@@ -1,9 +1,16 @@
 - button: Ed
-  link: https://ibm.com
+  link: https://edstem.org/us/courses/62469/discussion/
   color: purple
-- button: DataHub
-  link: https://ibm.com
-  color: green
 - button: Gradescope
-  link: https://ibm.com
+  link: https://www.gradescope.com/courses/825461
   color: orange
+- button: Tutorials
+  link: https://statistics.berkeley.edu/computing/training/tutorials
+  color: blue
+- button: Lecture recordings
+  link: https://bcourses.berkeley.edu/courses/1537551/external_tools/90481
+  color: green
+- button: bCourses 
+  link: https://bcourses.berkeley.edu/courses/1537551
+  color: red
+  

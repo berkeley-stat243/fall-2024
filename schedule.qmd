@@ -1,0 +1,36 @@
+---
+title: Office hours
+listing:
+  - id: schedule
+    template: assets/schedule.ejs
+    contents: schedule.yml
+---
+
+## Schedule
+
+::: {#schedule}
+:::
+
+
+## Quizzes
+
+Quizzes are in-person only. 
+
+- Quiz 1: TBD in class.
+  - Review session TBD in section.
+- Quiz 2: TBD in class.
+  - Review session TBD in section.
+
+## Project
+
+Due date: TBD.
+
+## Notes on assignments and activities
+
+- **Optional library LaTeX session**: I highly recommend (in particular if you are a Statistics graduate student) that you know how to create equations in LaTeX. Even if you develop your documents using Quarto, Jupyter notebooks, R Markdown, etc. rather than LaTeX-based documents, LaTeX math syntax is the common tool for writing math syntax that will render beautifully. 
+- **Optional Lab 0 software/command line help session**: (August 30 in lab room) Help session for installing software, accessing a UNIX-style command line, and basic command line usage (e.g., the UNIX basics tutorial). You can show up at any time (unlike all remaining labs). You should have software installed, be able to accesss the command line, and have started to become familiar with basic command line usage before class on TBD.
+- **Bash shell tutorial and exercises**: (by TBD) Read through this [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash). You can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the [exercises](https://berkeley-scf.github.io/tutorial-using-bash/exercises) and submit your answers via Gradescope. This is not a formal problem set, so you don't need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it's even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you've worked through the tutorial. I'll be doing demonstrations on using the bash shell in class starting on TBD, so that will be helpful as you work through the tutorial.
+- **Lab 1**: (TBD) First section/lab on using Git, setting up your GitHub repository for problem sets, and using Quarto to generate dynamic documents. **Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.** 
+- **Regular expression reading and exercises**: (by TBD), read the regular expression material in the [tutorial on using the bash shell](https://berkeley-scf.github.io/tutorial-using-bash/regex). Then answer the regular expressions (regex) [practice problems and submit your answers on Gradescope](ps/regex). This is not one of the graded problem sets but rather an assignment that will simply be noted as being completed or not.
+
+

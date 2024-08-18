@@ -1,0 +1,124 @@
+Quarto + pytest:
+
+
+Some folks are confused about how to use pytest with quarto. I'm sure there are multiple ways, but here's what I think is reasonable: quarto is a format for document generation, and should not be used for hosting large pieces of code in general. Write your main code in a python file (e.g. my_functions.py) and write your tests in another python file (e.g. my_tests.py). You will have to import my_code "package" in your tests file as we saw this morning in lecture. You can then run the tests by running pytest my_tests.py  in the command line or in a bash quarto chunk. You can also use the inspect package to print the code of functions in your my_code module.
+
+Here are some sample code files that I used to test out this workflow:
+
+my_code.py
+def doubled(input):
+    return input + input
+
+print("Module imported!")
+
+my_tests.py
+import pytest
+import my_code
+
+def test_answer1():
+    assert my_code.doubled(3) == 6
+
+def test_answer3():
+    assert my_code.doubled("who?") == "who?who?"
+    
+def test_answer4():
+    with pytest.raises(TypeError):
+        my_code.doubled()
+
+my_doc.qmd
+title: "testing"
+format: pdf
+enigne: knitr
+---
+
+## Running the test suite ..
+
+```{bash}
+pytest my_tests.py
+```
+
+## Printing the code
+
+```{python}
+#| echo: false
+import my_code
+import inspect
+print(inspect.getsource(my_code.doubled))
+```
+
+Wrapping code in quarto generated pdfs:
+
+Here's something that seems to work (for pdfs, annoyingly a different options works for html):
+title: "PS2"
+format: pdf
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
+Problems running and rendering bash commands in quarto:
+
+
+If you are using knitr engine (either by choosing it explicitly, as recommended for PS2 or by using RStudio) you should be able to simply do this:
+```{bash}
+echo "things"
+pwd
+```
+
+But if you are using Jupyter engine (like the header above is, you should be able to run bash commands this way:
+```{python}
+!echo "same things"
+!pwd
+```
+
+This different behavior between the two engines is somewhat annoying and is  the source of a lot of bugs and errors. But both are ultimately workable.
+
+Ezequiel Yudka
+2w
+
+Hi, I have been trying to work following the recommendation but when i write bash code in quarto I have no output (I even tried with echo "things" as I'm using knitr)
+
+(When I try to run my function from the terminal everything works fine)
+Ahmed Eldeeb (deeb)
+2w
+
+Try the engine.path trick below. If it doesn't work, try switching to Jupyter engine and using the cell magic "!". Hopefully this would only be a temporary solution.
+Partow Imani
+2w
+
+I have the same issue it seems. I was using the knitr engine in RStudio (and while the bash code compiles correctly in 1a), it doesn't in 1b even though it works properly in the terminal. I tried switching to the Jupyter engine but that doesn't output anything. When I check the version of python that is being used it is the correct one (and the same one used in the terminal). 
+Ahmed Eldeeb (deeb)
+2w
+
+A common problem sounds like this:
+
+Quarto doesn't render my Qmd, but RStudio does, but it's not recognizing my installed libraries!
+
+Most of this sort of issues seem to be resulting from the fact that quarto can use one of two engines: knitr (used by RStudio) or Jupyter (the default for the VS Studio path). For PS2, we are recommending using knitr.
+
+The two engines can be configured to use different versions of python on your machine.
+
+
+One shortcut to get around this misconfiguration or debug that it is indeed the problem is to set the engine path explicitly (your actual python path will vary):
+---
+title: "some PS"
+format: pdf
+engine: knitr
+---
+
+```{python, engine.path='/usr/local/bin/python3.11'}
+import numpy as np
+print("something")
+```
+
+```{bash}
+pwd
+```
+
+You can do this with Jupyter engine as well, but it's not recommended for now (at least for PS2).
+
+If this fixes your problem, then the next thing is to fix your PATH environment variable to make sure the default python is the one you want. and you can validate that by running which python in the command line.
+Ahmed Eldeeb (deeb)
+2w
+
+Made some updates to reflect that knitr is the recommended engine for PS2.

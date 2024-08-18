@@ -1,10 +1,7 @@
 ---
-title: "Statistics 999: Generic Statistics Class"
+title: "Statistics 243: Introduction to Statistical Computing"
 subtitle: "UC Berkeley, Spring 2024"
 listing:
-  - id: schedule
-    template: assets/schedule.ejs
-    contents: schedule.yml
   - id: buttons
     template: assets/buttons.ejs
     contents: buttons.yml
@@ -13,21 +10,21 @@ listing:
 ::: {#buttons}
 :::
 
-This page is hosted at [{{< var site-url >}}]({{< var site-url >}}). We could provide a templated listing of instructors here (or on its own page), similar to [DS100/fa23](https://github.com/DS-100/fa23).
+## Course materials
 
-::: {.callout-note title="Welcome to Week 1 of Stat 999"}
-:::
+See the links above for the key resources for the course.
 
-::: {.callout-note title="Welcome to Week 2"}
-Things are picking up now.
-:::
+Most course content (in particular unit notes, labs, and problem sets) are available through this website via the links in the left sidebar.
 
-## Schedule
+## Questions about taking the class
 
-Here we use Quarto's EJS templating.
+If you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out [this survey](https://forms.gle/TBD) as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 30 at noon.
 
-For a style similar to that of [Stat 20](https://stat20.org), modify `index.qmd` to point to `assets/{schedule-alt.ejs,buttons-alt.ejs}` and to `{schedule-alt.yml,buttons-alt.yml}` and `_quarto.yml` to point to `assets/styles-alt.scss`.
+Undergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.
 
-::: {#schedule}
-:::
+Concurrent enrollment students (e.g., exchange students from other universities/countries) can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.
+
+Please see the syllabus for the math and statistics background I expect, as well as the need to be familiar with Python or to get up to speed in Python during the first few weeks of the semester.
+
+The first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and Python. Please use [the schedule](schedule.qmd) to keep on top of what you need to do.
 
