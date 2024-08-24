@@ -1,0 +1,43 @@
+.label {
+    border-radius: 9px;
+    padding: 5px;
+    color: white;
+}
+
+.label-Activity { background-color: #4767FF}
+.label-Event { background-color:  #7A77B9}
+.label-Lab { background-color: #C82DC6}
+.label-Problem_Set { background-color: #E62100}
+.label-Quiz { background-color: green}
+
+
+th {
+    width: 10%;
+}
+
+td:first-of-type {
+    width: 60%;
+}
+
+td:last-of-type {
+    width: 30%;
+}
+
+table {
+    border: 2px solid;
+}
+
+button > a {
+    color: white;
+    text-decoration: none;
+}
+
+button {
+    border: none;
+}
+
+.border {
+  color:#069;
+  font-weight: bold;
+}
+
