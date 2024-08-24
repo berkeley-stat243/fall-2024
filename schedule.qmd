@@ -1,5 +1,5 @@
 ---
-title: Office hours
+title: Scheduling information
 listing:
   - id: schedule
     template: assets/schedule.ejs

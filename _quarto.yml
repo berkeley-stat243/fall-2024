@@ -25,7 +25,8 @@ website:
             text: "Unit 1 (UNIX intro)"
       - section: "Labs"
         contents:
-          - labs/lab0.qmd
+          - href: labs/lab0-setup.html
+            text: "Lab 0 (Optional setup)"
       - section: "How tos"
         contents:
           - howtos/accessPython.md

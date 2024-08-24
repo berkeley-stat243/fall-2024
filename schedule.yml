@@ -11,6 +11,7 @@
         - type: "Lab"
           id: "0"
           name: (Optional) help session for software installation/setup and UNIX-style command line basics
+          href: labs/lab0-setup.html
         - type: "Activity"
           id: "1"
           name: "Class Survey"
@@ -40,6 +41,7 @@
         - type: "Lab"
           id: "1"
           name: "Using Git and Quarto and problem set submission"
+          href: labs/lab1-submission.html
 - week: 3
   days:
     - date: "Sep 11"
