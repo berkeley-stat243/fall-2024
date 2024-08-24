@@ -14,12 +14,38 @@
         - type: "Activity"
           id: "1"
           name: "Class Survey"
-          href: "https://berkeley.edu"
+          href: "https://forms.gle/W5jZ3nT4sqbj2PNBA"
         - type: "Activity"
           id: "2"
           name: "Office hour time survey"
-          href: "https://berkeley.edu"
+          href: "http://whenisgood.net/gff9ndn"
         - type: "Activity"
           id: "3"
           name: "Login to github.berkeley.edu with your CalNet credentials"
-          href: "https://berkeley.edu"
+          href: "https://github.berkeley.edu"
+- week: 2
+  days:
+    - date: "Sep 4"
+      items:
+        - type: "Activity"
+          id: "4"
+          name: "Read first three sections of Unit 2 (sections before 'Webscraping')"
+          href: "unit2-data.html"
+        - type: "Activity"
+          id: "5"
+          name: "(Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end"
+          href: "https://berkeley-scf.github.io/tutorial-unix-basics"
+    - date: "Sep 6"
+      items:
+        - type: "Lab"
+          id: "1"
+          name: "Using Git and Quarto and problem set submission"
+- week: 3
+  days:
+    - date: "Sep 11"
+      items:
+        - type: "Event"
+          id: "2"
+          name: "(Optional) Library Introduction to LaTeX with Overleaf session"
+          href: "https://berkeley.libcal.com/event/12927278"
+      
