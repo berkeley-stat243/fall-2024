@@ -2,7 +2,7 @@
 title: Accessing Python
 ---
 
-We recommend using using the [Anaconda (Python 3.11 distribution)](https://www.anaconda.com/products/individual) on your laptop. Click "Download" and then click 64-bit "Graphical Installer" for your current operating system.
+We recommend using the [Miniforge distribution](https://github.com/conda-forge/miniforge) as your Python 3.12 installation.
 
 Once you've installed Python, please install the following packages: 
 
@@ -16,7 +16,7 @@ Once you've installed Python, please install the following packages:
 - dask.dataframe
 - dask.multiprocessing
 
-Assuming you installed Anaconda Python, you should be able to do this from the command line:
+Assuming you installed Miniforge, you should be able to do this from the command line:
 
 ```
 conda install numpy scipy pandas dask
