@@ -149,7 +149,7 @@ webpage](http://statistics.berkeley.edu/computing/copying-files).
 
 # Editors
 
-For statistical computing, we need a text editor, not a word processor,
+For scientific computing, we need a text editor, not a word processor,
 because we're going to be operating on code files, plain-text data files, 
 and markup language documents (e.g., Markdown/Quarto)
 for which word processing formatting gets
@@ -204,7 +204,7 @@ good.
     emacs -nw file.txt 
     ```
 
-## (Optional) Emacs keystroke sequence shortcuts (aka, *key bindings*).
+#### (Optional) Emacs keystroke sequence shortcuts (aka, *key bindings*).
 
 > **Note**
 > Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.
@@ -224,3 +224,14 @@ good.
 |       `Ctrl-y` *(*after using `Ctrl-k` or `Ctrl-w`*)*   |        Paste from kill buffer ('y' is for 'yank')|
 
 
+### (Optional) Basic vim
+
+vim is another option as an editor. Like emacs, it's been around for a long time, and some of the other options above are probably more user friendly. However, it can be helpful to know how to do some basic things in vim.
+
+For example, if you run `git commit` without the `-m` flag to add a message, you'll be put in a vim editor window by default (you can also modify what editor git uses).
+
+vim has two modes: `normal` mode, which allows you to carry out various operations (such as navigation, saving files, moving and deleting lines) and `insert` mode, which allows you to actually insert text.
+
+To get into `insert` mode from `normal` mode, type "i". To get back to `normal` mode, press `Esc`.
+
+When in normal mode, you can type `:w` to save, `:x` to save and exit, and `:q` to exit. To search a document for a string, type `/string_to_search_for`. Type `Esc` to get out of the search.
