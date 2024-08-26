@@ -14,6 +14,8 @@ format:
     toc: true
     code-copy: true
     code-block-background: true
+execute:
+  freeze: auto
 ---
 
 [PDF](./unit1-intro.pdf){.btn .btn-primary}
