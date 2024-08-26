@@ -234,4 +234,4 @@ vim has two modes: `normal` mode, which allows you to carry out various operatio
 
 To get into `insert` mode from `normal` mode, type "i". To get back to `normal` mode, press `Esc`.
 
-When in normal mode, you can type `:w` to save, `:x` to save and exit, and `:q` to exit. To search a document for a string, type `/string_to_search_for`. Type `Esc` to get out of the search.
+When in normal mode, you can type `:w` to save, `:x` to save and exit, and `:q` to exit. To search a document for a string (e.g., "python docstring", type `/python docstring` and return/enter. Type `Esc` to get out of the search.
