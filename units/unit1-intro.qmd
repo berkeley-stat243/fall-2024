@@ -14,8 +14,6 @@ format:
     toc: true
     code-copy: true
     code-block-background: true
-execute:
-  freeze: auto
 ---
 
 [PDF](./unit1-intro.pdf){.btn .btn-primary}
@@ -26,15 +24,16 @@ By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most 
 machines, often by [remotely logging in to a UNIX-based server](https://statistics.berkeley.edu/computing/ssh).
 
 There are a [variety of ways to get access to a UNIX-style command line
-environment](../howtos/accessingUnixCommandLine).
+environment](../howtos/accessUnixCommandLine).
 
 Please see the material in [our tutorial on the basics of
 UNIX](https://berkeley-scf.github.io/tutorial-unix-basics) to get up
-to speed on working in a UNIX-style command line environment. We'll do a
+to speed on working in a UNIX-style command line environment and/or
+the material in last week's [Computing Skills Workshop](https://berkeley-scf.github.io/compute-skills-2024/units/intro-computing.html). We'll do a
 bit of demo in the first class. If what you see seems quite familiar,
 you can probably skip that tutorial. If what you see is not familiar,
-please work through the tutorial by Monday August 28 and (optionally) attend section on
-Friday August 26 to work on the problems at the end of the tutorial and
+please work through the tutorial by Wednesday September 4 and (optionally) attend section on
+Friday August 30 to work on the problems at the end of the tutorial and
 be able to ask questions of the GSI and other students.
 
 For an alternative introduction (which also includes some of the topics
@@ -60,29 +59,29 @@ Git](https://git-scm.com/downloads) that you can explore. I've heard good things
 Mac and Windows.
 
 1.  To clone (i.e., copy) a repository (in this case from GitHub)
-    (*berkeley-stat243* is the organization and *stat243-fall-2022* is the
+    (`berkeley-stat243` is the organization and `fall-2024` is the
     repository):
     
     ```
-    git clone https://github.com/berkeley-stat243/stat243-fall-2023
+    git clone https://github.com/berkeley-stat243/fall-2024
     ```
 
 2.  To update a repository to reflect changes made in a remote copy of
     the repository:
     
     ```
-    cd /to/any/directory/within/the/local/repository
+    cd /to/any/directory/within/the/local/repository  ## e.g., cd fall-2024
     git pull
     ```
 
-More information is available in the [tutorial on the basics of using
+More information is available in the [Computing Skills Workshop](https://berkeley-scf.github.io/compute-skills-2024) as well as this [tutorial on the basics of using
 Git](https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html), as well as lots
 of information/tutorials online.
-We'll see a lot more about Git in Section sessions, where you'll learn to set up
+We'll see a lot more about Git in Section/Lab sessions, where you'll learn to set up
 a repository, make changes to repositories and work with local and
 remote versons of the repository. In particular, you'll have a chance to
 work through the tutorial and practice with
-Git in the first section/lab (September 2). During the course, you'll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set
+Git in the first section/lab (September 6). During the course, you'll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set
 solutions, and you'll need to use it extensively for the final group project.
 
 # Parts of a computer
@@ -94,9 +93,17 @@ could get into, but the key things for now are to have a basic
 understanding of these components of a computer:
 
 -   CPU
-    -   cache
+    -   cache (limited fast memory easily accessible from the CPU)
 -   main memory (RAM)
+-   bus
 -   disk
+
+Depending on what your code is doing, the slow step in a computation might be:
+
+   - doing the actual calculations on the CPU,
+   - moving data back and forth from (main) memory (RAM) to the CPU, or
+   - reading/writing (I/O) data to/from disk.
+
 
 Please read [this overview](https://36-750.github.io/tools/computer-architecture/) from a
 class at CMU that is similar to this class. Don't worry about too much
@@ -174,7 +181,7 @@ then your career.
 
 Be careful in Windows - file suffixes are often hidden.
 
-## (Optional) Basic emacs
+### (Optional) Basic emacs
 
 Emacs is one option as an editor. I use Emacs a fair amount, so I'm
 including some tips here, but other editors listed above are just as
@@ -197,7 +204,7 @@ good.
     emacs -nw file.txt 
     ```
 
-## (Optional) Emacs keystroke sequence shortcuts.
+## (Optional) Emacs keystroke sequence shortcuts (aka, *key bindings*).
 
 > **Note**
 > Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.
