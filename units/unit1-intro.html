@@ -244,8 +244,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#some-useful-editors" id="toc-some-useful-editors" class="nav-link" data-scroll-target="#some-useful-editors">Some useful editors</a>
   <ul class="collapse">
   <li><a href="#optional-basic-emacs" id="toc-optional-basic-emacs" class="nav-link" data-scroll-target="#optional-basic-emacs">(Optional) Basic emacs</a></li>
+  <li><a href="#optional-basic-vim" id="toc-optional-basic-vim" class="nav-link" data-scroll-target="#optional-basic-vim">(Optional) Basic vim</a></li>
   </ul></li>
-  <li><a href="#optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." id="toc-optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="nav-link" data-scroll-target="#optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="unit1-intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -340,7 +340,7 @@ git pull</code></pre></li>
 </section>
 <section id="editors" class="level1">
 <h1>Editors</h1>
-<p>For statistical computing, we need a text editor, not a word processor, because we’re going to be operating on code files, plain-text data files, and markup language documents (e.g., Markdown/Quarto) for which word processing formatting gets in the way. <strong>Don’t use Microsoft Word or Google Docs to edit code files or Markdown/Quarto/R Markdown/LaTeX.</strong></p>
+<p>For scientific computing, we need a text editor, not a word processor, because we’re going to be operating on code files, plain-text data files, and markup language documents (e.g., Markdown/Quarto) for which word processing formatting gets in the way. <strong>Don’t use Microsoft Word or Google Docs to edit code files or Markdown/Quarto/R Markdown/LaTeX.</strong></p>
 <section id="some-useful-editors" class="level2">
 <h2 class="anchored" data-anchor-id="some-useful-editors">Some useful editors</h2>
 <ul>
@@ -367,10 +367,8 @@ git pull</code></pre></li>
 </ul></li>
 <li>To open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: <code>emacs -nw file.txt</code></li>
 </ul>
-</section>
-</section>
-<section id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="level2">
-<h2 class="anchored" data-anchor-id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</h2>
+<section id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="level4">
+<h4 class="anchored" data-anchor-id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</h4>
 <blockquote class="blockquote">
 <p><strong>Note</strong> Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.</p>
 </blockquote>
@@ -432,8 +430,18 @@ git pull</code></pre></li>
 </tr>
 </tbody>
 </table>
+</section>
+</section>
+<section id="optional-basic-vim" class="level3">
+<h3 class="anchored" data-anchor-id="optional-basic-vim">(Optional) Basic vim</h3>
+<p>vim is another option as an editor. Like emacs, it’s been around for a long time, and some of the other options above are probably more user friendly. However, it can be helpful to know how to do some basic things in vim.</p>
+<p>For example, if you run <code>git commit</code> without the <code>-m</code> flag to add a message, you’ll be put in a vim editor window by default (you can also modify what editor git uses).</p>
+<p>vim has two modes: <code>normal</code> mode, which allows you to carry out various operations (such as navigation, saving files, moving and deleting lines) and <code>insert</code> mode, which allows you to actually insert text.</p>
+<p>To get into <code>insert</code> mode from <code>normal</code> mode, type “i”. To get back to <code>normal</code> mode, press <code>Esc</code>.</p>
+<p>When in normal mode, you can type <code>:w</code> to save, <code>:x</code> to save and exit, and <code>:q</code> to exit. To search a document for a string, type <code>/string_to_search_for</code>. Type <code>Esc</code> to get out of the search.</p>
 
 
+</section>
 </section>
 </section>
 
