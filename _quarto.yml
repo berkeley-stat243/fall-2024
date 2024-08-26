@@ -44,5 +44,6 @@ format:
     css: assets/styles.css
     toc: true
 
-
+execute:
+  freeze: auto
 
