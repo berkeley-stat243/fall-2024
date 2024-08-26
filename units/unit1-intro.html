@@ -241,9 +241,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#connecting-to-other-machines" id="toc-connecting-to-other-machines" class="nav-link" data-scroll-target="#connecting-to-other-machines">Connecting to other machines</a></li>
   <li><a href="#editors" id="toc-editors" class="nav-link" data-scroll-target="#editors">Editors</a>
   <ul class="collapse">
-  <li><a href="#some-useful-editors" id="toc-some-useful-editors" class="nav-link" data-scroll-target="#some-useful-editors">Some useful editors</a></li>
+  <li><a href="#some-useful-editors" id="toc-some-useful-editors" class="nav-link" data-scroll-target="#some-useful-editors">Some useful editors</a>
+  <ul class="collapse">
   <li><a href="#optional-basic-emacs" id="toc-optional-basic-emacs" class="nav-link" data-scroll-target="#optional-basic-emacs">(Optional) Basic emacs</a></li>
-  <li><a href="#optional-emacs-keystroke-sequence-shortcuts." id="toc-optional-emacs-keystroke-sequence-shortcuts." class="nav-link" data-scroll-target="#optional-emacs-keystroke-sequence-shortcuts.">(Optional) Emacs keystroke sequence shortcuts.</a></li>
+  </ul></li>
+  <li><a href="#optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." id="toc-optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="nav-link" data-scroll-target="#optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="unit1-intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -286,8 +288,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="unix-command-line-basics" class="level1">
 <h1>UNIX command line basics</h1>
 <p>By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most modern scientific computing is done on UNIX-based machines, often by <a href="https://statistics.berkeley.edu/computing/ssh">remotely logging in to a UNIX-based server</a>.</p>
-<p>There are a <a href="../howtos/accessingUnixCommandLine">variety of ways to get access to a UNIX-style command line environment</a>.</p>
-<p>Please see the material in <a href="https://berkeley-scf.github.io/tutorial-unix-basics">our tutorial on the basics of UNIX</a> to get up to speed on working in a UNIX-style command line environment. We’ll do a bit of demo in the first class. If what you see seems quite familiar, you can probably skip that tutorial. If what you see is not familiar, please work through the tutorial by Monday August 28 and (optionally) attend section on Friday August 26 to work on the problems at the end of the tutorial and be able to ask questions of the GSI and other students.</p>
+<p>There are a <a href="../howtos/accessUnixCommandLine">variety of ways to get access to a UNIX-style command line environment</a>.</p>
+<p>Please see the material in <a href="https://berkeley-scf.github.io/tutorial-unix-basics">our tutorial on the basics of UNIX</a> to get up to speed on working in a UNIX-style command line environment and/or the material in last week’s <a href="https://berkeley-scf.github.io/compute-skills-2024/units/intro-computing.html">Computing Skills Workshop</a>. We’ll do a bit of demo in the first class. If what you see seems quite familiar, you can probably skip that tutorial. If what you see is not familiar, please work through the tutorial by Wednesday September 4 and (optionally) attend section on Friday August 30 to work on the problems at the end of the tutorial and be able to ask questions of the GSI and other students.</p>
 <p>For an alternative introduction (which also includes some of the topics we’ll discuss in Unit 3 on shell scripting), see <a href="https://swcarpentry.github.io/shell-novice">this Software Carpentry tutorial</a>.</p>
 </section>
 <section id="version-control" class="level1">
@@ -296,13 +298,13 @@ ul.task-list li input[type="checkbox"] {
 <p>A very popular and powerful tool for version control is Git. We’ll be using Git extensively for version control.</p>
 <p>Git stores the files for a project in a <em>repository</em>. Here are some basic Git commands you can use to access the class materials from the command line. There are also <a href="https://git-scm.com/downloads">graphical interfaces to Git</a> that you can explore. I’ve heard good things (albeit a few years ago) about <a href="https://desktop.github.com">GitHub Desktop</a>, available for Mac and Windows.</p>
 <ol type="1">
-<li><p>To clone (i.e., copy) a repository (in this case from GitHub) (<em>berkeley-stat243</em> is the organization and <em>stat243-fall-2022</em> is the repository):</p>
-<pre><code>git clone https://github.com/berkeley-stat243/stat243-fall-2023</code></pre></li>
+<li><p>To clone (i.e., copy) a repository (in this case from GitHub) (<code>berkeley-stat243</code> is the organization and <code>fall-2024</code> is the repository):</p>
+<pre><code>git clone https://github.com/berkeley-stat243/fall-2024</code></pre></li>
 <li><p>To update a repository to reflect changes made in a remote copy of the repository:</p>
-<pre><code>cd /to/any/directory/within/the/local/repository
+<pre><code>cd /to/any/directory/within/the/local/repository  ## e.g., cd fall-2024
 git pull</code></pre></li>
 </ol>
-<p>More information is available in the <a href="https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html">tutorial on the basics of using Git</a>, as well as lots of information/tutorials online. We’ll see a lot more about Git in Section sessions, where you’ll learn to set up a repository, make changes to repositories and work with local and remote versons of the repository. In particular, you’ll have a chance to work through the tutorial and practice with Git in the first section/lab (September 2). During the course, you’ll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set solutions, and you’ll need to use it extensively for the final group project.</p>
+<p>More information is available in the <a href="https://berkeley-scf.github.io/compute-skills-2024">Computing Skills Workshop</a> as well as this <a href="https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html">tutorial on the basics of using Git</a>, as well as lots of information/tutorials online. We’ll see a lot more about Git in Section/Lab sessions, where you’ll learn to set up a repository, make changes to repositories and work with local and remote versons of the repository. In particular, you’ll have a chance to work through the tutorial and practice with Git in the first section/lab (September 6). During the course, you’ll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set solutions, and you’ll need to use it extensively for the final group project.</p>
 </section>
 <section id="parts-of-a-computer" class="level1">
 <h1>Parts of a computer</h1>
@@ -310,10 +312,17 @@ git pull</code></pre></li>
 <ul>
 <li>CPU
 <ul>
-<li>cache</li>
+<li>cache (limited fast memory easily accessible from the CPU)</li>
 </ul></li>
 <li>main memory (RAM)</li>
+<li>bus</li>
 <li>disk</li>
+</ul>
+<p>Depending on what your code is doing, the slow step in a computation might be:</p>
+<ul>
+<li>doing the actual calculations on the CPU,</li>
+<li>moving data back and forth from (main) memory (RAM) to the CPU, or</li>
+<li>reading/writing (I/O) data to/from disk.</li>
 </ul>
 <p>Please read <a href="https://36-750.github.io/tools/computer-architecture/">this overview</a> from a class at CMU that is similar to this class. Don’t worry about too much of the details in the “How Programs Run” section - just try to get the main idea.</p>
 </section>
@@ -347,9 +356,8 @@ git pull</code></pre></li>
 </ul>
 <p>As you get started it’s ok to use a very simple text editor such as Notepad in Windows, but you should take the time in the next few weeks to try out more powerful editors such as one of those listed above. It will be well worth your time over the course of your graduate work and then your career.</p>
 <p>Be careful in Windows - file suffixes are often hidden.</p>
-</section>
-<section id="optional-basic-emacs" class="level2">
-<h2 class="anchored" data-anchor-id="optional-basic-emacs">(Optional) Basic emacs</h2>
+<section id="optional-basic-emacs" class="level3">
+<h3 class="anchored" data-anchor-id="optional-basic-emacs">(Optional) Basic emacs</h3>
 <p>Emacs is one option as an editor. I use Emacs a fair amount, so I’m including some tips here, but other editors listed above are just as good.</p>
 <ul>
 <li><em>Emacs</em> has special modes for different types of files: Python code files, R code files, C code files, Latex files – it’s worth your time to figure out how to set this up on your machine for the kinds of files you often work on
@@ -360,8 +368,9 @@ git pull</code></pre></li>
 <li>To open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: <code>emacs -nw file.txt</code></li>
 </ul>
 </section>
-<section id="optional-emacs-keystroke-sequence-shortcuts." class="level2">
-<h2 class="anchored" data-anchor-id="optional-emacs-keystroke-sequence-shortcuts.">(Optional) Emacs keystroke sequence shortcuts.</h2>
+</section>
+<section id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="level2">
+<h2 class="anchored" data-anchor-id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</h2>
 <blockquote class="blockquote">
 <p><strong>Note</strong> Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.</p>
 </blockquote>
