@@ -38,9 +38,6 @@ website:
       - href: license.qmd
         text: License
           
-execute:
-  freeze: true
-  
 format:
   html:
     theme: cosmo
