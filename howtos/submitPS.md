@@ -9,17 +9,15 @@ title: Problem Set Submissions
 
 ## Submission format
 
-Problem set solutions should be written in Quarto Markdown (.qmd) source files, interspersing explanatory text with Python (and in some cases bash) code chunks. Please do not use Jupyter notebook (.ipynb) files as your underlying source file for your solutions. 
+Problem set solutions should be written in Quarto Markdown (.qmd) source files, interspersing explanatory text with Python (and in some cases bash) code chunks. Please do not use Jupyter notebook (.ipynb) files as your underlying source file for your solutions. In some cases we will ask that you put function definitions for more complicated functions into one or more Python code (.py) file(s) and show us the code in the appendix of your main solution file by using `inspect.getsource()`.
 
 Why?
 
  - For one or two of the initial problem sets you'll need to include both bash and Python code. This isn't possible in a single notebook.
- - The underlying format of .ipynb files is JSON. While this is a plain text format, the key-value pair structure is much less well-suited for use with Git version control (which relies on `diff`) than Markdown-based formats. 
+ - The underlying format of .ipynb files is JSON. While this is a plain text format, the key-value pair structure (not generally being aligned with the file lines) is much less well-suited for use with Git version control (which relies on `diff`) than Markdown-based formats. 
  - One can run chunks in a Jupyter notebook in arbitrary order. What is printed to PDF depends on the order in which the chunks are run and the results can differ from what one would expect based on reading the notebook sequentially and running the chunks sequentially. For example, consider the following experiment and you'll see what I mean: (1) Have one code chunk with `a = 3` and run it; (2) Add a second chunk with `print(a)` and run it; and (3) Change the first chunk to `a=4` and DO NOT rerun the second chunk. Save the notebook to PDF. You'll see that your "report" makes no sense. Here's [the result](./notebook-unreproducible.pdf) of me doing that experiment.
  
  If you really want to do your initial explorations of the problems in a Jupyter notebook, with content then copied to qmd, that is fine.
-
-For problem sets later in the semester, we may allow the work to be done in a Jupyter notebook (committed to the repository as the source file) and then submitted as a PDF, but the initial problem sets must be provided as qmd source files. 
 
 ## Problem set solution workflows
 
@@ -49,7 +47,7 @@ created. Nothing else needs to be done, just log in and log out.
 
 2. After accounts are created (may take a couple days after first login), when 
 you log in again, you should see one private repository listed on the left side 
-(e.g., `stat243-fall-2022/ahv36`). This is your class repository.
+(e.g., `stat243-fall-2024/ahv36`). This is your class repository.
 Do not change the repository settings! They are set up for this class.
 
 3. Clone the repo to your home directory (I would clone it into a directory

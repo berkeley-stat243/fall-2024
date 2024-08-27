@@ -283,7 +283,7 @@ There are several rules for submitting your assignments.
     1.  A PDF submitted electronically through Gradescope, **by the
         start of class (10 am)** on the due date, and
 
-    2.  An electronic copy of the PDF, code file, and Quarto
+    2.  An electronic copy of the PDF, code files, and Quarto
         document pushed to your class GitHub repository, following the
         instructions to be provided by the GSI.
 
@@ -292,8 +292,9 @@ There are several rules for submitting your assignments.
 
 3.  Answers should consist of textual response or mathematical
     expressions as appropriate, with key chunks of code embedded within
-    the document. Extensive additional code can be provided as an
-    appendix. Before diving into the code for a problem, you should say
+    the document. Function definitions would generally be placed in a separate
+    .py code file. The function definitions and any extensive additional code should
+    be provided as an appendix. Before diving into the code for a problem, you should say
     what the goal of the code is and your strategy for solving the
     problem. **Raw code without explanation is not an appropriate
     solution.** Please see our [qualitative grading rubric](rubric) for guidance. 
@@ -315,10 +316,6 @@ In the first section (September 1), we'll discuss [how to submit your problem se
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 
-::: {.callout-warning}
-## The numerical scheme is still being finalized. Do not rely on this section.
-:::
-
 The grading scheme for problem sets is as follows. Each problem set will
 receive a numeric score for (1) presentation and explanation of results,
 (2) technical accuracy of code or mathematical derivation, and (3) code
@@ -330,8 +327,7 @@ possible scores are:
 -   1 = partial credit (you did some of the problems but not all),
 
 -   2 = satisfactory (you tried everything but there were pieces of what
-    you did that didn't solve or present/explain one or more problems in
-    a complete way), and
+    you did that didn't completely/correctly solve or present/explain one or more problems), and
 
 -   3 = full credit.
 
