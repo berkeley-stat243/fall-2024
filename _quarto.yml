@@ -23,6 +23,8 @@ website:
         contents:
           - href: units/unit1-intro.qmd
             text: "Unit 1 (UNIX intro)"
+          - href: units/unit2-dataTech.qmd
+            text: "Unit 2 (Data technologies)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
