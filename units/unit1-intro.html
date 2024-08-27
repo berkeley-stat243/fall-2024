@@ -153,6 +153,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Unit 1 (UNIX intro)</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit2-dataTech.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 2 (Data technologies)</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -235,17 +241,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#unix-command-line-basics" id="toc-unix-command-line-basics" class="nav-link active" data-scroll-target="#unix-command-line-basics">UNIX command line basics</a></li>
-  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version control</a></li>
-  <li><a href="#parts-of-a-computer" id="toc-parts-of-a-computer" class="nav-link" data-scroll-target="#parts-of-a-computer">Parts of a computer</a></li>
+  <li><a href="#unix-command-line-basics" id="toc-unix-command-line-basics" class="nav-link active" data-scroll-target="#unix-command-line-basics">1. UNIX command line basics</a></li>
+  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">2. Version control</a></li>
+  <li><a href="#parts-of-a-computer" id="toc-parts-of-a-computer" class="nav-link" data-scroll-target="#parts-of-a-computer">3. Parts of a computer</a></li>
   <li><a href="#connecting-to-other-machines" id="toc-connecting-to-other-machines" class="nav-link" data-scroll-target="#connecting-to-other-machines">Connecting to other machines</a></li>
-  <li><a href="#editors" id="toc-editors" class="nav-link" data-scroll-target="#editors">Editors</a>
+  <li><a href="#editors" id="toc-editors" class="nav-link" data-scroll-target="#editors">4. Editors</a>
   <ul class="collapse">
-  <li><a href="#some-useful-editors" id="toc-some-useful-editors" class="nav-link" data-scroll-target="#some-useful-editors">Some useful editors</a>
+  <li><a href="#summary-of-some-useful-editors" id="toc-summary-of-some-useful-editors" class="nav-link" data-scroll-target="#summary-of-some-useful-editors">Summary of some useful editors</a></li>
+  <li><a href="#optional-basic-emacs" id="toc-optional-basic-emacs" class="nav-link" data-scroll-target="#optional-basic-emacs">(Optional) Basic emacs</a>
   <ul class="collapse">
-  <li><a href="#optional-basic-emacs" id="toc-optional-basic-emacs" class="nav-link" data-scroll-target="#optional-basic-emacs">(Optional) Basic emacs</a></li>
-  <li><a href="#optional-basic-vim" id="toc-optional-basic-vim" class="nav-link" data-scroll-target="#optional-basic-vim">(Optional) Basic vim</a></li>
+  <li><a href="#optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." id="toc-optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="nav-link" data-scroll-target="#optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</a></li>
   </ul></li>
+  <li><a href="#optional-basic-vim" id="toc-optional-basic-vim" class="nav-link" data-scroll-target="#optional-basic-vim">(Optional) Basic vim</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="unit1-intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -286,14 +293,14 @@ ul.task-list li input[type="checkbox"] {
 
 <p><a href="./unit1-intro.pdf" class="btn btn-primary">PDF</a></p>
 <section id="unix-command-line-basics" class="level1">
-<h1>UNIX command line basics</h1>
+<h1>1. UNIX command line basics</h1>
 <p>By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most modern scientific computing is done on UNIX-based machines, often by <a href="https://statistics.berkeley.edu/computing/ssh">remotely logging in to a UNIX-based server</a>.</p>
 <p>There are a <a href="../howtos/accessUnixCommandLine">variety of ways to get access to a UNIX-style command line environment</a>.</p>
 <p>Please see the material in <a href="https://berkeley-scf.github.io/tutorial-unix-basics">our tutorial on the basics of UNIX</a> to get up to speed on working in a UNIX-style command line environment and/or the material in last week’s <a href="https://berkeley-scf.github.io/compute-skills-2024/units/intro-computing.html">Computing Skills Workshop</a>. We’ll do a bit of demo in the first class. If what you see seems quite familiar, you can probably skip that tutorial. If what you see is not familiar, please work through the tutorial by Wednesday September 4 and (optionally) attend section on Friday August 30 to work on the problems at the end of the tutorial and be able to ask questions of the GSI and other students.</p>
 <p>For an alternative introduction (which also includes some of the topics we’ll discuss in Unit 3 on shell scripting), see <a href="https://swcarpentry.github.io/shell-novice">this Software Carpentry tutorial</a>.</p>
 </section>
 <section id="version-control" class="level1">
-<h1>Version control</h1>
+<h1>2. Version control</h1>
 <p>Version control refers to the process of keeping track of changes to your materials on a computer, often code files but other files as well. It generally works well with text files because version control operates based on differences between two versions of a file, and those differences are kept track of on a line-by-line basis. Version control is a central concept/practice in modern scientific computing.</p>
 <p>A very popular and powerful tool for version control is Git. We’ll be using Git extensively for version control.</p>
 <p>Git stores the files for a project in a <em>repository</em>. Here are some basic Git commands you can use to access the class materials from the command line. There are also <a href="https://git-scm.com/downloads">graphical interfaces to Git</a> that you can explore. I’ve heard good things (albeit a few years ago) about <a href="https://desktop.github.com">GitHub Desktop</a>, available for Mac and Windows.</p>
@@ -307,7 +314,7 @@ git pull</code></pre></li>
 <p>More information is available in the <a href="https://berkeley-scf.github.io/compute-skills-2024">Computing Skills Workshop</a> as well as this <a href="https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html">tutorial on the basics of using Git</a>, as well as lots of information/tutorials online. We’ll see a lot more about Git in Section/Lab sessions, where you’ll learn to set up a repository, make changes to repositories and work with local and remote versons of the repository. In particular, you’ll have a chance to work through the tutorial and practice with Git in the first section/lab (September 6). During the course, you’ll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set solutions, and you’ll need to use it extensively for the final group project.</p>
 </section>
 <section id="parts-of-a-computer" class="level1">
-<h1>Parts of a computer</h1>
+<h1>3. Parts of a computer</h1>
 <p>We won’t spend a lot of time thinking about computer hardware, but we do need to know some of the basics that relate to using a computer and programming effectively. There are many layers of technical detail one could get into, but the key things for now are to have a basic understanding of these components of a computer:</p>
 <ul>
 <li>CPU
@@ -339,10 +346,10 @@ git pull</code></pre></li>
 <p>There are also client programs for file transfer; see <a href="http://statistics.berkeley.edu/computing/copying-files">this webpage</a>.</p>
 </section>
 <section id="editors" class="level1">
-<h1>Editors</h1>
+<h1>4. Editors</h1>
 <p>For scientific computing, we need a text editor, not a word processor, because we’re going to be operating on code files, plain-text data files, and markup language documents (e.g., Markdown/Quarto) for which word processing formatting gets in the way. <strong>Don’t use Microsoft Word or Google Docs to edit code files or Markdown/Quarto/R Markdown/LaTeX.</strong></p>
-<section id="some-useful-editors" class="level2">
-<h2 class="anchored" data-anchor-id="some-useful-editors">Some useful editors</h2>
+<section id="summary-of-some-useful-editors" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-some-useful-editors">Summary of some useful editors</h2>
 <ul>
 <li>various editors available on all operating systems:
 <ul>
@@ -356,8 +363,9 @@ git pull</code></pre></li>
 </ul>
 <p>As you get started it’s ok to use a very simple text editor such as Notepad in Windows, but you should take the time in the next few weeks to try out more powerful editors such as one of those listed above. It will be well worth your time over the course of your graduate work and then your career.</p>
 <p>Be careful in Windows - file suffixes are often hidden.</p>
-<section id="optional-basic-emacs" class="level3">
-<h3 class="anchored" data-anchor-id="optional-basic-emacs">(Optional) Basic emacs</h3>
+</section>
+<section id="optional-basic-emacs" class="level2">
+<h2 class="anchored" data-anchor-id="optional-basic-emacs">(Optional) Basic emacs</h2>
 <p>Emacs is one option as an editor. I use Emacs a fair amount, so I’m including some tips here, but other editors listed above are just as good.</p>
 <ul>
 <li><em>Emacs</em> has special modes for different types of files: Python code files, R code files, C code files, Latex files – it’s worth your time to figure out how to set this up on your machine for the kinds of files you often work on
@@ -367,8 +375,8 @@ git pull</code></pre></li>
 </ul></li>
 <li>To open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: <code>emacs -nw file.txt</code></li>
 </ul>
-<section id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="level4">
-<h4 class="anchored" data-anchor-id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</h4>
+<section id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings." class="level3">
+<h3 class="anchored" data-anchor-id="optional-emacs-keystroke-sequence-shortcuts-aka-key-bindings.">(Optional) Emacs keystroke sequence shortcuts (aka, <em>key bindings</em>).</h3>
 <blockquote class="blockquote">
 <p><strong>Note</strong> Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.</p>
 </blockquote>
@@ -432,8 +440,8 @@ git pull</code></pre></li>
 </table>
 </section>
 </section>
-<section id="optional-basic-vim" class="level3">
-<h3 class="anchored" data-anchor-id="optional-basic-vim">(Optional) Basic vim</h3>
+<section id="optional-basic-vim" class="level2">
+<h2 class="anchored" data-anchor-id="optional-basic-vim">(Optional) Basic vim</h2>
 <p>vim is another option as an editor. Like emacs, it’s been around for a long time, and some of the other options above are probably more user friendly. However, it can be helpful to know how to do some basic things in vim.</p>
 <p>For example, if you run <code>git commit</code> without the <code>-m</code> flag to add a message, you’ll be put in a vim editor window by default (you can also modify what editor git uses).</p>
 <p>vim has two modes: <code>normal</code> mode, which allows you to carry out various operations (such as navigation, saving files, moving and deleting lines) and <code>insert</code> mode, which allows you to actually insert text.</p>
@@ -441,7 +449,6 @@ git pull</code></pre></li>
 <p>When in normal mode, you can type <code>:w</code> to save, <code>:x</code> to save and exit, and <code>:q</code> to exit. To search a document for a string (e.g., “python docstring”, type <code>/python docstring</code> and return/enter. Type <code>Esc</code> to get out of the search.</p>
 
 
-</section>
 </section>
 </section>
 
