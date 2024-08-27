@@ -18,7 +18,7 @@ format:
 
 [PDF](./unit1-intro.pdf){.btn .btn-primary}
 
-# UNIX command line basics
+# 1. UNIX command line basics
 
 By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most modern scientific computing is done on UNIX-based
 machines, often by [remotely logging in to a UNIX-based server](https://statistics.berkeley.edu/computing/ssh).
@@ -40,7 +40,7 @@ For an alternative introduction (which also includes some of the topics
 we'll discuss in Unit 3 on shell scripting), see [this Software
 Carpentry tutorial](https://swcarpentry.github.io/shell-novice).
 
-# Version control
+# 2. Version control
 
 Version control refers to the process of keeping track of changes to
 your materials on a computer, often code files but other files as well.
@@ -84,7 +84,7 @@ work through the tutorial and practice with
 Git in the first section/lab (September 6). During the course, you'll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set
 solutions, and you'll need to use it extensively for the final group project.
 
-# Parts of a computer
+# 3. Parts of a computer
 
 We won't spend a lot of time thinking about computer hardware, but we do
 need to know some of the basics that relate to using a computer and
@@ -147,7 +147,7 @@ relative to your home directory on that machine.
 There are also client programs for file transfer; see [this
 webpage](http://statistics.berkeley.edu/computing/copying-files).
 
-# Editors
+# 4. Editors
 
 For scientific computing, we need a text editor, not a word processor,
 because we're going to be operating on code files, plain-text data files, 
@@ -156,7 +156,7 @@ for which word processing formatting gets
 in the way. **Don't use Microsoft Word or Google Docs to edit code files
 or Markdown/Quarto/R Markdown/LaTeX.**
 
-## Some useful editors
+## Summary of some useful editors
 
 -   various editors available on all operating systems:
     -   traditional editors born in UNIX: *emacs*, *vim*
@@ -181,7 +181,7 @@ then your career.
 
 Be careful in Windows - file suffixes are often hidden.
 
-### (Optional) Basic emacs
+## (Optional) Basic emacs
 
 Emacs is one option as an editor. I use Emacs a fair amount, so I'm
 including some tips here, but other editors listed above are just as
@@ -204,7 +204,7 @@ good.
     emacs -nw file.txt 
     ```
 
-#### (Optional) Emacs keystroke sequence shortcuts (aka, *key bindings*).
+### (Optional) Emacs keystroke sequence shortcuts (aka, *key bindings*).
 
 > **Note**
 > Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.
@@ -224,7 +224,7 @@ good.
 |       `Ctrl-y` *(*after using `Ctrl-k` or `Ctrl-w`*)*   |        Paste from kill buffer ('y' is for 'yank')|
 
 
-### (Optional) Basic vim
+## (Optional) Basic vim
 
 vim is another option as an editor. Like emacs, it's been around for a long time, and some of the other options above are probably more user friendly. However, it can be helpful to know how to do some basic things in vim.
 
