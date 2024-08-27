@@ -1,5 +1,190 @@
 [
   {
+    "objectID": "office_hours.html",
+    "href": "office_hours.html",
+    "title": "Office hours",
+    "section": "",
+    "text": "Chris (Evans 495 or Zoom (see Ed Discussion post for link))\n\nTBD\n\nJoão:\n\nTBD\nFridays during unused section time up until 3:30 pm (Evans 340)",
+    "crumbs": [
+      "Office Hours"
+    ]
+  },
+  {
+    "objectID": "calendar.html",
+    "href": "calendar.html",
+    "title": "Calendar",
+    "section": "",
+    "text": "We can just embed the iframe html:"
+  },
+  {
+    "objectID": "labs/lab0-setup.html",
+    "href": "labs/lab0-setup.html",
+    "title": "Lab 0: Setup",
+    "section": "",
+    "text": "Warning: This page is under construction for 2024.",
+    "crumbs": [
+      "Labs",
+      "Lab 0 (Optional setup)"
+    ]
+  },
+  {
+    "objectID": "labs/lab0-setup.html#setting-up-your-environment-082523",
+    "href": "labs/lab0-setup.html#setting-up-your-environment-082523",
+    "title": "Lab 0: Setup",
+    "section": "Setting up your environment (08/25/23)",
+    "text": "Setting up your environment (08/25/23)\nYou will need to set up (or make sure you have access to) the following:\n\nUnix shell\nGit\nQuarto\nPython\nA text editor or IDE of your choice (deeb recommends VS Code or sublime, but if you are already familiar with a specific editor, stick with it)\n\nAfter making sure you have access to all these 5 tools, it may be a good idea to go through some of the following tutorials on unix bash and unix commands. You can do this on your own or in the Lab section on Friday 8/25.\nAttending lab 0 is optional. If you successfully set up your environment to have all the listed tools, you don’t need to attend. You are welcome to attend to ask for help with the setup or to help your classmates with setting up their environments.\nYou are also welcome to come and ask for help on using any of these 5 tools/systems (esp. bash and unix commands this week), but priority will be given to environment setup questions.\nReach out to deeb @ deeb@berkeley.edu with any unresolved problems or if you discover something that needs to be changed with our howtos and instructions.\nDeeb’s unsolicited advice on languages and tools:\n\nWhichever editor you pick, make sure to spend some time every week learning a few keyboard shortcuts for it. The same goes for the bash shell (ctrl+a and ctrl+e are among my favorites) and for your OS of choice in general (and even your web browser!). Not only do keyboard shortcuts make you more efficient, but they dramatically reduce the cognitive load after a while, and so make your life less painful in the long run. They can be the difference between hating computers and loving them.\nProgramming languages come and go, but Unix is forever! Well, maybe not forever, but close enough. Invest more of your time in getting familiar with durable and proven paradigms. Different programming languages are suitable in different situations and change dramatically from one decade to the next, but the unix shell and commands are as pristine, long lived, and as widely applicable as you’ll find in the computing world. I have a much more mixed view of git, Python, R, and C++. Another example of a very durable computing paradigm is SQL, which we’ll get to in a few weeks.",
+    "crumbs": [
+      "Labs",
+      "Lab 0 (Optional setup)"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistics 243: Introduction to Statistical Computing",
+    "section": "",
+    "text": "Ed\n\n  Gradescope\n\n  Tutorials\n\n  Lecture recordings\n\n  bCourses\n\n\nNo matching items",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "Statistics 243: Introduction to Statistical Computing",
+    "section": "Course materials",
+    "text": "Course materials\nSee the links above for the key resources for the course.\nMost course content (in particular unit notes, labs, and problem sets) are available through this website via the links in the left sidebar.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#questions-about-taking-the-class",
+    "href": "index.html#questions-about-taking-the-class",
+    "title": "Statistics 243: Introduction to Statistical Computing",
+    "section": "Questions about taking the class",
+    "text": "Questions about taking the class\nIf you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out this survey as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 30 at noon.\nUndergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nConcurrent enrollment students (e.g., exchange students from other universities/countries) can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nPlease see the syllabus for the math and statistics background I expect, as well as the need to be familiar with Python or to get up to speed in Python during the first few weeks of the semester.\nThe first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and Python. Please use the schedule to keep on top of what you need to do.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
+    "objectID": "howtos/installQuarto.html",
+    "href": "howtos/installQuarto.html",
+    "title": "Installing and Using Quarto",
+    "section": "",
+    "text": "Unless you plan to generate your problem set solutions on the SCF, you’ll need to install Quarto.\nOnce installed, you should be able to run commands such as quarto render FILE and quarto preview FILE from the command line.\nQuarto also runs from the Windows Command shell or PowerShell. We’ll add details/troubleshooting tips here as needed.",
+    "crumbs": [
+      "How tos",
+      "Installing and Using Quarto"
+    ]
+  },
+  {
+    "objectID": "howtos/accessPython.html",
+    "href": "howtos/accessPython.html",
+    "title": "Accessing Python",
+    "section": "",
+    "text": "We recommend using the Miniforge distribution as your Python 3.12 installation.\nOnce you’ve installed Python, please install the following packages:\nAssuming you installed Miniforge, you should be able to do this from the command line:\nWhile you’re welcome to work with Python in a Jupyter notebook for exploration (e.g., using the campus DataHub, you’ll need to submit Quarto (.qmd) documents with Python chunks for your problem sets. So you’ll need Python set up on your laptop or to use it by logging in to an SCF machine.",
+    "crumbs": [
+      "How tos",
+      "Accessing Python"
+    ]
+  },
+  {
+    "objectID": "howtos/accessPython.html#python-from-the-command-line",
+    "href": "howtos/accessPython.html#python-from-the-command-line",
+    "title": "Accessing Python",
+    "section": "Python from the command line",
+    "text": "Python from the command line\nOnce you get your SCF account, you can access Python or IPython from the UNIX command line as soon as you login to an SCF server. Just SSH to an SCF Linux machine (e.g., gandalf.berkeley.edu or radagast.berkeley.edu) and run ‘python’ or ‘ipython’ from the command line.\nMore details on using SSH are here. Note that if you have the Ubuntu subsystem for Windows, you can use SSH directly from the Ubuntu terminal.",
+    "crumbs": [
+      "How tos",
+      "Accessing Python"
+    ]
+  },
+  {
+    "objectID": "howtos/accessPython.html#python-via-jupyter-notebook",
+    "href": "howtos/accessPython.html#python-via-jupyter-notebook",
+    "title": "Accessing Python",
+    "section": "Python via Jupyter notebook",
+    "text": "Python via Jupyter notebook\nYou can use a Jupyter notebook to run Python code from the SCF JupyterHub or the Berkeley DataHub.\nIf you’re on the SCF JupyterHub, select Start My Server. Then, unless you are running long or parallelized code, just click Spawn (in other words, accept the default ‘standalone’ partition). On the next page select ‘New’ and ‘Python 3’.\nTo finish your session, click on Control Panel and Stop My Server. Do not click Logout.",
+    "crumbs": [
+      "How tos",
+      "Accessing Python"
+    ]
+  },
+  {
+    "objectID": "howtos/submitPS.html",
+    "href": "howtos/submitPS.html",
+    "title": "Problem Set Submissions",
+    "section": "",
+    "text": "These requirements are still being finalized. Do not rely on this material yet.",
+    "crumbs": [
+      "How tos",
+      "Problem Set Submissions"
+    ]
+  },
+  {
+    "objectID": "howtos/submitPS.html#submission-format",
+    "href": "howtos/submitPS.html#submission-format",
+    "title": "Problem Set Submissions",
+    "section": "Submission format",
+    "text": "Submission format\nProblem set solutions should be written in Quarto Markdown (.qmd) source files, interspersing explanatory text with Python (and in some cases bash) code chunks. Please do not use Jupyter notebook (.ipynb) files as your underlying source file for your solutions.\nWhy?\n\nFor one or two of the initial problem sets you’ll need to include both bash and Python code. This isn’t possible in a single notebook.\nThe underlying format of .ipynb files is JSON. While this is a plain text format, the key-value pair structure is much less well-suited for use with Git version control (which relies on diff) than Markdown-based formats.\nOne can run chunks in a Jupyter notebook in arbitrary order. What is printed to PDF depends on the order in which the chunks are run and the results can differ from what one would expect based on reading the notebook sequentially and running the chunks sequentially. For example, consider the following experiment and you’ll see what I mean: (1) Have one code chunk with a = 3 and run it; (2) Add a second chunk with print(a) and run it; and (3) Change the first chunk to a=4 and DO NOT rerun the second chunk. Save the notebook to PDF. You’ll see that your “report” makes no sense. Here’s the result of me doing that experiment.\n\nIf you really want to do your initial explorations of the problems in a Jupyter notebook, with content then copied to qmd, that is fine.\nFor problem sets later in the semester, we may allow the work to be done in a Jupyter notebook (committed to the repository as the source file) and then submitted as a PDF, but the initial problem sets must be provided as qmd source files.",
+    "crumbs": [
+      "How tos",
+      "Problem Set Submissions"
+    ]
+  },
+  {
+    "objectID": "howtos/submitPS.html#problem-set-solution-workflows",
+    "href": "howtos/submitPS.html#problem-set-solution-workflows",
+    "title": "Problem Set Submissions",
+    "section": "Problem set solution workflows",
+    "text": "Problem set solution workflows\nHere we outline a few suggested workflows for developing your problem set solutions:\n\nOpen the qmd file in any editor you like (e.g., Emacs, Sublime, ….). From the command line (we think this will work from a Windows command line such as cmd.exe or PowerShell as well), run quarto preview FILE to show your rendered document live as you edit and save changes. You can put the preview window side by side with your editor, and the preview document should automatically render as you save your qmd file.\nUse VS Code with the following extensions: Python, Quarto, and Jupyter Notebooks. This allows you to execute and preview chunks (and whole document) inside VS Code. This is currently deeb’s favorite path due to how well it integrated with the Python debugger.\nUse RStudio (yes, RStudio), which can manage Python code and will display chunk output in the same way it does with R chunks. This path seems to work quite well and is recommended if you are already familiar with RStudio.\n\nLater in the semester, you may be allowed to work directly in Jupyter notebooks and use quarto to render from them directly. This has a few quirks and limitations, but may be allowed for some problem sets.\nPlease commit your work regularly to your repository as you develop your solutions.",
+    "crumbs": [
+      "How tos",
+      "Problem Set Submissions"
+    ]
+  },
+  {
+    "objectID": "howtos/submitPS.html#github-repository",
+    "href": "howtos/submitPS.html#github-repository",
+    "title": "Problem Set Submissions",
+    "section": "GitHub repository",
+    "text": "GitHub repository\n\nSetting up your repository\nWe are creating repositories for everyone at github.berkeley.edu. Additionally, homeworks still need to be submitted as PDFs on Gradescope.\nSteps:\n\nLog into github.berkeley.edu using your Berkeley credentials. Because of how the system works, you will need to log in before your account is created. Nothing else needs to be done, just log in and log out.\nAfter accounts are created (may take a couple days after first login), when you log in again, you should see one private repository listed on the left side (e.g., stat243-fall-2022/ahv36). This is your class repository. Do not change the repository settings! They are set up for this class.\nClone the repo to your home directory (I would clone it into a directory just for repositories (e.g., I use ~/repos). In the top-level of your working directory, you should create a file named (exactly) .gitignore.\n\nThe .gitignore file causes Git to ignore transient or computer-specific files that Quarto generates. (more info at https://github.com/github/gitignore) In it, put (again, don’t put dashed lines):\n# cache directories\n/__pycache__\n\n# pickle files\n*.pkl\n*.pickle\n\n\nRepository Organization\nThe problem sets in your repository should be organized into folders with specific filenames.\nWhen we pull from your repository, our code will be assuming the following structure:\nyour_repo/\n├── ps1/\n│   ├── ps1.pdf\n│   ├── ps1.qmd \n│   ├── &lt;possibly auxiliary code or other files&gt;\n├── ps2/\n│   ├── ...\n├── ...\n├── ps8/\n├── .gitignore\n└── info.json\nThe file names are case-sensitive, so please keep everything lowercase.",
+    "crumbs": [
+      "How tos",
+      "Problem Set Submissions"
+    ]
+  },
+  {
+    "objectID": "howtos/windowsInstall.html",
+    "href": "howtos/windowsInstall.html",
+    "title": "R/Rstudio on Windows",
+    "section": "",
+    "text": "While R was built/designed for UNIX systems, it has been well adapted for Windows. Here, we’ll start with the basics of installing R on Windows. Then, we’ll cover the recommended editor (Rstudio), and how to build pdf documents using MikTeX.\n\n\n\n\n\n\nNote\n\n\n\nThis tutorial installs Windows-only versions of everything. Modern Windows systems have an Ubuntu subsystem available that we highly recommend. See the Installing the Linux Subsystem on Windows tutorial for setting up that configuration.\n\n\n\nInstalling R\nThe first step in installing the R language. This is available on CRAN (Comprehensive R Archive Network).\n\nGo to the CRAN webpage, www.r-project.org\nIn the first paragraph, click the link download R\nYou’re now on a page titled CRAN Mirrors, choose the mirror located closest to your geographic location\n\nMirrors are different servers that all host copies of the same website. You get best performance from the location closest to you.\n\nYou’re now on a paged titled The Comprehensive R Archive Network. The first box is labeled Downloand and Install R, click Download R for Windows\nClick base or install R for the first time, these take you to the same place\n\nFor more advanced things, you may need the Rtools download later. It isn’t necessary now, but remember that for the future.\n\nAt the top is a large-font link, Download R X.X.X for Windows, click this. It will begin downloading the Windows installer for R.\nFollow the instructions for setup. If you are unsure of anything, leave the default settings\n\n\n\nInstalling RStudio\nRStudio is one of the best text editors for coding in R. It is our recommended option for beginning. After you are comfortable with the language, or if you use other languages as well, you may want to explore Atom or Sublime. More advanced options include Emacs with [ESS package][https://ess.r-project.org/] and vim with the Nvim-R plugin.\nTo install RStudio:\n\nGo to the RStudio Desktop download page, rstudio.com/products/rstudio/download/#download\nChoose the download for your OS, most likely the Windows 10/8/7 one\nFollow the instructions for setup. If you are unsure of anything, leave the default settings\nOpen RStudio (R will run automatically in the background)\n\nYou may have to allow RStudio to run if prompted (depends on security settings and anti-virus software)\n\n\nOnce RStudio is installed, you can install or update packages in one of two ways:\n\nVia the console, using install.packages() or update.packages()\n\nVia the gui:\n\nIn the top bar, click on tools\nSelect Install Packages… to install packages\nSelect Check for Package Updates… to update packages\n\n\n\n\nCompiling PDF Documents\nFor the purposes of this class, you will be submitting homeworks as PDF documents that blend written text, code, and code-generated output. These documents are RMarkdown documents, and are dynamic documents that provide a convenient method for documenting your work (more on this in one of the lab sections). To do this, you need a LaTeX renderer. We recommend MiKTeX for Windows.\n\nGo to Getting MiKTeX to download MiKTeX for Windows, miktex.org/download\nThe first page should be Install on Windows, click Download at the bottom of the page\n\nClick the download to begin\n\n\n\n\n\n\n\nImportant\n\n\n\nFOLLOW THESE INSTALL INSTRUCTIONS.\nThe default options are fine in most places, but there is one that will cause problems.\n\n\n\nAccept the Copying Conditions, click next\nInstall only for you, click next\nUse the default directory, click next\nThis should be the Settings page. Under Install missing packages on-the-fly, change the setting to Yes, click next\n\n\n\nBecause we are using MiKTeX as an external renderer, it can’t ask you to install missing packages, and will then fail, so we have to set that installation as automatic.\n\n\nClick start (Optional, but highly recommended) Open RStudio, select a new .Rmd document, d then choose knit. This may take some time, because MiKTeX is installing new braries, but it ensures that your pipeline is setup correctly"
+  },
+  {
+    "objectID": "howtos/installGit.html",
+    "href": "howtos/installGit.html",
+    "title": "Installing Git",
+    "section": "",
+    "text": "Here are some instructions for installing Git on your computer. Git is the version control software we’ll use in the course.\nYou can install Git by downloading and installing the correct binary from here.\nFor macOS, deeb recommends using the Homebrew option.\nGit comes installed on the SCF, so if you login to an SCF machine and want to use Git there, you don’t need to install Git.\n\nSidenotes on using Git with RStudio\nYou can work with Git through RStudio via RStudio projects.\nHere are some instructions. Here are some helpful guidelines from RStudio.\nYou may need to tell RStudio where the Git executable is located as follows.\n\nOn Windows, the git executable should be installed somewhere like: \"C:/Program Files (x86)/Git/bin/git.exe\"\nOn MacOS X, you can locate the executable by executing the following in Terminal: which git\nOnce you locate the executable, you may then need to confirm that RStudio is looking in the right place. Go to “Tools -&gt; Options -&gt; Git/SVN -&gt; Git executable” and confirm it has the correct information about the location of the git executable.",
+    "crumbs": [
+      "How tos",
+      "Installing Git"
+    ]
+  },
+  {
     "objectID": "howtos/windowsAndLinux.html",
     "href": "howtos/windowsAndLinux.html",
     "title": "Windows 10 and the Ubuntu Subsystem",
@@ -99,48 +284,11 @@
     ]
   },
   {
-    "objectID": "howtos/installGit.html",
-    "href": "howtos/installGit.html",
-    "title": "Installing Git",
+    "objectID": "howtos/RandRStudioInstall.html",
+    "href": "howtos/RandRStudioInstall.html",
+    "title": "Installing R & RStudio",
     "section": "",
-    "text": "Here are some instructions for installing Git on your computer. Git is the version control software we’ll use in the course.\nYou can install Git by downloading and installing the correct binary from here.\nFor macOS, deeb recommends using the Homebrew option.\nGit comes installed on the SCF, so if you login to an SCF machine and want to use Git there, you don’t need to install Git.\n\nSidenotes on using Git with RStudio\nYou can work with Git through RStudio via RStudio projects.\nHere are some instructions. Here are some helpful guidelines from RStudio.\nYou may need to tell RStudio where the Git executable is located as follows.\n\nOn Windows, the git executable should be installed somewhere like: \"C:/Program Files (x86)/Git/bin/git.exe\"\nOn MacOS X, you can locate the executable by executing the following in Terminal: which git\nOnce you locate the executable, you may then need to confirm that RStudio is looking in the right place. Go to “Tools -&gt; Options -&gt; Git/SVN -&gt; Git executable” and confirm it has the correct information about the location of the git executable.",
-    "crumbs": [
-      "How tos",
-      "Installing Git"
-    ]
-  },
-  {
-    "objectID": "howtos/accessPython.html",
-    "href": "howtos/accessPython.html",
-    "title": "Accessing Python",
-    "section": "",
-    "text": "We recommend using the Miniforge distribution as your Python 3.12 installation.\nOnce you’ve installed Python, please install the following packages:\nAssuming you installed Miniforge, you should be able to do this from the command line:\nWhile you’re welcome to work with Python in a Jupyter notebook for exploration (e.g., using the campus DataHub, you’ll need to submit Quarto (.qmd) documents with Python chunks for your problem sets. So you’ll need Python set up on your laptop or to use it by logging in to an SCF machine.",
-    "crumbs": [
-      "How tos",
-      "Accessing Python"
-    ]
-  },
-  {
-    "objectID": "howtos/accessPython.html#python-from-the-command-line",
-    "href": "howtos/accessPython.html#python-from-the-command-line",
-    "title": "Accessing Python",
-    "section": "Python from the command line",
-    "text": "Python from the command line\nOnce you get your SCF account, you can access Python or IPython from the UNIX command line as soon as you login to an SCF server. Just SSH to an SCF Linux machine (e.g., gandalf.berkeley.edu or radagast.berkeley.edu) and run ‘python’ or ‘ipython’ from the command line.\nMore details on using SSH are here. Note that if you have the Ubuntu subsystem for Windows, you can use SSH directly from the Ubuntu terminal.",
-    "crumbs": [
-      "How tos",
-      "Accessing Python"
-    ]
-  },
-  {
-    "objectID": "howtos/accessPython.html#python-via-jupyter-notebook",
-    "href": "howtos/accessPython.html#python-via-jupyter-notebook",
-    "title": "Accessing Python",
-    "section": "Python via Jupyter notebook",
-    "text": "Python via Jupyter notebook\nYou can use a Jupyter notebook to run Python code from the SCF JupyterHub or the Berkeley DataHub.\nIf you’re on the SCF JupyterHub, select Start My Server. Then, unless you are running long or parallelized code, just click Spawn (in other words, accept the default ‘standalone’ partition). On the next page select ‘New’ and ‘Python 3’.\nTo finish your session, click on Control Panel and Stop My Server. Do not click Logout.",
-    "crumbs": [
-      "How tos",
-      "Accessing Python"
-    ]
+    "text": "On your laptop\nIf your version of R is older than 4.0.0, please install the latest version.\nTo install R, see:\n\nMacOS: install the R-4.2.1.pkg from https://cran.rstudio.com/bin/macosx\nWindows: https://cran.rstudio.com/bin/windows/base/\nLinux: https://cran.rstudio.com/bin/linux/\n\nThen install RStudio. To do so, see https://www.rstudio.com/ide/download/desktop, scrolling down to the “Installers for Supported Platforms” section and selecting the Installer for your operating system.\nVerify that you can install add-on R packages by installing the ‘fields’ package. In RStudio, go to ‘Tools-&gt;Install Packages’. In the resulting dialog box, enter ‘fields’ (without quotes) in the ‘Packages’ field. Depending on the location specified in the ‘Install to Library’ field, you may need to enter your administrator password. To be able to install packages to the directory of an individual user, you may need to do the following:\n\nIn R, enter the command Sys.getenv()['R_LIBS_USER'].\nCreate the directory specified in the result that R returns, e.g., on a Mac, this might be ~/Library/R/4.0/library.\n\nFor more detailed installation instructions for Windows, see Using R, RStudio, and LaTeX on Windows file.\n\n\nVia DataHub\nSee the instructions in Accessing the Unix Command Line for how to login to Datahub. Then in the mid-upper right, click on New and RStudio. Alternatively, to go directly to RStudio, go to https://r.datahub.berkeley.edu."
   },
   {
     "objectID": "howtos/accessUnixCommandLine.html",
@@ -151,156 +299,6 @@
     "crumbs": [
       "How tos",
       "Accessing the Unix Command Line"
-    ]
-  },
-  {
-    "objectID": "rubric.html",
-    "href": "rubric.html",
-    "title": "",
-    "section": "",
-    "text": "This document provides guidance for submitting high-quality problem set (and project) solutions. This guidance is based on general good practices for scientific communication, reproducible research, and software development."
-  },
-  {
-    "objectID": "rubric.html#general-presentation",
-    "href": "rubric.html#general-presentation",
-    "title": "",
-    "section": "General presentation",
-    "text": "General presentation\n\nSimply presenting code or derivations is not sufficient.\nBriefly describe the overall goal or strategy before providing code/derivations.\nAs needed describe what the pieces of your code/derivation are doing to make it easier for a reader to follow the steps.\nKeep your output focused on illustrating what you did, without distracting from the flow of your solution by showing voluminous output. The output should illustrate and demonstrate, not overwhelm or obscure. If you need to show longer output, you can add it at the end as supplemental material.\nOutput should be produced by your code (i.e., from the code chunks running when the document is rendered), not by copying and pasting results into the document."
-  },
-  {
-    "objectID": "rubric.html#coding-practice",
-    "href": "rubric.html#coding-practice",
-    "title": "",
-    "section": "Coding practice",
-    "text": "Coding practice\n\nMinimize (or eliminate) use of global variables.\nBreak down work into core tasks and develop small, modular, self-contained functions (or class methods) to carry out those tasks.\nDon’t repeat code. As needed refactor code to create new functions (or class methods).\nFunctions and classes should be “weakly coupled”, interacting via their interfaces and not by having to know the internals of how they work.\nUse data structures appropriate for the computations that need to be done.\nDon’t hard code ‘magic’ numbers. Assign such numbers to variables with clear names, e.g., speed_of_light = 3e8.\nProvide reasonable default arguments to functions (or class methods) when possible.\nProvide tests (including unit tests) when requested (this is good general practice but we won’t require it in all cases).\nAvoid overly complicated syntax – try to use the clearest syntax you can to solve the problem.\nIn terms of speed, don’t worry about it too much so long as the code finishes real-world tasks in a reasonable amount of time. When optimizing, focus on the parts of the code that are the bottlenecks.\nUse functions already available in the language rather than recreating yourself."
-  },
-  {
-    "objectID": "rubric.html#code-style",
-    "href": "rubric.html#code-style",
-    "title": "",
-    "section": "Code style",
-    "text": "Code style\n\nFollow a consistent style. While you don’t have to follow Python’s PEP8 style guide exactly, please look at it and follow it generally.\nUse informative variable and function names and have a consistent naming style.\nUse whitespace (spaces, newlines) and parentheses to make the structure of the code easy to understand and the individual syntax pieces clear.\nUse consistent indentation to make the structure of the code easy to understand.\nProvide comments that give the goal of a given piece of code and why it does things, but don’t use comments to restate what the code does when it should be obvious from reading the code.\n\nProvide summaries for blocks of code.\nFor particularly complicated syntax, say what a given piece of code does."
-  },
-  {
-    "objectID": "office_hours.html",
-    "href": "office_hours.html",
-    "title": "Office hours",
-    "section": "",
-    "text": "Chris (Evans 495 or Zoom (see Ed Discussion post for link))\n\nTBD\n\nJoão:\n\nTBD\nFridays during unused section time up until 3:30 pm (Evans 340)",
-    "crumbs": [
-      "Office Hours"
-    ]
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License.",
-    "crumbs": [
-      "License"
-    ]
-  },
-  {
-    "objectID": "units/unit1-intro.html",
-    "href": "units/unit1-intro.html",
-    "title": "Introduction to UNIX, computers, and key tools",
-    "section": "",
-    "text": "PDF",
-    "crumbs": [
-      "Units",
-      "Unit 1 (UNIX intro)"
-    ]
-  },
-  {
-    "objectID": "units/unit1-intro.html#some-useful-editors",
-    "href": "units/unit1-intro.html#some-useful-editors",
-    "title": "Introduction to UNIX, computers, and key tools",
-    "section": "Some useful editors",
-    "text": "Some useful editors\n\nvarious editors available on all operating systems:\n\ntraditional editors born in UNIX: emacs, vim\nsome newer editors: Atom, Sublime Text (Sublime is proprietary/not free)\n\nWindows-specific: WinEdt\nMac-specific: Aquamacs Emacs, TextMate, TextEdit\nRStudio provides a built-in editor for R code and Quarto/R Markdown files. One can actually edit and run Python code chunks quite nicely in RStudio. (Note: RStudio as a whole is an IDE (integrated development environment. The editor is just the editing window where you edit code (and Markdown) files.)\nVSCode has a powerful code editor that is customized to work with various languages, and it has a Quarto extension.\n\nAs you get started it’s ok to use a very simple text editor such as Notepad in Windows, but you should take the time in the next few weeks to try out more powerful editors such as one of those listed above. It will be well worth your time over the course of your graduate work and then your career.\nBe careful in Windows - file suffixes are often hidden.\n\n(Optional) Basic emacs\nEmacs is one option as an editor. I use Emacs a fair amount, so I’m including some tips here, but other editors listed above are just as good.\n\nEmacs has special modes for different types of files: Python code files, R code files, C code files, Latex files – it’s worth your time to figure out how to set this up on your machine for the kinds of files you often work on\n\nIf working with Python and R, one can start up a Python or R interpreter in an additional Emacs buffer and send code to that interpreter and see the results of running the code.\nFor working with R, ESS (emacs speaks statistics) mode is helpful. This is built into Aquamacs Emacs.\n\nTo open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: emacs -nw file.txt\n\n\n(Optional) Emacs keystroke sequence shortcuts (aka, key bindings).\n\nNote Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.\n\n\n\n\n\n\n\n\nSequence\nResult\n\n\n\n\nCtrl-x,Ctrl-c\nClose the file\n\n\nCtrl-x,Ctrl-s\nSave the file\n\n\nCtrl-x,Ctrl-w\nSave with a new name\n\n\nCtrl-s\nSearch\n\n\nESC\nGet out of command buffer at bottom of screen\n\n\nCtrl-a\nGo to beginning of line\n\n\nCtrl-e\nGo to end of line\n\n\nCtrl-k\nDelete the rest of the line from cursor forward\n\n\nCtrl-space, then move to end of block\nHighlight a block of text\n\n\nCtrl-w\nRemove the highlighted block, putting it in the kill buffer\n\n\nCtrl-y (after using Ctrl-k or Ctrl-w)\nPaste from kill buffer (‘y’ is for ‘yank’)\n\n\n\n\n\n\n(Optional) Basic vim\nvim is another option as an editor. Like emacs, it’s been around for a long time, and some of the other options above are probably more user friendly. However, it can be helpful to know how to do some basic things in vim.\nFor example, if you run git commit without the -m flag to add a message, you’ll be put in a vim editor window by default (you can also modify what editor git uses).\nvim has two modes: normal mode, which allows you to carry out various operations (such as navigation, saving files, moving and deleting lines) and insert mode, which allows you to actually insert text.\nTo get into insert mode from normal mode, type “i”. To get back to normal mode, press Esc.\nWhen in normal mode, you can type :w to save, :x to save and exit, and :q to exit. To search a document for a string (e.g., “python docstring”, type /python docstring and return/enter. Type Esc to get out of the search.",
-    "crumbs": [
-      "Units",
-      "Unit 1 (UNIX intro)"
-    ]
-  },
-  {
-    "objectID": "schedule.html",
-    "href": "schedule.html",
-    "title": "Scheduling information",
-    "section": "",
-    "text": "Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 11:\n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#schedule",
-    "href": "schedule.html#schedule",
-    "title": "Scheduling information",
-    "section": "",
-    "text": "Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 11:\n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#quizzes",
-    "href": "schedule.html#quizzes",
-    "title": "Scheduling information",
-    "section": "Quizzes",
-    "text": "Quizzes\nQuizzes are in-person only.\n\nQuiz 1: TBD in class.\n\nReview session TBD in section.\n\nQuiz 2: TBD in class.\n\nReview session TBD in section.",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#project",
-    "href": "schedule.html#project",
-    "title": "Scheduling information",
-    "section": "Project",
-    "text": "Project\nDue date: TBD.",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#notes-on-assignments-and-activities",
-    "href": "schedule.html#notes-on-assignments-and-activities",
-    "title": "Scheduling information",
-    "section": "Notes on assignments and activities",
-    "text": "Notes on assignments and activities\n\nOptional library LaTeX session: I highly recommend (in particular if you are a Statistics graduate student) that you know how to create equations in LaTeX. Even if you develop your documents using Quarto, Jupyter notebooks, R Markdown, etc. rather than LaTeX-based documents, LaTeX math syntax is the common tool for writing math syntax that will render beautifully.\nOptional Lab 0 software/command line help session: (August 30 in lab room) Help session for installing software, accessing a UNIX-style command line, and basic command line usage (e.g., the UNIX basics tutorial). You can show up at any time (unlike all remaining labs). You should have software installed, be able to accesss the command line, and have started to become familiar with basic command line usage before class on Friday September 6.\nBash shell tutorial and exercises: (by TBD) Read through this tutorial on using the bash shell. You can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the exercises and submit your answers via Gradescope. This is not a formal problem set, so you don’t need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it’s even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you’ve worked through the tutorial. I’ll be doing demonstrations on using the bash shell in class starting on TBD, so that will be helpful as you work through the tutorial.\nLab 1: (September 6) First section/lab on using Git, setting up your GitHub repository for problem sets, and using Quarto to generate dynamic documents. Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.\nRegular expression reading and exercises: (by TBD), read the regular expression material in the tutorial on using the bash shell. Then answer the regular expressions (regex) practice problems and submit your answers on Gradescope. This is not one of the graded problem sets but rather an assignment that will simply be noted as being completed or not.",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistics 243: Introduction to Statistical Computing",
-    "section": "",
-    "text": "Ed\n\n  Gradescope\n\n  Tutorials\n\n  Lecture recordings\n\n  bCourses\n\n\nNo matching items",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-materials",
-    "href": "index.html#course-materials",
-    "title": "Statistics 243: Introduction to Statistical Computing",
-    "section": "Course materials",
-    "text": "Course materials\nSee the links above for the key resources for the course.\nMost course content (in particular unit notes, labs, and problem sets) are available through this website via the links in the left sidebar.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#questions-about-taking-the-class",
-    "href": "index.html#questions-about-taking-the-class",
-    "title": "Statistics 243: Introduction to Statistical Computing",
-    "section": "Questions about taking the class",
-    "text": "Questions about taking the class\nIf you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out this survey as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 30 at noon.\nUndergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nConcurrent enrollment students (e.g., exchange students from other universities/countries) can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nPlease see the syllabus for the math and statistics background I expect, as well as the need to be familiar with Python or to get up to speed in Python during the first few weeks of the semester.\nThe first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and Python. Please use the schedule to keep on top of what you need to do.",
-    "crumbs": [
-      "Home"
     ]
   },
   {
@@ -444,101 +442,103 @@
     ]
   },
   {
-    "objectID": "labs/lab0-setup.html",
-    "href": "labs/lab0-setup.html",
-    "title": "Lab 0: Setup",
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Scheduling information",
     "section": "",
-    "text": "Warning: This page is under construction for 2024.",
+    "text": "Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 11:\n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
     "crumbs": [
-      "Labs",
-      "Lab 0 (Optional setup)"
+      "Schedule"
     ]
   },
   {
-    "objectID": "labs/lab0-setup.html#setting-up-your-environment-082523",
-    "href": "labs/lab0-setup.html#setting-up-your-environment-082523",
-    "title": "Lab 0: Setup",
-    "section": "Setting up your environment (08/25/23)",
-    "text": "Setting up your environment (08/25/23)\nYou will need to set up (or make sure you have access to) the following:\n\nUnix shell\nGit\nQuarto\nPython\nA text editor or IDE of your choice (deeb recommends VS Code or sublime, but if you are already familiar with a specific editor, stick with it)\n\nAfter making sure you have access to all these 5 tools, it may be a good idea to go through some of the following tutorials on unix bash and unix commands. You can do this on your own or in the Lab section on Friday 8/25.\nAttending lab 0 is optional. If you successfully set up your environment to have all the listed tools, you don’t need to attend. You are welcome to attend to ask for help with the setup or to help your classmates with setting up their environments.\nYou are also welcome to come and ask for help on using any of these 5 tools/systems (esp. bash and unix commands this week), but priority will be given to environment setup questions.\nReach out to deeb @ deeb@berkeley.edu with any unresolved problems or if you discover something that needs to be changed with our howtos and instructions.\nDeeb’s unsolicited advice on languages and tools:\n\nWhichever editor you pick, make sure to spend some time every week learning a few keyboard shortcuts for it. The same goes for the bash shell (ctrl+a and ctrl+e are among my favorites) and for your OS of choice in general (and even your web browser!). Not only do keyboard shortcuts make you more efficient, but they dramatically reduce the cognitive load after a while, and so make your life less painful in the long run. They can be the difference between hating computers and loving them.\nProgramming languages come and go, but Unix is forever! Well, maybe not forever, but close enough. Invest more of your time in getting familiar with durable and proven paradigms. Different programming languages are suitable in different situations and change dramatically from one decade to the next, but the unix shell and commands are as pristine, long lived, and as widely applicable as you’ll find in the computing world. I have a much more mixed view of git, Python, R, and C++. Another example of a very durable computing paradigm is SQL, which we’ll get to in a few weeks.",
-    "crumbs": [
-      "Labs",
-      "Lab 0 (Optional setup)"
-    ]
-  },
-  {
-    "objectID": "calendar.html",
-    "href": "calendar.html",
-    "title": "Calendar",
+    "objectID": "schedule.html#schedule",
+    "href": "schedule.html#schedule",
+    "title": "Scheduling information",
     "section": "",
-    "text": "We can just embed the iframe html:"
+    "text": "Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Sep 11:\n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
+    "crumbs": [
+      "Schedule"
+    ]
   },
   {
-    "objectID": "howtos/RandRStudioInstall.html",
-    "href": "howtos/RandRStudioInstall.html",
-    "title": "Installing R & RStudio",
+    "objectID": "schedule.html#quizzes",
+    "href": "schedule.html#quizzes",
+    "title": "Scheduling information",
+    "section": "Quizzes",
+    "text": "Quizzes\nQuizzes are in-person only.\n\nQuiz 1: TBD in class.\n\nReview session TBD in section.\n\nQuiz 2: TBD in class.\n\nReview session TBD in section.",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#project",
+    "href": "schedule.html#project",
+    "title": "Scheduling information",
+    "section": "Project",
+    "text": "Project\nDue date: TBD.",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#notes-on-assignments-and-activities",
+    "href": "schedule.html#notes-on-assignments-and-activities",
+    "title": "Scheduling information",
+    "section": "Notes on assignments and activities",
+    "text": "Notes on assignments and activities\n\nOptional library LaTeX session: I highly recommend (in particular if you are a Statistics graduate student) that you know how to create equations in LaTeX. Even if you develop your documents using Quarto, Jupyter notebooks, R Markdown, etc. rather than LaTeX-based documents, LaTeX math syntax is the common tool for writing math syntax that will render beautifully.\nOptional Lab 0 software/command line help session: (August 30 in lab room) Help session for installing software, accessing a UNIX-style command line, and basic command line usage (e.g., the UNIX basics tutorial). You can show up at any time (unlike all remaining labs). You should have software installed, be able to accesss the command line, and have started to become familiar with basic command line usage before class on Friday September 6.\nBash shell tutorial and exercises: (by TBD) Read through this tutorial on using the bash shell. You can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the exercises and submit your answers via Gradescope. This is not a formal problem set, so you don’t need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it’s even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you’ve worked through the tutorial. I’ll be doing demonstrations on using the bash shell in class starting on TBD, so that will be helpful as you work through the tutorial.\nLab 1: (September 6) First section/lab on using Git, setting up your GitHub repository for problem sets, and using Quarto to generate dynamic documents. Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.\nRegular expression reading and exercises: (by TBD), read the regular expression material in the tutorial on using the bash shell. Then answer the regular expressions (regex) practice problems and submit your answers on Gradescope. This is not one of the graded problem sets but rather an assignment that will simply be noted as being completed or not.",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "units/unit1-intro.html",
+    "href": "units/unit1-intro.html",
+    "title": "Introduction to UNIX, computers, and key tools",
     "section": "",
-    "text": "On your laptop\nIf your version of R is older than 4.0.0, please install the latest version.\nTo install R, see:\n\nMacOS: install the R-4.2.1.pkg from https://cran.rstudio.com/bin/macosx\nWindows: https://cran.rstudio.com/bin/windows/base/\nLinux: https://cran.rstudio.com/bin/linux/\n\nThen install RStudio. To do so, see https://www.rstudio.com/ide/download/desktop, scrolling down to the “Installers for Supported Platforms” section and selecting the Installer for your operating system.\nVerify that you can install add-on R packages by installing the ‘fields’ package. In RStudio, go to ‘Tools-&gt;Install Packages’. In the resulting dialog box, enter ‘fields’ (without quotes) in the ‘Packages’ field. Depending on the location specified in the ‘Install to Library’ field, you may need to enter your administrator password. To be able to install packages to the directory of an individual user, you may need to do the following:\n\nIn R, enter the command Sys.getenv()['R_LIBS_USER'].\nCreate the directory specified in the result that R returns, e.g., on a Mac, this might be ~/Library/R/4.0/library.\n\nFor more detailed installation instructions for Windows, see Using R, RStudio, and LaTeX on Windows file.\n\n\nVia DataHub\nSee the instructions in Accessing the Unix Command Line for how to login to Datahub. Then in the mid-upper right, click on New and RStudio. Alternatively, to go directly to RStudio, go to https://r.datahub.berkeley.edu."
+    "text": "PDF",
+    "crumbs": [
+      "Units",
+      "Unit 1 (UNIX intro)"
+    ]
   },
   {
-    "objectID": "howtos/submitPS.html",
-    "href": "howtos/submitPS.html",
-    "title": "Problem Set Submissions",
+    "objectID": "units/unit1-intro.html#some-useful-editors",
+    "href": "units/unit1-intro.html#some-useful-editors",
+    "title": "Introduction to UNIX, computers, and key tools",
+    "section": "Some useful editors",
+    "text": "Some useful editors\n\nvarious editors available on all operating systems:\n\ntraditional editors born in UNIX: emacs, vim\nsome newer editors: Atom, Sublime Text (Sublime is proprietary/not free)\n\nWindows-specific: WinEdt\nMac-specific: Aquamacs Emacs, TextMate, TextEdit\nRStudio provides a built-in editor for R code and Quarto/R Markdown files. One can actually edit and run Python code chunks quite nicely in RStudio. (Note: RStudio as a whole is an IDE (integrated development environment. The editor is just the editing window where you edit code (and Markdown) files.)\nVSCode has a powerful code editor that is customized to work with various languages, and it has a Quarto extension.\n\nAs you get started it’s ok to use a very simple text editor such as Notepad in Windows, but you should take the time in the next few weeks to try out more powerful editors such as one of those listed above. It will be well worth your time over the course of your graduate work and then your career.\nBe careful in Windows - file suffixes are often hidden.\n\n(Optional) Basic emacs\nEmacs is one option as an editor. I use Emacs a fair amount, so I’m including some tips here, but other editors listed above are just as good.\n\nEmacs has special modes for different types of files: Python code files, R code files, C code files, Latex files – it’s worth your time to figure out how to set this up on your machine for the kinds of files you often work on\n\nIf working with Python and R, one can start up a Python or R interpreter in an additional Emacs buffer and send code to that interpreter and see the results of running the code.\nFor working with R, ESS (emacs speaks statistics) mode is helpful. This is built into Aquamacs Emacs.\n\nTo open emacs in the terminal window rather than as a new window, which is handy when it’s too slow (or impossible) to pass (i.e., tunnel) the graphical emacs window through ssh: emacs -nw file.txt\n\n\n(Optional) Emacs keystroke sequence shortcuts (aka, key bindings).\n\nNote Several of these (Ctrl-a, Ctrl-e, Ctrl-k, Ctrl-y) work in the command line, interactive Python and R sessions, and other places as well.\n\n\n\n\n\n\n\n\nSequence\nResult\n\n\n\n\nCtrl-x,Ctrl-c\nClose the file\n\n\nCtrl-x,Ctrl-s\nSave the file\n\n\nCtrl-x,Ctrl-w\nSave with a new name\n\n\nCtrl-s\nSearch\n\n\nESC\nGet out of command buffer at bottom of screen\n\n\nCtrl-a\nGo to beginning of line\n\n\nCtrl-e\nGo to end of line\n\n\nCtrl-k\nDelete the rest of the line from cursor forward\n\n\nCtrl-space, then move to end of block\nHighlight a block of text\n\n\nCtrl-w\nRemove the highlighted block, putting it in the kill buffer\n\n\nCtrl-y (after using Ctrl-k or Ctrl-w)\nPaste from kill buffer (‘y’ is for ‘yank’)\n\n\n\n\n\n\n(Optional) Basic vim\nvim is another option as an editor. Like emacs, it’s been around for a long time, and some of the other options above are probably more user friendly. However, it can be helpful to know how to do some basic things in vim.\nFor example, if you run git commit without the -m flag to add a message, you’ll be put in a vim editor window by default (you can also modify what editor git uses).\nvim has two modes: normal mode, which allows you to carry out various operations (such as navigation, saving files, moving and deleting lines) and insert mode, which allows you to actually insert text.\nTo get into insert mode from normal mode, type “i”. To get back to normal mode, press Esc.\nWhen in normal mode, you can type :w to save, :x to save and exit, and :q to exit. To search a document for a string (e.g., “python docstring”, type /python docstring and return/enter. Type Esc to get out of the search.",
+    "crumbs": [
+      "Units",
+      "Unit 1 (UNIX intro)"
+    ]
+  },
+  {
+    "objectID": "rubric.html",
+    "href": "rubric.html",
+    "title": "",
     "section": "",
-    "text": "These requirements are still being finalized. Do not rely on this material yet.",
-    "crumbs": [
-      "How tos",
-      "Problem Set Submissions"
-    ]
+    "text": "This document provides guidance for submitting high-quality problem set (and project) solutions. This guidance is based on general good practices for scientific communication, reproducible research, and software development."
   },
   {
-    "objectID": "howtos/submitPS.html#submission-format",
-    "href": "howtos/submitPS.html#submission-format",
-    "title": "Problem Set Submissions",
-    "section": "Submission format",
-    "text": "Submission format\nProblem set solutions should be written in Quarto Markdown (.qmd) source files, interspersing explanatory text with Python (and in some cases bash) code chunks. Please do not use Jupyter notebook (.ipynb) files as your underlying source file for your solutions.\nWhy?\n\nFor one or two of the initial problem sets you’ll need to include both bash and Python code. This isn’t possible in a single notebook.\nThe underlying format of .ipynb files is JSON. While this is a plain text format, the key-value pair structure is much less well-suited for use with Git version control (which relies on diff) than Markdown-based formats.\nOne can run chunks in a Jupyter notebook in arbitrary order. What is printed to PDF depends on the order in which the chunks are run and the results can differ from what one would expect based on reading the notebook sequentially and running the chunks sequentially. For example, consider the following experiment and you’ll see what I mean: (1) Have one code chunk with a = 3 and run it; (2) Add a second chunk with print(a) and run it; and (3) Change the first chunk to a=4 and DO NOT rerun the second chunk. Save the notebook to PDF. You’ll see that your “report” makes no sense. Here’s the result of me doing that experiment.\n\nIf you really want to do your initial explorations of the problems in a Jupyter notebook, with content then copied to qmd, that is fine.\nFor problem sets later in the semester, we may allow the work to be done in a Jupyter notebook (committed to the repository as the source file) and then submitted as a PDF, but the initial problem sets must be provided as qmd source files.",
-    "crumbs": [
-      "How tos",
-      "Problem Set Submissions"
-    ]
+    "objectID": "rubric.html#general-presentation",
+    "href": "rubric.html#general-presentation",
+    "title": "",
+    "section": "General presentation",
+    "text": "General presentation\n\nSimply presenting code or derivations is not sufficient.\nBriefly describe the overall goal or strategy before providing code/derivations.\nAs needed describe what the pieces of your code/derivation are doing to make it easier for a reader to follow the steps.\nKeep your output focused on illustrating what you did, without distracting from the flow of your solution by showing voluminous output. The output should illustrate and demonstrate, not overwhelm or obscure. If you need to show longer output, you can add it at the end as supplemental material.\nOutput should be produced by your code (i.e., from the code chunks running when the document is rendered), not by copying and pasting results into the document."
   },
   {
-    "objectID": "howtos/submitPS.html#problem-set-solution-workflows",
-    "href": "howtos/submitPS.html#problem-set-solution-workflows",
-    "title": "Problem Set Submissions",
-    "section": "Problem set solution workflows",
-    "text": "Problem set solution workflows\nHere we outline a few suggested workflows for developing your problem set solutions:\n\nOpen the qmd file in any editor you like (e.g., Emacs, Sublime, ….). From the command line (we think this will work from a Windows command line such as cmd.exe or PowerShell as well), run quarto preview FILE to show your rendered document live as you edit and save changes. You can put the preview window side by side with your editor, and the preview document should automatically render as you save your qmd file.\nUse VS Code with the following extensions: Python, Quarto, and Jupyter Notebooks. This allows you to execute and preview chunks (and whole document) inside VS Code. This is currently deeb’s favorite path due to how well it integrated with the Python debugger.\nUse RStudio (yes, RStudio), which can manage Python code and will display chunk output in the same way it does with R chunks. This path seems to work quite well and is recommended if you are already familiar with RStudio.\n\nLater in the semester, you may be allowed to work directly in Jupyter notebooks and use quarto to render from them directly. This has a few quirks and limitations, but may be allowed for some problem sets.\nPlease commit your work regularly to your repository as you develop your solutions.",
-    "crumbs": [
-      "How tos",
-      "Problem Set Submissions"
-    ]
+    "objectID": "rubric.html#coding-practice",
+    "href": "rubric.html#coding-practice",
+    "title": "",
+    "section": "Coding practice",
+    "text": "Coding practice\n\nMinimize (or eliminate) use of global variables.\nBreak down work into core tasks and develop small, modular, self-contained functions (or class methods) to carry out those tasks.\nDon’t repeat code. As needed refactor code to create new functions (or class methods).\nFunctions and classes should be “weakly coupled”, interacting via their interfaces and not by having to know the internals of how they work.\nUse data structures appropriate for the computations that need to be done.\nDon’t hard code ‘magic’ numbers. Assign such numbers to variables with clear names, e.g., speed_of_light = 3e8.\nProvide reasonable default arguments to functions (or class methods) when possible.\nProvide tests (including unit tests) when requested (this is good general practice but we won’t require it in all cases).\nAvoid overly complicated syntax – try to use the clearest syntax you can to solve the problem.\nIn terms of speed, don’t worry about it too much so long as the code finishes real-world tasks in a reasonable amount of time. When optimizing, focus on the parts of the code that are the bottlenecks.\nUse functions already available in the language rather than recreating yourself."
   },
   {
-    "objectID": "howtos/submitPS.html#github-repository",
-    "href": "howtos/submitPS.html#github-repository",
-    "title": "Problem Set Submissions",
-    "section": "GitHub repository",
-    "text": "GitHub repository\n\nSetting up your repository\nWe are creating repositories for everyone at github.berkeley.edu. Additionally, homeworks still need to be submitted as PDFs on Gradescope.\nSteps:\n\nLog into github.berkeley.edu using your Berkeley credentials. Because of how the system works, you will need to log in before your account is created. Nothing else needs to be done, just log in and log out.\nAfter accounts are created (may take a couple days after first login), when you log in again, you should see one private repository listed on the left side (e.g., stat243-fall-2022/ahv36). This is your class repository. Do not change the repository settings! They are set up for this class.\nClone the repo to your home directory (I would clone it into a directory just for repositories (e.g., I use ~/repos). In the top-level of your working directory, you should create a file named (exactly) .gitignore.\n\nThe .gitignore file causes Git to ignore transient or computer-specific files that Quarto generates. (more info at https://github.com/github/gitignore) In it, put (again, don’t put dashed lines):\n# cache directories\n/__pycache__\n\n# pickle files\n*.pkl\n*.pickle\n\n\nRepository Organization\nThe problem sets in your repository should be organized into folders with specific filenames.\nWhen we pull from your repository, our code will be assuming the following structure:\nyour_repo/\n├── ps1/\n│   ├── ps1.pdf\n│   ├── ps1.qmd \n│   ├── &lt;possibly auxiliary code or other files&gt;\n├── ps2/\n│   ├── ...\n├── ...\n├── ps8/\n├── .gitignore\n└── info.json\nThe file names are case-sensitive, so please keep everything lowercase.",
-    "crumbs": [
-      "How tos",
-      "Problem Set Submissions"
-    ]
-  },
-  {
-    "objectID": "howtos/windowsInstall.html",
-    "href": "howtos/windowsInstall.html",
-    "title": "R/Rstudio on Windows",
-    "section": "",
-    "text": "While R was built/designed for UNIX systems, it has been well adapted for Windows. Here, we’ll start with the basics of installing R on Windows. Then, we’ll cover the recommended editor (Rstudio), and how to build pdf documents using MikTeX.\n\n\n\n\n\n\nNote\n\n\n\nThis tutorial installs Windows-only versions of everything. Modern Windows systems have an Ubuntu subsystem available that we highly recommend. See the Installing the Linux Subsystem on Windows tutorial for setting up that configuration.\n\n\n\nInstalling R\nThe first step in installing the R language. This is available on CRAN (Comprehensive R Archive Network).\n\nGo to the CRAN webpage, www.r-project.org\nIn the first paragraph, click the link download R\nYou’re now on a page titled CRAN Mirrors, choose the mirror located closest to your geographic location\n\nMirrors are different servers that all host copies of the same website. You get best performance from the location closest to you.\n\nYou’re now on a paged titled The Comprehensive R Archive Network. The first box is labeled Downloand and Install R, click Download R for Windows\nClick base or install R for the first time, these take you to the same place\n\nFor more advanced things, you may need the Rtools download later. It isn’t necessary now, but remember that for the future.\n\nAt the top is a large-font link, Download R X.X.X for Windows, click this. It will begin downloading the Windows installer for R.\nFollow the instructions for setup. If you are unsure of anything, leave the default settings\n\n\n\nInstalling RStudio\nRStudio is one of the best text editors for coding in R. It is our recommended option for beginning. After you are comfortable with the language, or if you use other languages as well, you may want to explore Atom or Sublime. More advanced options include Emacs with [ESS package][https://ess.r-project.org/] and vim with the Nvim-R plugin.\nTo install RStudio:\n\nGo to the RStudio Desktop download page, rstudio.com/products/rstudio/download/#download\nChoose the download for your OS, most likely the Windows 10/8/7 one\nFollow the instructions for setup. If you are unsure of anything, leave the default settings\nOpen RStudio (R will run automatically in the background)\n\nYou may have to allow RStudio to run if prompted (depends on security settings and anti-virus software)\n\n\nOnce RStudio is installed, you can install or update packages in one of two ways:\n\nVia the console, using install.packages() or update.packages()\n\nVia the gui:\n\nIn the top bar, click on tools\nSelect Install Packages… to install packages\nSelect Check for Package Updates… to update packages\n\n\n\n\nCompiling PDF Documents\nFor the purposes of this class, you will be submitting homeworks as PDF documents that blend written text, code, and code-generated output. These documents are RMarkdown documents, and are dynamic documents that provide a convenient method for documenting your work (more on this in one of the lab sections). To do this, you need a LaTeX renderer. We recommend MiKTeX for Windows.\n\nGo to Getting MiKTeX to download MiKTeX for Windows, miktex.org/download\nThe first page should be Install on Windows, click Download at the bottom of the page\n\nClick the download to begin\n\n\n\n\n\n\n\nImportant\n\n\n\nFOLLOW THESE INSTALL INSTRUCTIONS.\nThe default options are fine in most places, but there is one that will cause problems.\n\n\n\nAccept the Copying Conditions, click next\nInstall only for you, click next\nUse the default directory, click next\nThis should be the Settings page. Under Install missing packages on-the-fly, change the setting to Yes, click next\n\n\n\nBecause we are using MiKTeX as an external renderer, it can’t ask you to install missing packages, and will then fail, so we have to set that installation as automatic.\n\n\nClick start (Optional, but highly recommended) Open RStudio, select a new .Rmd document, d then choose knit. This may take some time, because MiKTeX is installing new braries, but it ensures that your pipeline is setup correctly"
-  },
-  {
-    "objectID": "howtos/installQuarto.html",
-    "href": "howtos/installQuarto.html",
-    "title": "Installing and Using Quarto",
-    "section": "",
-    "text": "Unless you plan to generate your problem set solutions on the SCF, you’ll need to install Quarto.\nOnce installed, you should be able to run commands such as quarto render FILE and quarto preview FILE from the command line.\nQuarto also runs from the Windows Command shell or PowerShell. We’ll add details/troubleshooting tips here as needed.",
-    "crumbs": [
-      "How tos",
-      "Installing and Using Quarto"
-    ]
+    "objectID": "rubric.html#code-style",
+    "href": "rubric.html#code-style",
+    "title": "",
+    "section": "Code style",
+    "text": "Code style\n\nFollow a consistent style. While you don’t have to follow Python’s PEP8 style guide exactly, please look at it and follow it generally.\nUse informative variable and function names and have a consistent naming style.\nUse whitespace (spaces, newlines) and parentheses to make the structure of the code easy to understand and the individual syntax pieces clear.\nUse consistent indentation to make the structure of the code easy to understand.\nProvide comments that give the goal of a given piece of code and why it does things, but don’t use comments to restate what the code does when it should be obvious from reading the code.\n\nProvide summaries for blocks of code.\nFor particularly complicated syntax, say what a given piece of code does."
   }
 ]
