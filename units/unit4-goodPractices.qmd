@@ -196,10 +196,11 @@ First, we check for and fix syntax errors.
 ruff check test.py
 ```
 
+
 Then we ask ruff to reformat to conform to standard style.
 
-```
-cp test.py test-save.py   # Not required, just so we can see what `ruff did.
+```{bash}
+cp test.py test-save.py   # Not required, just so we can see what `ruff` did.
 ruff format test.py
 ```
 
@@ -266,12 +267,29 @@ We'll use Python's built-in `ValueError`, one of the various [exception types
 that Python provides](https://docs.python.org/3/library/exceptions.html#concrete-exceptions) and that you could use. You can also create your own exceptions by subclassing one of Python's existing exception classes. (We haven't yet discussed classes and object-oriented programming, so don't worry if you're not sure about what that means.)
 
 ```{python}
+#| echo: false
+#| eval: false
+#| error: true
+## This is causing a rendering error: "Text line contains an invalid character"
+def myfun(val):
+    if val <= 0:
+        raise ValueError("`val` should be positive")
+
+myfun(-3)
+```
+
+```{python}
+#| eval: false
 #| error: true
 def myfun(val):
     if val <= 0:
         raise ValueError("`val` should be positive")
 
 myfun(-3)
+```
+
+```
+ValueError: `val` should be positive
 ```
 
 Next let's consider cases where your function runs some code that might return an
@@ -288,6 +306,7 @@ First let's see the case of continuing execution.
 
 
 ```{python}
+#| eval: false
 #| error: true
 import os
 
@@ -306,10 +325,16 @@ def myfun(filename):
 myfun('missing_file.txt')
 ```
 
+```
+[Errno 2] No such file or directory: 'missing_file.txt'
+Check that the file `missing_file.txt` can be found in the current path: `/accounts/vis/paciorek/teaching/243fall24/fall-2024/units`.
+```
+
 Finally let's see how we can intercept an error but then "re-raise" the error rather than
 continuing execution.
 
 ```{python}
+#| eval: false
 #| error: true
 import requests
 
@@ -322,6 +347,12 @@ def myfun(url):
         raise
 
 myfun("http://missingurl.com")
+```
+
+```
+There was a problem accessing http://missingurl.com. Perhaps it doesn't exist or the URL has a typo?
+
+ConnectionError: HTTPConnectionPool(host='missingurl.com', port=80): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f348db44590>: Failed to establish a new connection: [Errno -2] Name or service not known'))
 ```
 
 
@@ -390,7 +421,7 @@ With GHA, you specify the operating system and then the steps to run in the YAML
 
 When triggered, GitHub will run the steps in a virtual machine, which is called the *runner*.
 
-Here's an example YAML file for testing the [an example package called `mytoy`](https://github.com/fperez/mytoy):
+Here's an example YAML file for testing [an example package called `mytoy`](https://github.com/fperez/mytoy):
 
 ```
 on:
@@ -620,6 +651,8 @@ Here's a list of useful pdb commands (some of which we saw above) that you can u
 We can use `pdb.run()` to run a function under the debugger. We need to make sure to use `s` as the first pdb command
 in order to actually step into the function. From there, we can debug as normal as if we had set a breakpoint at the start
 of the function.
+
+
 
 ```{python}
 #| eval: false
