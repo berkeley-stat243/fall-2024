@@ -394,14 +394,15 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="computing-resources" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="computing-resources">Computing Resources</h2>
-<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department Linux cluster. You can also use the SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook.</p>
+<p>Most work for the course can be done on your laptop. Later in the course we’ll also use the Statistics Department Linux cluster. You can also use the SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook. (The campus DataHub is limited in terms of number of CPU cores and memory so won’t be suitable for more computationally-intensive work later in the semester.)</p>
 <p>The software needed for the course is as follows:</p>
 <ul>
 <li><p>Access to the UNIX command line (bash shell)</p></li>
 <li><p>Git</p></li>
 <li><p>Python (the Miniforge installation of Conda is recommended but by no means required)</p></li>
+<li><p>Quarto</p></li>
 </ul>
-<p>We have <a href="howtos">some tips for software installation (and access to DataHub)</a>, including suggestions for how to access a UNIX shell, which you’ll need to be able to do by the second week of class.</p>
+<p>See the “how tos” in the left sidebar for tips on software installation and access to a UNIX shell, which you’ll need to be able to do by the second week of class.</p>
 </section>
 <section id="class-time" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="class-time">Class time</h2>
@@ -420,7 +421,13 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="course-grades" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="course-grades">Course grades</h3>
-<p>The grade for this course is primarily based on assignments due every 1-2 weeks, two quizzes (likely in early-mid October and mid-late November), and a final group project. I will also provide extra credit questions on some problem sets. There is no final exam. 50% of the grade is based on the problem sets, 25% on the quizzes, 15% on the project, and 10% on your participation in discussions on Ed (i.e., responding to your classmates questions and asking thoughtful questions about course material), your responses to the in-class Google forms questions, completion of occasional non-problem set assignments, as well as occasional brief questions that I will ask you to answer in advance of the next class.</p>
+<p>The grade for this course is primarily based on assignments due every 1-2 weeks, two quizzes (likely in early-mid October and mid-late November), and a final group project. I will also provide extra credit questions on some problem sets. There is no final exam.</p>
+<ul>
+<li>50% of the grade is based on the problem sets,</li>
+<li>25% on the quizzes,</li>
+<li>15% on the project, and</li>
+<li>10% on your participation in discussions on Ed (i.e., responding to your classmates’ questions and asking thoughtful questions about course material), your responses to the in-class Google forms questions, completion of occasional non-problem set assignments (including assignments in lab section), as well as occasional brief questions that I will ask you to answer in advance of the next class.</li>
+</ul>
 <p>Grades will generally be As and Bs. An A involves doing all the work, getting full credit on most of the problem sets, doing well on the quizzes, and doing a thorough job on the final project.</p>
 </section>
 <section id="problem-sets" class="level3 unnumbered">
@@ -432,10 +439,10 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Problem set submission consists of <strong>both</strong> of the following:</p>
 <ol type="1">
 <li><p>A PDF submitted electronically through Gradescope, <strong>by the start of class (10 am)</strong> on the due date, and</p></li>
-<li><p>An electronic copy of the PDF, code file, and Quarto document pushed to your class GitHub repository, following the instructions to be provided by the GSI.</p></li>
+<li><p>An electronic copy of the PDF, code files, and Quarto document pushed to your class GitHub repository, following the instructions to be provided by the GSI.</p></li>
 </ol>
 <p><strong>On-time submission will be determined based on the time stamp of when the PDF is submitted to Gradescope.</strong></p></li>
-<li><p>Answers should consist of textual response or mathematical expressions as appropriate, with key chunks of code embedded within the document. Extensive additional code can be provided as an appendix. Before diving into the code for a problem, you should say what the goal of the code is and your strategy for solving the problem. <strong>Raw code without explanation is not an appropriate solution.</strong> Please see our <a href="rubric">qualitative grading rubric</a> for guidance. In general the rubric is meant to reinforce good coding practices and high-quality scientific communication.</p></li>
+<li><p>Answers should consist of textual response or mathematical expressions as appropriate, with key chunks of code embedded within the document. Function definitions would generally be placed in a separate .py code file. The function definitions and any extensive additional code should be provided as an appendix. Before diving into the code for a problem, you should say what the goal of the code is and your strategy for solving the problem. <strong>Raw code without explanation is not an appropriate solution.</strong> Please see our <a href="rubric">qualitative grading rubric</a> for guidance. In general the rubric is meant to reinforce good coding practices and high-quality scientific communication.</p></li>
 <li><p>Any mathematical derivations may be done by hand and scanned with your phone if you prefer that to writing up LaTeX equations.</p></li>
 <li><p>You must include a “Collaboration” section in which you indicate any other students you worked with. If you did not collaborate with anyone else, simply state that.</p></li>
 </ol>
@@ -447,24 +454,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="problem-set-grading" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="problem-set-grading">Problem set grading</h3>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-The numerical scheme is still being finalized. Do not rely on this section.
-</div>
-</div>
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
 <p>The grading scheme for problem sets is as follows. Each problem set will receive a numeric score for (1) presentation and explanation of results, (2) technical accuracy of code or mathematical derivation, and (3) code quality (style, structure, reproducibility, and creativity). For each of these three components, the possible scores are:</p>
 <ul>
 <li><p>0 = no credit,</p></li>
 <li><p>1 = partial credit (you did some of the problems but not all),</p></li>
-<li><p>2 = satisfactory (you tried everything but there were pieces of what you did that didn’t solve or present/explain one or more problems in a complete way), and</p></li>
+<li><p>2 = satisfactory (you tried everything but there were pieces of what you did that didn’t completely/correctly solve or present/explain one or more problems), and</p></li>
 <li><p>3 = full credit.</p></li>
 </ul>
 <p>Again, the <a href="rubric">qualitative grading rubric</a> provides guidance on what we want to see for full credit.</p>

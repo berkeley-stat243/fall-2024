@@ -244,8 +244,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#unix-command-line-basics" id="toc-unix-command-line-basics" class="nav-link active" data-scroll-target="#unix-command-line-basics">1. UNIX command line basics</a></li>
   <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">2. Version control</a></li>
   <li><a href="#parts-of-a-computer" id="toc-parts-of-a-computer" class="nav-link" data-scroll-target="#parts-of-a-computer">3. Parts of a computer</a></li>
-  <li><a href="#connecting-to-other-machines" id="toc-connecting-to-other-machines" class="nav-link" data-scroll-target="#connecting-to-other-machines">Connecting to other machines</a></li>
-  <li><a href="#editors" id="toc-editors" class="nav-link" data-scroll-target="#editors">4. Editors</a>
+  <li><a href="#connecting-to-other-machines" id="toc-connecting-to-other-machines" class="nav-link" data-scroll-target="#connecting-to-other-machines">4. Connecting to other machines</a></li>
+  <li><a href="#editors" id="toc-editors" class="nav-link" data-scroll-target="#editors">5. Editors</a>
   <ul class="collapse">
   <li><a href="#summary-of-some-useful-editors" id="toc-summary-of-some-useful-editors" class="nav-link" data-scroll-target="#summary-of-some-useful-editors">Summary of some useful editors</a></li>
   <li><a href="#optional-basic-emacs" id="toc-optional-basic-emacs" class="nav-link" data-scroll-target="#optional-basic-emacs">(Optional) Basic emacs</a>
@@ -334,8 +334,8 @@ git pull</code></pre></li>
 <p>Please read <a href="https://36-750.github.io/tools/computer-architecture/">this overview</a> from a class at CMU that is similar to this class. Don’t worry about too much of the details in the “How Programs Run” section - just try to get the main idea.</p>
 </section>
 <section id="connecting-to-other-machines" class="level1">
-<h1>Connecting to other machines</h1>
-<p>To connect to a remote machine, you generally need to use SSH. SSH is available as <code>ssh</code> when you are on the UNIX command line. There are also SSH clients for Windows. The SCF has <a href="http://statistics.berkeley.edu/computing/ssh">more information on SSH client programs and on using SSH</a>. Here’s an example of connecting to one of the SCF machines (this assumes you have an SCF account, which you may, and that your user name is paciorek, which it is not).</p>
+<h1>4. Connecting to other machines</h1>
+<p>To connect to a remote machine, you generally need to use SSH. SSH is available as <code>ssh</code> when you are on the UNIX command line. There are also SSH clients for Windows. The SCF has <a href="http://statistics.berkeley.edu/computing/ssh">more information on SSH client programs and on using SSH</a>, including <a href="https://statistics.berkeley.edu/computing/ssh-keys">connecting without entering your password</a>. Here’s an example of connecting to one of the SCF machines (this assumes you have an SCF account, which you may, and that your user name is paciorek, which it is not).</p>
 <pre><code>ssh paciorek@radagast.berkeley.edu</code></pre>
 <p>To copy files between machines, we can use <em>scp</em>, which has similar options to <em>cp</em>. Here’s how we can copy a local file to a remote machine.</p>
 <pre><code>scp file.txt paciorek@radagast.berkeley.edu:~/research/.</code></pre>
@@ -346,7 +346,7 @@ git pull</code></pre></li>
 <p>There are also client programs for file transfer; see <a href="http://statistics.berkeley.edu/computing/copying-files">this webpage</a>.</p>
 </section>
 <section id="editors" class="level1">
-<h1>4. Editors</h1>
+<h1>5. Editors</h1>
 <p>For scientific computing, we need a text editor, not a word processor, because we’re going to be operating on code files, plain-text data files, and markup language documents (e.g., Markdown/Quarto) for which word processing formatting gets in the way. <strong>Don’t use Microsoft Word or Google Docs to edit code files or Markdown/Quarto/R Markdown/LaTeX.</strong></p>
 <section id="summary-of-some-useful-editors" class="level2">
 <h2 class="anchored" data-anchor-id="summary-of-some-useful-editors">Summary of some useful editors</h2>
