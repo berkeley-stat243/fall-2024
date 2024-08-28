@@ -1,7 +1,7 @@
 ---
 title: "Data technologies, formats, and structures"
 author: "Chris Paciorek"
-date: "2023-08-21"
+date: "2024-08-28"
 format:
   pdf:
     documentclass: article

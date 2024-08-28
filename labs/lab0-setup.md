@@ -30,7 +30,7 @@ You will need to set up (or make sure you have access to) the following:
 4. [Python](../howtos/accessingPython)
 5. A text editor or IDE of your choice (deeb recommends [VS Code](https://code.visualstudio.com/) or [sublime](https://www.sublimetext.com/), but if you are already familiar with a specific editor, stick with it)
 
-After making sure you have access to all these 5 tools, it may be a good idea to go through some of the following tutorials on [unix](https://berkeley-scf.github.io/tutorial-unix-basics/) [bash](https://berkeley-scf.github.io/tutorial-using-bash/) and [unix commands](https://www.unixtutorial.org/basic-unix-commands). You can do this on your own or in the Lab section on Friday 8/25.
+After making sure you have access to all these 5 tools, it may be a good idea to go through the tutorial on [unix](https://berkeley-scf.github.io/tutorial-unix-basics/) and (possibly) [unix commands](https://www.unixtutorial.org/basic-unix-commands). You can do this on your own or in the Lab section on Friday 8/25.
 
 Attending lab 0 is optional. If you successfully set up your environment to have all the listed tools, you don't need to attend. You are welcome to attend to ask for help with the setup or to help your classmates with setting up their environments.
 
