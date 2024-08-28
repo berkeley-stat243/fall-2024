@@ -110,12 +110,13 @@ class at CMU that is similar to this class. Don't worry about too much
 of the details in the "How Programs Run" section - just try to get the
 main idea.
 
-# Connecting to other machines
+# 4. Connecting to other machines
 
 To connect to a remote machine, you generally need to use SSH. SSH is available as
 `ssh` when you are on the UNIX command line. There are also SSH clients
 for Windows. The SCF has [more information on SSH client programs and on using
-SSH](http://statistics.berkeley.edu/computing/ssh). Here's an
+SSH](http://statistics.berkeley.edu/computing/ssh), including [connecting without
+entering your password](https://statistics.berkeley.edu/computing/ssh-keys). Here's an
 example of connecting to one of the SCF machines (this assumes you have
 an SCF account, which you may, and that your user name is paciorek,
 which it is not).
@@ -147,7 +148,7 @@ relative to your home directory on that machine.
 There are also client programs for file transfer; see [this
 webpage](http://statistics.berkeley.edu/computing/copying-files).
 
-# 4. Editors
+# 5. Editors
 
 For scientific computing, we need a text editor, not a word processor,
 because we're going to be operating on code files, plain-text data files, 

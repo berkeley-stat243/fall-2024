@@ -191,7 +191,7 @@ first.**
 
 Most work for the course can be done on your laptop. Later in the course
 we'll also use the Statistics Department Linux cluster. You can also use the
-SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook.
+SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook. (The campus DataHub is limited in terms of number of CPU cores and memory so won't be suitable for more computationally-intensive work later in the semester.)
 
 The software needed for the course is as follows:
 
@@ -201,8 +201,9 @@ The software needed for the course is as follows:
 
 -   Python (the Miniforge installation of Conda is recommended but by no means required)
 
-We have [some tips for software installation (and access to DataHub)](howtos), including
-suggestions for how to access a UNIX shell, which you'll need to be able to do by the second week of class.
+-   Quarto
+
+See the "how tos" in the left sidebar for tips on software installation and access to a UNIX shell, which you'll need to be able to do by the second week of class.
 
 ## Class time {#class-time .unnumbered}
 
