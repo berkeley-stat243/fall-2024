@@ -25,6 +25,10 @@ website:
             text: "Unit 1 (UNIX intro)"
           - href: units/unit2-dataTech.qmd
             text: "Unit 2 (Data technologies)"
+          - href: units/unit3-bash.qmd
+            text: "Unit 3 (Bash shell)"
+          - href: units/unit4-goodPractices.qmd
+            text: "Unit 4 (Good practices)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
