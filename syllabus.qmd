@@ -265,7 +265,10 @@ sets. There is no final exam.
 sets,
  - 25% on the quizzes,
  - 15% on the project, and
- - 10% on your participation in discussions on Ed (i.e., responding to your classmates' questions and asking thoughtful questions about course material), your responses to the in-class Google forms questions, completion of occasional non-problem set assignments (including assignments in lab section), as well as occasional brief questions that I will ask you to answer in advance of the next class.
+ - 10% on your class participation:
+    - discussions on Ed (i.e., responding to your classmates' questions and asking thoughtful questions about course material),
+    - your responses to the in-class (and occasionally in-advance-of-class) Google forms questions, and
+    - completion of occasional non-problem set assignments (including assignments in lab section).
 
 Grades will generally be As and Bs. An A involves doing all the work,
 getting full credit on most of the problem sets, doing well on the quizzes, and doing a thorough job on the final project.
