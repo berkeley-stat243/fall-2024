@@ -245,14 +245,8 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#sidenotes-on-using-git-with-rstudio" id="toc-sidenotes-on-using-git-with-rstudio" class="nav-link active" data-scroll-target="#sidenotes-on-using-git-with-rstudio">Sidenotes on using Git with RStudio</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -278,21 +272,10 @@ ul.task-list li input[type="checkbox"] {
 
 <p>Here are some instructions for installing Git on your computer. Git is the version control software we’ll use in the course.</p>
 <p>You can install Git by downloading and installing the correct binary from <a href="http://git-scm.com/downloads">here</a>.</p>
-<p>For macOS, deeb recommends using the <a href="https://brew.sh/">Homebrew</a> option.</p>
+<p>For macOS, we recommend using the <a href="https://brew.sh/">Homebrew</a> option.</p>
 <p>Git comes installed on the SCF, so if you login to an SCF machine and want to use Git there, you don’t need to install Git.</p>
-<section id="sidenotes-on-using-git-with-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="sidenotes-on-using-git-with-rstudio">Sidenotes on using Git with RStudio</h3>
-<p>You can work with Git through RStudio via RStudio projects.</p>
-<p>Here are some <a href="http://www.molecularecologist.com/2013/11/using-github-with-r-and-rstudio/">instructions</a>. Here are some helpful <a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">guidelines from RStudio</a>.</p>
-<p>You may need to tell RStudio where the Git executable is located as follows.</p>
-<ul>
-<li>On Windows, the git executable should be installed somewhere like: <code>"C:/Program Files (x86)/Git/bin/git.exe"</code></li>
-<li>On MacOS X, you can locate the executable by executing the following in Terminal: <code>which git</code></li>
-<li>Once you locate the executable, you may then need to confirm that RStudio is looking in the right place. Go to “Tools -&gt; Options -&gt; Git/SVN -&gt; Git executable” and confirm it has the correct information about the location of the git executable.</li>
-</ul>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

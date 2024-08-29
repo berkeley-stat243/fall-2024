@@ -426,7 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Comments should generally be complete sentences.</li>
 </ul></li>
 <li><p>You can use parentheses to group operations such that they can be split up into lines and easily commented, e.g.,</p>
-<div id="d05905e5" class="cell" data-execution_count="1">
+<div id="75eccc64" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>newdf <span class="op">=</span> (</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        pd.read_csv(<span class="st">'file.csv'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        .rename(columns <span class="op">=</span> {<span class="st">'STATE'</span>: <span class="st">'us_state'</span>})  <span class="co"># adjust column names</span></span>
@@ -510,7 +510,7 @@ mv -f test-save.py test.py</code></pre>
 <h4 class="anchored" data-anchor-id="using-try-except-to-continue-execution">Using <code>try-except</code> to continue execution</h4>
 <p>If you want some code to continue running even when it encounters an error, you can use <code>try-except</code>. This would often be done in code where you were running some workflow rather than in functions that you write for general purpose use (e.g., code in a package you are writing).</p>
 <p>Suppose we have a loop and we want to run all the iterations even if the code for some iterations fail. We can embed the code that might fail in a <code>try</code> block and then in the <code>except</code> block, run code that will handle the situation when the error occurs.</p>
-<div id="98b5deca" class="cell" data-execution_count="2">
+<div id="972fe06d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>some code that might fail<span class="op">&gt;</span></span>
@@ -525,7 +525,7 @@ mv -f test-save.py test.py</code></pre>
 <p>Here we’ll address situations that might arise when you are developing code for general purpose use (e.g., writing functions in a package) and need that code to invoke an error under certain circumstances or deal gracefully with an error occurring in some code that you are calling.</p>
 <p>A basic situation is when you want to detect a situation where you need to invoke an error (i.e., throw an exception).</p>
 <p>With <code>raise</code> you can invoke an exception. Suppose we need an input to be a positive number. We’ll use Python’s built-in <code>ValueError</code>, one of the various <a href="https://docs.python.org/3/library/exceptions.html#concrete-exceptions">exception types that Python provides</a> and that you could use. You can also create your own exceptions by subclassing one of Python’s existing exception classes. (We haven’t yet discussed classes and object-oriented programming, so don’t worry if you’re not sure about what that means.)</p>
-<div id="1545b010" class="cell" data-execution_count="4">
+<div id="1a0eba55" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(val):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> val <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"`val` should be positive"</span>)</span>
@@ -536,7 +536,7 @@ mv -f test-save.py test.py</code></pre>
 <p>Next let’s consider cases where your function runs some code that might return an error.</p>
 <p>We’d often want to catch the error using <code>try-except</code>. In some cases we would want to notify the user and then continue (perhaps falling back to a different way to do things or returning <code>None</code> from our function) while in others we might want to provide a more informative error message than if we had just let the error occur, but still have the exception be raised.</p>
 <p>First let’s see the case of continuing execution.</p>
-<div id="fd0a19b9" class="cell" data-execution_count="5">
+<div id="adb42acf" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(filename):</span>
@@ -556,7 +556,7 @@ mv -f test-save.py test.py</code></pre>
 <pre><code>[Errno 2] No such file or directory: 'missing_file.txt'
 Check that the file `missing_file.txt` can be found in the current path: `/accounts/vis/paciorek/teaching/243fall24/fall-2024/units`.</code></pre>
 <p>Finally let’s see how we can intercept an error but then “re-raise” the error rather than continuing execution.</p>
-<div id="7aac44c1" class="cell" data-execution_count="6">
+<div id="53c62b79" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(url):</span>
@@ -577,7 +577,7 @@ ConnectionError: HTTPConnectionPool(host='missingurl.com', port=80): Max retries
 <section id="assertions" class="level3">
 <h3 class="anchored" data-anchor-id="assertions">Assertions</h3>
 <p>Assertions are a quick way to raise a specific type of Exception (AssertionError). Assertions are useful for performing quick checks in your code that the state of the program is as you expect. They’re primarily intended for use during the development process to provide “sanity checks” that specific conditions are true, and there are ways to disable them when you are running your code for production purposes (to improve performance). A common use is for verifying preconditions and postconditions (especially preconditions). One would generally only expect such conditions not to be true if there is a bug in the code. Here’s an example of using the <code>assert</code> statement in Python, with a clear assertion message telling the developer what the problem is.</p>
-<div id="0ca3b85a" class="cell" data-execution_count="7">
+<div id="3ee0ab51" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>number <span class="op">=</span> <span class="op">-</span><span class="dv">42</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> number <span class="op">&gt;</span> <span class="dv">0</span>, <span class="ss">f"number greater than 0 expected, got: </span><span class="sc">{</span>number<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Produces this error:</span></span>
@@ -586,7 +586,7 @@ ConnectionError: HTTPConnectionPool(host='missingurl.com', port=80): Max retries
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">## AssertionError: number greater than 0 expected, got: -42</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Various operators/functions are commonly used in assertions, including</p>
-<div id="6a5d8bee" class="cell" data-execution_count="8">
+<div id="ec4ad847" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> x <span class="kw">in</span> y</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> x <span class="kw">not</span> <span class="kw">in</span> y</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> x <span class="kw">is</span> y</span>
@@ -686,7 +686,7 @@ jobs:
 <h3 class="anchored" data-anchor-id="using-breakpoint">Using <code>breakpoint</code></h3>
 <p>Let’s define a function that will run a stratified analysis, in this case fitting a regression to each of the strata (groups/clusters) in some data. Our function is in <code>stratified_with_break.py</code>, and it contains <code>breakpoint</code> at the point where we want to invoke the debugger.</p>
 <p>Now I can call the function and will be put into debugging mode just before the next line is called:</p>
-<div id="8c18ebf5" class="cell" data-execution_count="9">
+<div id="06de29a6" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> run_with_break <span class="im">as</span> run</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>run.fit(run.data, run.n_cats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -717,7 +717,7 @@ jobs:
 <section id="post-mortem-debugging" class="level3">
 <h3 class="anchored" data-anchor-id="post-mortem-debugging">Post-mortem debugging</h3>
 <p>We’ll use a version of the module without the <code>breakpoint()</code> command.</p>
-<div id="b7cc0b4e" class="cell" data-execution_count="10">
+<div id="b8d92627" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pdb</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> run_no_break <span class="im">as</span> run </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -778,7 +778,7 @@ Index: []</code></pre>
 <section id="invoking-pdb-on-a-function-or-block-of-code" class="level3">
 <h3 class="anchored" data-anchor-id="invoking-pdb-on-a-function-or-block-of-code">Invoking pdb on a function or block of code</h3>
 <p>We can use <code>pdb.run()</code> to run a function under the debugger. We need to make sure to use <code>s</code> as the first pdb command in order to actually step into the function. From there, we can debug as normal as if we had set a breakpoint at the start of the function.</p>
-<div id="5b3726a3" class="cell" data-execution_count="11">
+<div id="28706288" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> run_with_break <span class="im">as</span> run</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pdb</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>pdb.run(<span class="st">"run.fit(run.data, run.n_cats)"</span>)</span>
@@ -796,7 +796,7 @@ python -m pdb run_no_break2.py</code></pre>
 <p>Let’s set a breakpoint at the same place we did with <code>breakpoint()</code> but using a line number (this avoids having to actually modify our code):</p>
 <pre><code>(Pdb) b 9
 Breakpoint 1 at /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_no_break.py:9</code></pre>
-<div id="82d1c2dd" class="cell" data-execution_count="12">
+<div id="c9b28e02" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(Pdb) c</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="op">/</span>accounts<span class="op">/</span>vis<span class="op">/</span>paciorek<span class="op">/</span>teaching<span class="op">/</span><span class="dv">243</span><span class="er">fall22</span><span class="op">/</span>stat243<span class="op">-</span>fall<span class="op">-</span><span class="dv">2023</span><span class="op">/</span>units<span class="op">/</span>run_no_break2.py(<span class="dv">9</span>)fit()</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="op">-&gt;</span> model <span class="op">=</span> statsmodels.api.OLS(sub[<span class="st">'y'</span>], statsmodels.api.add_constant(sub[<span class="st">'x'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -816,7 +816,7 @@ Breakpoint 1 at /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/unit
 <li><p>Parenthesis mis-matches</p></li>
 <li><p><code>==</code> vs.&nbsp;<code>=</code></p></li>
 <li><p>Comparing real numbers exactly using <code>==</code> is dangerous because numbers on a computer are only represented to limited numerical precision. For example,</p>
-<p>::: {#7f853185 .cell execution_count=13} <code>{.python .cell-code}  1/3 == 4*(4/12-3/12)</code></p>
+<p>::: {#1788e906 .cell execution_count=13} <code>{.python .cell-code}  1/3 == 4*(4/12-3/12)</code></p>
 <p>::: {.cell-output .cell-output-display execution_count=1} <code>False</code> ::: :::</p></li>
 <li><p>You expect a single value but execution of the code gives an array</p></li>
 <li><p>Silent type conversion when you don’t want it, or lack of coercion where you’re expecting it</p></li>
@@ -840,7 +840,7 @@ Breakpoint 1 at /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/unit
 <li>stop execution based on assertions, <code>try</code> or <code>raise</code> with an informative error message.</li>
 </ul>
 <p>Here’s an example of building a robust square root function:</p>
-<div id="3aa4d3fe" class="cell" data-execution_count="14">
+<div id="32ac7657" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mysqrt(x):</span>
@@ -865,7 +865,7 @@ Breakpoint 1 at /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/unit
 <pre><code>what is the square root of 'hat'?</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_3935979/1815678236.py:7: UserWarning:
+<pre><code>/tmp/ipykernel_2262381/1815678236.py:7: UserWarning:
 
 Input value is negative.
 </code></pre>
@@ -875,7 +875,7 @@ Input value is negative.
 <section id="catch-run-time-errors-with-tryexcept-statements" class="level3">
 <h3 class="anchored" data-anchor-id="catch-run-time-errors-with-tryexcept-statements">Catch run-time errors with <code>try/except</code> statements</h3>
 <p>Also, sometimes a function you call will fail, but you want to continue execution. For example, consider the stratified analysis show previously in which you take subsets of your data based on some categorical variable and fit a statistical model for each value of the categorical variable. If some of the subsets have no or very few observations, the statistical model fitting might fail. To do this, you might be using a for loop or <code>apply</code>. You want your code to continue and fit the model for the rest of the cases even if one (or more) of the cases cannot be fit. You can wrap the function call that may fail within the <code>try</code> statement and then your code won’t stop, even when an error occurs. Here’s a toy example.</p>
-<div id="46862553" class="cell" data-execution_count="15">
+<div id="f9142f2d" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -942,7 +942,7 @@ Regression cannot be fit for stratum 29.
 <section id="maintain-dimensionality" class="level3">
 <h3 class="anchored" data-anchor-id="maintain-dimensionality">Maintain dimensionality</h3>
 <p>Python (usually helpfully) drops array dimensions that are extraneous. This can sometimes confuse later code that expects an object of a certain dimension. Here’s a work-around:</p>
-<div id="292dc097" class="cell" data-execution_count="16">
+<div id="41c34eae" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(mat, axis<span class="op">=</span><span class="dv">0</span>)         <span class="co"># This sums columns, as desired</span></span>
@@ -966,7 +966,7 @@ Regression cannot be fit for stratum 29.
 <h3 class="anchored" data-anchor-id="find-and-avoid-global-variables">Find and avoid global variables</h3>
 <p>In general, using global variables (variables that are not created or passed into a function) results in code that is not robust. Results will change if you or a user modifies that global variable, usually without realizing/remembering that a function depends on it.</p>
 <p>One ad hoc strategy is to remove objects you don’t need from Python’s global scope, to avoid accidentally using values from an old object via Python’s scoping rules. You can also run your function in a fresh session to see if it’s unable to find variables.</p>
-<div id="e801736d" class="cell" data-execution_count="17">
+<div id="09e375b5" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> x   <span class="co"># Mimic having a fresh sesson (knowing in this case `x` is global).</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(z):</span>
