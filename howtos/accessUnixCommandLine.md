@@ -15,9 +15,8 @@ Open a Terminal by going to Applications -> Utilities -> Terminal
 
     Your PC must be running a 64-bit version of Windows 10 Anniversary Update or later (build 1607+).
 
-    Please see these links for more information:
+    Please see this link for more information:
 
-    - [http://blog.revolutionanalytics.com/2017/12/r-in-the-windows-subsystem-for-linux.html](http://blog.revolutionanalytics.com/2017/12/r-in-the-windows-subsystem-for-linux.html)
     - [https://msdn.microsoft.com/en-us/commandline/wsl/install_guide](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
     
     For more detailed instructions, see the [Installing the Linux Subsystem on Windows](./windowsAndLinux.md) tutorial.
@@ -35,9 +34,9 @@ If you have access to a Linux machine, you very likely know how to access a term
 ### Access via DataHub (provided by UC Berkeley's Data Science Education Program)
 
 1) Go to [https://datahub.berkeley.edu](https://datahub.berkeley.edu)
-2) Click on `Sign in with bCourses`, sign in via CalNet, and authorize DataHub to have access to your account.
-3) In the mid-upper right, click on `New` and `Terminal`.
-4) To end your session, click on `Control Panel` and `Stop My Server`. Note that `Logout` will not end your running session, it will just log you out of it.
+2) Click on `Log in to continue`, sign in via CalNet, and authorize DataHub to have access to your account.
+3) In the upper left, click on `File`, `New` and `Terminal`.
+4) To end your session, click on `File`, `Hub Control Panel` and `Stop My Server`. Note that `Logout` will not end your running session, it will just log you out of it.
 
 ### Access via the Statistical Computing Facility (SCF)
 
