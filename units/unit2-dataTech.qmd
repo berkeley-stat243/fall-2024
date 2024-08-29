@@ -191,22 +191,22 @@ CSV is a common format (particularly in some disciplines/contexts) and has the a
 
 A popular file format that has some advantages over plain text formats such as CSV is [Parquet](https://parquet.apache.org/docs/overview/motivation/). The storage is by column (actually in chunks of columns). This works well with how datasets are often structured in that a given field/variable will generally have values of all the same type and there may be many repeated values, so there are opportunities for efficient storage including compression. Storage by column also allows retrieval only of the columns that a user needs. As a result data stored in the Parquet format often takes up much less space than stored as CSV and can be queried much faster. Also note that data stored in Parquet will often be stored as multiple files.
 
-Here's a brief exploration using a data file not in the class repository.
+Here's a brief exploration using a data file not in the class repository because of its size but available [online here](https://www.stat.berkeley.edu/~paciorek/transfer/airline.csv).
 
 ```{python}
 import time
 
-## Read from CSV
+## Read from CSV.
 t0 = time.time()
 data_from_csv = pd.read_csv(os.path.join('..', 'data', 'airline.csv'))
 print(time.time() - t0)
 ```
 
 ```{python}
-## Write out Parquet-formatted data
+## Write out Parquet-formatted data.
 data_from_csv.to_parquet(os.path.join('..', 'data', 'airline.parquet'))
 
-## Read from Parquet
+## Read from Parquet.
 t0 = time.time()
 data_from_parquet = pd.read_parquet(os.path.join(
                                     '..', 'data', 'airline.parquet'))
@@ -585,9 +585,9 @@ html_tables = soup.find_all('table')
 ## Pandas `read_html` doesn't want `str` input directly.
 pd_tables = [pd.read_html(io.StringIO(str(tbl)))[0] for tbl in html_tables]
 
-[x.shape[0] for x in pd_tables]
+[x.shape for x in pd_tables]
 
-pd_tables[0].head()
+pd_tables[0]
 ```
 
 
@@ -627,12 +627,12 @@ day). We'll use `get_text` to retrieve the element's value.
 
 ```{python, headlines}
 #| eval: false
-URL = "https://www.nytimes.com"
-responseNYT = requests.get(URL)
-soupNYT = bs(responseNYT.content, 'html.parser')
-h2_elements = soupNYT.find_all("h2")
+URL = "https://dailycal.org"
+response_news = requests.get(URL)
+soup_news = bs(response_news.content, 'html.parser')
+h2_elements = soup_news.find_all("h2")
 headlines2 = [x.get_text() for x in h2_elements]
-h3_elements = soupNYT.find_all("h3")
+h3_elements = soup_news.find_all("h3")
 headlines3 = [x.get_text() for x in h3_elements]
 ```
 
