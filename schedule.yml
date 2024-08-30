@@ -44,10 +44,22 @@
           href: labs/lab1-submission.html
 - week: 3
   days:
+    - date: "Sep 9"
+      items:
+        - type: "Assignment"
+          id: "1"
+          name: "Bash shell tutorial and exercises (see details below)
+          href: "https://berkeley-scf.github.io/tutorial-using-bash"
     - date: "Sep 11"
       items:
         - type: "Event"
           id: "2"
           name: "(Optional) Library Introduction to LaTeX with Overleaf session"
           href: "https://berkeley.libcal.com/event/12927278"
+    - date: "Sep 13"
+      items:
+        - type: "Assignment"
+          id: "1"
+          name: "Regular expression tutorial and exercises (see Details below)
+          href: "https://berkeley-scf.github.io/tutorial-using-bash/regex"
       
