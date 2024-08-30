@@ -48,7 +48,7 @@
       items:
         - type: "Assignment"
           id: "1"
-          name: "Bash shell tutorial and exercises (see details below)
+          name: "Bash shell tutorial and exercises (see details below)"
           href: "https://berkeley-scf.github.io/tutorial-using-bash"
     - date: "Sep 11"
       items:
@@ -60,6 +60,6 @@
       items:
         - type: "Assignment"
           id: "1"
-          name: "Regular expression tutorial and exercises (see Details below)
+          name: "Regular expression tutorial and exercises (see Details below)"
           href: "https://berkeley-scf.github.io/tutorial-using-bash/regex"
       
