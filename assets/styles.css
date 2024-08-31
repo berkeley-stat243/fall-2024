@@ -13,7 +13,7 @@
 
 
 th {
-    width: 15%;
+    width: 20%;
 }
 
 td:first-of-type {
@@ -21,7 +21,7 @@ td:first-of-type {
 }
 
 td:last-of-type {
-    width: 25%;
+    width: 20%;
 }
 
 table {
