@@ -21,48 +21,52 @@
     <lastmod>2024-08-26T15:32:15.588Z</lastmod>
   </url>
   <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/office_hours.html</loc>
-    <lastmod>2024-08-31T17:42:56.332Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/license.html</loc>
-    <lastmod>2024-08-26T15:32:15.584Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/units/unit1-intro.html</loc>
-    <lastmod>2024-08-28T16:04:44.814Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/units/unit3-bash.html</loc>
-    <lastmod>2024-08-28T16:32:18.316Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/index.html</loc>
-    <lastmod>2024-08-26T15:32:15.580Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/schedule.html</loc>
-    <lastmod>2024-08-30T16:10:06.862Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/units/unit2-dataTech.html</loc>
-    <lastmod>2024-08-29T15:42:38.168Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/units/unit4-goodPractices.html</loc>
-    <lastmod>2024-08-28T19:09:15.166Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/syllabus.html</loc>
-    <lastmod>2024-08-28T16:20:03.423Z</lastmod>
+    <loc>https://stat243.berkeley.edu/fall-2024/calendar.html</loc>
+    <lastmod>2024-08-26T15:32:15.552Z</lastmod>
   </url>
   <url>
     <loc>https://stat243.berkeley.edu/fall-2024/labs/lab0-setup.html</loc>
     <lastmod>2024-08-29T15:57:41.525Z</lastmod>
   </url>
   <url>
-    <loc>https://stat243.berkeley.edu/fall-2024/calendar.html</loc>
-    <lastmod>2024-08-26T15:32:15.552Z</lastmod>
+    <loc>https://stat243.berkeley.edu/fall-2024/syllabus.html</loc>
+    <lastmod>2024-08-28T16:20:03.423Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/units/unit4-goodPractices.html</loc>
+    <lastmod>2024-08-28T19:09:15.166Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/units/unit2-dataTech.html</loc>
+    <lastmod>2024-08-29T15:42:38.168Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/schedule.html</loc>
+    <lastmod>2024-08-30T16:10:06.862Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/index.html</loc>
+    <lastmod>2024-08-26T15:32:15.580Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/units/unit3-bash.html</loc>
+    <lastmod>2024-08-28T16:32:18.316Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/units/unit1-intro.html</loc>
+    <lastmod>2024-08-28T16:04:44.814Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/license.html</loc>
+    <lastmod>2024-08-26T15:32:15.584Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/office_hours.html</loc>
+    <lastmod>2024-08-31T18:52:19.468Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat243.berkeley.edu/fall-2024/ps/ps1.html</loc>
+    <lastmod>2024-08-31T18:50:19.169Z</lastmod>
   </url>
   <url>
     <loc>https://stat243.berkeley.edu/fall-2024/howtos/RandRStudioInstall.html</loc>
