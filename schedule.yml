@@ -1,12 +1,12 @@
 - week: 1
   days:
-    - date: "Aug 29"
+    - date: "Thu Aug 29"
       items:
         - type: "Event"
           id: "1"
           name: "(Optional) Library Introduction to LaTeX with Overleaf session"
           href: "https://berkeley.libcal.com/event/12928377"
-    - date: "Aug 30"
+    - date: "Fri Aug 30"
       items:
         - type: "Lab"
           id: "0"
@@ -26,7 +26,7 @@
           href: "https://github.berkeley.edu"
 - week: 2
   days:
-    - date: "Sep 4"
+    - date: "Wed Sep 4"
       items:
         - type: "Activity"
           id: "4"
@@ -36,7 +36,7 @@
           id: "5"
           name: "(Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end"
           href: "https://berkeley-scf.github.io/tutorial-unix-basics"
-    - date: "Sep 6"
+    - date: "Fri Sep 6"
       items:
         - type: "Lab"
           id: "1"
@@ -44,19 +44,23 @@
           href: labs/lab1-submission.html
 - week: 3
   days:
-    - date: "Sep 9"
+    - date: "Mon Sep 9"
       items:
         - type: "Assignment"
           id: "1"
           name: "Bash shell tutorial and exercises (see details below)"
           href: "https://berkeley-scf.github.io/tutorial-using-bash"
-    - date: "Sep 11"
+    - date: "Wed Sep 11"
       items:
+        - type: "Problem_Set"
+          id: "1"
+          name: "Problem Set 1"
+          href: "ps/ps1.html"
         - type: "Event"
           id: "2"
           name: "(Optional) Library Introduction to LaTeX with Overleaf session"
           href: "https://berkeley.libcal.com/event/12927278"
-    - date: "Sep 13"
+    - date: "Fri Sep 13"
       items:
         - type: "Assignment"
           id: "2"

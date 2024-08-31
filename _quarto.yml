@@ -33,6 +33,9 @@ website:
         contents:
           - href: labs/lab0-setup.html
             text: "Lab 0 (Optional setup)"
+      - section: "Problem Sets"
+        contents:
+          - href: ps/ps1.qmd
       - section: "How tos"
         contents:
           - howtos/accessPython.md
