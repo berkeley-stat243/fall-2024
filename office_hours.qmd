@@ -2,7 +2,7 @@
 title: Office hours
 ---
 
-  - Chris (Evans 495 or Zoom (see Ed Discussion post for link))
+  - Chris (Evans 495 or [Zoom](https://edstem.org/us/courses/62469/discussion/5201840))
      - Mondays, 3-4 pm
      - Tuesdays, 10:30-11:30 am
      - Thursdays, 12:30-1:30 pm
