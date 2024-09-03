@@ -1035,6 +1035,10 @@ fairly easily construct using string processing in bash, Python, or R,
 such as this (here I just paste it together directly, but using more structured syntax
 such as I used for the World Bank example would be better):
 
+Here what is returned is a zip file, which is represented in Python as a sequence of “raw” bytes,
+so the example code also has some syntax for handling the unzipping and extraction of the CSV
+file with the data.
+
 ```{python, http-byURL}
 import zipfile
 
@@ -1069,7 +1073,7 @@ So, what have we achieved?
 
 ### More details on HTTP requests
 
-A more sophisticated way to do the download is to pass the request in a structured way with named input parameters. This request is easier to construct programmatically. Here what is returned is a zip file, which is represented in Python as a sequence of “raw” bytes. 
+A more sophisticated way to do the download is to pass the request in a structured way with named input parameters. This request is easier to construct programmatically. 
 
 ```{python, http-get2}
 data = {"DataFilter": f"itemCode:{itemCode};year:{yrs}",
@@ -1271,7 +1275,7 @@ with open('tmp2.txt', 'wb') as textfile:
 
 ## Here n-tilde and division symbol take up two bytes
 subprocess.run(["ls", "-l", "tmp2.txt"])
-## The system knows how to interpret the UTF-8 encoded file
+## The shell knows how to interpret the UTF-8 encoded file
 ## and represent the Unicode character on the screen:
 subprocess.run(["cat", "tmp2.txt"])
 ```
@@ -1282,7 +1286,11 @@ other characters take two bytes, but some take four bytes. In fact it is
 even more clever than that - the representation is such that the bits of
 a one-byte character never appear within the representation of a two-
 or three- or four-byte character (and similarly for two-byte characters
-in three- or four-byte characters, etc.).
+in three- or four-byte characters, etc.). And from the initial bit or bits,
+one can determine how many bytes are used for the character. For example if
+the first bit is a zero, it's clear that the character is an ASCII character
+using only one byte. If it starts with a one, then one needs to look at the
+next bit(s) to determine if the character takes up 2, 3, or 4 bytes.
 
 The UNIX utility `file`, e.g. `file tmp.txt` can help provide some
 information.
