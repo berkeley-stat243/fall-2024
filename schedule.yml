@@ -31,7 +31,7 @@
         - type: "Activity"
           id: "4"
           name: "Read first three sections of Unit 2 (sections before 'Webscraping')"
-          href: "unit2-data.html"
+          href: "units/unit2-data.html"
         - type: "Activity"
           id: "5"
           name: "(Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end"
