@@ -27,8 +27,6 @@ Reference:
 
 - Newham and Rosenblatt, Learning the bash Shell, 2nd ed.
 
-[This Unit is still under construction as of 2024-08-28.]
-
 # 1. Shell basics
 
 The shell is the interface between you and the UNIX operating system.
@@ -90,7 +88,7 @@ files we can do interesting things with.
 
 ```{bash}
 #| eval: false
-git clone https://github.com/berkeley-stat243/stat243-fall-2023
+git clone https://github.com/berkeley-stat243/fall-2024
 ```
 
 One important note is that most of the shell commands that work with
@@ -104,14 +102,14 @@ states using the *coop.txt* file.
 
 ```{bash}
 #| eval: false
-cd stat243-fall-2023/data
+cd fall-2024/data
 gzip -cd coop.txt.gz | less
 gunzip coop.txt.gz
 cut -b50-70 coop.txt | less 
 cut -b60-61 coop.txt | uniq
 cut -b60-61 coop.txt | sort | uniq
 cut -b60-61 coop.txt | sort | uniq -c
-## all in one line with no change to the original file:
+## Do it all in one line with no change to the original file:
 gzip -cd coop.txt.gz | cut -b60-61 coop.txt | sort | uniq -c
 ```
 
@@ -133,7 +131,7 @@ nfields=$(tail -n 1 cpds.csv | grep -o ',' | wc -l)
 nfields=$((${nfields}+1))
 echo $nfields
 
-## alternatively, we can use `bc`
+## Alternatively, we can use `bc`.
 nfields=$(echo "${nfields}+1" | bc)
 ```
 
@@ -146,26 +144,25 @@ in any file.
 Extension: How could I see if all of the lines have the same number of
 fields?
 
-**Our third mission**: was the `sqlite3` package in the five most
+**We'll work on Challenge #1 here.**
+
+**Our third mission**: was the `requests` package in the five most
 recently modified Quarto Markdown files in the units directory?
 
 ```{bash}
 #| eval: false
 cd ../units
-grep -l 'import sqlite3' unit7-bigData.qmd
+grep -l 'import requests' unit4-goodPractices.qmd
 ls -tr *.qmd
-## if unit7-bigData.qmd is not amongst the 5 most recently used,
+## If unit4-goodPractices.qmd is not amongst the 5 most recently used,
 ## let's artificially change the timestamp so it is recently used.
-touch unit7-bigData.qmd
+touch unit4-goodPractices.qmd
 
 ls -tr *.qmd | tail -n 5
-ls -tr *.qmd | tail -n 5 | grep sqlite3
-ls -tr *.qmd | tail -n 5 | grep "unit7-bigData"
-ls -tr *.qmd | tail -n 5 | xargs grep 'import sqlite3'
-ls -tr *.qmd | tail -n 5 | xargs grep -l 'import sqlite3'
-## here's how we could do it by explicitly passing the file names
-## rather than using xargs
-grep -l 'import sqlite3' $(ls -tr *.R | tail -n 5)
+ls -tr *.qmd | tail -n 5 | grep requests
+ls -tr *.qmd | tail -n 5 | grep "unit4-goodPractices"
+ls -tr *.qmd | tail -n 5 | xargs grep 'import requests'
+ls -tr *.qmd | tail -n 5 | xargs grep -l 'import requests'
 ```
 
 Notice that `man tail` indicates it can take input from a FILE or from
@@ -178,12 +175,25 @@ However, we want grep to operate on the content of the files indicated
 in stdin. So we use `xargs` to convert `stdin` to be recognized as
 arguments, which then are the FILE inputs to `grep`.
 
+An alternative to `xargs` is to embed the `ls` invocation, using `$()`,
+to explicitly pass the file names as the argument to `grep`:
+
+```{bash}
+#| eval: false
+grep -l 'import requests' $(ls -tr *.R | tail -n 5)
+```
+
+
+
+
 Here are some of the ways we can pass information from a command to somewhere else:
 
 - Piping allows us to pass information from one command to another command via stdout to stdin.
 - `$()` allows us to store the result of a command in a variable.
     - also used to create a temporary variable to pass the output from one command as an option or argument (e.g., the FILE argument) of another command
-- File redirection operators such as `>` and `>>` allow us to pass information from a command into a file.
+- File redirection operators such as `>` and `>>` allow us to pass output from a command into a file.
+
+**We'll work on Challenge #2 here.**
 
 **Our fourth mission**: write a function that will move the most recent
 *n* files in your Downloads directory to another directory.
@@ -194,11 +204,11 @@ to create the function.
 ```{bash}
 #| eval: false
 ls -rt ~/Downloads | tail -n 5
-# create dummy test files without any spaces
+# Create dummy test files without any spaces.
 touch ~/Downloads/test{1..4}
 ls -rt ~/Downloads | tail -n 5
 
-## sometimes the ~ behaves weirdly in scripting, so let's use full path 
+## Sometimes the ~ behaves weirdly in scripting, so let's use full path.
 mv "/accounts/vis/paciorek/Downloads/$(ls -rt \
    /accounts/vis/paciorek/Downloads | tail -n 1)" ~/Desktop
 
@@ -224,6 +234,11 @@ function mvlast() {
 
 Side note: if we were just moving files from the current working directory and with files without spaces in their names, it should be possible to use `tail -n ${1}` without the loop.
 
+**We'll work on Challenge #3 here.**
+
+**We'll work on Challenge #4 here.**
+
+
 **Our fifth mission**: automate the process of determining what Python
 packages are used in all of the qmd code chunks here and install those packages
 on a new machine.
@@ -241,13 +256,13 @@ grep --no-filename "^import " *.qmd | cut -d'#' -f1 | \
                    sed  "s/as .*//" | sed "s/import //" > tmp.txt
 sed "s/,/\n/g" tmp.txt | sed "s/ //g" | sort | uniq | tee requirements.txt
 
-## note: on a Mac, use 's/,/\\\n/g'
+## Note: on a Mac, use 's/,/\\\n/g'
 ## See https://superuser.com/questions/307165/newlines-in-sed-on-mac-os-x
 
 echo "There are $(wc -l requirements.txt | cut -d' ' -f1) \
 unique packages we will install."
-## note: on Linux, wc -l puts the number as the first characters of the output
-## on a Mac, there may be a bunch of spaces preceding the number, so try this:
+## Note: on Linux, wc -l puts the number as the first characters of the output.
+## On a Mac, there may be a bunch of spaces preceding the number, so try this:
 ## echo "There are $(wc -l libs.txt | tr -s ' ' | cut -d' ' -f2) \
 ## unique packages we will install."
 
@@ -264,7 +279,7 @@ beyond what you were asked to read for this Unit.)
 
 ```{bash}
 #| eval: false
-# use a 'here document':
+# Use a 'here document':
 cat > job.py << EOF
 import time
 time.sleep(1e5)
