@@ -91,4 +91,4 @@ The file names are case-sensitive, so please keep everything lowercase.
 
 ### Save or cache credentials in Git
 
-If authenticating to [github.berkeley.edu](https://github.berkeley.edu/) every time sounds inconvenient, note that your credentials can be saved or cache to avoid entering them constantly. More details can be found on this [SCF page](https://statistics.berkeley.edu/computing/faqs/git-auth#git-save-auth).
+If authenticating to [github.berkeley.edu](https://github.berkeley.edu/) every time sounds inconvenient, note that your credentials can be saved or cache to avoid entering them constantly. More details can be found on this [SCF page](https://statistics.berkeley.edu/computing/faqs/git-auth#git-save-auth). Besides the methods mentioned on the page, one can also store credentials in a file via `git config --global credential.helper store`.
