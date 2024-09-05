@@ -22,8 +22,6 @@ from: markdown+tex_math_single_backslash
 
 [PDF](./unit4-goodPractices.pdf){.btn .btn-primary}
 
-[This Unit is under construction as of 2024-08-28.]
-
 Sources:
 
 -   The Python [PEP8 Style Guide](https://peps.python.org/pep-0008)
@@ -47,7 +45,7 @@ Python, but some details and the examples are in Python.
 
 Some of these tips apply more to software development and some more to
 analyses done for specific projects; hopefully it will be clear in most
-cases.
+cases what the relevant context(s) is/are.
 
 ## Editors
 
@@ -59,13 +57,13 @@ Use an editor that supports the language you are using (e.g., *Atom*, *Emacs*/*A
   4. line numbering (good for finding bugs), and
   5. code can often be run (or compiled) and debugged from within the editor.
 
-See the problem set submission how-to document for more information about editors that interact nicely with Quarto documents.
+See the [problem set submission how-to](../howtos/submitPS.html) for more information about editors that interact nicely with Quarto documents.
 
 ## Code syntax and style
 
 ### Coding syntax tips
 
-The PEP 8 style guide is your go-to reference for Python style.
+The [PEP 8 style guide](https://peps.python.org/pep-0008) is your go-to reference for Python style.
 I've highlighted some details here as well as included some general
 suggestions of my own.
 
@@ -96,7 +94,7 @@ suggestions of my own.
     use `a/y * x`.
 - Avoid code lines longer than 79 characters and comment/docstring lines
     longer than 72 characters.
-- Comments: add lots of comments (but don't belabor the
+- Comments: add helpful comments (but don't belabor the
     obvious, such as `x = x + 1  # increment x`).
     - Remember that in a few months, you may not follow your own
     code any better than a stranger.
@@ -135,7 +133,7 @@ look at your assignments. So to help us in understanding your code and
 develop good habits, put these ideas into practice in your assignments.
 
 While not Python examples, the files [goodCode.R](goodCode.R) and [badCode.R](badCode.R) in the `units` directory of the
-class repository provide examples of code written such that it does and
+class repository provide examples of R code written such that it does and
 does not conform to the general ideas listed above (leaving aside the different syntax of Python and R).
 
 
@@ -144,12 +142,12 @@ does not conform to the general ideas listed above (leaving aside the different 
 This is particularly focused on software development, but some of the
 ideas are useful for data analysis as well.
 
-- Break down tasks into core units
+- Break down tasks into core units.
 - Write reusable code for core functionality and keep a single copy of
-    the code (using version control or at least with a reasonable backup strategy) so you
-    only need to make changes to a piece of code in one place
+    the code (using version control) so you
+    only need to make changes to a piece of code in one place.
 - Smaller functions are easier to debug, easier to understand, and can
-    be combined in a modular fashion (like the UNIX utilities)
+    be combined in a modular fashion (like the UNIX utilities).
 - Write functions that take data as an argument and not lines of code
     that operate on specific data objects. Why? Functions allow us to
     reuse blocks of code easily for later use and for recreating an
@@ -161,12 +159,12 @@ ideas are useful for data analysis as well.
     - be modular (having a single task);
     - have meaningful name; and
     - have a doc string describing their purpose, inputs and outputs.
-- Write tests for each function (i.e., unit tests)
+- Write tests for each function (i.e., unit tests).
 - Don't hard code numbers - use variables (e.g., number of iterations,
     parameter values in simulations), even if you don't expect to change
-    the value, as this makes the code more readable. For example, the speed of light is a constant in a scientific sense, but best to make it a variable in code: `speed_of_light = 3e8`
-- Use lists or tuples to keep disparate parts of related data together
-- Practice defensive programming (see also the discussion below on assertions)
+    the value, as this makes the code more readable. For example, the speed of light is a constant in a scientific sense, but best to make it a variable in code: `speed_of_light = 3e8`.
+- Use lists or tuples to keep disparate parts of related data together.
+- Practice defensive programming (see also the discussion below on raising exceptions and assertions):
     - check function inputs and warn users if the code will do something they might not expect or makes particular choices;
     - check inputs to *if*:
         - Note that in Python, an expression used as the condition of an `if` will be equivalent to `True` unless it is one of `False`, `0`, `None`, or an empty list/tuple/string.
@@ -175,8 +173,9 @@ ideas are useful for data analysis as well.
     - check that the output produced is valid; and
     - stop execution based on checks and give an informative error message.
 - Try to avoid system-dependent code that only runs on a specific
-    version of an OS or specific OS
-- Learn from others' code
+    version of an OS or specific OS.
+- Learn from others' code.
+- Ask others to review your code and help by reviewing other people's code.
 - Consider rewriting your code once you know all the settings and
     conditions; often analyses and projects meander as we do our work
     and the initial plan for the code no longer makes sense and the code
@@ -196,6 +195,10 @@ First, we check for and fix syntax errors.
 ruff check test.py
 ```
 
+```
+All checks passed!
+```
+
 
 Then we ask ruff to reformat to conform to standard style.
 
@@ -204,16 +207,32 @@ cp test.py test-save.py   # Not required, just so we can see what `ruff` did.
 ruff format test.py
 ```
 
+```
+1 file reformatted
+```
+
 Let’s see what changed:
 
 ```{bash}
 diff test-save.py test.py
 ```
 
-```{bash}
-#| echo: false
-mv -f test-save.py test.py
 ```
+1c1
+< x=  7
+---
+> x = 7
+3,5d2
+< def myfun(x, y =0):
+< # This is a toy function.
+<       return x*y
+6a4,6
+> def myfun(x, y=0):
+>     # This is a toy function.
+>     return x * y
+```
+
+So we see that `ruff` fixed spacing and properly indented the comment line.
 
 ## Assertions, exceptions and testing
 
@@ -225,16 +244,16 @@ code that is less likely to contain bugs.
 You've probably already seen exceptions in action whenever you've done something
 in Python that causes an error to occur and an error message to be printed.
 Syntax errors are different from exceptions in that exceptions occur
-when the syntax is correct but the execution of the code results in some sort of error.
+when the syntax is correct, but the execution of the code results in some sort of error (i.e., a *run-time error*).
 
-Exceptions can be a valuable tool for making your code handle different modes of failure (missing file, URL unreachable, permission denied, invalid inputs, etc.). You use them when you are writing code that is supposed to perform a task (e.g., a function that does something with an input file) to indicate that the task failed and the reason for that failure (e.g., the file was not there in the first place). In such case, you want your code to raise an exception and make the error message informative as possible, typically by handling the exception thrown by another function you call and augmenting the message. Another possibility is that your code detects a situation where you need to throw an exception (e.g., an invalid input to a function). 
+Exceptions can be a valuable tool for making your code handle different modes of failure (missing file, URL unreachable, permission denied, invalid inputs, etc.). You use them when you are writing code that is supposed to perform a task (e.g., a function that does something with an input file) to indicate that the task failed and the reason for that failure (e.g., the file was not there in the first place). In such a case, you want your code to raise an exception and make the error message informative as possible, typically by handling the exception thrown by another function you call and augmenting the message. Another possibility is that your code detects a situation where you need to throw an exception (e.g., an invalid input to a function). 
 
 The other side of the coin happens when you want to write a piece of code that handles failure in a specific way, instead of simply giving up. For example, if you are writing a script that reads and downloads hundreds of URLs, you don't want your program to stop when any of them fails to respond (or do you?). You might want to continue with the rest of the URLs, and write out the failed URLs in a secondary output file.
 
 #### Using `try-except` to continue execution
 
 If you want some code to continue running even when it encounters an error, you can use `try-except`.
-This would often be done in code where you were running some workflow rather than in functions
+This would often be done in code where you were running some workflow, but can also be useful in functions
 that you write for general purpose use (e.g., code in a package you are writing).
 
 Suppose we have a loop and we want to run all the iterations even if the code for some iterations fail.
@@ -260,7 +279,7 @@ to invoke an error under certain circumstances or deal gracefully with an error 
 in some code that you are calling.
 
 A basic situation is when you want to detect a situation where you need to
-invoke an error (i.e., throw an exception).
+invoke an error (i.e., "throw an exception").
 
 With `raise` you can invoke an exception. Suppose we need an input to be a positive number.
 We'll use Python's built-in `ValueError`, one of the various [exception types
@@ -387,9 +406,11 @@ assert all(x)
 assert any(x)
 ```
 
+Next we'll see that assertions are a core part of setting up tests.
+
 ### Testing
 
-Testing is informally what you do after you write some code and want to check that it actually works. But when you are developing important code (e.g. functions that are going to be used by others) you typically want to encode your tests in code. There are many reasons to do that, including making sure that if someone else changes your code later on without fully understanding what it was supposed to do, the test suite should immediately indicate that. 
+Testing is informally what you do after you write some code and want to check that it actually works. But when you are developing important code (e.g. functions that are going to be used by others) you typically want to encode your tests in code. There are many reasons to do that, including making sure that if anyone changes the code later on and breaks something, the test suite should immediately indicate that. 
 
 Some people even advocate for writing a preliminary test suite before writing the code itself(!) as it can be a good way to organize work and track progress, as well as act as a secondary form of documentation for clarity.  This can include
 tests that your code provides correct and useful errors when something
@@ -399,6 +420,70 @@ the behavior of small pieces (units) of code, generally individual
 functions. Unit tests naturally work well with the ideas above of
 writing small, modular functions. I recommend the `pytest` package,
 which is designed to make it easier to write sets of good tests.
+
+Here is an example of the contents of a test file, called `test_dummy.py`.
+
+```{python}
+#| eval: false
+import pytest
+import numpy as np
+
+import dummy
+
+def test_numeric():
+    assert dummy.add_one(3) == 4
+
+# This test will fail.
+def test_numpy_array():
+    assert np.all(np.equal(dummy.add_one(np.array([3,4])), np.array([4,5])))
+
+def test_bad_input():
+    with pytest.raises(TypeError):
+        dummy.add_one('hello')
+
+def test_warning():
+    with pytest.warns(UserWarning, match='complex'):
+        dummy.add_one(1+3j)
+```
+
+
+We can then run the tests via `pytest` like this:
+
+```{bash}
+#| eval: true
+pytest mytestfile.py
+```
+
+```
+====================================== test session starts ======================================
+platform linux -- Python 3.12.2, pytest-8.1.1, pluggy-1.4.0
+rootdir: /accounts/vis/paciorek/teaching/243fall24/fall-2024/units
+plugins: anyio-4.3.0
+collected 4 items                                                                               
+
+test_dummy.py .F..                                                                        [100%]
+
+=========================================== FAILURES ============================================
+_______________________________________ test_numpy_array ________________________________________
+
+    def test_numpy_array():
+>       assert np.all(np.equal(dummy.add_one(np.array([3,4])), np.array([4,5])))
+
+test_dummy.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+x = array([3, 4])
+
+    def add_one(x):
+        if not isinstance(x, (float, int, complex)):
+>           raise TypeError(f"`{x}` should be numeric")
+E           TypeError: `[3 4]` should be numeric
+
+dummy.py:5: TypeError
+==================================== short test summary info ====================================
+FAILED test_dummy.py::test_numpy_array - TypeError: `[3 4]` should be numeric
+================================== 1 failed, 3 passed in 0.84s ==================================
+```
 
 In lab, we'll go over assertions, exceptions, and testing in
 detail.
@@ -452,6 +537,8 @@ jobs:
         pytest
 ```
 
+You'll use GitHub Actions to automate testing during your projects. Unfortunately, GitHub Actions is not available via `github.berkeley.edu` so we
+can't use it with your class repositories for your problem set work. 
 
 ## Version control
 
@@ -462,8 +549,7 @@ jobs:
 - In addition to good commit messages, it's a good idea to keep good
     running notes documenting your projects.
 
-We've already seen Git some and will see it in a lot more detail later
-in the semester, so I don't have more to say here.
+We'll be discussing Git a lot separately.
 
 # 2. Debugging and recommendations for avoiding bugs
 
@@ -710,11 +796,10 @@ Some of these are Python-specific, while others are common to a variety of langu
  - Parenthesis mis-matches
  - `==` vs. `=` 
  - Comparing real numbers exactly using `==` is dangerous because numbers on a computer are only represented to limited numerical precision. For example,
- 
-    ```{python, num-prec}
-    1/3 == 4*(4/12-3/12)
-    ```
-    
+   ```{python, num-prec}
+   1/3 == 4*(4/12-3/12)
+   ```
+   We'll discuss in detail in Unit 8. 
  - You expect a single value but execution of the code gives an array
  - Silent type conversion when you don't want it, or lack of coercion where you're expecting it
  - Using the wrong function or variable name
@@ -743,11 +828,12 @@ Here's an example of building a robust square root function:
 import warnings
 
 def mysqrt(x):
-    assert not isinstance(x, str), f"what is the square root of '{x}'?"
-    if isinstance(x, int) or isinstance(x, float):
+    if isinstance(x, str):
+        raise TypeError(f"What is the square root of '{x}'?")
+    if isinstance(x, (float, int)):
         if x < 0:
             warnings.warn("Input value is negative.", UserWarning)
-            return float('nan')   # avoid complex number result
+            return float('nan')   # Avoid complex number result.
         else:
             return x**0.5
     else:
@@ -756,10 +842,18 @@ def mysqrt(x):
 
 mysqrt(3.1)
 mysqrt(-3)
-try:
-    mysqrt('hat')
-except Exception as error:
-    print(error)
+```
+
+```{python}
+#| eval: false
+mysqrt('hat')
+```
+
+```
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in mysqrt
+TypeError: What is the square root of 'hat'?
 ```
 
 ### Catch run-time errors with  `try/except` statements
@@ -847,11 +941,18 @@ except Exception as error:
  - Plan out your code in advance, including all special cases/possibilities.
  - Write tests for your code early in the process. 
  - Build up code in pieces, testing along the way. Make big changes in small steps, sequentially checking to see if the code has broken on test case(s).
- - Be careful that the conditions of `if` statements and the sequences of `for` loops are robust when they involve evaluating R code.
+ - Be careful that the conditions of `if` statements and `while` loops and the sequences of `for` loops are robust.
  - Don't hard code numbers - use variables (e.g., number of iterations, parameter values in simulations), even if you don't expect to change the value, as this makes the code more readable and reduces bugs when you use the same number multiple times; e.g. `speed_of_light = 3e8` or `n_its = 1000`.
 
 
 In a future Lab, we'll go over debugging in detail.
+
+### Code review
+
+It's a good idea to have others review your code, ideally during the development process.
+
+[This article](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012375) provides guidance on good practices for code review.
+
 
 # 3. Tips for running analyses
 
@@ -893,14 +994,14 @@ same scientific question.
 Open question: What is required for something to be reproducible? What
 about replicable? What are the challenges in doing so?
 
-## Some basic strategies
+## Some basic strategies for reproducible analyses
 
 - Have a directory for each project with subdirectories with
     meaningful and standardized names: e.g., `code`, `data`, `paper`. The Journal of the American Statistical Association (JASA) has a [template GitHub repository](https://github.com/jasa-acs/repro-template) with some suggestions.
 - Have a file of code for pre-processing, one or more for analysis,
     and one for figure/table preparation.
     - The pre-processing may involve time-consuming steps. Save the
-        output of the pre-processing as a file that can be read in to
+        output of the pre-processing as data file(s) that can be read in to
         the analysis script.
     - You may want to name your files something like this, so there is
         an obvious ordering: "1-prep.py", "2-analysis.py", "3-figs.py".
@@ -919,8 +1020,7 @@ about replicable? What are the challenges in doing so?
     lab book). If possible, have all changes to data represented as code that processes the data relative to a fixed baseline dataset.
 - Note what code files do what in the lab book.
 - Keep track of the details of the system and software you are running
-    your code under, e.g., operating system version, software (e.g., Python,
-    R) versions, Python or R package versions, etc.
+    your code under, e.g., operating system version, software (e.g., Python, R) versions, Python or R package versions, etc.
     - `pip list` and `conda list` will show you version numbers for installed packages.
     - `pip freeze > requirements.txt` and `conda env export > env.yml` will create a recipe file for your environment.
     - `pip install -r requirements.txt` and `conda env create -f env.yml` will build that environment on your machine.
@@ -942,4 +1042,4 @@ about replicable? What are the challenges in doing so?
     - R: You can manage the versions of R packages (and dependent packages)
     used in your project using package management packages such as
     `renv` and `packrat`. Unfortunately, the useful `checkpoint` package relies on snapshots of CRAN that are not available after January 2023.
-5. If your project uses multiple pieces of software (e.g., not just Python or R), you can set up a reproducible environment using *containers*, of which Docker containers are the best known. These provide something that is like a lightweight virtual machine in which you can install exactly the software (and versions) you want and then share with others. Docker container images are a key building block of various tools such as GitHub Actions and the [Binder project](https://mybinder.org). Alternatively Conda is a general package manager that can install lots of non-Python packages and can also be used in many circumstances.
+5. If your project uses multiple pieces of software (e.g., not just Python or R), you can set up a reproducible environment using *containers*, of which Docker containers are the best known. These provide something that is like a lightweight virtual machine in which you can install exactly the software (and versions) you want and then share with others. Docker container images are a key building block of various tools such as GitHub Actions and the [Binder project](https://mybinder.org). Alternatively (and often much easier) Conda is a general package manager that can install lots of non-Python packages and can also be used in many circumstances.
