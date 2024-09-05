@@ -450,7 +450,6 @@ def test_warning():
 We can then run the tests via `pytest` like this:
 
 ```{bash}
-#| eval: true
 pytest mytestfile.py
 ```
 
@@ -492,7 +491,7 @@ detail.
 
 *Continuous integration* (CI) is the term for carrying out actions automatically as your code changes. The most common kind of CI is automated testing - running your tests on your code when you make changes to the code. This enforces the discipline of running tests regularly and avoids the common problem that testing passes locally on your own machine, but fails for various reasons when done elsewhere. 
 
-A standard way to do this is via GitHub Actions.
+A standard way to do this is via GitHub Actions (GHA).
 
 To set up a GitHub Actions workflow, one
 
