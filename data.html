@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Accessing Python</title>
+<title>Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,225 +68,32 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/accessPython.html">Accessing Python</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
-</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/stat_bear.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
-      </a>
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">Stat 243</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
-</div>
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Syllabus</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Schedule</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../office_hours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Office Hours</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Units</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../units/unit1-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Unit 1 (UNIX intro)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../units/unit2-dataTech.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Unit 2 (Data technologies)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../units/unit3-bash.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Unit 3 (Bash shell)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../units/unit4-goodPractices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Unit 4 (Good practices)</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Labs</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab0-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 0 (Optional setup)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab1-submission.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 1 (Quarto/Git/Submission)</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 1</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">How tos</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../howtos/accessPython.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Accessing Python</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../howtos/accessUnixCommandLine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Accessing the Unix Command Line</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../howtos/installGit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing Git</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../howtos/installQuarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing and Using Quarto</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set Submissions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../howtos/windowsAndLinux.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Windows 10 and the Ubuntu Subsystem</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../license.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">License</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#access-via-the-scf" id="toc-access-via-the-scf" class="nav-link active" data-scroll-target="#access-via-the-scf">Access via the SCF</a>
-  <ul class="collapse">
-  <li><a href="#python-from-the-command-line" id="toc-python-from-the-command-line" class="nav-link" data-scroll-target="#python-from-the-command-line">Python from the command line</a></li>
-  <li><a href="#python-via-jupyter-notebook" id="toc-python-via-jupyter-notebook" class="nav-link" data-scroll-target="#python-via-jupyter-notebook">Python via Jupyter notebook</a></li>
-  </ul></li>
+  <li><a href="#data-1" id="toc-data-1" class="nav-link active" data-scroll-target="#data-1">Data 1</a></li>
+  <li><a href="#data-2" id="toc-data-2" class="nav-link" data-scroll-target="#data-2">Data 2</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/accessPython.html">Accessing Python</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Accessing Python</h1>
+<h1 class="title">Data</h1>
 </div>
 
 
@@ -303,37 +110,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We recommend using the <a href="https://github.com/conda-forge/miniforge">Miniforge distribution</a> as your Python 3.12 installation.</p>
-<p>Once you’ve installed Python, please install the following packages:</p>
-<ul>
-<li>numpy</li>
-<li>scipy</li>
-<li>pandas</li>
-<li>dask</li>
-<li>dask.distributed</li>
-<li>dask.bag</li>
-<li>dask.array</li>
-<li>dask.dataframe</li>
-<li>dask.multiprocessing</li>
-</ul>
-<p>Assuming you installed Miniforge, you should be able to do this from the command line:</p>
-<pre><code>conda install numpy scipy pandas dask</code></pre>
-<p>While you’re welcome to work with Python in a Jupyter notebook for exploration (e.g., using the <a href="https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F">campus DataHub</a>, you’ll need to submit Quarto (.qmd) documents with Python chunks for your problem sets. So you’ll need Python set up on your laptop or to use it by logging in to an SCF machine.</p>
-<section id="access-via-the-scf" class="level1">
-<h1>Access via the SCF</h1>
-<section id="python-from-the-command-line" class="level2">
-<h2 class="anchored" data-anchor-id="python-from-the-command-line">Python from the command line</h2>
-<p>Once you get your SCF account, you can access Python or IPython from the UNIX command line as soon as you login to an SCF server. Just SSH to an SCF Linux machine (e.g., gandalf.berkeley.edu or radagast.berkeley.edu) and run ‘python’ or ‘ipython’ from the command line.</p>
-<p>More details on using SSH are <a href="https://statistics.berkeley.edu/computing/ssh">here</a>. Note that if you have the Ubuntu subsystem for Windows, you can use SSH directly from the Ubuntu terminal.</p>
+<p>We’ll use data from several real world situations in class.</p>
+<section id="data-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-1">Data 1</h2>
 </section>
-<section id="python-via-jupyter-notebook" class="level2">
-<h2 class="anchored" data-anchor-id="python-via-jupyter-notebook">Python via Jupyter notebook</h2>
-<p>You can use a Jupyter notebook to run Python code from the <a href="https://jupyter.stat.berkeley.edu">SCF JupyterHub</a> or the <a href="https://datahub.berkeley.edu">Berkeley DataHub</a>.</p>
-<p>If you’re on the SCF JupyterHub, select <code>Start My Server</code>. Then, unless you are running long or parallelized code, just click <code>Spawn</code> (in other words, accept the default ‘standalone’ partition). On the next page select ‘New’ and ‘Python 3’.</p>
-<p>To finish your session, click on <code>File</code>, <code>Hub Control Panel</code> and <code>Stop My Server</code>. Do not click <code>Logout</code>.</p>
+<section id="data-2" class="level2">
+<h2 class="anchored" data-anchor-id="data-2">Data 2</h2>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
