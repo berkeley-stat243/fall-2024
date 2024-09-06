@@ -33,6 +33,8 @@ website:
         contents:
           - href: labs/lab0-setup.html
             text: "Lab 0 (Optional setup)"
+          - href: labs/lab1-submission.html
+            text: "Lab 1 (Quarto/Git/Submission)"
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
