@@ -347,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="a">
 <li><p>Generate a numpy array (named <code>x</code>) of random numbers from a standard normal distribution with 20 columns and as many rows as needed so that the data take up about 16 MB (megabytes) in size. As part of your answer, show the arithmetic (formatted using LaTeX math syntax) you did to determine the number of rows.</p></li>
 <li><p>Explain the sizes of the two files created below. In discussing the CSV text file, how many characters do you expect to be in the file (i.e., you should be able to estimate this reasonably accurately from first principles without using <code>wc</code> or any explicit program that counts characters). Hint: what do we know about numbers drawn from a standard normal distribution?</p>
-<div id="29ca7484" class="cell" data-execution_count="2">
+<div id="dc82915c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x.<span class="bu">round</span>(decimals <span class="op">=</span> <span class="dv">12</span>)</span>
@@ -358,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(x).to_pickle(<span class="st">'x.pkl'</span>, compression <span class="op">=</span> <span class="va">None</span>) </span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">str</span>(os.path.getsize(<span class="st">'x.pkl'</span>)<span class="op">/</span><span class="fl">1e6</span>)<span class="sc">}</span><span class="ss"> MB"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>30.777135 MB
+<pre><code>30.778352 MB
 16.000572 MB</code></pre>
 </div>
 </div>
