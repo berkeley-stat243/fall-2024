@@ -406,6 +406,8 @@ assert all(x)
 assert any(x)
 ```
 
+Assertions can also be quite useful in the context of data analysis pipelines for checking that the state of the analysis is as expected. E.g., at various points, you might check that the dimension of your data is as expected, check for missing or extreme/unexpected values, etc.
+
 Next we'll see that assertions are a core part of setting up tests.
 
 ### Testing
