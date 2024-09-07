@@ -33,7 +33,7 @@ Some books to [learn](https://www.amazon.com/Learning-UNIX-Operating-System-Fift
 
 ## Quick Intro to [git and GitHub](https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html)
 
-0. Creating a enw repository
+0. Creating a new repository
 1. Making changes
 - Editing and saving files
 - Staging changes
@@ -62,7 +62,7 @@ Refer to [this guide](../howtos/submitPS.md) and please ask questions if somethi
 0. Clone your github repository to your development environment
 1. Create a subdirectory in your github repository with the name ps0
 2. In that subdirectory, create a quarto document (ps0.qmd) that has some simple code that creates a simple plot (you can follow this example/tutorial [here](https://quarto.org/docs/get-started/hello/text-editor.html))
-3. Use the quarto command line to render it into a pdf document (quarto render FILE --to pdf)
+3. Use the quarto command line to render it into a pdf document (quarto render FILE ---to pdf)
 4. Commit the changes to your repository (git add FILES; git commit -m MESSAGE; git push)
 5. Add another section to your quarto document (use your imagination), then preview and commit the changes
 6. Use the quarto command line to render the updated document into a pdf document
@@ -82,18 +82,22 @@ Depending on what's required in the problem sets, you may need to set **eval to 
 
 ### Troubleshooting
 
-##### Quarto succeeds in rendering html but fails at rendering pdf
+#### Quarto succeeds in rendering html but fails at rendering pdf
 
 Install tinytex via `quarto install tinytex`
 
-##### Problems running and rendering bash commands in quarto
+#### Problems running and rendering bash commands in quarto
 
 If you are using the knitr engine, you should be able to tag your code chunks in quarto with `{bash}` and use verbatim bash commands. If you are using the Jupyter engine, the `{python}` tag should be used instead and every line containing a bash command should be prefixed with an exclamation mark (!).
 
-##### Quarto rendering (or python execution) works from the terminal but not from the IDE
+#### Quarto rendering (or python execution) works from the terminal but not from the IDE
 
 You can go to the settings in your IDE and point it to the specific python installation that you find when you execute which python in the terminal.
 
-##### Quarto rendering (or python execution) works from the IDE but not from the terminal
+#### Quarto rendering (or python execution) works from the IDE but not from the terminal
 
 you can fix the quarto configuration by setting the environment variable `QUARTO_PYTHON` to the correct python path or by running `quarto check`. Restarting the IDE may also help if you had just installed something in the other environment.
+
+#### Pushing to git fails with message "Make sure you configure your 'user.email' and 'user.name' in git"
+
+Follow the suggested course of action in the error message to configure your email and name, then push again.
