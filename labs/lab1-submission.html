@@ -331,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="quick-intro-to-git-and-github" class="level2">
 <h2 class="anchored" data-anchor-id="quick-intro-to-git-and-github">Quick Intro to <a href="https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html">git and GitHub</a></h2>
 <ol start="0" type="1">
-<li>Creating a enw repository</li>
+<li>Creating a new repository</li>
 <li>Making changes</li>
 </ol>
 <ul>
@@ -367,7 +367,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Clone your github repository to your development environment</li>
 <li>Create a subdirectory in your github repository with the name ps0</li>
 <li>In that subdirectory, create a quarto document (ps0.qmd) that has some simple code that creates a simple plot (you can follow this example/tutorial <a href="https://quarto.org/docs/get-started/hello/text-editor.html">here</a>)</li>
-<li>Use the quarto command line to render it into a pdf document (quarto render FILE –to pdf)</li>
+<li>Use the quarto command line to render it into a pdf document (quarto render FILE —to pdf)</li>
 <li>Commit the changes to your repository (git add FILES; git commit -m MESSAGE; git push)</li>
 <li>Add another section to your quarto document (use your imagination), then preview and commit the changes</li>
 <li>Use the quarto command line to render the updated document into a pdf document</li>
@@ -384,21 +384,25 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="troubleshooting" class="level3">
 <h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
-<section id="quarto-succeeds-in-rendering-html-but-fails-at-rendering-pdf" class="level5">
-<h5 class="anchored" data-anchor-id="quarto-succeeds-in-rendering-html-but-fails-at-rendering-pdf">Quarto succeeds in rendering html but fails at rendering pdf</h5>
+<section id="quarto-succeeds-in-rendering-html-but-fails-at-rendering-pdf" class="level4">
+<h4 class="anchored" data-anchor-id="quarto-succeeds-in-rendering-html-but-fails-at-rendering-pdf">Quarto succeeds in rendering html but fails at rendering pdf</h4>
 <p>Install tinytex via <code>quarto install tinytex</code></p>
 </section>
-<section id="problems-running-and-rendering-bash-commands-in-quarto" class="level5">
-<h5 class="anchored" data-anchor-id="problems-running-and-rendering-bash-commands-in-quarto">Problems running and rendering bash commands in quarto</h5>
+<section id="problems-running-and-rendering-bash-commands-in-quarto" class="level4">
+<h4 class="anchored" data-anchor-id="problems-running-and-rendering-bash-commands-in-quarto">Problems running and rendering bash commands in quarto</h4>
 <p>If you are using the knitr engine, you should be able to tag your code chunks in quarto with <code>{bash}</code> and use verbatim bash commands. If you are using the Jupyter engine, the <code>{python}</code> tag should be used instead and every line containing a bash command should be prefixed with an exclamation mark (!).</p>
 </section>
-<section id="quarto-rendering-or-python-execution-works-from-the-terminal-but-not-from-the-ide" class="level5">
-<h5 class="anchored" data-anchor-id="quarto-rendering-or-python-execution-works-from-the-terminal-but-not-from-the-ide">Quarto rendering (or python execution) works from the terminal but not from the IDE</h5>
+<section id="quarto-rendering-or-python-execution-works-from-the-terminal-but-not-from-the-ide" class="level4">
+<h4 class="anchored" data-anchor-id="quarto-rendering-or-python-execution-works-from-the-terminal-but-not-from-the-ide">Quarto rendering (or python execution) works from the terminal but not from the IDE</h4>
 <p>You can go to the settings in your IDE and point it to the specific python installation that you find when you execute which python in the terminal.</p>
 </section>
-<section id="quarto-rendering-or-python-execution-works-from-the-ide-but-not-from-the-terminal" class="level5">
-<h5 class="anchored" data-anchor-id="quarto-rendering-or-python-execution-works-from-the-ide-but-not-from-the-terminal">Quarto rendering (or python execution) works from the IDE but not from the terminal</h5>
+<section id="quarto-rendering-or-python-execution-works-from-the-ide-but-not-from-the-terminal" class="level4">
+<h4 class="anchored" data-anchor-id="quarto-rendering-or-python-execution-works-from-the-ide-but-not-from-the-terminal">Quarto rendering (or python execution) works from the IDE but not from the terminal</h4>
 <p>you can fix the quarto configuration by setting the environment variable <code>QUARTO_PYTHON</code> to the correct python path or by running <code>quarto check</code>. Restarting the IDE may also help if you had just installed something in the other environment.</p>
+</section>
+<section id="pushing-to-git-fails-with-message-make-sure-you-configure-your-user.email-and-user.name-in-git" class="level4">
+<h4 class="anchored" data-anchor-id="pushing-to-git-fails-with-message-make-sure-you-configure-your-user.email-and-user.name-in-git">Pushing to git fails with message “Make sure you configure your ‘user.email’ and ‘user.name’ in git”</h4>
+<p>Follow the suggested course of action in the error message to configure your email and name, then push again.</p>
 
 
 </section>
