@@ -317,7 +317,7 @@ Please see the SCF [dynamics document tutorial](https://berkeley-scf.github.io/t
 
 ### Submitting assignments
 
-In the first section (September 1), we'll discuss [how to submit your problem sets](howtos/ps-submission) both on Gradescope and via your class GitHub repository, located at `https://github.berkeley.edu/<your_calnet_username>`.
+In the first section (September 1), we'll discuss [how to submit your problem sets](howtos/submitPS) both on Gradescope and via your class GitHub repository, located at `https://github.berkeley.edu/<your_calnet_username>`.
 
 ### Problem set grading {#problem-set-grading .unnumbered}
 
