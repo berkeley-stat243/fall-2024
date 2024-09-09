@@ -265,194 +265,11 @@
     ]
   },
   {
-    "objectID": "units/unit3-bash.html",
-    "href": "units/unit3-bash.html",
-    "title": "The bash shell and UNIX commands",
+    "objectID": "units/regex.html",
+    "href": "units/regex.html",
+    "title": "Assignment: regex problems",
     "section": "",
-    "text": "PDF\nReference:",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#first-challenge",
-    "href": "units/unit3-bash.html#first-challenge",
-    "title": "The bash shell and UNIX commands",
-    "section": "4.1 First challenge",
-    "text": "4.1 First challenge\nConsider the file cpds.csv. How would you write a shell command that returns “There are 8 occurrences of the word ‘Belgium’ in this file.”, where ‘8’ should instead be the correct number of times the word occurs.\nExtra: make your code into a function that can operate on any file indicated by the user and any word of interest.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#second-challenge",
-    "href": "units/unit3-bash.html#second-challenge",
-    "title": "The bash shell and UNIX commands",
-    "section": "4.2 Second challenge",
-    "text": "4.2 Second challenge\nConsider the data in the RTADataSub.csv file. This is a subset of data giving freeway travel times for segments of a freeway in an Australian city. The data are from a kaggle.com competition. We want to try to understand the kinds of data in each field of the file. The following would be particularly useful if the data were in many files or the data were many gigabytes in size.\n\nFirst, take the fourth column. Figure out the unique values in that column.\nNext, automate the process of determining if any of the values are non-numeric so that you don’t have to scan through all of the unique values looking for non-numbers. You’ll need to look for the following regular expression pattern [^0-9], which is interpreted as NOT any of the numbers 0 through 9.\n\nExtra: do it for all the fields, except the first one. Have your code print out the result in a human-readable way understandable by someone who didn’t write the code. For simplicity, you can assume you know the number of fields.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#third-challenge",
-    "href": "units/unit3-bash.html#third-challenge",
-    "title": "The bash shell and UNIX commands",
-    "section": "4.3 Third challenge",
-    "text": "4.3 Third challenge\n\nFor Belgium, determine the minimum unemployment value (field #6) in cpds.csv in a programmatic way.\nHave what is printed out to the screen look like “Belgium 6.2”.\nNow store the unique values of the countries in a variable, first stripping out the quotation marks.\nFigure out how to automate step 1 to do the calculation for all the countries and print to the screen.\nHow would you instead store the results in a new file?",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#fourth-challenge",
-    "href": "units/unit3-bash.html#fourth-challenge",
-    "title": "The bash shell and UNIX commands",
-    "section": "4.4 Fourth challenge",
-    "text": "4.4 Fourth challenge\nLet’s return to the RTADataSub.csv file and the issue of missing values.\n\nCreate a new file without any rows that have an ‘x’ (which indicate a missing value).\nTurn the code into a function that also prints out the number of rows that are being removed and that sends its output to stdout so that it can be used with piping.\nNow modify your function so that the user could provide the missing value string and the input filename.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#fifth-challenge",
-    "href": "units/unit3-bash.html#fifth-challenge",
-    "title": "The bash shell and UNIX commands",
-    "section": "4.5 Fifth challenge",
-    "text": "4.5 Fifth challenge\nConsider the coop.txt weather station file.\nFigure out how to use grep to tell you the starting position of the state field. Hints: search for a known state-country combination and figure out what flags you can use with grep to print out the “byte offset” for the matched state.\nUse that information to automate the first mission where we extracted the state field using cut. You’ll need to do a bit of arithmetic using shell commands.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#sixth-challenge",
-    "href": "units/unit3-bash.html#sixth-challenge",
-    "title": "The bash shell and UNIX commands",
-    "section": "4.6 Sixth challenge",
-    "text": "4.6 Sixth challenge\nHere’s an advanced one - you’ll probably need to use sed, but the brief examples of text substitution in the using bash tutorial (or in the demos above) should be sufficient to solve the problem.\nConsider a CSV file that has rows that look like this:\n1,\"America, United States of\",45,96.1,\"continental, coastal\" \n2,\"France\",33,807.1,\"continental, coastal\"\nWhile Pandas would be able to handle this using read_csv(), using cut in UNIX won’t work because of the commas embedded within the fields. The challenge is to convert this file to one that we can use cut on, as follows.\nFigure out a way to make this into a new delimited file in which the delimiter is not a comma. At least one solution that will work for this particular two-line dataset does not require you to use regular expressions, just simple replacement of fixed patterns.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#versions-of-regular-expressions",
-    "href": "units/unit3-bash.html#versions-of-regular-expressions",
-    "title": "The bash shell and UNIX commands",
-    "section": "Versions of regular expressions",
-    "text": "Versions of regular expressions\nOne thing that can cause headaches is differences in version of regular expression syntax used. As discussed in man grep, extended regular expressions are standard, with basic regular expressions providing less functionality and Perl regular expressions additional functionality.\nThe bash shell tutorial provides a full documentation of the extended regular expressions syntax, which we’ll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.\n\nIn bash, grep -E (or egrep) enables use of the extended regular expressions.\nIn Python, the re package provides syntax “similar to” Perl.\nIn R, stringr provides ICU regular expressions (see help(regex)), which are based on Perl regular expressions.\n\nMore details about Perl regular expressions can be found in the regex Wikipedia page.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#general-principles-for-working-with-regex",
-    "href": "units/unit3-bash.html#general-principles-for-working-with-regex",
-    "title": "The bash shell and UNIX commands",
-    "section": "General principles for working with regex",
-    "text": "General principles for working with regex\nThe syntax is very concise, so it’s helpful to break down individual regular expressions into the component parts to understand them. As Murrell notes, since regex are their own language, it’s a good idea to build up a regex in pieces as a way of avoiding errors just as we would with any computer code. re.findall in Python and str_detect in R’s stringr, as well as regex101.com are particularly useful in seeing what was matched to help in understanding and learning regular expression syntax and debugging your regex. As with many kinds of coding, I find that debugging my regex is usually what takes most of my time.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "units/unit3-bash.html#challenge-problem",
-    "href": "units/unit3-bash.html#challenge-problem",
-    "title": "The bash shell and UNIX commands",
-    "section": "Challenge problem",
-    "text": "Challenge problem\nChallenge: Let’s think about what regex syntax we would need to detect any number, integer- or real-valued. Let’s start from a test-driven development perspective of writing out test cases including: - various cases we want to detect, - various tricky cases that are not numbers and we don’t want to detect, and - “corner cases” – tricky (perhaps unexpected) cases that might trip us up.",
-    "crumbs": [
-      "Units",
-      "Unit 3 (Bash shell)"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistics 243: Introduction to Statistical Computing",
-    "section": "",
-    "text": "Ed\n\n  Gradescope\n\n  Tutorials\n\n  Lecture recordings\n\n  bCourses\n\n\nNo matching items",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-materials",
-    "href": "index.html#course-materials",
-    "title": "Statistics 243: Introduction to Statistical Computing",
-    "section": "Course materials",
-    "text": "Course materials\nSee the links above for the key resources for the course.\nMost course content (in particular unit notes, labs, and problem sets) are available through this website via the links in the left sidebar.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#questions-about-taking-the-class",
-    "href": "index.html#questions-about-taking-the-class",
-    "title": "Statistics 243: Introduction to Statistical Computing",
-    "section": "Questions about taking the class",
-    "text": "Questions about taking the class\nIf you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out this survey as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 30 at noon.\nUndergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nConcurrent enrollment students (e.g., exchange students from other universities/countries) can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nPlease see the syllabus for the math and statistics background I expect, as well as the need to be familiar with Python or to get up to speed in Python during the first few weeks of the semester.\nThe first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and Python. Please use the schedule to keep on top of what you need to do.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "schedule.html",
-    "href": "schedule.html",
-    "title": "Scheduling information",
-    "section": "",
-    "text": "Thu Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Wed Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Mon Sep 9:\n           \n           Assignment 1 Bash shell tutorial and exercises (see details below)\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Wed Sep 11:\n           \n           Problem_Set 1 Problem Set 1\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 13:\n           \n           Assignment 2 Regular expression tutorial and exercises (see Details below)\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#schedule",
-    "href": "schedule.html#schedule",
-    "title": "Scheduling information",
-    "section": "",
-    "text": "Thu Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Wed Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Mon Sep 9:\n           \n           Assignment 1 Bash shell tutorial and exercises (see details below)\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Wed Sep 11:\n           \n           Problem_Set 1 Problem Set 1\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 13:\n           \n           Assignment 2 Regular expression tutorial and exercises (see Details below)\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#quizzes",
-    "href": "schedule.html#quizzes",
-    "title": "Scheduling information",
-    "section": "Quizzes",
-    "text": "Quizzes\nQuizzes are in-person only.\n\nQuiz 1: Wednesday October 23 in class.\n\nReview session Friday October 18 in section.\n\nQuiz 2: Monday November 25 in class.\n\nReview session Friday November 22 in section.",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#project",
-    "href": "schedule.html#project",
-    "title": "Scheduling information",
-    "section": "Project",
-    "text": "Project\nDue date: TBD during exam week.",
-    "crumbs": [
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "schedule.html#notes-on-assignments-and-activities",
-    "href": "schedule.html#notes-on-assignments-and-activities",
-    "title": "Scheduling information",
-    "section": "Notes on assignments and activities",
-    "text": "Notes on assignments and activities\n\nOptional library LaTeX session: I highly recommend (in particular if you are a Statistics graduate student) that you know how to create equations in LaTeX. Even if you develop your documents using Quarto, Jupyter notebooks, R Markdown, etc. rather than LaTeX-based documents, LaTeX math syntax is the common tool for writing math syntax that will render beautifully.\nOptional Lab 0 software/command line help session: (August 30 in lab room) Help session for installing software, accessing a UNIX-style command line, and basic command line usage (e.g., the UNIX basics tutorial). You can show up at any time (unlike all remaining labs). You should have software installed, be able to accesss the command line, and have started to become familiar with basic command line usage before class on Friday September 6.\nLab 1: (September 6) First section/lab on using Git, setting up your GitHub repository for problem sets, and using Quarto to generate dynamic documents. Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.\nBash shell tutorial and exercises: (by September 9) Read through this tutorial on using the bash shell. You can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the exercises and submit your answers via Gradescope. This is not a formal problem set, so you don’t need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it’s even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you’ve worked through the tutorial. I’ll be doing demonstrations on using the bash shell in class starting on September 6, so that will be helpful as you work through the tutorial.\nRegular expression reading and exercises: (by September 13), read the regular expression material in the tutorial on using the bash shell. Then answer the regular expressions (regex) practice problems and submit your answers on Gradescope (NOT YET AVAILABLE). This is not one of the graded problem sets but rather an assignment that will simply be noted as being completed or not.",
-    "crumbs": [
-      "Schedule"
-    ]
+    "text": "Overview\nRead the regular expression section of the bash shell tutorial and provide regular expression syntax to match the strings in the following scenarios. Any reasonable syntax si fine, and even better, challenge yourself to figure out multiple ways to answer each question.\nThis is an assignment, graded credit/no credit, and it does not need to follow the requirements for problem set submissions. Any format is fine (including hand-written and scanned).\n\n\nProblems\n\nMatch the strings “dog”, “Dog”, “dOg”, “doG”, “DOg”, etc. (The word ‘dog’ in any combination of lower and upper case.)\nMatch the strings “cat”, “caat”, “caaat”, etc.\nMatch the strings “cat”, “at”, and “t”.\nMatch two words separated by any amount of whitespace."
   },
   {
     "objectID": "units/unit2-dataTech.html",
@@ -617,6 +434,196 @@
     "crumbs": [
       "Units",
       "Unit 2 (Data technologies)"
+    ]
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Scheduling information",
+    "section": "",
+    "text": "Thu Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Wed Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Mon Sep 9:\n           \n           Assignment 1 Bash shell tutorial and exercises (see details below)\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Wed Sep 11:\n           \n           Problem_Set 1 Problem Set 1\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 13:\n           \n           Assignment 2 Regular expression tutorial and exercises (see Details below)\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#schedule",
+    "href": "schedule.html#schedule",
+    "title": "Scheduling information",
+    "section": "",
+    "text": "Thu Aug 29:\n           \n           Event 1 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Aug 30:\n           \n           Lab 0 (Optional) help session for software installation/setup and UNIX-style command line basics\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 1 Class Survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 2 Office hour time survey\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 3 Login to github.berkeley.edu with your CalNet credentials\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Wed Sep 4:\n           \n           Activity 4 Read first three sections of Unit 2 (sections before 'Webscraping')\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Activity 5 (Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 6:\n           \n           Lab 1 Using Git and Quarto and problem set submission\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n   \n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           Mon Sep 9:\n           \n           Assignment 1 Bash shell tutorial and exercises (see details below)\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Wed Sep 11:\n           \n           Problem_Set 1 Problem Set 1\n           \n                \n           \n                \n           \n        \n\n           \n           \n           Event 2 (Optional) Library Introduction to LaTeX with Overleaf session\n           \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           Fri Sep 13:\n           \n           Assignment 2 Regular expression tutorial and exercises (see Details below)\n           \n                \n           \n                \n           \n        \n   \n   \n   \n  \n\n\nNo matching items",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#quizzes",
+    "href": "schedule.html#quizzes",
+    "title": "Scheduling information",
+    "section": "Quizzes",
+    "text": "Quizzes\nQuizzes are in-person only.\n\nQuiz 1: Wednesday October 23 in class.\n\nReview session Friday October 18 in section.\n\nQuiz 2: Monday November 25 in class.\n\nReview session Friday November 22 in section.",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#project",
+    "href": "schedule.html#project",
+    "title": "Scheduling information",
+    "section": "Project",
+    "text": "Project\nDue date: TBD during exam week.",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#notes-on-assignments-and-activities",
+    "href": "schedule.html#notes-on-assignments-and-activities",
+    "title": "Scheduling information",
+    "section": "Notes on assignments and activities",
+    "text": "Notes on assignments and activities\n\nOptional library LaTeX session: I highly recommend (in particular if you are a Statistics graduate student) that you know how to create equations in LaTeX. Even if you develop your documents using Quarto, Jupyter notebooks, R Markdown, etc. rather than LaTeX-based documents, LaTeX math syntax is the common tool for writing math syntax that will render beautifully.\nOptional Lab 0 software/command line help session: (August 30 in lab room) Help session for installing software, accessing a UNIX-style command line, and basic command line usage (e.g., the UNIX basics tutorial). You can show up at any time (unlike all remaining labs). You should have software installed, be able to accesss the command line, and have started to become familiar with basic command line usage before class on Friday September 6.\nLab 1: (September 6) First section/lab on using Git, setting up your GitHub repository for problem sets, and using Quarto to generate dynamic documents. Please come only to the section you are registered for given space limits in the room, unless you have talked with Chris and have his permission.\nBash shell tutorial and exercises: (by September 9) Read through this tutorial on using the bash shell. You can skip the pages on Regular Expressions and Managing Processes. Work through the first 10 problems in the exercises and submit your answers via Gradescope. This is not a formal problem set, so you don’t need to worry about formatting nor about explaining/commenting your answers, nor do you need to put your answers in your GitHub class repository. In fact it’s even fine with me if you hand-write the answers and scan them to an electronic document. I just want to make sure you’ve worked through the tutorial. I’ll be doing demonstrations on using the bash shell in class starting on September 6, so that will be helpful as you work through the tutorial.\nRegular expression reading and exercises: (by September 13), read the regular expression material in the tutorial on using the bash shell. Then answer the regular expressions (regex) practice problems and submit your answers on Gradescope. This is not one of the graded problem sets but rather an assignment that will simply be noted as being completed or not.",
+    "crumbs": [
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistics 243: Introduction to Statistical Computing",
+    "section": "",
+    "text": "Ed\n\n  Gradescope\n\n  Tutorials\n\n  Lecture recordings\n\n  bCourses\n\n\nNo matching items",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "Statistics 243: Introduction to Statistical Computing",
+    "section": "Course materials",
+    "text": "Course materials\nSee the links above for the key resources for the course.\nMost course content (in particular unit notes, labs, and problem sets) are available through this website via the links in the left sidebar.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#questions-about-taking-the-class",
+    "href": "index.html#questions-about-taking-the-class",
+    "title": "Statistics 243: Introduction to Statistical Computing",
+    "section": "Questions about taking the class",
+    "text": "Questions about taking the class\nIf you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out this survey as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 30 at noon.\nUndergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nConcurrent enrollment students (e.g., exchange students from other universities/countries) can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.\nPlease see the syllabus for the math and statistics background I expect, as well as the need to be familiar with Python or to get up to speed in Python during the first few weeks of the semester.\nThe first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and Python. Please use the schedule to keep on top of what you need to do.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html",
+    "href": "units/unit3-bash.html",
+    "title": "The bash shell and UNIX commands",
+    "section": "",
+    "text": "PDF\nReference:",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#first-challenge",
+    "href": "units/unit3-bash.html#first-challenge",
+    "title": "The bash shell and UNIX commands",
+    "section": "4.1 First challenge",
+    "text": "4.1 First challenge\nConsider the file cpds.csv. How would you write a shell command that returns “There are 8 occurrences of the word ‘Belgium’ in this file.”, where ‘8’ should instead be the correct number of times the word occurs.\nExtra: make your code into a function that can operate on any file indicated by the user and any word of interest.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#second-challenge",
+    "href": "units/unit3-bash.html#second-challenge",
+    "title": "The bash shell and UNIX commands",
+    "section": "4.2 Second challenge",
+    "text": "4.2 Second challenge\nConsider the data in the RTADataSub.csv file. This is a subset of data giving freeway travel times for segments of a freeway in an Australian city. The data are from a kaggle.com competition. We want to try to understand the kinds of data in each field of the file. The following would be particularly useful if the data were in many files or the data were many gigabytes in size.\n\nFirst, take the fourth column. Figure out the unique values in that column.\nNext, automate the process of determining if any of the values are non-numeric so that you don’t have to scan through all of the unique values looking for non-numbers. You’ll need to look for the following regular expression pattern [^0-9], which is interpreted as NOT any of the numbers 0 through 9.\n\nExtra: do it for all the fields, except the first one. Have your code print out the result in a human-readable way understandable by someone who didn’t write the code. For simplicity, you can assume you know the number of fields.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#third-challenge",
+    "href": "units/unit3-bash.html#third-challenge",
+    "title": "The bash shell and UNIX commands",
+    "section": "4.3 Third challenge",
+    "text": "4.3 Third challenge\n\nFor Belgium, determine the minimum unemployment value (field #6) in cpds.csv in a programmatic way.\nHave what is printed out to the screen look like “Belgium 6.2”.\nNow store the unique values of the countries in a variable, first stripping out the quotation marks.\nFigure out how to automate step 1 to do the calculation for all the countries and print to the screen.\nHow would you instead store the results in a new file?",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#fourth-challenge",
+    "href": "units/unit3-bash.html#fourth-challenge",
+    "title": "The bash shell and UNIX commands",
+    "section": "4.4 Fourth challenge",
+    "text": "4.4 Fourth challenge\nLet’s return to the RTADataSub.csv file and the issue of missing values.\n\nCreate a new file without any rows that have an ‘x’ (which indicate a missing value).\nTurn the code into a function that also prints out the number of rows that are being removed and that sends its output to stdout so that it can be used with piping.\nNow modify your function so that the user could provide the missing value string and the input filename.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#fifth-challenge",
+    "href": "units/unit3-bash.html#fifth-challenge",
+    "title": "The bash shell and UNIX commands",
+    "section": "4.5 Fifth challenge",
+    "text": "4.5 Fifth challenge\nConsider the coop.txt weather station file.\nFigure out how to use grep to tell you the starting position of the state field. Hints: search for a known state-country combination and figure out what flags you can use with grep to print out the “byte offset” for the matched state.\nUse that information to automate the first mission where we extracted the state field using cut. You’ll need to do a bit of arithmetic using shell commands.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#sixth-challenge",
+    "href": "units/unit3-bash.html#sixth-challenge",
+    "title": "The bash shell and UNIX commands",
+    "section": "4.6 Sixth challenge",
+    "text": "4.6 Sixth challenge\nHere’s an advanced one - you’ll probably need to use sed, but the brief examples of text substitution in the using bash tutorial (or in the demos above) should be sufficient to solve the problem.\nConsider a CSV file that has rows that look like this:\n1,\"America, United States of\",45,96.1,\"continental, coastal\" \n2,\"France\",33,807.1,\"continental, coastal\"\nWhile Pandas would be able to handle this using read_csv(), using cut in UNIX won’t work because of the commas embedded within the fields. The challenge is to convert this file to one that we can use cut on, as follows.\nFigure out a way to make this into a new delimited file in which the delimiter is not a comma. At least one solution that will work for this particular two-line dataset does not require you to use regular expressions, just simple replacement of fixed patterns.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#versions-of-regular-expressions",
+    "href": "units/unit3-bash.html#versions-of-regular-expressions",
+    "title": "The bash shell and UNIX commands",
+    "section": "Versions of regular expressions",
+    "text": "Versions of regular expressions\nOne thing that can cause headaches is differences in version of regular expression syntax used. As discussed in man grep, extended regular expressions are standard, with basic regular expressions providing less functionality and Perl regular expressions additional functionality.\nThe bash shell tutorial provides a full documentation of the extended regular expressions syntax, which we’ll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.\n\nIn bash, grep -E (or egrep) enables use of the extended regular expressions.\nIn Python, the re package provides syntax “similar to” Perl.\nIn R, stringr provides ICU regular expressions (see help(regex)), which are based on Perl regular expressions.\n\nMore details about Perl regular expressions can be found in the regex Wikipedia page.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#general-principles-for-working-with-regex",
+    "href": "units/unit3-bash.html#general-principles-for-working-with-regex",
+    "title": "The bash shell and UNIX commands",
+    "section": "General principles for working with regex",
+    "text": "General principles for working with regex\nThe syntax is very concise, so it’s helpful to break down individual regular expressions into the component parts to understand them. As Murrell notes, since regex are their own language, it’s a good idea to build up a regex in pieces as a way of avoiding errors just as we would with any computer code. re.findall in Python and str_detect in R’s stringr, as well as regex101.com are particularly useful in seeing what was matched to help in understanding and learning regular expression syntax and debugging your regex. As with many kinds of coding, I find that debugging my regex is usually what takes most of my time.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
+    ]
+  },
+  {
+    "objectID": "units/unit3-bash.html#challenge-problem",
+    "href": "units/unit3-bash.html#challenge-problem",
+    "title": "The bash shell and UNIX commands",
+    "section": "Challenge problem",
+    "text": "Challenge problem\nChallenge: Let’s think about what regex syntax we would need to detect any number, integer- or real-valued. Let’s start from a test-driven development perspective of writing out test cases including: - various cases we want to detect, - various tricky cases that are not numbers and we don’t want to detect, and - “corner cases” – tricky (perhaps unexpected) cases that might trip us up.",
+    "crumbs": [
+      "Units",
+      "Unit 3 (Bash shell)"
     ]
   },
   {
