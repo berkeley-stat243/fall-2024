@@ -78,8 +78,7 @@ your_repo/
 │   ├── ...
 ├── ...
 ├── ps8/
-├── .gitignore
-└── info.json
+└── .gitignore
 ```
 
 The file names are case-sensitive, so please keep everything lowercase.
