@@ -31,3 +31,7 @@ Attending Lab 0 is optional. If you successfully set up your environment to have
 You are also welcome to come and ask for help on using any of these 5 tools/systems (especially shell and unix commands this week), but priority will be given to environment setup questions.
 
 Reach out to us on Ed with any unresolved problems or if you discover something that needs to be changed with our howtos and instructions.
+
+## Acknowledgements
+
+This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.

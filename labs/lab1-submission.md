@@ -1,6 +1,6 @@
 ---
 title: "Lab 1: Submitting problem set solutions"
-date: "2023-08-21"
+date: "2024-09-06"
 format:
   pdf:
     documentclass: article
@@ -19,10 +19,10 @@ format:
 
 By now you should already have access to the following 5 basic tools:
 
-1. [Unix shell](../howtos/accessingUnixCommandLine.md)
-2. [Git](../howtos/gitInstall.md)
-3. [Quarto](../howtos/quartoInstall.md)
-4. [Python](../howtos/accessingPython.md)
+1. [Unix shell](../howtos/accessUnixCommandLine.md)
+2. [Git](../howtos/installGit.md)
+3. [Quarto](../howtos/installQuarto.md)
+4. [Python](../howtos/accessPython.md)
 5. A text editor of your choice
 
 Today we will use all these tools together to submit a solution for Problem Set 0 (not a real problem set) to make sure you know how to submit solutions to upcoming (real) problem sets.
@@ -101,3 +101,7 @@ you can fix the quarto configuration by setting the environment variable `QUARTO
 #### Pushing to git fails with message "Make sure you configure your 'user.email' and 'user.name' in git"
 
 Follow the suggested course of action in the error message to configure your email and name, then push again.
+
+## Acknowledgements
+
+This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.

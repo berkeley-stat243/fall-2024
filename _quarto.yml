@@ -35,6 +35,8 @@ website:
             text: "Lab 0 (Optional setup)"
           - href: labs/lab1-submission.html
             text: "Lab 1 (Quarto/Git/Submission)"
+          - href: labs/lab2-testing.html
+            text: "Lab 2 (Exceptions/Testing)"
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
