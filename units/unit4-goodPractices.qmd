@@ -586,14 +586,16 @@ We can activate the debugger in various ways:
 
   - by inserting `breakpoint()` (or equivalently `import pdb; pdb.set_trace()`) inside a function or module at a location of interest (and then running the function or module)
   - by using `pdb.pm()` after an error (i.e., an *exception*) has occurred to invoke the browser at the point the error occurred
+    - alternatively in IPython/Jupyter Notebook, run `%debug` (an IPython 'magic' command) and then run the code that results in the error
   - by running a function under debugger control with `pdb.run()`
   - by starting python with `python -m pdb file.py` and adding breakpoints 
 
+If you're using IPython or a Jupyter Notebook, `ipdb` is a wrapper for `pdb` that has all the same commands, but provides some nice features for interactivity (such as tab completion and syntax highlighting).
 
 ### Using `breakpoint`
 
 Let's define a function that will run a stratified analysis, in this case fitting a regression to each of the strata (groups/clusters) in some data.
-Our function is in `stratified_with_break.py`, and it contains `breakpoint` at the point where we want to invoke the debugger.
+Our function is in `run_with_break.py`, and it contains `breakpoint` at the point where we want to invoke the debugger.
 
 Now I can call the function and will be put into debugging mode just before the next line is called:
 
@@ -607,7 +609,7 @@ When I run this, I see this:
 
 ```
 >>> run.fit(data, n_cats)
-> /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_with_break.py(10)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_with_break.py(10)fit()
 -> sub = data[data['cats'] == i]
 (Pdb) 
 ```
@@ -619,7 +621,7 @@ I can type `n` to run that line and go to the next one:
 
 ```
 (Pdb) n
-> /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_with_break.py(11)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_with_break.py(11)fit()
 -> model = statsmodels.api.OLS(sub['y'], statsmodels.api.add_constant(sub['x']))
 ```
 
@@ -629,7 +631,7 @@ I can type `c` to continue until the next breakpoint:
 
 ```
 (Pdb) c
-> /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_with_break.py(10)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_with_break.py(10)fit()
 -> sub = data[data['cats'] == i]
 ```
 
@@ -667,7 +669,7 @@ pdb.pm()
 That puts us into debugging mode at the point the error occurred:
 
 ```
-> /usr/local/linux/mambaforge-3.11/lib/python3.11/site-packages/numpy/core/fromnumeric.py(86)_wrapreduction()
+> /usr/local/linux/miniforge-3.12/lib/python3.12/site-packages/numpy/core/fromnumeric.py(86)_wrapreduction()
 -> return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
 (Pdb)
 ```
@@ -694,7 +696,7 @@ We can enter `u` multiple times (it's only shown once below) to go up in the sta
 
 ```
 (Pdb) u
-> /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_no_break.py(10)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break.py(10)fit()
 -> model = statsmodels.api.OLS(sub['y'], statsmodels.api.add_constant(sub['x']))
 ```
 
@@ -711,8 +713,6 @@ Index: []
 
 Ah, so in the 29th stratum there are no data!
 
-In addition using the IPython magic `%debug` will put you into the debugger in 
-in post-mortem mode when an error occurs.
 
 ### pdb commands
 
@@ -721,7 +721,7 @@ Here's a list of useful pdb commands (some of which we saw above) that you can u
   - `h` or `help`: shows all the commands
   - `l` or `list`: show the code around where the debugger is currently operating
   - `c` or `continue`: continue running the code until the next breakpoint
-  - `p` or `print`: print a variable
+  - `p` or `print`: print a variable or the result of evaluating an expression
   - `n` or `next`: run the current line and go to the next line in the current function
   - `s` or `step`: jump (step) into the function called in the current line (if it's a Python function)
   - `r` or `run`: exit out of the current function (e.g., if you accidentally stepped into a function) (but note this stops at breakpoints)
@@ -760,7 +760,7 @@ python -m pdb run_no_break2.py
 ```
 
 ```
-> /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_no_break2.py(1)<module>()
+> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break2.py(1)<module>()
 -> import numpy as np
 (Pdb) 
 ```
@@ -769,13 +769,13 @@ Let's set a breakpoint at the same place we did with `breakpoint()` but using a 
 
 ```
 (Pdb) b 9
-Breakpoint 1 at /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_no_break.py:9
+Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break.py:9
 ```
 
 ```{python}
 #| eval: false
 (Pdb) c
-> /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_no_break2.py(9)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break2.py(9)fit()
 -> model = statsmodels.api.OLS(sub['y'], statsmodels.api.add_constant(sub['x']))
 ```
 
@@ -785,9 +785,9 @@ Or we could have set a breakpoint at the start of the function:
 
 ```
 (Pdb) disable 1
-Disabled breakpoint 1 at /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_no_break2.py:9
+Disabled breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break2.py:9
 (Pdb) b fit
-Breakpoint 1 at /accounts/vis/paciorek/teaching/243fall22/stat243-fall-2023/units/run_no_break.py:6
+Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break.py:6
 ```
 
 ## Some common causes of bugs 
