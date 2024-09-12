@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-09-13">
 
-<title>Data</title>
+<title>Lab 2: Assertions, Exceptions, and Tesing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +70,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
@@ -83,17 +85,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-1" id="toc-data-1" class="nav-link active" data-scroll-target="#data-1">Data 1</a></li>
-  <li><a href="#data-2" id="toc-data-2" class="nav-link" data-scroll-target="#data-2">Data 2</a></li>
+  <li><a href="#lab-goals" id="toc-lab-goals" class="nav-link active" data-scroll-target="#lab-goals">Lab Goals</a></li>
+  <li><a href="#lab-exercise" id="toc-lab-exercise" class="nav-link" data-scroll-target="#lab-exercise">Lab Exercise</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab2-testing.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data</h1>
+<h1 class="title">Lab 2: Assertions, Exceptions, and Tesing</h1>
 </div>
 
 
@@ -101,6 +104,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 13, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -110,12 +119,26 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We’ll use data from several real world situations in class.</p>
-<section id="data-1" class="level2">
-<h2 class="anchored" data-anchor-id="data-1">Data 1</h2>
+<p>Today we will spend some time getting familiar with some of the programming tools that can help make your code more robust and resilient to errors and boundary conditions. Tools like unit tests, exceptions, and asserts (and next week we will spend some time on debugging misbehaving code).</p>
+<p>Testing is what you do when you finish implementing a piece of code and want to try it out to see if it works. Running your code manually and seeing if it works is a workable strategy for simple one-time scripts that do simple tasks, but there are situations (like writing a function that others will repeatedly use, or like running the same piece of code on hundreds of files or URLs) where it is prudent to test your code ahead of its actual use or deployment. Today we will use the pytest package to do that. We will also use some error handling techniques to make sure our code can handle malformed inputs.</p>
+<section id="lab-goals" class="level2">
+<h2 class="anchored" data-anchor-id="lab-goals">Lab Goals</h2>
+<p>In today’s lab, we are going to get acquainted with: - raising exceptions; - setting up testing with pytest; - testing for correct behavior; - testing that exceptions are raised in the right situations.</p>
 </section>
-<section id="data-2" class="level2">
-<h2 class="anchored" data-anchor-id="data-2">Data 2</h2>
+<section id="lab-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="lab-exercise">Lab Exercise</h2>
+<p>1- Write a function in Python that finds a number in a string using regular expressions. The number can be positive or negative, integer-valued, or real, and numbers less than one can also be of the form 0.96 or .96. It can be assumed that no numbers appear in scientific notation. Refer to <a href="http://berkeley-scf.github.io/tutorial-string-processing/regex#6-using-regex-in-python">Using regex in Python</a> for a quick overview of Python’s <code>re</code> package.</p>
+<p>2- Write an interface for that function (a function name and arguments), but do not implement the function yet (you can have it return an <code>None</code>, or an empty string for now). We will do this in a good old fashioned .py file (not a notebook or a quarto file).</p>
+<p>3- Build a test suite using the <code>pytest</code> package to test that your function works as intended. Add at least 8 test cases with justification for each. Try to cover the main use cases, and as many potential corner cases or boundary conditions as possible.</p>
+<p>4- Now run the test suite. It should fail for all your tests (unless one of them was passing an empty string).</p>
+<p>5- Implement the function. You can do this at one go, or case by case. As you implement a case, you can rerun the test suite and see some of the tests relevant to that cases stopping to fail. When all the tests pass, you are done. This is called test-driven development.</p>
+<p>6- If some cases are still failing, that’s alright, we can use that failing code next week for demonstrating debugging functionality.</p>
+<p>7- Make sure you raise an exception to trap invalid input types.</p>
+<p>8- Add a test to check that an exception is properly raised when the function is given invalid input types.</p>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.</p>
 
 
 </section>
