@@ -101,3 +101,7 @@ you can fix the quarto configuration by setting the environment variable `QUARTO
 #### Pushing to git fails with message "Make sure you configure your 'user.email' and 'user.name' in git"
 
 Follow the suggested course of action in the error message to configure your email and name, then push again.
+
+## Acknowledgements
+
+This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.
