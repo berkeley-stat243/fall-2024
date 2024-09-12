@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Accessing Python</title>
+<title>Problem Set 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked">
@@ -80,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/accessPython.html">Accessing Python</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps2.html">Problem Set 2</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -210,7 +211,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 2</span></a>
   </div>
 </li>
@@ -227,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howtos/accessPython.html" class="sidebar-item-text sidebar-link active">
+  <a href="../howtos/accessPython.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Accessing Python</span></a>
   </div>
 </li>
@@ -275,24 +276,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#access-via-the-scf" id="toc-access-via-the-scf" class="nav-link active" data-scroll-target="#access-via-the-scf">Access via the SCF</a>
-  <ul class="collapse">
-  <li><a href="#python-from-the-command-line" id="toc-python-from-the-command-line" class="nav-link" data-scroll-target="#python-from-the-command-line">Python from the command line</a></li>
-  <li><a href="#python-via-jupyter-notebook" id="toc-python-via-jupyter-notebook" class="nav-link" data-scroll-target="#python-via-jupyter-notebook">Python via Jupyter notebook</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ps2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/accessPython.html">Accessing Python</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps2.html">Problem Set 2</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Accessing Python</h1>
+<h1 class="title">Problem Set 2</h1>
+<p class="subtitle lead">Due Friday Sep.&nbsp;20, 10 am</p>
 </div>
 
 
@@ -309,37 +300,44 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We recommend using the <a href="https://github.com/conda-forge/miniforge">Miniforge distribution</a> as your Python 3.12 installation.</p>
-<p>Once you’ve installed Python, please install the following packages:</p>
+<section id="comments" class="level2">
+<h2 class="anchored" data-anchor-id="comments">Comments</h2>
 <ul>
-<li>numpy</li>
-<li>scipy</li>
-<li>pandas</li>
-<li>dask</li>
-<li>dask.distributed</li>
-<li>dask.bag</li>
-<li>dask.array</li>
-<li>dask.dataframe</li>
-<li>dask.multiprocessing</li>
+<li>This covers material in Units 3 and 4.</li>
+<li>It’s due at 10 am (Pacific) on September 20, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>Please see PS1 for formatting and attribution requirements.</li>
+<li>Note that using chunks of bash code in Qmd may be troublesome.
+<ul>
+<li>You will need to add <code>engine: knitr</code> to the YAML preface of your qmd document. The default <code>jupyter</code> engine won’t run both bash and Python chunks in the same document because the Jupyter notebooks are associated with a single ‘kernel’ (i.e., a single language for the code chunks).</li>
+<li>For the <code>knitr</code> engine, you’ll need to have R installed on your computer, including the <code>knitr</code> package. Quarto will then process the code chunks through <code>knitr</code> (which will use R’s <code>reticulate</code> package to handle Python chunks).</li>
+<li>If you have trouble on your own computer, you can always render your solution for this problem set on an SCF machine (we won’t generally use bash chunks in future problem sets). (In particular I’m not quite sure what will happen if you render on Windows.)</li>
+<li>We can help troubleshoot and feel free to post on Ed.</li>
+<li><strong>Test things out well before the due date with a dummy qmd file with both a bash chunk and a Python chunk and make sure things work.</strong></li>
+</ul></li>
+<li>You will probably need to use <code>sed</code> in a basic way as shown in the bash tutorial. You should not need to use more advanced functionality nor should you need to use <code>awk</code>, but you may if you want to.</li>
 </ul>
-<p>Assuming you installed Miniforge, you should be able to do this from the command line:</p>
-<pre><code>conda install numpy scipy pandas dask</code></pre>
-<p>While you’re welcome to work with Python in a Jupyter notebook for exploration (e.g., using the <a href="https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F">campus DataHub</a>, you’ll need to submit Quarto (.qmd) documents with Python chunks for your problem sets. So you’ll need Python set up on your laptop or to use it by logging in to an SCF machine.</p>
-<section id="access-via-the-scf" class="level1">
-<h1>Access via the SCF</h1>
-<section id="python-from-the-command-line" class="level2">
-<h2 class="anchored" data-anchor-id="python-from-the-command-line">Python from the command line</h2>
-<p>Once you get your SCF account, you can access Python or IPython from the UNIX command line as soon as you login to an SCF server. Just SSH to an SCF Linux machine (e.g., gandalf.berkeley.edu or radagast.berkeley.edu) and run ‘python’ or ‘ipython’ from the command line.</p>
-<p>More details on using SSH are <a href="https://statistics.berkeley.edu/computing/ssh">here</a>. Note that if you have the Ubuntu subsystem for Windows, you can use SSH directly from the Ubuntu terminal.</p>
 </section>
-<section id="python-via-jupyter-notebook" class="level2">
-<h2 class="anchored" data-anchor-id="python-via-jupyter-notebook">Python via Jupyter notebook</h2>
-<p>You can use a Jupyter notebook to run Python code from the <a href="https://jupyter.stat.berkeley.edu">SCF JupyterHub</a> or the <a href="https://datahub.berkeley.edu">Berkeley DataHub</a>.</p>
-<p>If you’re on the SCF JupyterHub, select <code>Start My Server</code>. Then, unless you are running long or parallelized code, just click <code>Spawn</code> (in other words, accept the default ‘standalone’ partition). On the next page select ‘New’ and ‘Python 3’.</p>
-<p>To finish your session, click on <code>File</code>, <code>Hub Control Panel</code> and <code>Stop My Server</code>. Do not click <code>Logout</code>.</p>
+<section id="problems" class="level2">
+<h2 class="anchored" data-anchor-id="problems">Problems</h2>
+<ol type="1">
+<li><p>A friend of mine is planning to get married in Death Valley National Park in March (this problem is based on real events…). She wants to hold it as late in March as possible but without having a high chance of a very hot day. This problem will automate the task of generating information about what day of March to hold the wedding using data from the <a href="https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/by_year">Global Historical Climatology Network</a>. All of your operations should be done using the bash shell except part (c). Also, ALL of your work should be done using shell commands that you save in your solution file. So you can’t say “I downloaded the data from such-and-such website” or “I unzipped the file”; you need to give us the bash code that we could run to repeat what you did. This is partly for practice in writing shell code and partly to enforce the idea that your work should be reproducible and documented.</p>
+<ol type="a">
+<li><p>Download yearly climate data for a set of years of interest into a temporary directory. Do not download all the years and feel free to focus on a small number of years to reduce the amount of data you need to download. Note that data for Death Valley is only present in the last few decades. As you are processing the files, report the number of observations in each year by printing the information to the screen (i.e., <code>stdout</code>), including if there are no observations for that year.</p></li>
+<li><p>Subset to the station corresponding to Death Valley, to the TMAX (maximum daily temperature) variable, and to March, and put all the data into a single file. In subsetting to Death Valley, get the information programmatically from the <code>ghcnd-stations.txt</code> file one level up in the website. Do NOT type in the station ID code when you retrieve the Death Valley data from the yearly files.</p></li>
+<li><p>Create a Python chunk (or R would be fine too) that takes as input your single file from (b) and makes a single plot showing side-by-side boxplots containing the maximum daily temperatures on each calendar day in March. (If you somehow really have trouble mixing Python and bash chunks, it’s ok to insert this figure manually, after running the Python code separately. In this case you could use the <code>jupyter</code> engine provided that a bash kernel is available for Jupyter.)</p></li>
+<li><p>Now generalize your code from parts (a) and (b). Write a shell function that takes as arguments a string for identifying the location, the weather variable of interest, and the time period (i.e., the years of interest and the month of interest), and returns the results. Your function should detect if the user provides the wrong number of arguments or a string that doesn’t allow one to identify a single weather station and return a useful error message. It should also give useful help information if the user invokes the function as: <code>get_weather -h</code>. Finally the function should remove the raw downloaded data files (or you should download into your operating system’s temporary file location).</p>
+<p>Hint: to check for equality in an if statement, you generally need syntax like:</p>
+<pre><code>if [ "${var}" == "7" ]</code></pre></li>
+</ol></li>
+<li><p>Add documentation, error-trapping and testing for your code from Problem 4, parts (b) and (c) of PS1. You may use a modified version of your PS1 solution, perhaps because you found errors in what you did or wanted to make changes based on Chris’ solutions (to be distributed in class on Friday Sep.&nbsp;13) or your discussions with other students. These topics will be covered in Lab 2 (Sep.&nbsp;13) and are also discussed in Unit 4.</p>
+<ol type="a">
+<li>Add informative doc strings to your functions.</li>
+<li>Add exceptions for handling run-time errors. You should try to catch the various incorrect inputs a user could provide and anything else that could go wrong (e.g., what happens if the server refuses the request or if one is not online?). In some cases you will want to raise an error, but in others you may want to catch an error with <code>try-except</code> and return <code>None</code>.</li>
+<li>Use the <code>pytest</code> package to set up a thoughtful set of unit tests of your functions.</li>
+</ol></li>
+</ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
