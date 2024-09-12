@@ -66,4 +66,12 @@
           id: "2"
           name: "Regular expression tutorial and exercises (see Details below)"
           href: "https://berkeley-scf.github.io/tutorial-using-bash/regex"
+- week: 4
+  days:
+    - date: "Fri Sep 20"
+      items:
+        - type: "Problem_Set"
+          id: "2"
+          name: "Problem Set 2"
+          href: "ps/ps2.html"
       

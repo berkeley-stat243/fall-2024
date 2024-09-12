@@ -38,6 +38,7 @@ website:
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
+          - href: ps/ps2.qmd
       - section: "How tos"
         contents:
           - howtos/accessPython.md
