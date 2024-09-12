@@ -34,7 +34,7 @@ Sources:
     scientists](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf)
 -   [Millman and Perez article about reproducible research](https://github.com/berkeley-stat243/stat243-fall-2014/blob/master/section/millman-perez.pdf)
 -   [Chapter 11 of Transparent and Reproducible Social Science
-    Research](https://california.degruyter.com/view/title/568658?tab_body=toc)
+    Research](https://www.degruyter.com/document/doi/10.1525/9780520969230-014/html)
 
 This unit covers good coding/software development practices, debugging
 (and practices for avoiding bugs), and doing reproducible research. As
