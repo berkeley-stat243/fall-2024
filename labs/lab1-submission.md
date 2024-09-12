@@ -1,6 +1,6 @@
 ---
 title: "Lab 1: Submitting problem set solutions"
-date: "2023-08-21"
+date: "2024-09-06"
 format:
   pdf:
     documentclass: article
@@ -19,10 +19,10 @@ format:
 
 By now you should already have access to the following 5 basic tools:
 
-1. [Unix shell](../howtos/accessingUnixCommandLine.md)
-2. [Git](../howtos/gitInstall.md)
-3. [Quarto](../howtos/quartoInstall.md)
-4. [Python](../howtos/accessingPython.md)
+1. [Unix shell](../howtos/accessUnixCommandLine.md)
+2. [Git](../howtos/installGit.md)
+3. [Quarto](../howtos/installQuarto.md)
+4. [Python](../howtos/accessPython.md)
 5. A text editor of your choice
 
 Today we will use all these tools together to submit a solution for Problem Set 0 (not a real problem set) to make sure you know how to submit solutions to upcoming (real) problem sets.
