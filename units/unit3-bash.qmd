@@ -425,7 +425,7 @@ One thing that can cause headaches is differences in version of regular expressi
 
 The [bash shell tutorial](https://berkeley-scf.github.io/tutorial-using-bash/regex) provides a full documentation of the *extended regular expressions* syntax, which we'll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.
 
-  - In bash, `grep -E` (or `egrep`) enables use of the extended regular expressions.
+  - In bash, `grep -E` (or `egrep`) enables use of the extended regular expressions, while `grep -P` enables Perl-style regular expressions.
   - In Python, the `re` package provides [syntax "similar to" Perl](https://docs.python.org/3/library/re.html). 
   - In R, `stringr` provides *ICU regular expressions* (see `help(regex)`), which are based on Perl regular expressions.
 
@@ -447,6 +447,7 @@ most of my time.
 ## Challenge problem
 
 *Challenge*: Let's think about what regex syntax we would need to detect any number, integer- or real-valued. Let's start from a test-driven development perspective of writing out test cases including:
+
   - various cases we want to detect,
   - various tricky cases that are not numbers and we don't want to detect, and
   - "corner cases" -- tricky (perhaps unexpected) cases that might trip us up.
