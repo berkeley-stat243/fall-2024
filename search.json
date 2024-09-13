@@ -689,7 +689,7 @@
     "href": "units/unit3-bash.html#versions-of-regular-expressions",
     "title": "The bash shell and UNIX commands",
     "section": "Versions of regular expressions",
-    "text": "Versions of regular expressions\nOne thing that can cause headaches is differences in version of regular expression syntax used. As discussed in man grep, extended regular expressions are standard, with basic regular expressions providing less functionality and Perl regular expressions additional functionality.\nThe bash shell tutorial provides a full documentation of the extended regular expressions syntax, which we’ll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.\n\nIn bash, grep -E (or egrep) enables use of the extended regular expressions.\nIn Python, the re package provides syntax “similar to” Perl.\nIn R, stringr provides ICU regular expressions (see help(regex)), which are based on Perl regular expressions.\n\nMore details about Perl regular expressions can be found in the regex Wikipedia page.",
+    "text": "Versions of regular expressions\nOne thing that can cause headaches is differences in version of regular expression syntax used. As discussed in man grep, extended regular expressions are standard, with basic regular expressions providing less functionality and Perl regular expressions additional functionality.\nThe bash shell tutorial provides a full documentation of the extended regular expressions syntax, which we’ll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.\n\nIn bash, grep -E (or egrep) enables use of the extended regular expressions, while grep -P enables Perl-style regular expressions.\nIn Python, the re package provides syntax “similar to” Perl.\nIn R, stringr provides ICU regular expressions (see help(regex)), which are based on Perl regular expressions.\n\nMore details about Perl regular expressions can be found in the regex Wikipedia page.",
     "crumbs": [
       "Units",
       "Unit 3 (Bash shell)"
@@ -711,7 +711,7 @@
     "href": "units/unit3-bash.html#challenge-problem",
     "title": "The bash shell and UNIX commands",
     "section": "Challenge problem",
-    "text": "Challenge problem\nChallenge: Let’s think about what regex syntax we would need to detect any number, integer- or real-valued. Let’s start from a test-driven development perspective of writing out test cases including: - various cases we want to detect, - various tricky cases that are not numbers and we don’t want to detect, and - “corner cases” – tricky (perhaps unexpected) cases that might trip us up.",
+    "text": "Challenge problem\nChallenge: Let’s think about what regex syntax we would need to detect any number, integer- or real-valued. Let’s start from a test-driven development perspective of writing out test cases including:\n\nvarious cases we want to detect,\nvarious tricky cases that are not numbers and we don’t want to detect, and\n“corner cases” – tricky (perhaps unexpected) cases that might trip us up.",
     "crumbs": [
       "Units",
       "Unit 3 (Bash shell)"

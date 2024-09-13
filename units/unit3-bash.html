@@ -624,7 +624,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>One thing that can cause headaches is differences in version of regular expression syntax used. As discussed in <code>man grep</code>, <em>extended regular expressions</em> are standard, with <em>basic regular expressions</em> providing less functionality and <em>Perl regular expressions</em> additional functionality.</p>
 <p>The <a href="https://berkeley-scf.github.io/tutorial-using-bash/regex">bash shell tutorial</a> provides a full documentation of the <em>extended regular expressions</em> syntax, which we’ll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.</p>
 <ul>
-<li>In bash, <code>grep -E</code> (or <code>egrep</code>) enables use of the extended regular expressions.</li>
+<li>In bash, <code>grep -E</code> (or <code>egrep</code>) enables use of the extended regular expressions, while <code>grep -P</code> enables Perl-style regular expressions.</li>
 <li>In Python, the <code>re</code> package provides <a href="https://docs.python.org/3/library/re.html">syntax “similar to” Perl</a>.</li>
 <li>In R, <code>stringr</code> provides <em>ICU regular expressions</em> (see <code>help(regex)</code>), which are based on Perl regular expressions.</li>
 </ul>
@@ -636,7 +636,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="challenge-problem" class="level2">
 <h2 class="anchored" data-anchor-id="challenge-problem">Challenge problem</h2>
-<p><em>Challenge</em>: Let’s think about what regex syntax we would need to detect any number, integer- or real-valued. Let’s start from a test-driven development perspective of writing out test cases including: - various cases we want to detect, - various tricky cases that are not numbers and we don’t want to detect, and - “corner cases” – tricky (perhaps unexpected) cases that might trip us up.</p>
+<p><em>Challenge</em>: Let’s think about what regex syntax we would need to detect any number, integer- or real-valued. Let’s start from a test-driven development perspective of writing out test cases including:</p>
+<ul>
+<li>various cases we want to detect,</li>
+<li>various tricky cases that are not numbers and we don’t want to detect, and</li>
+<li>“corner cases” – tricky (perhaps unexpected) cases that might trip us up.</li>
+</ul>
 
 
 </section>
