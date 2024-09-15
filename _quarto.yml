@@ -29,6 +29,8 @@ website:
             text: "Unit 3 (Bash shell)"
           - href: units/unit4-goodPractices.qmd
             text: "Unit 4 (Good practices)"
+          - href: units/unit5-programming.qmd
+            text: "Unit 5 (Programming)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
