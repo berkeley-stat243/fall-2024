@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Chris Paciorek">
-<meta name="dcterms.date" content="2024-09-03">
 
-<title>Good practices: coding practices, debugging, and reproducible research</title>
+<title>foo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,7 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../assets/styles.css">
-<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
@@ -115,53 +112,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#good-coding-practices" id="toc-good-coding-practices" class="nav-link active" data-scroll-target="#good-coding-practices">1. Good coding practices</a>
-  <ul class="collapse">
-  <li><a href="#editors" id="toc-editors" class="nav-link" data-scroll-target="#editors">Editors</a></li>
-  <li><a href="#code-syntax-and-style" id="toc-code-syntax-and-style" class="nav-link" data-scroll-target="#code-syntax-and-style">Code syntax and style</a>
-  <ul class="collapse">
-  <li><a href="#coding-syntax-tips" id="toc-coding-syntax-tips" class="nav-link" data-scroll-target="#coding-syntax-tips">Coding syntax tips</a></li>
-  <li><a href="#coding-style-suggestions" id="toc-coding-style-suggestions" class="nav-link" data-scroll-target="#coding-style-suggestions">Coding style suggestions</a></li>
-  <li><a href="#linting" id="toc-linting" class="nav-link" data-scroll-target="#linting">Linting</a></li>
-  </ul></li>
-  <li><a href="#assertions-exceptions-and-testing" id="toc-assertions-exceptions-and-testing" class="nav-link" data-scroll-target="#assertions-exceptions-and-testing">Assertions, exceptions and testing</a>
-  <ul class="collapse">
-  <li><a href="#exceptions" id="toc-exceptions" class="nav-link" data-scroll-target="#exceptions">Exceptions</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="test.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Good practices: coding practices, debugging, and reproducible research</h1>
+<h1 class="title">foo</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Chris Paciorek </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 3, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -171,192 +137,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="./unit4-goodPractices.pdf" class="btn btn-primary">PDF</a></p>
-<p>[This Unit is under construction as of 2024-08-28.]</p>
-<p>Sources:</p>
-<ul>
-<li>The Python <a href="https://peps.python.org/pep-0008">PEP8 Style Guide</a></li>
-<li>Murrell, Introduction to Data Technologies, Ch. 2</li>
-<li><a href="http://www.jstatsoft.org/v42/i02">Journal of Statistical Software vol.&nbsp;42: 19 Ways of Looking at Statistical Software</a></li>
-<li><a href="http://arxiv.org/abs/1210.0530">Wilson et at., Best practices for scientific computing, ArXiv:1210:0530</a></li>
-<li><a href="https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf">Gentzkow and Shapiro tutorial for social scientists</a></li>
-<li><a href="https://github.com/berkeley-stat243/stat243-fall-2014/blob/master/section/millman-perez.pdf">Millman and Perez article about reproducible research</a></li>
-<li><a href="https://california.degruyter.com/view/title/568658?tab_body=toc">Chapter 11 of Transparent and Reproducible Social Science Research</a></li>
-</ul>
-<p>This unit covers good coding/software development practices, debugging (and practices for avoiding bugs), and doing reproducible research. As in later units of the course, the material is generally not specific to Python, but some details and the examples are in Python.</p>
-<section id="good-coding-practices" class="level1">
-<h1>1. Good coding practices</h1>
-<p>Some of these tips apply more to software development and some more to analyses done for specific projects; hopefully it will be clear in most cases.</p>
-<section id="editors" class="level2">
-<h2 class="anchored" data-anchor-id="editors">Editors</h2>
-<p>Use an editor that supports the language you are using (e.g., <em>Atom</em>, <em>Emacs</em>/<em>Aquamacs</em>, <em>Sublime</em>, <em>vim</em>, <em>VSCode</em>, <em>TextMate</em>, <em>WinEdt</em>, or the built-in editor in <em>RStudio</em> [you can use Python from within RStudio]). Some advantages of this can include:</p>
-<ol type="1">
-<li>helpful color coding of different types of syntax,</li>
-<li>automatic indentation and spacing,</li>
-<li>parenthesis matching,</li>
-<li>line numbering (good for finding bugs), and</li>
-<li>code can often be run (or compiled) and debugged from within the editor.</li>
-</ol>
-<p>See the problem set submission how-to document for more information about editors that interact nicely with Quarto documents.</p>
-</section>
-<section id="code-syntax-and-style" class="level2">
-<h2 class="anchored" data-anchor-id="code-syntax-and-style">Code syntax and style</h2>
-<section id="coding-syntax-tips" class="level3">
-<h3 class="anchored" data-anchor-id="coding-syntax-tips">Coding syntax tips</h3>
-<p>The PEP 8 style guide is your go-to reference for Python style. I’ve highlighted some details here as well as included some general suggestions of my own.</p>
-<ul>
-<li><p>Header information: put metainfo on the code into the first few lines of the file as comments. Include who, when, what, how the code fits within a larger program (if appropriate), possibly the versions of Python and key packages that you used.</p></li>
-<li><p>Write docstrings for public modules, classes, functions, and methods. For non-public items, a comment after the <code>def</code> line is sufficient to describe the purpose of the item.</p></li>
-<li><p>Indentation: Python is strict about indentation of course, which helps to enforce clear indentation more than in other languages. This helps you and others to read and understand the code and can help in detecting errors in your code because it can expose lack of symmetry.</p>
-<ul>
-<li>use 4 spaces per indentation level (avoid tabs if possible).</li>
-</ul></li>
-<li><p>Whitespace: use it in a variety of places. Some places where it is good to have it are</p>
-<ul>
-<li>around operators (assignment and arithmetic);</li>
-<li>between function arguments;</li>
-<li>between list/tuple elements; and</li>
-<li>between matrix/array indices.</li>
-</ul></li>
-<li><p>Use blank lines to separate blocks of code with comments to say what the block does.</p></li>
-<li><p>Use whitespaces or parentheses for clarity even if not needed for order of operations. For example, <code>a/y*x</code> will work but is not easy to read and you can easily induce a bug if you forget the order of ops. Instead, use <code>a/y * x</code>.</p></li>
-<li><p>Avoid code lines longer than 79 characters and comment/docstring lines longer than 72 characters.</p></li>
-<li><p>Comments: add lots of comments (but don’t belabor the obvious, such as <code>x = x + 1  # increment x</code>).</p>
-<ul>
-<li>Remember that in a few months, you may not follow your own code any better than a stranger.</li>
-<li>Some key things to document: (1) summarizing a block of code, (2) explaining a very complicated piece of code - recall our complicated regular expressions, and (3) explaining arbitrary constant values.</li>
-<li>Comments should generally be complete sentences.</li>
-</ul></li>
-<li><p>You can use parentheses to group operations such that they can be split up into lines and easily commented, e.g.,</p>
-<div id="e0f4cf81" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>newdf <span class="op">=</span> (</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        pd.read_csv(<span class="st">'file.csv'</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        .rename(columns <span class="op">=</span> {<span class="st">'STATE'</span>: <span class="st">'us_state'</span>})  <span class="co"># adjust column names</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        .dropna()                                 <span class="co"># remove some rows</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>For software development, break code into separate files (2000-3000 lines per file) with meaningful file names and related functions grouped within a file.</p></li>
-<li><p>Being consistent about the naming style for objects and functions is hard, but try to be consistent. PEP8 suggests:</p>
-<ul>
-<li>Class names should be UpperCamelCase.</li>
-<li>Function, method, and variable names should be snake_case, e.g., <code>number_of_its</code> or <code>n_its</code>.</li>
-<li>Non-public methods and variables should have a leading underscore.</li>
-</ul></li>
-<li><p>Try to have the names be informative without being overly long.</p></li>
-<li><p>Don’t overwrite names of objects/functions that already exist in Python. E.g., don’t use <code>len</code>. That said, the namespace system helps with the unavoidable cases where there are name conflicts.</p></li>
-<li><p>Use active names for functions (e.g., <code>calc_loglik</code>, <code>calc_log_lik</code> rather than <code>loglik</code> or <code>loglik_calc</code>). The idea is that a function in a programming language is like a verb in regular language (a function <em>does</em> something), so use a verb to name it.</p></li>
-<li><p>Learn from others’ code</p></li>
-</ul>
-<p>This semester, someone will be reading your code - the GSI and and me when we look at your assignments. So to help us in understanding your code and develop good habits, put these ideas into practice in your assignments.</p>
-<p>While not Python examples, the files <a href="goodCode.R">goodCode.R</a> and <a href="badCode.R">badCode.R</a> in the <code>units</code> directory of the class repository provide examples of code written such that it does and does not conform to the general ideas listed above (leaving aside the different syntax of Python and R).</p>
-</section>
-<section id="coding-style-suggestions" class="level3">
-<h3 class="anchored" data-anchor-id="coding-style-suggestions">Coding style suggestions</h3>
-<p>This is particularly focused on software development, but some of the ideas are useful for data analysis as well.</p>
-<ul>
-<li>Break down tasks into core units</li>
-<li>Write reusable code for core functionality and keep a single copy of the code (using version control or at least with a reasonable backup strategy) so you only need to make changes to a piece of code in one place</li>
-<li>Smaller functions are easier to debug, easier to understand, and can be combined in a modular fashion (like the UNIX utilities)</li>
-<li>Write functions that take data as an argument and not lines of code that operate on specific data objects. Why? Functions allow us to reuse blocks of code easily for later use and for recreating an analysis (reproducible research). It’s more transparent than sourcing a file of code because the inputs and outputs are specified formally, so you don’t have to read through the code to figure out what it does.</li>
-<li>Functions should:
-<ul>
-<li>be modular (having a single task);</li>
-<li>have meaningful name; and</li>
-<li>have a doc string describing their purpose, inputs and outputs.</li>
-</ul></li>
-<li>Write tests for each function (i.e., unit tests)</li>
-<li>Don’t hard code numbers - use variables (e.g., number of iterations, parameter values in simulations), even if you don’t expect to change the value, as this makes the code more readable. For example, the speed of light is a constant in a scientific sense, but best to make it a variable in code: <code>speed_of_light = 3e8</code></li>
-<li>Use lists or tuples to keep disparate parts of related data together</li>
-<li>Practice defensive programming (see also the discussion below on assertions)
-<ul>
-<li>check function inputs and warn users if the code will do something they might not expect or makes particular choices;</li>
-<li>check inputs to <em>if</em>:
-<ul>
-<li>Note that in Python, an expression used as the condition of an <code>if</code> will be equivalent to <code>True</code> unless it is one of <code>False</code>, <code>0</code>, <code>None</code>, or an empty list/tuple/string.</li>
-</ul></li>
-<li>provide reasonable default arguments;</li>
-<li>document the range of valid inputs;</li>
-<li>check that the output produced is valid; and</li>
-<li>stop execution based on checks and give an informative error message.</li>
-</ul></li>
-<li>Try to avoid system-dependent code that only runs on a specific version of an OS or specific OS</li>
-<li>Learn from others’ code</li>
-<li>Consider rewriting your code once you know all the settings and conditions; often analyses and projects meander as we do our work and the initial plan for the code no longer makes sense and the code is no longer designed specifically for the job being done.</li>
-</ul>
-</section>
-<section id="linting" class="level3">
-<h3 class="anchored" data-anchor-id="linting">Linting</h3>
-<p>Linting is the process of applying a tool to your code to enforce style.</p>
-<p>Here we’ll see how to use <code>ruff</code>. You might also consider <code>black</code>.</p>
-<p>We’ll practice with ruff with a small module we’ll use next also for debugging.</p>
-<p>First, we check for and fix syntax errors.</p>
-<pre class="{bash}"><code>ruff check test.py</code></pre>
-<p>Then we ask ruff to reformat to conform to standard style.</p>
-<pre class="{bash}"><code>cp test.py test-save.py   # Not required, just so we can see what `ruff` did.
-ruff format test.py</code></pre>
-<p>Let’s see what changed:</p>
-<pre class="{bash}"><code>diff test-save.py test.py</code></pre>
-<pre class="{bash}"><code>#| echo: false
-mv -f test-save.py test.py</code></pre>
-</section>
-</section>
-<section id="assertions-exceptions-and-testing" class="level2">
-<h2 class="anchored" data-anchor-id="assertions-exceptions-and-testing">Assertions, exceptions and testing</h2>
-<p>Assertions, exceptions and testing are critically important for writing robust code that is less likely to contain bugs.</p>
-<section id="exceptions" class="level3">
-<h3 class="anchored" data-anchor-id="exceptions">Exceptions</h3>
-<p>You’ve probably already seen exceptions in action whenever you’ve done something in Python that causes an error to occur and an error message to be printed. Syntax errors are different from exceptions in that exceptions occur when the syntax is correct but the execution of the code results in some sort of error.</p>
-<p>Exceptions can be a valuable tool for making your code handle different modes of failure (missing file, URL unreachable, permission denied, invalid inputs, etc.). You use them when you are writing code that is supposed to perform a task (e.g., a function that does something with an input file) to indicate that the task failed and the reason for that failure (e.g., the file was not there in the first place). In such case, you want your code to raise an exception and make the error message informative as possible, typically by handling the exception thrown by another function you call and augmenting the message. Another possibility is that your code detects a situation where you need to throw an exception (e.g., an invalid input to a function).</p>
-<p>The other side of the coin happens when you want to write a piece of code that handles failure in a specific way, instead of simply giving up. For example, if you are writing a script that reads and downloads hundreds of URLs, you don’t want your program to stop when any of them fails to respond (or do you?). You might want to continue with the rest of the URLs, and write out the failed URLs in a secondary output file.</p>
-<section id="using-try-except-to-continue-execution" class="level4">
-<h4 class="anchored" data-anchor-id="using-try-except-to-continue-execution">Using <code>try-except</code> to continue execution</h4>
-<p>If you want some code to continue running even when it encounters an error, you can use <code>try-except</code>. This would often be done in code where you were running some workflow rather than in functions that you write for general purpose use (e.g., code in a package you are writing).</p>
-<p>Suppose we have a loop and we want to run all the iterations even if the code for some iterations fail. We can embed the code that might fail in a <code>try</code> block and then in the <code>except</code> block, run code that will handle the situation when the error occurs.</p>
-<div id="6b40bb07" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>some code that might fail<span class="op">&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        result[i] <span class="op">=</span> <span class="op">&lt;</span>actual result<span class="op">&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>what to do <span class="cf">if</span> the code fails<span class="op">&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        result[i] <span class="op">=</span> <span class="va">None</span>   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="strategies-for-invoking-and-handling-errors" class="level4">
-<h4 class="anchored" data-anchor-id="strategies-for-invoking-and-handling-errors">Strategies for invoking and handling errors</h4>
-<p>Here we’ll address situations that might arise when you are developing code for general purpose use (e.g., writing functions in a package) and need that code to invoke an error under certain circumstances or deal gracefully with an error occurring in some code that you are calling.</p>
-<p>A basic situation is when you want to detect a situation where you need to invoke an error (i.e., throw an exception).</p>
-<p>With <code>raise</code> you can invoke an exception. Suppose we need an input to be a positive number. We’ll use Python’s built-in <code>ValueError</code>, one of the various <a href="https://docs.python.org/3/library/exceptions.html#concrete-exceptions">exception types that Python provides</a> and that you could use. You can also create your own exceptions by subclassing one of Python’s existing exception classes. (We haven’t yet discussed classes and object-oriented programming, so don’t worry if you’re not sure about what that means.)</p>
-<div id="683508dd" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(val):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> val <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"`val` should be positive"</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>myfun(<span class="op">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[1], line 5</span>
-<span class="ansi-green-fg ansi-bold">      2</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> val <span style="color:rgb(98,98,98)">&lt;</span><span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(98,98,98)">0</span>:
-<span class="ansi-green-fg ansi-bold">      3</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ValueError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">`val` should be positive</span><span style="color:rgb(175,0,0)">"</span>)
-<span class="ansi-green-fg">----&gt; 5</span> <span class="ansi-yellow-bg">myfun</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">-</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">3</span><span class="ansi-yellow-bg">)</span>
-
-Cell <span class="ansi-green-fg">In[1], line 3</span>, in <span class="ansi-cyan-fg">myfun</span><span class="ansi-blue-fg">(val)</span>
-<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">myfun</span>(val):
-<span class="ansi-green-fg ansi-bold">      2</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> val <span style="color:rgb(98,98,98)">&lt;</span><span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(98,98,98)">0</span>:
-<span class="ansi-green-fg">----&gt; 3</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ValueError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">`val` should be positive</span><span style="color:rgb(175,0,0)">"</span>)
-
-<span class="ansi-red-fg">ValueError</span>: `val` should be positive</pre>
-</div>
+<div id="b21ccad7" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">3</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>int</code></pre>
 </div>
 </div>
 
 
-</section>
-</section>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
