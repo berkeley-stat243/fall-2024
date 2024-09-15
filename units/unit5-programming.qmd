@@ -69,7 +69,9 @@ by seeing how we can replace patterns in addition to finding them.
 
 The `re` package provides Perl-style regular expressions, but it doesn't seem to support named character classes such as `[:digit:]`. Instead use classes such as `\d` and `[0-9]`.
 
-In Python, you apply a matching function and then query the result to get information about what was matched and where in the string. 
+### Finding patterns
+
+In Python, you can apply a matching function and then query the result to get information about what was matched and where in the string. 
 
 
 ```{python}
@@ -126,13 +128,6 @@ text = ["Here's my number: 919-543-3300.", "hi John, good to meet you",
 [return_group("\\d+", str) for str in text]
 ```
 
-We can replace matching substrings with `re.sub`.
-
-```{python}
-text = "Here's my number: 919-543-3300."
-re.sub("\\d", "Z", text   )
-```
-
 Recall that we can search for location-specific matches in relation to the start and end of a string.
 
 ```{python}
@@ -147,7 +142,39 @@ text = "Here's my number: 919-543-3300. They bought 731 hats. Please call 1.919.
 re.findall("\\d{3}[-.]\\d{3}[-.]\\d{4}", text)
 ```
 
-Next let's consider grouping using `()`.
+
+As another example, the phone number detection problem could have been done a bit more compactly (as well as more generally to allow for an initial "1-" or "1.") as:
+
+```{python}
+text = "Here's my number: 919-543-3300. They bought 731 bananas. Please call 1.919.554.3800."
+re.findall("((1[-.])?(\\d{3}[-.]){1,2}\\d{4})", text)
+```
+
+Question: the above regex would actually match something that is not a valid phone number. What can go wrong?
+
+
+When you are searching for all occurrences of a pattern in a large text object, it may be beneficial to use `finditer`:
+
+```{python}
+it = re.finditer("(http|ftp):\\/\\/", text)  # http or ftp followed by ://
+
+for match in it:
+    match.span()
+```
+
+This method behaves lazily and returns an iterator that gives us one match at a time, and only scans for the next match when we ask for it. This is similar to the behavior we saw with `pandas.read_csv(chunksize = n)`
+
+### Manipulating and replacing patterns
+
+We can replace matching substrings with `re.sub`.
+
+```{python}
+text = "Here's my number: 919-543-3300."
+re.sub("\\d", "Z", text   )
+```
+
+Next let's consider grouping using `()`. We'll see that the grouping operator also
+controls what is returned as the matched patterns.
 
 Here’s a basic example of using grouping via parentheses with the OR operator.
 
@@ -163,27 +190,6 @@ so we'd need to add an additional grouping operator to capture the full pattern 
 re.findall("(http|ftp):\\/\\/", text)  
 re.findall("((http|ftp):\\/\\/)", text) 
 ```
-
-When you are searching for all occurrences of a pattern in a large text object, it may be beneficial to use `finditer`:
-
-```{python}
-it = re.finditer("(http|ftp):\\/\\/", text)  # http or ftp followed by ://
-
-for match in it:
-    match.span()
-```
-
-This method behaves lazily and returns an iterator that gives us one match at a time, and only scans for the next match when we ask for it. This is similar to the behavior we saw with `pandas.read_csv(chunksize = n)`
-
-As another example, the phone number detection problem could have been done a bit more compactly (as well as more generally to allow for an initial "1-" or "1.") as:
-
-```{python}
-text = "Here's my number: 919-543-3300. They bought 731 bananas. Please call 1.919.554.3800."
-re.findall("((1[-.])?(\\d{3}[-.]){1,2}\\d{4})", text)
-```
-
-Question: the above regex would actually match something that is not a valid phone number. What can go wrong?
-
 
 Groups are also used when we need to reference back to a detected pattern when doing a replacement. This is why they are sometimes referred to as "capturing groups". For example, here we’ll find any numbers and add underscores before and after them:
 
@@ -201,9 +207,21 @@ re.sub("([^\",]),", "\\1", text)
 
 How does that work? Consider that `[^\",]` matches a character that is not a quote and not a comma. The regex is such a character followed by a comma, with the matched character saved in `\\1` because of the grouping operator.
 
+> **Challenge**: Instead of removing the commas to remove the ambiguity, how would you convert the comma delimiters to pipe (`|`) delimiters (since the pipe is rarely used in text)?
+
+Extending the use of `\\1`, we can refer to multiple captured groups:
+
+```{python}
+text = "Here's my number: 919-543-3300. They bought 731 bananas. Please call 919.554.3800."
+re.sub("([0-9]{3})[-\.]([0-9]{3})[-\.]([0-9]{4})", "area code \\1, number \\2-\\3", text)
+```
+
+
 Groups can also be given names, instead of having to refer to them by their numbers, but we will not demonstrate that here.
 
 > **Challenge**: Suppose a text string has dates in the form "Aug-3", "May-9", etc. and I want them in the form "3 Aug", "9 May", etc. How would I do this regex?
+
+### Greedy matching
 
 Finally, let's consider where a match ends when there is ambiguity.
 
