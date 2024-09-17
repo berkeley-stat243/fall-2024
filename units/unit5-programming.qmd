@@ -370,7 +370,7 @@ This tells python to treat this sting literal without any escaping, but that doe
 > files as you may paste in something that looks like a single or double
 > quote, but which Python cannot interpret as a quote because it's some other
 > ASCII (or Unicode) quote character. If you paste in a " from PDF, it will not be
-> interpreted as a standard R double quote mark.
+> interpreted as a standard Python double quote mark.
 
 Similar things come up in the shell and in R, but in the shell you
 often don't need as many backslashes. E.g. you could do this to look for a
@@ -403,7 +403,7 @@ Also in IPython there is additional functionality/syntax.
 Here are a variety of tools for interacting with the operating system:
 
 -   To run UNIX commands from within Python, use `subprocess.run()`, as follows,
-    noting that we can save the result of a system call to an R object:
+    noting that we can save the result of a system call to an Python object:
 
     ```{python}
     import subprocess, io
