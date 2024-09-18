@@ -650,29 +650,32 @@ internal.
 ### Internal/private objects
 
 We could add another module that the main module uses but that is not intended
-for direct use by the user.
+for direct use by the user. Here we name the function to start with `_` following
+the convention that this indicates a private/internal function.
 
 ```{bash}
 #| eval: false
 cat << EOF > mypkg/auxil.py
 
-def helper(val):
+def _helper(val):
     return val + 10
 EOF
 
 
 cat << EOF >> mypkg/mymod.py
 
-from .auxil import helper
+from .auxil import _helper
 
 def myfun10(val):
-    print(f"Converting {val} to integer plus 10: {int(helper(val))}.")
+    print(f"Converting {val} to integer plus 10: {int(_helper(val))}.")
 EOF
 ```
 
 ```{python}
-import mypkg as mypkg_updated
-mypkg_updated.myfun10(7.3)
+del mypkg
+import mypkg 
+mypkg.myfun10(7.3)
+del mypkg
 ```
 
 
@@ -702,18 +705,23 @@ EOF
 ```{python}
 import mypkg.mysubpkg     ## Note that __init__.py is invoked
 mypkg.mysubpkg.b
+mypkg.x
 ```
 
 Note that a given `__init__.py` is invoked when importing anything nested within the
-directory containing the `__init__.py`. 
+directory containing the `__init__.py`; in the case above the `__init__.py` from `mypkg`
+is invoked, though for some reason the "Welcome to my package." output is not showing 
+up in this rendered document.
 
 If we wanted to automatically import the subpackage we would add
 `import mypkg.mysubpkg` to `mypkg/__init__.py`.
 
 One would generally not import the items from `mysubpkg` directly into the `mypkg` namespace
-but there may be cases one would do something like this. For example `np.linspace` is actually
+but there may be cases one would do something like this. For example `numpy.linspace` is actually
 found in `numpy/core/function_base.py`, but we don't need to refer to `numpy.core.linspace`
 because of how `numpy` structures the `import` statements in `__init__.py`.
+
+Take a look at `dir(numpy)`, `dir(numpy.linalg)`, and `dir(numpy.core)` to get a better sense for this in a real package.
 
 ## Installing packages
 
@@ -738,7 +746,7 @@ It's also generally recommended to use the `conda-forge` *channel* (i.e., locati
 (this is done automatically when using `mamba`). `conda-forge` provides a wide variety of up-to-date packages, maintained by the community.
 
 
-### Making your package installable
+### Making your package installable (optional)
 
 It's pretty easy to configure your package so that it can be built and installed via `pip`. See the structure of
 [this example repository](https://github.com/fperez/mytoy). In fact, one can install the package with only
