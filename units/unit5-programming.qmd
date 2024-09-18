@@ -992,9 +992,9 @@ try:
 except Exception as error:
     print(error)
   
-myArray = [1, 3, 5, 9, 4, 7]
-# myArray[2.0]    # What do you think is going to happen?
-# myArray[2.73]   # What do you think is going to happen?
+myList = [1, 3, 5, 9, 4, 7]
+# myList[2.0]    # What do you think is going to happen?
+# myList[2.73]   # What do you think is going to happen?
 ```
 
 R is less strict and will do conversions in some cases that Python won't:
