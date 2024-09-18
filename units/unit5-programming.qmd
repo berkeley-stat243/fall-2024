@@ -618,7 +618,7 @@ mkdir mypkg
 
 cat << EOF > mypkg/__init__.py
 ## Make objects from mymod.py available as mypkg.foo rather than mypkg.mymod.foo.
-## The "." means find "mymod" here in this directory.
+## The "." is a "relative" import that means find "mymod" here in this directory.
 from .mymod import *
 
 print("Welcome to my package.")
@@ -714,12 +714,14 @@ is invoked, though for some reason the "Welcome to my package." output is not sh
 up in this rendered document.
 
 If we wanted to automatically import the subpackage we would add
-`import mypkg.mysubpkg` to `mypkg/__init__.py`.
+`from . import mysubpkg` to `mypkg/__init__.py`, which uses [relative imports](https://docs.python.org/3/reference/import.html). The alternative "absolute" import would be `import mypkg.mysubpkg`, which finds `mypkg` using `sys.path` (which specifies a set of paths of where to look).
+
 
 One would generally not import the items from `mysubpkg` directly into the `mypkg` namespace
 but there may be cases one would do something like this. For example `numpy.linspace` is actually
 found in `numpy/core/function_base.py`, but we don't need to refer to `numpy.core.linspace`
-because of how `numpy` structures the `import` statements in `__init__.py`.
+because of how `numpy` structures the `import` statements in `__init__.py`. In contrast, the linear algebra
+functions are available via the subpackage namespace as `numpy.linalg.<function_name>`.
 
 Take a look at `dir(numpy)`, `dir(numpy.linalg)`, and `dir(numpy.core)` to get a better sense for this in a real package.
 
