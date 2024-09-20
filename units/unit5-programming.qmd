@@ -1066,7 +1066,7 @@ myit.__next__()   ## This is equivalent to using `next(myit)`.
 We've actually gotten ahead of ourselves -- how is it that `iter` seems to do the same thing as `mytuple.__iter__()`
 and `next` seems to do the same thing as `myit.__next__()`? We'll discuss that when we discuss the [#Python object model](#the-python-object-model-and-dunder-methods).
 
-
+```{python}
 x = zip(['clinton', 'bush', 'obama', 'trump'], ['Dem', 'Rep', 'Dem', 'Rep'])
 next(x)
 next(x)
@@ -1155,17 +1155,17 @@ class tsSimClass:
     Class definition for time series simulators
     '''
     ## dunder methods (more later)
-    def __init__(self, times, mean = 0, corParam = 1, seed = 1):
-        ## For robustness, need checks that `corParam` is numeric of length 1 and `times` is np array.
+    def __init__(self, times, mean = 0, cor_param = 1, seed = 1):
+        ## For robustness, need checks that `cor_param` is numeric of length 1 and `times` is np array.
         ## Public attributes
         self.n = len(times)
         self.mean = mean
-        self.corParam = corParam
+        self.cor_param = cor_param
         ## Private attributes (encapsulation)
         self._times = times
-        self._currentU = False
+        self._current_U = False
         ## Some setup steps
-        self._calcMats()
+        self._calc_mats()
         np.random.seed(seed)
     def __str__(self):    # 'print' method
         return f"An object of class `tsSimClass` with {self.n} time points."
@@ -1173,27 +1173,28 @@ class tsSimClass:
         return self.n
 
     ## Public methods: getter and setter (encapsulation)
-    def setTimes(self, newTimes):
-        self._times = newTimes
-        self._calcMats()
-    def getTimes(self):
+    def set_times(self, new_times):
+        self._times = new_times
+        self._current_U = False
+        self._calc_mats()
+    def get_times(self):
         return self._times
  
     ## Main public method
     def simulate(self):
-        if not self._currentU:    
-            self._calcMats()
+        if not self._current_U:    
+            self._calc_mats()
         ## analogous to mu+sigma*z for generating N(mu, sigma^2)
         return self.mean + np.dot(self.U.T, np.random.normal(size = self.n))
 
     ## Private method.
-    def _calcMats(self):
+    def _calc_mats(self):
         ## Calculates correlation matrix and Cholesky factor (caching).
-        lagMat = np.abs(self._times[:, np.newaxis] - self._times)
-        corMat = np.exp(-lagMat ** 2 / self.corParam ** 2)
-        self.U = np.linalg.cholesky(corMat)
+        lag_mat = np.abs(self._times[:, np.newaxis] - self._times)
+        cor_mat = np.exp(-lag_mat ** 2 / self.cor_param ** 2)
+        self.U = np.linalg.cholesky(cor_mat)
         print("Done updating correlation matrix and Cholesky factor.")
-        self._currentU = True
+        self._current_U = True
 
 ```
 
@@ -1204,32 +1205,32 @@ Now let's see how we would use the class.
 myts = tsSimClass(np.arange(1, 101), 2, 1)
 print(myts)
 np.random.seed(1)
-## here's a simulated time series
+## Here's a simulated time series.
 y1 = myts.simulate()
 
 import matplotlib.pyplot as plt
-plt.plot(myts.getTimes(), y1, '-')
+plt.plot(myts.get_times(), y1, '-')
 plt.xlabel('time')
 plt.ylabel('process values')
-## simulate a second series
+## Simulate a second series.
 y2 = myts.simulate()
-plt.plot(myts.getTimes(), y2, '--')
+plt.plot(myts.get_times(), y2, '--')
 plt.show()
 ```
 
 We could set up a different object that has different parameter values.
-That new simulated time series is less wiggly because the `corParam` value
+That new simulated time series is less wiggly because the `cor_param` value
 is larger than before.
 
 
 ```{python}
 myts2 = tsSimClass(np.arange(1, 101), 2, 4)
 np.random.seed(1)
-## here's a simulated time series with a different value of
-## the correlation parameter (corParam)
+## Here's a simulated time series with a different value of
+## the correlation parameter (cor_param).
 y3 = myts2.simulate()
 
-plt.plot(myts2.getTimes(), y3, '-', color = 'red')
+plt.plot(myts2.get_times(), y3, '-', color = 'red')
 plt.xlabel('time')
 plt.ylabel('process values')
 plt.show()
@@ -1237,25 +1238,25 @@ plt.show()
 
 #### Copies and references
 
-Next let's think about when copies are made. In the next example `mytsRef` is a copy of `myts`
+Next let's think about when copies are made. In the next example `myts_ref` is a copy of `myts`
 in the sense that both names point to the same underlying object.
-But no data were copied when the assignment to `mytsRef` was done. 
+But no data were copied when the assignment to `myts_ref` was done. 
 
 ```{python}
-mytsRef = myts
-## 'mytsRef' and 'myts' are names for the same underlying object
+myts_ref = myts
+## 'myts_ref' and 'myts' are names for the same underlying object.
 import copy
-mytsFullCopy = copy.deepcopy(myts)
+myts_full_copy = copy.deepcopy(myts)
 
-## Now let's change the values of a field
-myts.setTimes(np.arange(1,1001,10))
-myts.getTimes()[0:4] 
-mytsRef.getTimes()[0:4] # the same as `myts`
-mytsFullCopy.getTimes()[0:4] # different from `myts`
+## Now let's change the values of a field.
+myts.set_times(np.arange(1,1001,10))
+myts.get_times()[0:4] 
+myts_ref.get_times()[0:4] # the same as `myts`
+myts_full_copy.get_times()[0:4] # different from `myts`
 ```
 
-In contrast `mytsFullCopy` is a reference to a different object, and
-all the data from `myts` had to be copied over to `mytsFullCopy`. This takes additional memory (and time), but is also safer, as it avoids the possibility that the user might modify `myts` and not realize that they were also affecting `mytsRef`. We'll discuss this more when we discuss copying in the [section on memory use](#memory-and-copies).
+In contrast `myts_full_copy` is a reference to a different object, and
+all the data from `myts` had to be copied over to `myts_full_copy`. This takes additional memory (and time), but is also safer, as it avoids the possibility that the user might modify `myts` and not realize that they were also affecting `myts_ref`. We'll discuss this more when we discuss copying in the [section on memory use](#memory-and-copies).
 
 #### Encapsulation
 
@@ -1267,8 +1268,8 @@ Why have private fields (i.e., *encapsulation*)? The use of private fields shiel
     In this case, we don't want users to modify the 
 `times` field. Why is this important? In this example, the correlation matrix and
     the Cholesky factor U are both functions of the vector of times. So
-    we don't want to allow a user to directly modify `times`. If they did, it would leave the fields of the object in inconsistent states. Instead we want  them to use `setTimes`, which correctly keeps all the fields
-    in the object internally consistent (by calling `_calcMats`). It also allows us to improve efficiency
+    we don't want to allow a user to directly modify `times`. If they did, it would leave the fields of the object in inconsistent states. Instead we want  them to use `set_times`, which correctly keeps all the fields
+    in the object internally consistent (by calling `_calc_mats`). It also allows us to improve efficiency
 by controlling when computationally expensive operations are carried out.
 
 In a module, objects that start with `_` are a weak form of private attributes. Users can access them, but `from foo import *` does not import them.
