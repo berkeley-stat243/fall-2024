@@ -1054,11 +1054,18 @@ mytuple = ("apple", "banana", "cherry")
 for item in mytuple:
     print(item)
 
+## We can manually create the iterator and iterate through it.
 myit = iter(mytuple)
+## myit = mytuple.__iter__()  ## This is equivalent to using `iter(mytuple)`.
 
 print(next(myit))
 print(next(myit))
-myit.__next__()
+myit.__next__()   ## This is equivalent to using `next(myit)`.
+```
+
+We've actually gotten ahead of ourselves -- how is it that `iter` seems to do the same thing as `mytuple.__iter__()`
+and `next` seems to do the same thing as `myit.__next__()`? We'll discuss that when we discuss the [#Python object model](#the-python-object-model-and-dunder-methods).
+
 
 x = zip(['clinton', 'bush', 'obama', 'trump'], ['Dem', 'Rep', 'Dem', 'Rep'])
 next(x)
@@ -1138,7 +1145,7 @@ Python provides a pretty standard approach to writing object-oriented code focus
 
 Our example is to create a class for working with random time series. Each object of the class has specific parameter values that control the stochastic behavior of the time series. With a given object we can simulate one or more time series (realizations).
 
-Here's the initial definition of the class with methods and fields.
+Here's the initial definition of the class with methods and fields (aka attributes).
 
 ```{python}
 import numpy as np
@@ -1147,30 +1154,41 @@ class tsSimClass:
     '''
     Class definition for time series simulators
     '''
-    def __init__(self, times, mean = 0, corParam = 1):
-        ## add assertions that corParam is numeric, length 1 and times is np array
-        self._times = times
+    ## dunder methods (more later)
+    def __init__(self, times, mean = 0, corParam = 1, seed = 1):
+        ## For robustness, need checks that `corParam` is numeric of length 1 and `times` is np array.
+        ## Public attributes
         self.n = len(times)
         self.mean = mean
         self.corParam = corParam
+        ## Private attributes (encapsulation)
+        self._times = times
         self._currentU = False
+        ## Some setup steps
         self._calcMats()
+        np.random.seed(seed)
     def __str__(self):    # 'print' method
         return f"An object of class `tsSimClass` with {self.n} time points."
     def __len__(self):
         return self.n
+
+    ## Public methods: getter and setter (encapsulation)
     def setTimes(self, newTimes):
         self._times = newTimes
         self._calcMats()
     def getTimes(self):
         return self._times
+ 
+    ## Main public method
     def simulate(self):
         if not self._currentU:    
             self._calcMats()
         ## analogous to mu+sigma*z for generating N(mu, sigma^2)
         return self.mean + np.dot(self.U.T, np.random.normal(size = self.n))
+
+    ## Private method.
     def _calcMats(self):
-        ## calculates correlation matrix and Cholesky factor
+        ## Calculates correlation matrix and Cholesky factor (caching).
         lagMat = np.abs(self._times[:, np.newaxis] - self._times)
         corMat = np.exp(-lagMat ** 2 / self.corParam ** 2)
         self.U = np.linalg.cholesky(corMat)
@@ -1201,7 +1219,7 @@ plt.show()
 
 We could set up a different object that has different parameter values.
 That new simulated time series is less wiggly because the `corParam` value
- is larger than before.
+is larger than before.
 
 
 ```{python}
@@ -1255,17 +1273,13 @@ by controlling when computationally expensive operations are carried out.
 
 In a module, objects that start with `_` are a weak form of private attributes. Users can access them, but `from foo import *` does not import them.
 
-#### Challenge
-
-> **Challenge**
->
-> How would you get Python to quit immediately, without asking for any more information, when you simply type `q` (no parentheses!) instead of `quit()`? There are actually a couple ways to do this. (Hint: you can do this by understanding what happens when you type `q` and how to exploit the characteristics of Python classes.)
 
 
 ### Inheritance
 
 Inheritance can be a powerful way to reduce code duplication and keep your code organized in a logical (nested) fashion.
-Special cases can be simple extensions of more general classes.
+Special cases can be simple extensions of more general classes. A good example of inheritance in Python and R is how regression models are handled.
+E.g., in Python's `statsmodels` package, the [`OLS` class inherits from the `WLS` class](https://www.statsmodels.org/stable/_modules/statsmodels/regression/linear_model.html#OLS).
 
 ```{python}
 class Bear:
@@ -1281,7 +1295,7 @@ class GrizzlyBear(Bear):
       def __init__(self, name, age, num_people_killed = 0):
           super().__init__(name, age)
           self.num_people_killed = num_people_killed
-      def color(self):
+      def color(self):  
           return "brown"
 
 yog = Bear("Yogi the Bear", 23)
@@ -1306,8 +1320,6 @@ The above is an example of polymorphism. Instances of the `GrizzlyBear` class ar
 because they can have behavior from both the `GrizzlyBear` and `Bear` classes. The `color` method is polymorphic
 in that it can be used for both classes but is defined to behave differently depending on the class.
 
-More relevant examples of inheritance in Python and R include how regression models are handled.
-E.g., in Python's `statsmodels`, the [`OLS` class inherits from the `WLS` class](https://www.statsmodels.org/stable/_modules/statsmodels/regression/linear_model.html#OLS).
 
 
 ## Attributes
@@ -1331,17 +1343,18 @@ class Bear:
 
 yog = Bear("Yogi the Bear", 23)
 yog.count
-smoke = Bear("Smoky the Bear", 77)
-smoke.count
+smokey = Bear("Smokey the Bear", 77)
+smokey.count
 ```
 
 The class attribute allows us to manipulate information relating to all instances of the class, as seen here where we keep track of the number of bears that have been created.
 
 ### Adding attributes
 
-It turns out we can add instance attributes on the fly in some cases, which is a bit disconcerting in some ways.
+What do you think will happen if we do the following?
 
 ```{python}
+#| eval: false
 yog.bizarre = 7
 yog.bizarre
 
@@ -1352,6 +1365,7 @@ foo.bizarre = 3
 foo.bizarre
 ```
 
+It turns out we can add instance attributes on the fly in some cases, which is a bit disconcerting in some ways.
 
 ## Generic function OOP
 
@@ -1455,7 +1469,7 @@ As a very simple example unrelated to any specific language, multiple dispatch w
 
 The idea of having the behavior of an operator or function adapt to the type of the input(s) is one aspect of *polymorphism*.
 
-## The Python object model and *dunder* methods.
+## The Python object model and *dunder* methods
 
 Now that we've seen the basics of classes, as well as generic function OOP, we're in a good position to understand the Python object model.
 
@@ -1503,6 +1517,12 @@ type(foo)
 
 type(Bear)
 ```
+
+> **Challenge**
+>
+> Let's check our understanding of the object model.
+> How would you get Python to quit immediately, without asking for any more information, when you simply type `q` (no parentheses!) instead of `quit()`? (Hint: you can do this by understanding what happens when you type `q` and how to exploit the characteristics of Python classes.)
+
 
 # 7. Functional programming
 
