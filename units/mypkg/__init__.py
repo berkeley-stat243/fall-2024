@@ -4,4 +4,3 @@ from .mymod import *
 
 print("Welcome to my package.")
 
-import mysubpkg
