@@ -45,6 +45,7 @@ website:
         contents:
           - href: ps/ps1.qmd
           - href: ps/ps2.qmd
+          - href: ps/ps3.qmd
       - section: "How tos"
         contents:
           - howtos/accessPython.md

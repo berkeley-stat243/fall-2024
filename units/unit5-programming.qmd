@@ -1064,7 +1064,7 @@ myit.__next__()   ## This is equivalent to using `next(myit)`.
 ```
 
 We've actually gotten ahead of ourselves -- how is it that `iter` seems to do the same thing as `mytuple.__iter__()`
-and `next` seems to do the same thing as `myit.__next__()`? We'll discuss that when we discuss the [#Python object model](#the-python-object-model-and-dunder-methods).
+and `next` seems to do the same thing as `myit.__next__()`? We'll discuss that in the next section when we discuss the [Python object model](#the-python-object-model-and-dunder-methods).
 
 ```{python}
 x = zip(['clinton', 'bush', 'obama', 'trump'], ['Dem', 'Rep', 'Dem', 'Rep'])
