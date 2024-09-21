@@ -1527,7 +1527,7 @@ type(Bear)
 
 # 7. Functional programming
 
-This section covers an approach to programming called "functional programming" as well as various
+This section covers an approach to programming called *functional programming* as well as various
 concepts related to writing and using functions. 
 
 ## Functional programming (in Python)
@@ -1617,7 +1617,7 @@ x   # no side effects!
 
 More on [pass-by-value vs. pass-by-reference](#pass-by-value-vs.-pass-by-reference) later.
 
-Even in R, there are some (necessary) exceptions to the idea of no side effects, such as `par()` and `plot()`.
+Even in R, there are some (necessary) exceptions to the idea of no side effects, such as `par()`, `library()`,  and `plot()`.
 
 ### Functions are first-class objects
 
@@ -1632,14 +1632,13 @@ Python can find the object by using the name to look up the object in the namesp
 x = 3
 type(x)
 try:
-    x(3)  # x is not a function (yet)
+    x([1,3,5])  # x is not a function (yet)
 except Exception as error:
     print(error)
 
-def x(val):
-    return pow(val, 2)
+x = sum
 
-x(3)
+x([1,3,5])
 type(x)
 ```
 
@@ -1672,7 +1671,7 @@ Python provides various statements that are not formal function calls but allow 
  - `return`: return results from a function
  - `del`: remove an object
 
-Operators are examples of generic function OOP, where the appropriate method of the class of the first object that is part of the operation is called.
+As we saw earlier with `+` (`__add__`), operators are examples of generic function OOP, where the appropriate method of the class of the first operand is called.
 
 ```{python}
 x = np.array([0,1,2])
@@ -1711,12 +1710,14 @@ list(map(pow, x, [2,2,2,2]))
 
 ```
 
-Or we can use lambda functions to define a function on the fly:
+Or we can use *lambda* functions to define a function on the fly:
 
 ```{python}
 x = [1.0, -2.7, 3.5, -5.1]
 result = list(map(lambda vals: vals * 2, x))
 ```
+
+A lambda function is a temporary function that is defined "on-the-fly" rather than in advance and is never given a name. (These are also sometimes called *anonymous* functions.)
 
 If you need to pass another argument to the function you can use a lambda function as above or `functools.partial`:
 
@@ -1801,9 +1802,12 @@ def function_b():
 
 def function_c():
     traceback.print_stack()
+    # raise RuntimeError("A fake error")
 
 function_a()
 ```
+
+If we comment out the `print_stack()` call and uncomment the error, we see the same traceback information. That's exactly what is happening when you get a long series of information when Python stops with an error.
 
 
 ## Function inputs and outputs 
@@ -1953,22 +1957,29 @@ Let's see what operations cause arguments modified in a function to affect state
 ```{python}
 def myfun(f_scalar, f_x, f_x_new, f_x_newid, f_x_copy):
 
-    f_scalar = 99                 # global input unaffected
-    f_x[0] = 99                   # global input MODIFIED
-    f_x_new = [99,2,3]            # global input unaffected
+    # `scalar` in global unaffected, as `f_scalar` is redefined.
+    f_scalar = 99              
 
-    newx = f_x_newid
-    newx[0] = 99                  # global input MODIFIED
+    # `x` in global is MODIFIED, as `x` and `f_x` have same id.
+    f_x[0] = 99                 
 
-    xcopy = f_x_copy.copy() 
-    xcopy[0] = 99                 # global input unaffected
+    # `x_new` in global unaffected as `f_x_new` is redefined.
+    f_x_new = [99,2,3]        
+
+    # `x_newid` in global is MODIFIED as `x_newid` and `y` have same id.
+    y = f_x_newid
+    y[0] = 99              
+
+    # `x_copy` in global is unaffected as `x_copy` has different id from `z`
+    z = f_x_copy.copy() 
+    z[0] = 99              
 
 
 scalar = 1
 x = [1,2,3]
-x_new = np.array([1,2,3])
-x_newid = np.array([1,2,3])
-x_copy = np.array([1,2,3])
+x_new = [1,2,3]
+x_newid = [1,2,3]
+x_copy = [1,2,3]
 
 
 myfun(scalar, x, x_new, x_newid, x_copy)
@@ -1990,9 +2001,7 @@ x_newid
 ```
 
 Basically if you replace the reference (object name) then the state outside the function is preserved.
-That's because a new local variable in the function scope is created. However in the
-`
-If you modify part of the object, state is not preserved.
+That's because a new local variable in the function scope is created. If you modify part of the object, state is not preserved.
 
 The same behavior occurs with other mutable objects such as numpy arrays.
 
@@ -2009,8 +2018,9 @@ ptr = &x;
 *ptr * 7; // returns 21
 ```
 
+  - `int x=3` declares `x` to be an int and immediately defines it to have the value 3.
   - The `int*` declares `ptr` to be a pointer to (the address of) the integer `x`.
-  - The `&x` gets the address where `x` is stored.
+  - `&x` gets the address where `x` is stored.
   - `*ptr` dereferences `ptr`, returning the value in that address (which is 3 since `ptr` is the address of `x`.
 
 Arrays in C are really pointers to a block of memory:
@@ -2151,13 +2161,18 @@ Now suppose we also define `magic_number` in the scope in which `myfun` is calle
 ```{python}
 import test_scope
 magic_number = 900
+def transform(x):
+   print("haha")
+
 test_scope.myfun(3)
 ```
 
 We see that Python uses `magic_number` from the module.
-What would be bad about using `magic_number` from the global scope of the Python session
-rather than the global scope of the module? Consider a case where instead of using the `test_scope.py` module we were using
-code from a package.
+What would be bad about using `magic_number` or `transform` from the global scope of the Python session
+rather than the global scope of the module? 
+
+Consider a case where instead of using the `test_scope.py` module we were using
+code from a package and that code has a variable called `magic_number` or  function called `transform`.
 
 ### Lexical scoping (enclosing scopes)
 

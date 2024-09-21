@@ -1,5 +1,8 @@
-magic_number = 7
+magic_number = 2
+
+def transform(x):
+    return x*5
 
 def myfun(val):
-    return(val * magic_number)
+    return(transform(val) * magic_number)
 
