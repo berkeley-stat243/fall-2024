@@ -1152,10 +1152,13 @@ import numpy as np
 
 class tsSimClass:
     '''
-    Class definition for time series simulators
+    Class definition for time series simulator
     '''
     ## dunder methods (more later)
     def __init__(self, times, mean = 0, cor_param = 1, seed = 1):
+        ## This is the constructor, called when `tsSimClass(...)` is invoked
+        ## to create an instance of the class.
+
         ## For robustness, need checks that `cor_param` is numeric of length 1 and `times` is np array.
         ## Public attributes
         self.n = len(times)
@@ -1795,16 +1798,18 @@ We can use functions from the `traceback` package to query the call stack.
 import traceback
 
 def function_a():
-    function_b()
+    function_b()  # line 2 within function, line 4 overall
 
 def function_b():
-    function_c()
+    # some comment
+    # another comment
+    function_c()  # line 4 within function, line 9 overall
 
 def function_c():
-    traceback.print_stack()
+    traceback.print_stack() # line 2 within, line 12 overall
     # raise RuntimeError("A fake error")
 
-function_a()
+function_a()    # line 1 relative to the call, line 15 overall
 ```
 
 If we comment out the `print_stack()` call and uncomment the error, we see the same traceback information. That's exactly what is happening when you get a long series of information when Python stops with an error.
@@ -2005,7 +2010,7 @@ That's because a new local variable in the function scope is created. If you mod
 
 The same behavior occurs with other mutable objects such as numpy arrays.
 
-### Pointers 
+### Pointers (optional)
 
 To put pass-by-value vs. pass-by-reference in a broader context, I want to briefly discuss
 the idea of a pointer, common in compiled languages such as C.
