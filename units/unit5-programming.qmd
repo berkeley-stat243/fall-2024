@@ -1795,6 +1795,7 @@ called.
 We can use functions from the `traceback` package to query the call stack.
 
 ```{python}
+#| eval: false
 import traceback
 
 def function_a():
@@ -1811,6 +1812,27 @@ def function_c():
 
 function_a()    # line 1 relative to the call, line 15 overall
 ```
+
+If we run that in Python (not via rendering the qmd file directly, because the line numbering shown is strange when things go through the quarto rendering process), we see this:
+
+```
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 2, in function_a
+  File "<stdin>", line 4, in function_b
+  File "<stdin>", line 2, in function_c
+```
+
+If we run the code by putting it in a module, say `file.py` and running `python file.py`, we see this, with the line numbering relative to the overall file, but showing the same stack of function calls:
+
+```
+  File "file.py", line 15, in <module>
+    function_a()    # line 1 relative to the call, line 15 overall
+  File "file.py", line 4, in function_a
+    function_b()  # line 2 within function, line 4 overall
+  File "file.py", line 9, in function_b
+    function_c()  # line 4 within function, line 9 overall
+  File "file.py", line 12, in function_c
+    traceback.print_stack() # line 2 within, line 12 overall
 
 If we comment out the `print_stack()` call and uncomment the error, we see the same traceback information. That's exactly what is happening when you get a long series of information when Python stops with an error.
 
