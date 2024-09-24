@@ -1833,6 +1833,7 @@ If we run the code by putting it in a module, say `file.py` and running `python 
     function_c()  # line 4 within function, line 9 overall
   File "file.py", line 12, in function_c
     traceback.print_stack() # line 2 within, line 12 overall
+```
 
 If we comment out the `print_stack()` call and uncomment the error, we see the same traceback information. That's exactly what is happening when you get a long series of information when Python stops with an error.
 
@@ -2183,7 +2184,7 @@ Suppose we have this code in a module named `test_scope.py`:
 cat test_scope.py
 ```
 
-Now suppose we also define `magic_number` in the scope in which `myfun` is called from.
+Now suppose we also define `magic_number` and `transform()` in the scope in which `myfun` is called from.
 
 ```{python}
 import test_scope
@@ -2194,9 +2195,9 @@ def transform(x):
 test_scope.myfun(3)
 ```
 
-We see that Python uses `magic_number` from the module.
-What would be bad about using `magic_number` or `transform` from the global scope of the Python session
-rather than the global scope of the module? 
+We see that Python uses `magic_number` and `transform()` from the module.
+What would be bad about using `magic_number` or `transform()` from the scope of the Python session
+rather than the scope of the module? 
 
 Consider a case where instead of using the `test_scope.py` module we were using
 code from a package and that code has a variable called `magic_number` or  function called `transform`.
@@ -2223,7 +2224,7 @@ which a function is called.**
 This approach is called *lexical scoping*. R and many other languages
 also use lexical scoping.
 
-The behavior of basing lookup on where functions are defined rather than where they are called from extends the local-global scoping discussed in the previous section, with similar motivation.
+The behavior of looking up object names based on where functions are defined rather than where they are called from extends the local-global scoping discussed in the previous section, with similar motivation.
 
 
 Let's dig deeper to understand where Python looks for non-local variables, illustrating lexical scoping:
