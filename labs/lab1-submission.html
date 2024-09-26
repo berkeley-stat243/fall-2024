@@ -429,7 +429,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="quarto-rendering-or-python-execution-works-from-the-ide-but-not-from-the-terminal" class="level4">
 <h4 class="anchored" data-anchor-id="quarto-rendering-or-python-execution-works-from-the-ide-but-not-from-the-terminal">Quarto rendering (or python execution) works from the IDE but not from the terminal</h4>
-<p>you can fix the quarto configuration by setting the environment variable <code>QUARTO_PYTHON</code> to the correct python path or by running <code>quarto check</code>. Restarting the IDE may also help if you had just installed something in the other environment.</p>
+<p>You can fix the quarto configuration by setting the environment variable <code>QUARTO_PYTHON</code> to the correct python path or by running <code>quarto check</code>. Restarting the IDE may also help if you had just installed something in the other environment.</p>
+</section>
+<section id="quarto-rendering-fails-to-find-a-python-package" class="level4">
+<h4 class="anchored" data-anchor-id="quarto-rendering-fails-to-find-a-python-package">Quarto rendering fails to find a Python package</h4>
+<p>It’s a good idea to test that you can import packages such as <code>numpy</code> when a document is rendered. If that fails, either you haven’t installed the package in Python or Quarto is using a different Python installation than the one in which you installed the package. See the items above.</p>
 </section>
 <section id="pushing-to-git-fails-with-message-make-sure-you-configure-your-user.email-and-user.name-in-git" class="level4">
 <h4 class="anchored" data-anchor-id="pushing-to-git-fails-with-message-make-sure-you-configure-your-user.email-and-user.name-in-git">Pushing to git fails with message “Make sure you configure your ‘user.email’ and ‘user.name’ in git”</h4>

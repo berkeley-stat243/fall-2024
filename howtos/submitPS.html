@@ -379,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The underlying format of .ipynb files is JSON. While this is a plain text format, the key-value pair structure (not generally being aligned with the file lines) is much less well-suited for use with Git version control (which relies on <code>diff</code>) than Markdown-based formats.</li>
 <li>One can run chunks in a Jupyter notebook in arbitrary order. What is printed to PDF depends on the order in which the chunks are run and the results can differ from what one would expect based on reading the notebook sequentially and running the chunks sequentially. For example, consider the following experiment and you’ll see what I mean: (1) Have one code chunk with <code>a = 3</code> and run it; (2) Add a second chunk with <code>print(a)</code> and run it; and (3) Change the first chunk to <code>a=4</code> and DO NOT rerun the second chunk. Save the notebook to PDF. You’ll see that your “report” makes no sense. Here’s <a href="./notebook-unreproducible.pdf">the result</a> of me doing that experiment.</li>
 </ul>
-<p>If you really want to do your initial explorations of the problems in a Jupyter notebook, with content then copied to qmd, that is fine.</p>
+<p>If you want to do your initial explorations of the problems in a Jupyter notebook, you can do so and convert the .ipynb file to a .qmd file using <code>quarto convert</code>.</p>
 </section>
 <section id="problem-set-solution-workflows" class="level2">
 <h2 class="anchored" data-anchor-id="problem-set-solution-workflows">Problem set solution workflows</h2>
@@ -409,7 +409,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pickle files</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">*.pkl</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">*.pickle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">*.pickle</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">*.csv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By adding the pickle and csv extensions you’ll avoid mistakenly committing potentially large data files to your repository.</p>
 </section>
 <section id="repository-organization" class="level3">
 <h3 class="anchored" data-anchor-id="repository-organization">Repository Organization</h3>
@@ -429,7 +431,7 @@ When we pull from your repository, our code will be assuming the following struc
 </section>
 <section id="save-or-cache-credentials-in-git" class="level3">
 <h3 class="anchored" data-anchor-id="save-or-cache-credentials-in-git">Save or cache credentials in Git</h3>
-<p>If authenticating to <a href="https://github.berkeley.edu/">github.berkeley.edu</a> every time sounds inconvenient, note that your credentials can be saved or cache to avoid entering them constantly. More details can be found on this <a href="https://statistics.berkeley.edu/computing/faqs/git-auth#git-save-auth">SCF page</a>. Besides the methods mentioned on the page, one can also store credentials in a file via <code>git config --global credential.helper store</code>.</p>
+<p>If authenticating to <a href="https://github.berkeley.edu/">github.berkeley.edu</a> every time sounds inconvenient, note that your credentials can be saved (cached) to avoid entering them constantly. More details can be found on this <a href="https://statistics.berkeley.edu/computing/faqs/git-auth#git-save-auth">SCF page</a>. Besides the methods mentioned on the page, one can also store credentials in a file via <code>git config --global credential.helper store</code>.</p>
 
 
 </section>
