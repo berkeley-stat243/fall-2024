@@ -12,7 +12,7 @@ Why?
  - The underlying format of .ipynb files is JSON. While this is a plain text format, the key-value pair structure (not generally being aligned with the file lines) is much less well-suited for use with Git version control (which relies on `diff`) than Markdown-based formats. 
  - One can run chunks in a Jupyter notebook in arbitrary order. What is printed to PDF depends on the order in which the chunks are run and the results can differ from what one would expect based on reading the notebook sequentially and running the chunks sequentially. For example, consider the following experiment and you'll see what I mean: (1) Have one code chunk with `a = 3` and run it; (2) Add a second chunk with `print(a)` and run it; and (3) Change the first chunk to `a=4` and DO NOT rerun the second chunk. Save the notebook to PDF. You'll see that your "report" makes no sense. Here's [the result](./notebook-unreproducible.pdf) of me doing that experiment.
  
- If you really want to do your initial explorations of the problems in a Jupyter notebook, with content then copied to qmd, that is fine.
+ If you want to do your initial explorations of the problems in a Jupyter notebook, you can do so and convert the .ipynb file to a .qmd file using `quarto convert`.
 
 ## Problem set solution workflows
 
@@ -61,7 +61,11 @@ it, put (again, don't put dashed lines):
 # pickle files
 *.pkl
 *.pickle
+*.csv
 ```
+
+By adding the pickle and csv extensions you'll avoid mistakenly committing potentially large data files to your repository. 
+
 
 ### Repository Organization
 
@@ -85,4 +89,5 @@ The file names are case-sensitive, so please keep everything lowercase.
 
 ### Save or cache credentials in Git
 
-If authenticating to [github.berkeley.edu](https://github.berkeley.edu/) every time sounds inconvenient, note that your credentials can be saved or cache to avoid entering them constantly. More details can be found on this [SCF page](https://statistics.berkeley.edu/computing/faqs/git-auth#git-save-auth). Besides the methods mentioned on the page, one can also store credentials in a file via `git config --global credential.helper store`.
+If authenticating to [github.berkeley.edu](https://github.berkeley.edu/) every time sounds inconvenient, note that your credentials can be saved (cached) to avoid entering them constantly. More details can be found on this [SCF page](https://statistics.berkeley.edu/computing/faqs/git-auth#git-save-auth). Besides the methods mentioned on the page, one can also store credentials in a file via `git config --global credential.helper store`.
+

@@ -37,6 +37,12 @@ offered Aug. 20-21, 2024. If you don't have that background
 you'll need to spend time in the initial couple weeks getting up to
 speed. The workshop materials are a good resource.
 
+In general, the [material in the workshop](https://berkeley-scf.github.io/compute-skills-2024) is a good reference for the course.
+While many of you will have attended, it's not required to take the course.
+But if you didn't attend, it's worthwhile to look through the materials
+in general and for additional information on various topics we'll see in
+Units 1, 3, 4, and 5.
+
 ## Objectives of the course {#objectives-of-the-course .unnumbered}
 
 The goals of the course are that, by the end of the course, students be
@@ -368,7 +374,7 @@ and with the GSI and me.
 share code syntax (generally not more than one line) on how to do small individual coding tasks within a problem.
   - **You should not ask another student for complete code or solutions, or look at their code/solution.**
   - **You should not share complete code or solutions with another student or on Ed Discussion.**
-- You may use ChatGPT (or similar chatbots) for help with small sections of a problem (e.g., how to do some specific Python or bash task). You should not use ChatGPT to try to answer an entire question. You should carefully verify that the result is correct.
+- You may use ChatGPT (or similar chatbots) for help with small sections of a problem (e.g., how to do some specific Python or bash task). You should not use ChatGPT to try to answer an entire question. You should carefully verify that the result is correct. For any code you submit based on such tools, you should be sure you understand (and could explain to someone else) in detail what the code does and how/why it works. I.e., these tools help us brainstorm; they don't replace us thinking.
 - You must provide attribution for ideas obtained elsewhere, including other students and ChatGPT or similar chatbots. 
   - **If you got a specific idea for how to do part of a problem from a fellow student (or some other resource, including ChatGPT), you should note that in your solution in the appropriate place** (for specific syntax ideas, note this in a code comment), just as you would cite a book or URL.
    - **In addition, you MUST list in a Collaboration section on your problem set solution any fellow students who you worked/consulted

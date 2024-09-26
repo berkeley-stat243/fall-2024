@@ -96,7 +96,11 @@ You can go to the settings in your IDE and point it to the specific python insta
 
 #### Quarto rendering (or python execution) works from the IDE but not from the terminal
 
-you can fix the quarto configuration by setting the environment variable `QUARTO_PYTHON` to the correct python path or by running `quarto check`. Restarting the IDE may also help if you had just installed something in the other environment.
+You can fix the quarto configuration by setting the environment variable `QUARTO_PYTHON` to the correct python path or by running `quarto check`. Restarting the IDE may also help if you had just installed something in the other environment.
+
+#### Quarto rendering fails to find a Python package
+
+It's a good idea to test that you can import packages such as `numpy` when a document is rendered. If that fails, either you haven't installed the package in Python or Quarto is using a different Python installation than the one in which you installed the package. See the items above.
 
 #### Pushing to git fails with message "Make sure you configure your 'user.email' and 'user.name' in git"
 

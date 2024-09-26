@@ -18,6 +18,7 @@ execute:
   freeze: auto
 engine: knitr
 ipynb-shell-interactivity: all
+code-overflow: wrap
 ---
 
 ```{python, setup}
@@ -216,8 +217,11 @@ text = "Here's my number: 919-543-3300. They bought 731 bananas. Please call 919
 re.sub("([0-9]{3})[-\.]([0-9]{3})[-\.]([0-9]{4})", "area code \\1, number \\2-\\3", text)
 ```
 
+Extensions that we won't discuss further here:
 
-Groups can also be given names, instead of having to refer to them by their numbers, but we will not demonstrate that here.
+ - Groups can also be given names, instead of having to refer to them by their numbers.
+ - We can have `sub` call a "callback" function to do the replacement. The function will be invoked on each match with the argument being equivalent to the result of `re.search`.
+  - We can reference previously captured groups within a pattern using the same `\\1`-style syntax (as opposed to when doing replacement as seen above).
 
 > **Challenge**: Suppose a text string has dates in the form "Aug-3", "May-9", etc. and I want them in the form "3 Aug", "9 May", etc. How would I do this regex?
 
@@ -1017,7 +1021,7 @@ Pandas picked up the idea of dataframes from R and functionality is similar in m
 what you can do with R's `dplyr` package.
 
 `dplyr` and `pandas` provide a lot of functionality for the "split-apply-combine"
-framework of working with "rectangular" data.
+framework of working with "rectangular" data. Unfortunately, using Pandas can be a bit hard to learn/remember. I suggest looking into learning [`polars`](unit2-dataTech.html#reading-data-quickly-arrow-and-polars) as an alternative.
 
 Often analyses are done in a stratified fashion - the same operation or
 analysis is done on subsets of the data set. The subsets might be
@@ -2465,9 +2469,10 @@ y
 
 Our decorator doesn't do anything useful, but hopefully you can imagine that the idea of being able to have more control over the operation of functions could be useful. For example we could set up a timing wrapper so that when we run a function, we get a report on how long it took to run the function. Or using the idea of a closure, we could keep a running count of the number of times a function has been called.
 
-One real-world example of using decorators is in setting up functions to run in parallel in `dask`, which we'll discuss in Unit 7.
+One real-world example of using decorators is in setting up functions to run in parallel in `dask`, which we'll discuss in Unit 7. Another is the use of Numba to do [just-in-time (JIT) compilation](#just-in-time-jit-compilation) of Python code.
 
 # 8. Memory and copies
+
 
 ## Overview
 
@@ -2775,10 +2780,12 @@ shared pointers in C++ and in how R handles copying and garbage collection.
 
 ## Strategies for saving memory
 
-A frew basic strategies for saving memory include:
+A few basic strategies for saving memory include:
 
 -   Avoiding unnecessary copies.
 -   Removing objects that are not being used, at which point the Python garbage collector should free up the memory.
+-   Use iterators (e.g., `range()`) and [generators](https://wiki.python.org/moin/Generators) to avoid building long lists that are iterated over.
+
 
 If you're really trying to optimize memory use, you may also consider:
 
@@ -2893,6 +2900,8 @@ One thing that needs to be dealt with is type checking. As discussed above, part
 JIT compilation can involve translation from the original code to machine code or translation of bytecode (see next section) to machine code.
 
 At the end of this unit, we'll see the use of JIT compilation with the JAX package in Python.
+
+`numba` is a standard JIT compiler for Python and numpy that uses the LLVM compiler library. To use it one applies the `numba.njit` decorator to a Python function.
 
 
 #### Byte compiling (optional)
@@ -3198,7 +3207,7 @@ z = np.random.normal(size = 1000)
 out = fun_append2(z)
 ```
 
-Surprisingly, the id of `x` doesn't seem to change, even though we are allocating new memory at many of the iterations. What is happening is that `x` is an wrapper object that contains within it a reference to an array of references (pointers) to the list elements. The location of the wrapper object doesn't change, but the underlying array of references/pointers is being reallocated.
+Surprisingly, the id of `x` doesn't seem to change, even though we are allocating new memory at many of the iterations. What is happening is that `x` is a wrapper object that contains within it a reference to an array of references (pointers) to the list elements. The location of the wrapper object doesn't change, but the underlying array of references/pointers is being reallocated. (And furthermore, Python may be using the `realloc` system call to request memory from the opearating system; the operating system can then try to allocate the additional memory at the same location (i.e., extending the block of memory).)
 
 Side note: our assessment of size above does not include the actual size of the list elements.
 
@@ -3613,14 +3622,14 @@ doing many, many summations that involve just a few numbers).
 
 ```{python, cache-aware2}
 # Define the sum calculations as functions
-def sum_by_column():
-    return np.sum(A, axis=0)
-
 def sum_by_row():
     return np.sum(tA, axis=1)
 
-timeit.timeit(sum_by_column, number=10)  # potentially slow
+def sum_by_column():
+    return np.sum(A, axis=0)
+
 timeit.timeit(sum_by_row, number=10)
+timeit.timeit(sum_by_column, number=10)  # potentially slow
 ```
 
 Suppose we instead do the looping manually.

@@ -419,6 +419,8 @@ Other resources include:
   - Sections 9.9 and 11 of [Paul Murrell's book](http://www.stat.auckland.ac.nz/~paul/ItDT)
   - The back/second page of RStudio's `stringr` cheatsheet has a [cheatsheet on regular expressions](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf).
 
+In addition to the regular expression functionality we'll cover, there is a lot more advanced functionality we won't cover, such as callbacks, named groups, recursion, word boundaries, and lookaround assertions. 
+
 ## Versions of regular expressions
 
 One thing that can cause headaches is differences in version of regular expression syntax used. As discussed in `man grep`, *extended regular expressions* are standard, with *basic regular expressions* providing less functionality and *Perl regular expressions* additional functionality.

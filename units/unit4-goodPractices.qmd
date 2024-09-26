@@ -554,7 +554,7 @@ We'll be discussing Git a lot separately.
 
 # 2. Debugging and recommendations for avoiding bugs
 
-Python's `pdb` package provides a standard debugger. JupyterLab also has a debugger.
+Python's `pdb` package provides a standard debugger, with the ipython `ipdb` being a useful wrapper around `pdb`. JupyterLab also has a debugger. Perhaps the most commonly-used graphical debugger is provided via [VS Code](https://code.visualstudio.com/docs/python/debugging), which I encourage you to check out, particularly if you already use VS Code. 
 
 
 ## Basic debugging strategies
@@ -650,6 +650,8 @@ Let's hit `q` to quit out of the debugger.
 (Pdb) q
 >>>
 ```
+
+Note that all of these commands have graphical-based equivalents in VS Code.
 
 Next let's see how we can enter debugging mode only at point an error occurs.
 
