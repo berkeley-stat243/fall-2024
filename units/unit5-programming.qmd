@@ -1274,7 +1274,7 @@ Why have private fields (i.e., *encapsulation*)? The use of private fields shiel
     attributes whose name starts with `_` are considered private.
     In this case, we don't want users to modify the 
 `times` field. Why is this important? In this example, the correlation matrix and
-    the Cholesky factor U are both functions of the vector of times. So
+    the Cholesky factor U are both functions of the array of times. So
     we don't want to allow a user to directly modify `times`. If they did, it would leave the fields of the object in inconsistent states. Instead we want  them to use `set_times`, which correctly keeps all the fields
     in the object internally consistent (by calling `_calc_mats`). It also allows us to improve efficiency
 by controlling when computationally expensive operations are carried out.
@@ -1574,7 +1574,7 @@ x <- 1:3
 myfun <- function(x) {
       x[2] <- 7
       print(x)
-      return(x)
+      return x
 }
 
 new_x <- myfun(x)
@@ -1853,9 +1853,9 @@ Let's create an example function:
 ```{python}
 def add(x, y, z=1, absol=False):
     if absol:
-        return(abs(x+y+z))
+        return abs(x+y+z)
     else:
-        return(x+y+z)
+        return x+y+z
 ```
 
 When using a function, there are some rules that must be followed.
@@ -2062,7 +2062,7 @@ Arrays in C are really pointers to a block of memory:
 int x[10];
 ```
 
-In this case `x` will be the address of the first element of the vector.
+In this case `x` will be the address of the first element of the array.
 We can access the first element as `x[0]` or `*x`.
 
 Why have we gone into this? In C, you can pass a pointer as an argument
@@ -2214,7 +2214,7 @@ circumstance. Namely, where does Python get the value for the object `x`?
 ```{python}
 #| eval: false
 def f(y):
-  return(x + y)
+  return x + y
 
 f(3)
 ```
@@ -2288,8 +2288,8 @@ y = 100
 def fun_constructor():
 	y = 10
 	def g(x):
-            return(x + y)     
-	return(g)
+            return x + y     
+	return g
 
 ## fun_constructor() creates functions
 myfun = fun_constructor()
@@ -2386,8 +2386,8 @@ x = np.random.normal(size = 5)
 def scaler_constructor(input):
 	data = input
 	def g(param):
-            return(param * data) 
-	return(g)
+            return param * data
+	return g
 
 scaler = scaler_constructor(x)
 del x # to demonstrate we no longer need x
@@ -2477,7 +2477,7 @@ One real-world example of using decorators is in setting up functions to run in 
 ## Overview
 
 The main things to remember when thinking about memory use are: (1)
-numeric vectors take 8 bytes per element and (2) we need to keep track
+numeric arrays take 8 bytes per element and (2) we need to keep track
 of when large objects are created, including local variables in the
 frames of functions.
 
@@ -2865,7 +2865,7 @@ for i in range(10):
     x[i]= np.exp(x[i])
 ```
 
-There is no way around the fact that because of how dynamic this is, the interpreter needs to check if `x` exists, if it is a vector of sufficient length, if it contains numeric values, and it needs to go retrieve the required value, EVERY TIME the `np.exp()` is executed. Now the code above is unusual, and in most cases, we wouldn't have the `if` statements that modify `x`. So you could imagine a process by which the checking were done on the first iteration and then not needed after that -- that gets into the idea of just-in-time compilation, discussed later. 
+There is no way around the fact that because of how dynamic this is, the interpreter needs to check if `x` exists, if it is an array of sufficient length, if it contains numeric values, and it needs to go retrieve the required value, EVERY TIME the `np.exp()` is executed. Now the code above is unusual, and in most cases, we wouldn't have the `if` statements that modify `x`. So you could imagine a process by which the checking were done on the first iteration and then not needed after that -- that gets into the idea of just-in-time compilation, discussed later. 
 
 The standard Python interpreter (CPython) is a C function so in some sense everything that happens is running as compiled code, but there are lots more things being done to accomplish a given task using interpreted code than if the task had been written directly in code that is compiled. By analogy, consider talking directly to a person in a language you both know compared to talking to a person via an interpreter who has to translate between two languages. Ultimately, the same information gets communicated (hopefully!) but the number of words spoken and time involved is much greater. 
 
@@ -2936,7 +2936,7 @@ def f(vals):
     x = np.zeros(len(vals))
     for i in range(len(vals)):
         x[i] = np.exp(vals[i])
-    return(x)
+    return x
 
 x = np.random.normal(size = 10**6)
 t0 = time.time()
@@ -3096,7 +3096,7 @@ def lr_fast(y, x):
     out = sp.linalg.solve_triangular(L.T, 
           sp.linalg.solve_triangular(L, xty, lower=True),
           lower=False)
-    return(out)
+    return out
 
 t0 = time.time()
 regr = lr_fast(y, x)
@@ -3140,7 +3140,7 @@ def fun_prealloc(vals):
    x = [0] * n
    for i in range(n):
        x[i] = np.exp(vals[i])
-   return(x)
+   return x
 
 ## Appending to a list
 
@@ -3148,7 +3148,7 @@ def fun_append(vals):
    x = []
    for i in range(n):
        x.append(np.exp(vals[i]))
-   return(x)
+   return x
 
 ## Appending to a numpy array
 
@@ -3156,7 +3156,7 @@ def fun_append_np(vals):
    x = np.array([])
    for i in range(n):
        x = np.append(x, np.exp(vals[i]))
-   return(x)
+   return x
 
 
 t0 = time.time()
@@ -3201,7 +3201,7 @@ def fun_append2(vals):
            sz = sys.getsizeof(x)
            print(f"iteration {i}: size {sz}")
    print(f"Final id: {id(x)}")
-   return(x)
+   return x
 
 z = np.random.normal(size = 1000)
 out = fun_append2(z)
@@ -3335,13 +3335,13 @@ up your problem so you can loop over the 10 columns rather than the 10000 rows.
  - In general, in Python looping over rows is likely to be faster than looping over columns
 because of numpy's row-major ordering (by default, matrices are stored in memory as a long array in which values in a row are adjacent to each other). However how numpy handles this is [more complicated](https://numpy.org/doc/stable/dev/internals.html#multidimensional-array-indexing-order-issues) (see more in the [Section on cache-aware programming](#cache-aware-programming)), such that it may not matter for numpy calculations.
  - You can use direct arithmetic operations to add/subtract/multiply/divide
-a vector by each column of a matrix, e.g. `A*b` does element-wise multiplication of
-each column of *A* by a vector *b*. If you need to operate
+a 1-d array by each column of a matrix, e.g. `A*b` does element-wise multiplication of
+each column of *A* by a 1-d array *b*. If you need to operate
 by row, you can do it by transposing the matrix. 
 
 Caution: relying on Python's broadcasting rule in the context of vectorized
 operations, such as is done when direct-multiplying a matrix by a
-vector to scale the columns relative to each other, can be dangerous as the code may not be easy for someone to read
+1-d array to scale the columns relative to each other, can be dangerous as the code may not be easy for someone to read
 and poses greater dangers of bugs. In some cases you may want to
 first write the code more directly and
 then compare the more efficient code to make sure the results are the same. It's also a good idea to  comment your code in such cases.
@@ -3402,7 +3402,7 @@ X = sm.add_constant(X)
 
 def regrFun(i):
     model = sm.OLS(mat[:,i], X)
-    return(model.fit().params[1])
+    return model.fit().params[1]
 
 t0 = time.time()
 out1 = list(map(regrFun, range(nCalcs)))
@@ -3424,7 +3424,7 @@ Here the looping is faster. I don't have any particular explanation for that res
 Often calculations that are not explicitly linear algebra calculations
 can be done as matrix algebra. If our Python installation has a fast (and possibly parallelized) BLAS, this allows our calculation to take advantage of it.
 
-For example, we can sum the rows of a matrix by multiplying by a vector of ones. 
+For example, we can sum the rows of a matrix by multiplying by a 1-d array of ones. 
 
 ```{python, matrix-calc}
 mat = np.random.normal(size=(500,500))
@@ -3689,12 +3689,12 @@ import jax.numpy as jnp
 
 def myfun_np(x):
     y = np.exp(x) + 3 * np.sin(x)
-    return(y)
+    return y
     
 def myfun_jnp(x):
     print('hello')
     y = jnp.exp(x) + 3 * jnp.sin(x)
-    return(y)
+    return y
 
 n = 500000000
 
