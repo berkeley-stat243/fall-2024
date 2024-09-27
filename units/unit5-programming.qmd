@@ -2759,18 +2759,18 @@ the object as the argument to `getrefcount`.
 
 ```{python}
 x = np.random.normal(size = 5)
-sys.getrefcount(x)  # 2 
+sys.getrefcount(x)  # In reality, only 1. 
 y = x
-sys.getrefcount(x)  # 3
-sys.getrefcount(y)  # 3
+sys.getrefcount(x)  # In reality, 2.
+sys.getrefcount(y)  # In reality, 2.
 
 del y
-sys.getrefcount(x)  # 2
+sys.getrefcount(x)  # In reality, only 1. 
 
 y = x
 x = np.random.normal(size = 5)
-sys.getrefcount(y)  # 2
-sys.getrefcount(x)  # 2
+sys.getrefcount(y)  # In reality, only 1. 
+sys.getrefcount(x)  # In reality, only 1. 
 ```
 
 
