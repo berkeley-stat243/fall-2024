@@ -41,6 +41,8 @@ website:
             text: "Lab 2 (Exceptions/Testing)"
           - href: labs/lab3-debugging.html
             text: "Lab 3 (Debugging)"
+          - href: labs/lab4-reproducibility.html
+            text: "Lab 4 (Reproducibility)"
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
