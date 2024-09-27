@@ -197,7 +197,7 @@ first.**
 
 Most work for the course can be done on your laptop. Later in the course
 we'll also use the Statistics Department Linux cluster. You can also use the
-SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook. (The campus DataHub is limited in terms of number of CPU cores and memory so won't be suitable for more computationally-intensive work later in the semester.)
+SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook. **(The campus DataHub is limited in terms of number of CPU cores and memory so won't be suitable for more computationally-intensive work later in the semester, including problem sets and labs.)**
 
 The software needed for the course is as follows:
 

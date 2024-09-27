@@ -38,6 +38,8 @@ If you have access to a Linux machine, you very likely know how to access a term
 3) In the upper left, click on `File`, `New` and `Terminal`.
 4) To end your session, click on `File`, `Hub Control Panel` and `Stop My Server`. Note that `Logout` will not end your running session, it will just log you out of it.
 
+**While using DataHub for the bash unit (Unit 2) should be fine, if you try to use it for any problems sets or other work in class, you are likely to run out of memory.** The SCF JupyterHub (see below) should be used instead if you want browser-based access to a Linux environment, including the bash shell.
+
 ### Access via the Statistical Computing Facility (SCF)
 
 With an SCF account (available [here](https://scf.berkeley.edu/account)), you can access a bash shell in the ways listed below. 
