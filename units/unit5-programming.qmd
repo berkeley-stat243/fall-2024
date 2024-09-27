@@ -1574,7 +1574,7 @@ x <- 1:3
 myfun <- function(x) {
       x[2] <- 7
       print(x)
-      return x
+      return(x)
 }
 
 new_x <- myfun(x)
