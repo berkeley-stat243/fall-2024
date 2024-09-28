@@ -3064,8 +3064,9 @@ def lr_slow(y, x):
     return inv @ xty
 
 ## generate random observations and random matrix of predictors
-y = np.random.normal(size = 5000)
-x = np.random.normal(size = (5000,1000))
+n = 7000
+y = np.random.normal(size = 7000)
+x = np.random.normal(size = (7000,1000))
 
 t0 = time.time()
 regr = lr_slow(y, x)
@@ -3106,8 +3107,11 @@ print(f"Execution time: {t1-t0} seconds.")
 cProfile.run('lr_fast(y,x)')
 ```
 
-The Cholesky now dominates the computational time (but is much faster than `inv`),
-so there's not much more we can do in this case.
+In principle, the Cholesky now dominates the computational time (but is much faster than `inv`),
+so there's not much more we can do in this case. That said, it's not obvious from the profiling
+that the fact that most of the time is in the Cholesky is the case. Interpreting the output of a 
+profiler can be hard. In this case to investigate further I would probably time individual steps
+with `timeit`.
 
 You might wonder if it's better to use `x.T` or `np.transpose(x)`. Try using `timeit` to decide.
 
@@ -3207,9 +3211,11 @@ z = np.random.normal(size = 1000)
 out = fun_append2(z)
 ```
 
-Surprisingly, the id of `x` doesn't seem to change, even though we are allocating new memory at many of the iterations. What is happening is that `x` is a wrapper object that contains within it a reference to an array of references (pointers) to the list elements. The location of the wrapper object doesn't change, but the underlying array of references/pointers is being reallocated. (And furthermore, Python may be using the `realloc` system call to request memory from the opearating system; the operating system can then try to allocate the additional memory at the same location (i.e., extending the block of memory).)
+Surprisingly, the id of `x` doesn't seem to change, even though we are allocating new memory at many of the iterations. What is happening is that `x` is a wrapper object that contains within it a reference to an array of references (pointers) to the list elements. The location of the wrapper object doesn't change, but the underlying array of references/pointers is being reallocated. 
 
-Side note: our assessment of size above does not include the actual size of the list elements.
+Side note: I don't know of any way to find out the location of the underlying array of pointers. I believe that under the hood, Python uses the `realloc` system call to request memory from the operating system when it needs to use additional pointers, and that the operating system can then try to allocate the additional memory at the same location (i.e., extending the block of memory).
+
+Note that as we discussed in the previous section on memory use, our assessment of size above does not include the actual size of the list elements, as illustrated by having one element of the list be a big object:
 
 ```{python}
 print(sys.getsizeof(out))
@@ -3217,7 +3223,7 @@ out[2] = np.random.normal(size = 100000)
 print(sys.getsizeof(out))
 ```
 
-One upshot of this is that if you need to grow an object use a Python list. Then once it is complete, you can always convert it to another type, such as a numpy array.
+One upshot of how Python efficiently grows lists is that if you need to grow an object use a Python list. Then once it is complete, you can always convert it to another type, such as a numpy array.
 
 ### Vectorization and use of fast matrix algebra
 
