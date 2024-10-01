@@ -2700,9 +2700,31 @@ What do we notice?
   - A list element can use the same memory as another object (or part of another object).
   
 
+A note about calling `id` on list elements, e.g., `id(obj[0])`. Running that code causes execution of `obj[0]`, and the result is passed into `id`. That creates a new temporary object that is passed to `id`. The temporary object references the same object that `obj[0]` does, so we find out the id of `obj[0]`. 
+
 #### How character strings are stored.
 
 Similar tricks are used for storing strings (and also integers). We'll explore this in a problem on PS4.
+
+#### How numpy arrays are stored
+
+To do vectorized calculations and linear algebra efficiently, one needs the data in arrays stored contiguously in memory, and this is how numpy arrays are stored. We've seen that a numpy array involves the actual numbers plus 112 bytes of metadata/overhead associated with the object. 
+
+We can't usefully call `id` on elements of the array. Consider this:
+
+```{python}
+x = np.random.normal(5)
+type(x[1])
+id(x[1])
+tmp1 = x[1]
+tmp2 = x[1]
+id(tmp1)
+id(tmp2)
+```
+
+Each time we get the `x[1]` element we are creating a new numpy float64 scalar object. This is because each element of the array is not its own object (unlike a list element) so extracting the element involves copying the value and making a new object. 
+
+Another indication of the array being stored contiguously is that if we pickle the array, it's size is just a bit more than the size needed just to store the 8-byte numbers. If we instead pickle a list containing those same numbers, the result is more than twice as big, related to the pointers involved in referring to the individual numbers. 
 
 #### Modifying elements in place
 
@@ -2805,10 +2827,11 @@ If you're really trying to optimize memory use, you may also consider:
 
 Let's work through a real example where we keep a running tally of
 current memory in use and maximum memory used in a function call. We'll
-want to consider hidden uses of memory, when copies are made, and lazy
-evaluation.  This
+want to consider hidden uses of memory and when copies of the object are made rather than simply creating a new reference to an existing object.  This
 code (translated from the original R code) comes from a PhD student's research. For our purposes here, let's assume
-that `xvar` and `yvar` are very long numpy arrays using a lot of memory. 
+that the input `x` and `y` are very long numpy arrays using a lot of memory. 
+
+`np.isnan` returns an boolean array of True/False values indicating whether each input element is a NaN (not a number).
 
 ```{python}
 #| eval: false
@@ -2823,7 +2846,19 @@ def fastcount(xvar, yvar):
     ## We'll ignore the rest of the code.
     ## ....
 
+fastcount(x, y) # Assume x, y are existing large numpy arrays.
+
 ```
+
+Solution: 
+
+ - Line 1: `xvar` and `yvar` are local variables that are references to `x` and `y`.
+ - Line 2: `naline` is a new object
+ - Line 3: `np.isnan(yvar)` creates a temporary boolean array that should be garbage-collected (its memory freed) very quickly once that line of code is finished executing. It increases memory use only temporarily. `naline` is modified in place.
+ - Lines 4-5: `localx` and `localy` are new objects.
+ - Lines 6-7: `localx` and `localy` are modified in place without a new object being created.
+ - Line 8: `useline` is a new object.
+
 
 # 9. Efficiency
 

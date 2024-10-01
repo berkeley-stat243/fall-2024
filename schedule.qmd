@@ -16,7 +16,8 @@ listing:
 
 Quizzes are in-person only. 
 
-- Quiz 1: Wednesday October 23 in class.
+- Quiz 1: Wednesday October 23 in class
+  - Last names A-T in Evans 60, last names from V-Z in Evans 340.
   - Review session Friday October 18 in section.
 - Quiz 2: Monday November 25 in class.
   - Review session Friday November 22 in section.
