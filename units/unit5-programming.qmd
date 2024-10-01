@@ -2713,7 +2713,7 @@ To do vectorized calculations and linear algebra efficiently, one needs the data
 We can't usefully call `id` on elements of the array. Consider this:
 
 ```{python}
-x = np.random.normal(5)
+x = np.random.normal(size=5)
 type(x[1])
 id(x[1])
 tmp1 = x[1]
