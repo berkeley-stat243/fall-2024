@@ -76,10 +76,18 @@
           href: "ps/ps2.html"
 - week: 6
   days:
-    - date: "wed Oct 2"
+    - date: "Wed Oct 2"
       items:
         - type: "Problem_Set"
-          id: "2"
+          id: "3"
           name: "Problem Set 3"
           href: "ps/ps3.html"
+- week: 8
+  days:
+    - date: "Mon Oct 14"
+      items:
+        - type: "Problem_Set"
+          id: "4"
+          name: "Problem Set 4"
+          href: "ps/ps4.html"
       

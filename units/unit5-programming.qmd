@@ -3045,8 +3045,9 @@ There are a few ways to time code:
 
 ```{python}
 import time
+x = np.random.normal(size = 10**7)
 t0 = time.time()
-x = 3
+y = np.exp(x)
 t1 = time.time()
 
 print(f"Execution time: {t1-t0} seconds.")
@@ -3054,7 +3055,16 @@ print(f"Execution time: {t1-t0} seconds.")
 
 In general, it's a good idea to repeat (replicate) your timing, as there is some stochasticity in how fast your computer will run a piece of code at any given moment.
 
-Using `time` is fine for code that takes a little while to run, but for code that is really fast, it may not be very accurate. Measuring fast bits of code is tricky to do well. This next approach is better for benchmarking code (particularly faster bits of code).
+```{python}
+import time
+t0 = time.time()
+y = np.exp(3.)
+t1 = time.time()
+
+print(f"Execution time: {t1-t0} seconds.")
+```
+
+Using `time` is fine for code that takes a little while to run, but for code that is really fast (such as the code above), it may not be very accurate. Measuring fast bits of code is tricky to do well. This next approach is better for benchmarking code (particularly faster bits of code).
 
 ```{python}
 import timeit
@@ -3458,7 +3468,7 @@ for i in range(nCalcs):
 time.time() - t0
 ```
 
-Here the looping is faster. I don't have any particular explanation for that result.
+Here they're about the same time (depending on when I render the document, I am getting some stochasticity in the timing). This is not too surprising -- the overhead of the iteration should be small relative to the fundamental cost of the model fitting. 
 
 ### Matrix algebra efficiency
 
@@ -3773,7 +3783,7 @@ for comparability. One could have JAX use 64-bit numbers like this:
 
 ```{python}
 #| eval: false
-import jax.config
+import jax
 jax.config.update("jax_enable_x64", True)  
 ```
 
@@ -3806,6 +3816,8 @@ system.time(mean(rnorm(1000000)))
 system.time(f(3))
 system.time(f(mean(rnorm(1000000)))) 
 ```
+
+It seems like the `rnorm(1000000)` is not actually executed when being passed to `f`. That is "lazy evaluation" in action - the code that is passed in as an argument is only evaluated when it is needed (and in this case it's not needed for the function to run).
 
 Lazy evaluation is not just an R thing. It also occurs in Tensorflow (particularly version 1),
 the Python Dask package, and in Spark. The basic idea is to delay executation until
