@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-10-04">
 
-<title>Statistics 243: Introduction to Statistical Computing</title>
+<title>Lab 5: Code Reviews</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,67 +67,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-buttons .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-button','listing-link','listing-color',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-button","listing-link","listing-color"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-buttons'] = new List('listing-buttons', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked">
@@ -140,7 +82,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab5-codereview.html">Lab 5 (Code review)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -154,11 +96,11 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./assets/stat_bear.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/stat_bear.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Stat 243</a> 
+      <a href="../">Stat 243</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
 </div>
@@ -173,25 +115,25 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./office_hours.html" class="sidebar-item-text sidebar-link">
+  <a href="../office_hours.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Office Hours</span></a>
   </div>
 </li>
@@ -206,31 +148,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./units/unit1-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../units/unit1-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Unit 1 (UNIX intro)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./units/unit2-dataTech.html" class="sidebar-item-text sidebar-link">
+  <a href="../units/unit2-dataTech.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Unit 2 (Data technologies)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./units/unit3-bash.html" class="sidebar-item-text sidebar-link">
+  <a href="../units/unit3-bash.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Unit 3 (Bash shell)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./units/unit4-goodPractices.html" class="sidebar-item-text sidebar-link">
+  <a href="../units/unit4-goodPractices.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Unit 4 (Good practices)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./units/unit5-programming.html" class="sidebar-item-text sidebar-link">
+  <a href="../units/unit5-programming.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Unit 5 (Programming)</span></a>
   </div>
 </li>
@@ -247,37 +189,37 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./labs/lab0-setup.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/lab0-setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 0 (Optional setup)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./labs/lab1-submission.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/lab1-submission.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 1 (Quarto/Git/Submission)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./labs/lab2-testing.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/lab2-testing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 2 (Exceptions/Testing)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./labs/lab3-debugging.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/lab3-debugging.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 3 (Debugging)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./labs/lab4-reproducibility.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/lab4-reproducibility.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 4 (Reproducibility)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./labs/lab5-codereview.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/lab5-codereview.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 5 (Code review)</span></a>
   </div>
 </li>
@@ -294,25 +236,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ps/ps1.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ps/ps2.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ps/ps3.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ps/ps4.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 4</span></a>
   </div>
 </li>
@@ -329,37 +271,37 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howtos/accessPython.html" class="sidebar-item-text sidebar-link">
+  <a href="../howtos/accessPython.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Accessing Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howtos/accessUnixCommandLine.html" class="sidebar-item-text sidebar-link">
+  <a href="../howtos/accessUnixCommandLine.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Accessing the Unix Command Line</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howtos/installGit.html" class="sidebar-item-text sidebar-link">
+  <a href="../howtos/installGit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing Git</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howtos/installQuarto.html" class="sidebar-item-text sidebar-link">
+  <a href="../howtos/installQuarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing and Using Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howtos/submitPS.html" class="sidebar-item-text sidebar-link">
+  <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set Submissions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howtos/windowsAndLinux.html" class="sidebar-item-text sidebar-link">
+  <a href="../howtos/windowsAndLinux.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Windows 10 and the Ubuntu Subsystem</span></a>
   </div>
 </li>
@@ -367,7 +309,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./license.html" class="sidebar-item-text sidebar-link">
+  <a href="../license.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">License</span></a>
   </div>
 </li>
@@ -381,18 +323,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-materials" id="toc-course-materials" class="nav-link active" data-scroll-target="#course-materials">Course materials</a></li>
-  <li><a href="#questions-about-taking-the-class" id="toc-questions-about-taking-the-class" class="nav-link" data-scroll-target="#questions-about-taking-the-class">Questions about taking the class</a></li>
+  <li><a href="#hands-on-steps-for-the-lab" id="toc-hands-on-steps-for-the-lab" class="nav-link active" data-scroll-target="#hands-on-steps-for-the-lab">Hands-on steps for the lab</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations">Considerations</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab5-codereview.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab5-codereview.html">Lab 5 (Code review)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Statistics 243: Introduction to Statistical Computing</h1>
-<p class="subtitle lead">UC Berkeley, Spring 2024</p>
+<h1 class="title">Lab 5: Code Reviews</h1>
 </div>
 
 
@@ -400,6 +342,12 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 4, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -409,37 +357,34 @@ window.Quarto = {
 </header>
 
 
-<div id="listing-buttons" class="quarto-listing quarto-listing-container-custom">
-
-  <button style="background-color: purple;"><a href="https://edstem.org/us/courses/62469/discussion/">Ed</a></button>
-
-  <button style="background-color: orange;"><a href="https://www.gradescope.com/courses/825461">Gradescope</a></button>
-
-  <button style="background-color: blue;"><a href="https://statistics.berkeley.edu/computing/training/tutorials">Tutorials</a></button>
-
-  <button style="background-color: green;"><a href="https://bcourses.berkeley.edu/courses/1537551/external_tools/90481">Lecture recordings</a></button>
-
-  <button style="background-color: red;"><a href="https://bcourses.berkeley.edu/courses/1537551">bCourses</a></button>
-
-  <button style="background-color: gray;"><a href="https://pollev.com/chrispaciorek428">PollEV</a></button>
-
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
-<section id="course-materials" class="level2">
-<h2 class="anchored" data-anchor-id="course-materials">Course materials</h2>
-<p>See the links above for the key resources for the course.</p>
-<p>Most course content (in particular unit notes, labs, and problem sets) are available through this website via the links in the left sidebar.</p>
+<section id="hands-on-steps-for-the-lab" class="level2">
+<h2 class="anchored" data-anchor-id="hands-on-steps-for-the-lab">Hands-on steps for the lab</h2>
+<ol type="1">
+<li>Pair up in teams of 2 (or 3 if necessary).</li>
+<li>One member of the team will create a new repository on https://github.berkeley.edu/ and invite the other team member(s) as collaborator(s) on the repo (Settings, Collaborators, Manage access, Add people).</li>
+<li>Using the GitHub web interface, each team member will create a new file in the repo via “Create new file” under “Add file”, and paste their code for presidential debates into it (problem 2 of PS3). Note that the files should have different names or be placed under different directories to avoid conflicts.</li>
+<li>Commit your new file (from the GitHub web interface) as a pull request / separate branch. That is, select “Create a new branch for this commit and start a pull request” instead of “Commit directly to the main branch”. Discuss the differences of committing to the main branch and opening a pull request with your partner(s) and when you would use one or the other.</li>
+<li>Write a descriptive message (what is the file being added, why are you adding it, are there any details the reviewer should be aware of, etc.) to accompany your pull request.</li>
+<li>Now each team member will go to the pull request made by another team member and look at the code changes.</li>
+<li>Read each other’s code carefully and leave some thoughtful comments.</li>
+<li>The comments may be about implementation details, efficiency concerns, or style and readability.</li>
+<li>Remember to be constructive and kind :)</li>
+</ol>
 </section>
-<section id="questions-about-taking-the-class" class="level2">
-<h2 class="anchored" data-anchor-id="questions-about-taking-the-class">Questions about taking the class</h2>
-<p>If you would like to audit the class, enroll as a UC Berkeley undergraduate, or enroll as a concurrent enrollment student (i.e., for visiting students), or for some other reason are not enrolled, please fill out <a href="https://forms.gle/W5jZ3nT4sqbj2PNBA">this survey</a> as soon as possible. All those enrolled or wishing to take the class should have filled it out by Friday August 30 at noon.</p>
-<p>Undergraduates can only take the course with my permission and once all graduate students have an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.</p>
-<p>Concurrent enrollment students (e.g., exchange students from other universities/countries) can take the course with my permission and once all UC Berkeley students have had an opportunity to register. I do not know if there will be space, but I recommend you attend the course as if you were enrolled until this is clear.</p>
-<p>Please see the syllabus for the math and statistics background I expect, as well as the need to be familiar with Python or to get up to speed in Python during the first few weeks of the semester.</p>
-<p>The first three weeks involve a lot of moving pieces, in part related to trying to get everyone up to speed with the bash shell and Python. Please use <a href="./schedule.html">the schedule</a> to keep on top of what you need to do.</p>
-
+<section id="considerations" class="level2">
+<h2 class="anchored" data-anchor-id="considerations">Considerations</h2>
+<p>Each review is going to be unique, but there are a few common points that might be worth considering in general. We suggest students think about (and beyond) the following:</p>
+<ul>
+<li><p>How is the code organized into functions or class methods;</p></li>
+<li><p>Use of loops vs.&nbsp;map() vs vs.&nbsp;list comprehensions;</p></li>
+<li><p>What approach (if any) was taken to identify unexpected things in the text and correct them, so that the parsing into chunks and sentences could be improved;</p></li>
+<li><p>What checks/assertions (if any) were implemented as sanity checks of the results (not unit tests of functions, but rather checks at steps of the workflow to see that the results are as expected at given checkpoints, e.g., that the number of chunks is not extremely small or large);</p></li>
+<li><p>What other checks/assertions do you think could be considered.</p></li>
+</ul>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.</p>
 
 
 </section>
