@@ -410,7 +410,7 @@ window.Quarto = {
 <section id="problems" class="level2">
 <h2 class="anchored" data-anchor-id="problems">Problems</h2>
 <ol type="1">
-<li><p>Memoization of a function involves storing (caching) the values produced by a given input and then returning the cached result instead of rerunning the function when the same input is provided in the future. It can be a good approach to improve efficiency when a calculation is expensive (and presuming that sometimes the function will be run with inputs on whic it has already been used). It’s particularly useful for for recursive calculuations that involve solving a subproblem in order to solve a given (larger) problem. If you’ve already solved the subproblem you don’t need to solve it again. For example if one is working with graphs or networks, one often ends up writing recursive algorithms. (Suppose, e.g., you have a geneology giving relationships of parents and children. If you wanted to find all the descendants of a person, and you had already found all the descendants of one of the person’s children, you could make use of that without finding the descendants of the child again.)</p>
+<li><p><em>Memoization</em> of a function involves storing (caching) the values produced by a given input and then returning the cached result instead of rerunning the function when the same input is provided in the future. It can be a good approach to improve efficiency when a calculation is expensive (and presuming that sometimes the function will be run with inputs on whic it has already been used). It’s particularly useful for for recursive calculuations that involve solving a subproblem in order to solve a given (larger) problem. If you’ve already solved the subproblem you don’t need to solve it again. For example if one is working with graphs or networks, one often ends up writing recursive algorithms. (Suppose, e.g., you have a geneology giving relationships of parents and children. If you wanted to find all the descendants of a person, and you had already found all the descendants of one of the person’s children, you could make use of that without finding the descendants of the child again.)</p>
 <p>Write a decorator that implements memoization. It should handle functions with either one or two arguments (write one decorator, not two!). You can assume these arguments are simple objects like numbers or strings. As part of your solution, explain whether you need to use <code>nonlocal</code> or not in this case.</p>
 <p>Test your code on basic cases, such as applying the log-gamma function to a number and multiplying together two numbers. These may not be realistic cases, because the lookup process could well take more time than the actual calculation. To assess that, time the memoization approach compared to directly doing the calculation. Be careful that you are getting an accurate timing of such quick calculations (see Unit 5 notes)!</p></li>
 <li><p>Let’s work more on how Python stores and copies objects, in particular lists.</p>
@@ -418,7 +418,7 @@ window.Quarto = {
 <li><p>Experiment with creating lists of real-valued numbers of different lengths. Try to determine how much memory is used for each reference (each element of the list), not counting the memory used for the actual values. Also consider lists of more complicated objects to see if the behavior is the same or similar.</p></li>
 <li><p>Use the list <code>.copy</code> method with a list of numbers and with a list containing more complicated objects (including another list or some dictionary). Compare the behavior in terms of what happens when you modify elements at different levels of nestedness. Relate the behavior to the help information in <code>help(list.copy)</code> and to what we know about how the structure of lists.</p></li>
 <li><p>Consider creating these lists.</p>
-<div id="9bf71c83" class="cell" data-execution_count="1">
+<div id="385d007a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_int <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_real <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>my_string <span class="op">=</span> <span class="st">'hat'</span></span>
@@ -430,18 +430,18 @@ window.Quarto = {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>xc <span class="op">=</span> [<span class="st">'hat'</span>, my_string, my_string, <span class="st">'dog'</span>]</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>yc <span class="op">=</span> [<span class="st">'hat'</span>, my_string, my_string, <span class="st">'dog'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-</ol>
-<p>What is different about how these objects are stored?</p></li>
-<li><p>Suppose I want to compute the trace of a matrix, <span class="math inline">\(A\)</span>, <span class="math inline">\(A=XY\)</span>, where the trace is <span class="math inline">\(\sum_{i=1}^{n} A_{ii}\)</span>. Assume both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <span class="math inline">\(n \times n\)</span>. A naive implementation is <code>np.sum(np.diag(X@Y))</code>.</p>
+</div>
+<p>What is different about how the elements in these lists are stored?</p></li>
+</ol></li>
+<li><p>Suppose I want to compute the trace of a matrix, <span class="math inline">\(A\)</span>, where <span class="math inline">\(A=XY\)</span>. The trace is <span class="math inline">\(\sum_{i=1}^{n} A_{ii}\)</span>. Assume both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <span class="math inline">\(n \times n\)</span>. A naive implementation is <code>np.sum(np.diag(X@Y))</code>.</p>
 <ol type="a">
 <li>What is the computational complexity of that naive implementation: <span class="math inline">\(O(n)\)</span>, <span class="math inline">\(O(n^2)\)</span>, or <span class="math inline">\(O(n^3)\)</span>? You can just count up the number of multiplications and ignore the additions. Why is that naive implementation inefficient?</li>
-<li>How could you (much) more eﬀiciently compute the trace in Python using vectorized operations on the matrices. Please provide Python code and do not use <code>map()</code> or list comprehension. What is the computational complexity of your solution?</li>
+<li>Write Python code that (much) more eﬀiciently computes the trace using vectorized/matrix operations on the matrices. You will not be able to use <code>map</code> or list comprehension to achieve this speedup. What is the computational complexity of your solution?</li>
 <li>Create a plot, as a function of <span class="math inline">\(n\)</span>, to demonstrate the scaling of the original implementation compared to your improved implementation.</li>
 <li>(Extra credit) Implement your more efficient version in using Jax (see Section 9 of Unit 5) and compare the timing to the numpy implementation, both with and without using <code>jax.jit()</code>.</li>
 </ol></li>
-<li><p>Suppose we have a matrix in which each column is a vector of probabilities that add to one, and we want to generate a sample from the categorical distribution represented by the probabilities in each column. For example, the first column might be (0.9, 0.05, 0.05) and the second row might be (0.1, 0.85, .0.5). When we generate the first sample, it is very likely to be a 1 and the second sample is very likely to be a 2. We could do this using a for loop over the columns of the matrix, and <code>np.random.choice()</code>, but that is a lot slower than some other ways we might do it because it is a loop executing in Python over many elements (columns).</p>
-<div id="80880a68" class="cell" data-execution_count="2">
+<li><p>Suppose we have a matrix in which each column is a vector of probabilities that add to one, and we want to generate a sample from the categorical distribution represented by the probabilities in each column. For example, the first column might be (0.9, 0.05, 0.05) and the second column might be (0.1, 0.85, .0.5). When we generate the first sample, it is very likely to be a 1 (a 0 in Python) and the second sample is very likely to be a 2 (a 1 in Python). We could do this using a for loop over the columns of the matrix, and <code>np.random.choice()</code>, but that is a lot slower than some other ways we might do it because it is a loop executing in Python over many elements (columns).</p>
+<div id="15d5b1f7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -462,7 +462,7 @@ window.Quarto = {
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    smp[i] <span class="op">=</span> np.random.choice(p, size<span class="op">=</span><span class="dv">1</span>, p<span class="op">=</span>probs[:,i])[<span class="dv">0</span>]</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Loop by column time: </span><span class="sc">{</span><span class="bu">round</span>(time.time() <span class="op">-</span> start, <span class="dv">2</span>)<span class="sc">}</span><span class="ss"> seconds."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Loop by column time: 3.01 seconds.</code></pre>
+<pre><code>Loop by column time: 3.37 seconds.</code></pre>
 </div>
 </div>
 <ol type="a">
