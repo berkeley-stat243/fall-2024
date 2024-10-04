@@ -31,6 +31,8 @@ website:
             text: "Unit 4 (Good practices)"
           - href: units/unit5-programming.qmd
             text: "Unit 5 (Programming)"
+          - href: units/unit6-parallel.qmd
+            text: "Unit 6 (Parallelization)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
