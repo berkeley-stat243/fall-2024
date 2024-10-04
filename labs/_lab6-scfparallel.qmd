@@ -41,7 +41,7 @@ A **cluster** is a collection of computing **nodes**. A node is analogous to a
 laptop or desktop computer, with an operating system, RAM, CPUs, and sometimes
 GPUs.
 
-![](./images/cluster.png)
+![](./lab6-scfparallel/images/cluster.png)
 [Image source](https://hbctraining.github.io/Intro-to-shell-flipped/lessons/08_HPC_intro_and_terms.html)
 
  Nodes with similar capabilities or access policies are often grouped together
