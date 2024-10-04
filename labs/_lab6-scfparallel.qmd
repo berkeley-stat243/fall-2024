@@ -152,6 +152,7 @@ interactive work such as job submission and monitoring, basic compilation,
 managing your disk space, and transferring data to/from the server.
 
 :::
+
  If for some reason `dorothy` is not working for you, the SCF has a number of
 nodes which can be accessed from your local machine with commands of the form
 `ssh <scf-username>@<hostname>.berkeley.edu`. Currently, these are:
