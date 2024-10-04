@@ -35,10 +35,8 @@ import re, os, sys, time, math
 
 [PDF](./unit5-programming.pdf){.btn .btn-primary}
 
-> **Warning**
-> This is a long unit and while I don't expect to make extensive
-> further edits, I will very likely make some. So you may need to
-> refresh the content periodically.
+> **Note**
+> 2024-10-03: There will be miminal further edits on this unit.
 
 # Overview
 
@@ -3165,7 +3163,7 @@ The Python profilers (`cProfile` and `profile` (not shown)) use [deterministic p
 (In contrast, R's profiler works by sampling (statistical profiling) - every little while during a calculation it finds out what function R is in and saves that information to a file. So if you try to profile code that finishes really quickly, there's not enough opportunity for the sampling to represent the calculation accurately and you may get spurious results.)
 
 
-## Writing efficient Python code
+## Writing efficient (Python) code
 
 We'll discuss a variety of these strategies, including:
 
@@ -3173,6 +3171,8 @@ We'll discuss a variety of these strategies, including:
 - Vectorization and use of fast matrix algebra
 - Consideration of loops vs. map operations
 - Speed of lookup operations, including hashing
+
+While illustrated in Python, many of the underlying ideas pertain in other contexts.
 
 ### Pre-allocating memory
 
@@ -3434,7 +3434,7 @@ time.time() - t0
 Regardless of how we do the looping (an explicit loop, list comprehension, or `map`), it looks like we can't avoid the overhead unless we use the vectorized call,
 which is of course the recommended approach in this case, both for speed and readability (and conciseness).
 
-Second, is it faster to use `map` than to use a loop? In the example above it is somewhat faster to use `map`. That might not be surprising. In the loop case, the interpreter needs to do the checking we discussed earlier in this section at each iteration of the loop. What about in the `map` case? For mapping over a numpy array, perhaps not, but what if mapping over a list? So without digging into how `map` works, it's hard to say.
+Second, is it faster to use `map` than to use a loop? In the example above it is somewhat (but not substantially) faster to use `map` (and still much slower than vectorization). In the loop case, the interpreter needs to do the checking we discussed earlier in this section at each iteration of the loop. What about in the `map` case? For mapping over a numpy array, perhaps not, but what if mapping over a list? Without digging into how `map` works, it's hard to say, but it does seem that based on this example, `map` is not doing anything special that saves much time when mapping over the elements of a numpy array.
 
 Here's an example where the bulk of time is in the actual computation and not in the looping itself. We'll run a bunch of regressions on a matrix `X` (i.e., each column of `X` is a predictor) using each column of the matrix `mat` to do a separate regression. 
 
@@ -3468,7 +3468,7 @@ for i in range(nCalcs):
 time.time() - t0
 ```
 
-Here they're about the same time (depending on when I render the document, I am getting some stochasticity in the timing). This is not too surprising -- the overhead of the iteration should be small relative to the fundamental cost of the model fitting. 
+Here they're about the same time (depending on when I render the document, I am getting some stochasticity in the timing). This is not too surprising -- the overhead of the iteration should be small relative to the fundamental cost of the model fitting, and we wouldn't be concerned with the overhead of using a loop. 
 
 ### Matrix algebra efficiency
 
@@ -3562,17 +3562,17 @@ Let's compare the speed of some different approaches to lookup.
 ```{python}
 n = 1000
 x = list(np.random.normal(size = n))
-keys = [str(v) for v in range(n)]
-xD = dict(zip(keys, x))
+labels = [str(v) for v in range(n)]
+xD = dict(zip(labels, x))
 
 timeit.timeit("x[500]", number = 10**6, globals = {'x':x})
 timeit.timeit("xD['500']", number=10**6, globals = {'xD':xD})
 ```
 
-How is it that Python can look up by key in the dictionary at essentially the same speed as jumping to an index position? It uses hashing, which allows O(1) lookup. In contrast, if one has to look through each key in turn, that is O(n), which is much slower:
+How is it that Python can look up by key in the dictionary at essentially the same speed as jumping to an index position? It uses hashing, which allows O(1) lookup. In contrast, if one has to look through each label (key) in turn, that is O(n), which is much slower:
 
 ```{python}
-timeit.timeit("x[keys.index('500')]", number = 10**6, globals = {'x':x, 'keys':keys})
+timeit.timeit("x[labels.index('500')]", number = 10**6, globals = {'x':x, 'labels': labels})
 ```
 
 As a further point of contrast, if we look up elements by name in R in named vectors or lists, that is much slower than looking up by index, because R doesn't use hashing in that context and  has to scan through the objects one by one until it finds the one with the name it is looking for. This stands in contrast to R and Python being able to directly go to the position of interest based on the index of an array, or to the hash-based lookup in a Python dictionary or an R environment.
@@ -3732,6 +3732,10 @@ We can also JIT compile JAX code. Behind the scenes, the instructions are compil
 
 Let's first consider running a vectorized calculation using JAX on the CPU, which will use multiple threads (discussed in Unit 6), each thread running on a separate CPU core on our computer. For now all we need to know is that the calculation will run in parallel, so we expect it to be faster than when using numpy, which won't run the calculation in parallel.
 
+> **Danger**
+> This demo uses 4 GB of memory just for `x`. Run on your own machine with caution.
+
+
 ```{python}
 #| eval: false
 import time
@@ -3743,7 +3747,6 @@ def myfun_np(x):
     return y
     
 def myfun_jnp(x):
-    print('hello')
     y = jnp.exp(x) + 3 * jnp.sin(x)
     return y
 
@@ -3752,6 +3755,10 @@ n = 500000000
 x = np.random.normal(size = n).astype(np.float32)  # 32-bit for consistency with JAX default
 x_jax = jnp.array(x)  # 32-bit by default
 print(x_jax.platform())
+```
+
+```
+cpu
 ```
 
 ```{python}
@@ -3801,12 +3808,13 @@ print(f"jitted jax time: {round(t3,3)}")
 ```
 
 ```
-jitted jax time: 3.874
+jitted jax time: 3.218
 ```
 
-So that gives some additional speedup, although in this case, it's not a huge improvement.
+So that gives a nice two-fold additional speedup.
 
-### Lazy evaluation
+
+### Lazy evaluation 
 
 What's strange about this R code?
 
