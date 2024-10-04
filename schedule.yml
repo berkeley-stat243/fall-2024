@@ -82,6 +82,14 @@
           id: "3"
           name: "Problem Set 3"
           href: "ps/ps3.html"
+- week: 7
+  days:
+    - date: "Mon Oct 7"
+      items:
+        - type: "Activity"
+          id: "6"
+          name: "Read first two (optionally three) sections of Unit 6"
+          href: "units/unit6-parallelization.html"
 - week: 8
   days:
     - date: "Mon Oct 14"
