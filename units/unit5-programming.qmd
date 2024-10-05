@@ -35,8 +35,9 @@ import re, os, sys, time, math
 
 [PDF](./unit5-programming.pdf){.btn .btn-primary}
 
-> **Note**
-> 2024-10-03: There will be miminal further edits on this unit.
+:::{.callout-note}
+2024-10-05: There will be miminal further edits on this unit.
+:::
 
 # Overview
 
@@ -50,7 +51,9 @@ made? While other languages use different principles and made different
 choices, understanding what one language does in detail will be helpful when you
 are learning another language or choosing a language for a project.
 
-Side note: this document has the configuration `ipynb-shell-interactivity: all`, so that output from all Python code in a chunk will print in the rendered document. It uses the `knitr` engine so that the output is interspersed with the code in the chunk rather than printed all at the end and to be able to run bash and (a few) R chunks.
+:::{.callout-note title="Quarto configuration details for this document"}
+This document  uses the `knitr` engine for rendering to be able to run chunks in multiple languages (Python and bash, as well as a few R chunks. It has the Quarto configuration `ipynb-shell-interactivity: all`, so that output from all Python code in a chunk will print in the rendered document; when done with the `knitr` engine, the output is interspersed with the code in the chunk rather than printed all at the end.
+:::
 
 # 1. Text manipulation, string processing and regular expressions (regex)
 
@@ -206,7 +209,9 @@ re.sub("([^\",]),", "\\1", text)
 
 How does that work? Consider that `[^\",]` matches a character that is not a quote and not a comma. The regex is such a character followed by a comma, with the matched character saved in `\\1` because of the grouping operator.
 
-> **Challenge**: Instead of removing the commas to remove the ambiguity, how would you convert the comma delimiters to pipe (`|`) delimiters (since the pipe is rarely used in text)?
+:::{.callout-tip title="Challenge"}
+Instead of removing the commas to remove the ambiguity, how would you convert the comma delimiters to pipe (`|`) delimiters (since the pipe is rarely used in text)?
+:::
 
 Extending the use of `\\1`, we can refer to multiple captured groups:
 
@@ -215,13 +220,20 @@ text = "Here's my number: 919-543-3300. They bought 731 bananas. Please call 919
 re.sub("([0-9]{3})[-\.]([0-9]{3})[-\.]([0-9]{4})", "area code \\1, number \\2-\\3", text)
 ```
 
-Extensions that we won't discuss further here:
+:::{.callout-note title="Additional regex functionality"}
+
+Regex extensions that we won't discuss further here include:
 
  - Groups can also be given names, instead of having to refer to them by their numbers.
  - We can have `sub` call a "callback" function to do the replacement. The function will be invoked on each match with the argument being equivalent to the result of `re.search`.
   - We can reference previously captured groups within a pattern using the same `\\1`-style syntax (as opposed to when doing replacement as seen above).
+:::
 
-> **Challenge**: Suppose a text string has dates in the form "Aug-3", "May-9", etc. and I want them in the form "3 Aug", "9 May", etc. How would I do this regex?
+:::{.callout-tip title="Challenge"}
+
+Suppose a text string has dates in the form "Aug-3", "May-9", etc. and I want them in the form "3 Aug", "9 May", etc. How would I do this regex?
+
+:::
 
 ### Greedy matching
 
@@ -258,9 +270,11 @@ re.sub("<.*?>", "", text)
 However, that syntax is a bit frustrating because `?` is also used to indicate
 0 or 1 repetitions, making the regex a bit hard to read/understand.
 
-> **Challenge**: Suppose I want to strip out HTML tags but without using the `?` to avoid
-greedy matching. How can I be more careful in constructing my regex?
+:::{.callout-tip title="Challenge"}
 
+Suppose I want to strip out HTML tags but without using the `?` to avoid
+greedy matching. How can I be more careful in constructing my regex?
+:::
 
 ## Special characters in Python
 
@@ -323,28 +337,28 @@ for st in ["3.9", "27", "4.2"]:
     print(st + ":\t", re.search("\\.", st)) 
 ```
 
+:::{.callout-tip title="Challenge"}
+Explain why we use a single backslash to get a newline and double backslash to write out a Windows path in the examples here:
 
-> **Challenge**
-> Explain why we use a single backslash to get a newline and double backslash to write out a Windows path in the examples here:
->
-> ```{python}
-> ## Suppose we want to use a \ in our string:
-> print("hello\nagain")
-> print("hello\\nagain")
->
-> print("My Windows path is: C:\\Users\\nadal.")
-> ```
->
-> Another way to achieve this effect if your string does not contain any special characters is to prefix your string literal with an r for "raw":
-> 
-> ```{python}
-> print(r"My Windows path is: C:\Users\nadal.")
-> ```
+```{python}
+## Suppose we want to use a \ in our string:
+print("hello\nagain")
+print("hello\\nagain")
 
+print("My Windows path is: C:\\Users\\nadal.")
+```
 
-Advanced note: Searching for an actual backslash gets even more
-complicated (lookup ["backslash plague"](https://docs.python.org/3/howto/regex.html#the-backslash-plague) or "baskslash hell"), because we need to pass two backslashes as the regular expression, so that a literal backslash is searched for. However, to pass two backslashes, we need to escape each of them with a backslash so Python doesn't treat each backslash as part of a special character. So that's four backslashes to search for a single backslash! Yikes. One rule of
+Another way to achieve this effect if your string does not contain any special characters is to prefix your string literal with an r for "raw":
+
+```{python}
+print(r"My Windows path is: C:\Users\nadal.")
+```
+:::
+
+On a more involved note, searching for an actual backslash gets even more
+complicated (lookup ["backslash plague"](https://docs.python.org/3/howto/regex.html#the-backslash-plague) or "backslash hell"), because we need to pass two backslashes as the regular expression, so that a literal backslash is searched for. However, to pass two backslashes, we need to escape each of them with a backslash so Python doesn't treat each backslash as part of a special character. So that's four backslashes to search for a single backslash! Yikes. One rule of
 thumb is just to keep entering backslashes until things work!
+
 
 ```{python}
 ## Use and search for an actual backslash
@@ -367,12 +381,14 @@ re.search(r"\\", tmp)
 
 This tells python to treat this sting literal without any escaping, but that does not apply to the regex engine (or else we would have used a single backslash). So yes. This can be quite confusing.
 
-> **Warning**
-> Be careful when cutting and pasting from documents that are not text
-> files as you may paste in something that looks like a single or double
-> quote, but which Python cannot interpret as a quote because it's some other
-> ASCII (or Unicode) quote character. If you paste in a " from PDF, it will not be
-> interpreted as a standard Python double quote mark.
+
+:::{.callout-warning title="Pasting quotation marks"}
+Be careful when cutting and pasting from documents that are not text
+files as you may paste in something that looks like a single or double
+quote, but which Python cannot interpret as a quote because it's some other
+ASCII (or Unicode) quote character. If you paste in a " from PDF, it will not be
+interpreted as a standard Python double quote mark.
+:::
 
 Similar things come up in the shell and in R, but in the shell you
 often don't need as many backslashes. E.g. you could do this to look for a
@@ -740,6 +756,7 @@ One advantage of Conda is that it can also install non-Python packages on which 
 package depends, whereas with pip you sometimes need to install a system package to
 satisfy a dependency.
 
+:::{.callout-note title="Using Mamba/libmamba and the Conda-forge channel"}
 It's not uncommon to run into a case where conda has trouble installing a package
 because of version inconsistencies amongst the dependencies. `mamba` is a drop-in
 replacement for `conda` and often does a better job of this "dependency resolution".
@@ -748,6 +765,7 @@ In recent versions of Conda, you can also use the Mamba's dependency resolver wh
 `conda config --set solver libmamba`, which puts `solver: libmamba` in your `.condarc` file.
 It's also generally recommended to use the `conda-forge` *channel* (i.e., location) when installing packages with Conda
 (this is done automatically when using `mamba`). `conda-forge` provides a wide variety of up-to-date packages, maintained by the community.
+:::
 
 
 ### Making your package installable (optional)
@@ -797,8 +815,9 @@ source activate myenv
 conda install numpy
 ```
 
-> **Warning**
-> If you use `conda activate` rather than `source activate`, Conda will prompt you to run `conda init`, which will make changes to your `~/.bashrc` that, for one, activate the Conda base environment automatically when a shell is started. This may be fine, but it's helpful to be aware.
+:::{.callout-warning}
+If you use `conda activate` rather than `source activate`, Conda will prompt you to run `conda init`, which will make changes to your `~/.bashrc` that, for one, activate the Conda base environment automatically when a shell is started. This may be fine, but it's helpful to be aware.
+:::
 
 ### Package locations
 
@@ -815,7 +834,7 @@ np.__file__
 np.__version__
 ```
 
-(`pip list` or `conda list` will also show version numbers, for all packages).
+(`pip list` or `conda list` will also show version numbers, for all packages.)
 
 `sys.path` shows where Python looks for packages on your system.
 
@@ -931,6 +950,7 @@ type(x[0])
 ```
 
 This can come up when working on a GPU, where the default is usually 32-bit (4-byte) numbers instead of 64-bit (8-byte) numbers. 
+
 ### Composite objects
 
 Many objects
@@ -1009,7 +1029,7 @@ x[2.0]
 x[2.73]
 ```
 
-What are the advantages and disadvantages of the different behaviors of Python and R?
+Question: What are the advantages and disadvantages of the different behaviors of Python and R?
 
 ### Dataframes
 
@@ -1524,11 +1544,11 @@ type(foo)
 type(Bear)
 ```
 
-> **Challenge**
->
-> Let's check our understanding of the object model.
-> How would you get Python to quit immediately, without asking for any more information, when you simply type `q` (no parentheses!) instead of `quit()`? (Hint: you can do this by understanding what happens when you type `q` and how to exploit the characteristics of Python classes.)
+:::{.callout-tip title="Challenge"}
+Let's check our understanding of the object model.
 
+How would you get Python to quit immediately, without asking for any more information, when you simply type `q` (no parentheses!) instead of `quit()`? (Hint: you can do this by understanding what happens when you type `q` and how to exploit the characteristics of Python classes.)
+:::
 
 # 7. Functional programming
 
@@ -1914,6 +1934,8 @@ os.path.join('a','b','c')
 x = ['a','b','c']
 os.path.join(*x)
 ```
+
+`*args` only handles positional arguments. You'd need to also have `**kwargs` as an argument to handle keyword arguments.
 
 ### Function outputs
 
@@ -2349,7 +2371,7 @@ def outer_function():
     x = 10  # Outer variable
     def inner_function():
         nonlocal x
-        x = 20  # Modifying the outer variable
+        x = 20  # Modify the outer variable.
     print(x)  # Output: 10
     inner_function()
     print(x)  # Output: 20
@@ -2517,7 +2539,9 @@ request more from the operating system. When objects are removed in Python, Pyth
 will handle the garbage collection of releasing that memory.
 
 The *stack* is the memory used for local variables when a function is
-called.
+called. I.e., the stack is the memory associated with function frames.
+Hence the term "stack trace" to refer to the active function frames
+during execution of code.
 
 There's a nice discussion of this on [this Stack Overflow
 thread](https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap).
@@ -2702,7 +2726,7 @@ A note about calling `id` on list elements, e.g., `id(obj[0])`. Running that cod
 
 #### How character strings are stored.
 
-Similar tricks are used for storing strings (and also integers). We'll explore this in a problem on PS4.
+Similar tricks are used for storing strings (and also integers). We may explore this in a problem set problem.
 
 #### How numpy arrays are stored
 
@@ -2722,7 +2746,7 @@ id(tmp2)
 
 Each time we get the `x[1]` element we are creating a new numpy float64 scalar object. This is because each element of the array is not its own object (unlike a list element) so extracting the element involves copying the value and making a new object. 
 
-Another indication of the array being stored contiguously is that if we pickle the array, it's size is just a bit more than the size needed just to store the 8-byte numbers. If we instead pickle a list containing those same numbers, the result is more than twice as big, related to the pointers involved in referring to the individual numbers. 
+Another indication of the array being stored contiguously is that if we pickle the array, its size is just a bit more than the size needed just to store the 8-byte numbers. If we instead pickle a list containing those same numbers, the result is more than twice as big, related to the pointers involved in referring to the individual numbers. 
 
 #### Modifying elements in place
 
@@ -2848,7 +2872,11 @@ fastcount(x, y) # Assume x, y are existing large numpy arrays.
 
 ```
 
-Solution: 
+:::{.callout-tip title="Challenge"}
+In the code above, note all the places where new memory must be allocated.
+:::
+
+:::{.callout-tip title="Solution" collapse="true"}
 
  - Line 1: `xvar` and `yvar` are local variables that are references to `x` and `y`.
  - Line 2: `naline` is a new object
@@ -2856,7 +2884,7 @@ Solution:
  - Lines 4-5: `localx` and `localy` are new objects.
  - Lines 6-7: `localx` and `localy` are modified in place without a new object being created.
  - Line 8: `useline` is a new object.
-
+:::
 
 # 9. Efficiency
 
@@ -2877,6 +2905,7 @@ For example, consider this code:
 x = 3
 abs(x)
 x*7
+
 x = 'hi'
 abs(x)
 x*3
@@ -3163,6 +3192,7 @@ The Python profilers (`cProfile` and `profile` (not shown)) use [deterministic p
 (In contrast, R's profiler works by sampling (statistical profiling) - every little while during a calculation it finds out what function R is in and saves that information to a file. So if you try to profile code that finishes really quickly, there's not enough opportunity for the sampling to represent the calculation accurately and you may get spurious results.)
 
 
+
 ## Writing efficient (Python) code
 
 We'll discuss a variety of these strategies, including:
@@ -3268,7 +3298,9 @@ out[2] = np.random.normal(size = 100000)
 print(sys.getsizeof(out))
 ```
 
-One upshot of how Python efficiently grows lists is that if you need to grow an object use a Python list. Then once it is complete, you can always convert it to another type, such as a numpy array.
+:::{.callout-tip title="Grow objects using lists, then convert"}
+One upshot of how Python efficiently grows lists is that if you need to grow an object, use a Python list. Then once it is complete, you can always convert it to another type, such as a numpy array.
+:::
 
 ### Vectorization and use of fast matrix algebra
 
@@ -3339,8 +3371,8 @@ except Exception as error:
 list(map(math.cos, x))
 ```
 
-
-**Challenge**: Consider the chi-squared statistic involved in
+:::{.callout-tip title="Challenge"}
+Consider the chi-squared statistic involved in
 a test of independence in a contingency table:
 
 $$
@@ -3350,6 +3382,7 @@ $$
 where $y_{i\cdot}=\sum_{j}y_{ij}$ and $y_{\cdot j} = \sum_{i} y_{ij}$ and $y_{\cdot\cdot} = \sum_{i} \sum_{j} y_{ij}$. Write this in a vectorized way
 without any loops.  Note that 'vectorized' calculations also work
 with matrices and arrays.
+:::
 
 Sometimes we can exploit vectorized mathematical operations in
 surprising ways, though sometimes the
@@ -3377,7 +3410,7 @@ timeit.timeit('truncx = x * x>0', number = 10, globals = {'x':x})
 
 We'll discuss what has to happen (in terms of calculations, memory allocation, and copying) in the two vectorized approaches to try to understand which is more efficient.
 
-Additional tips:
+:::{.callout-tip title="Additional efficiency tips"}
 
  - If you do need to loop over dimensions of a matrix or array, if possible
 loop over the smallest dimension and use the vectorized calculation
@@ -3388,7 +3421,8 @@ because of numpy's row-major ordering (by default, matrices are stored in memory
  - You can use direct arithmetic operations to add/subtract/multiply/divide
 a 1-d array by each column of a matrix, e.g. `A*b` does element-wise multiplication of
 each column of *A* by a 1-d array *b*. If you need to operate
-by row, you can do it by transposing the matrix. 
+by row, you can do it by transposing the matrix.
+::: 
 
 Caution: relying on Python's broadcasting rule in the context of vectorized
 operations, such as is done when direct-multiplying a matrix by a
@@ -3491,7 +3525,8 @@ Given the extra computation involved in actually multiplying each number by one,
 
 On the other hand, big matrix operations can be slow.
 
-**Challenge**: Suppose you
+:::{.callout-tip title="Challenge"}
+Suppose you
 want a new matrix that computes the differences between successive
 columns of a matrix of arbitrary size. How would you do this as matrix
 algebra operations? It's possible to write it as multiplying the matrix
@@ -3499,6 +3534,7 @@ by another matrix that contains 0s, 1s, and -1s in appropriate places.
  Here it turns out that the
 *for* loop is much faster than matrix multiplication. However,
 there is a way to do it faster as matrix direct subtraction. 
+:::
 
 ### Order of operations and efficiency
 
@@ -3521,7 +3557,11 @@ print(time.time() - t0)
 
 ```
 
+:::{.callout-tip "Challenge"}
 Why is the second order much faster?
+
+Count the number of multiplications involved in each of the two approaches.
+:::
 
 ### Avoiding unnecessary operations 
 
@@ -3533,7 +3573,7 @@ of a matrix, $XY$?
 Finally, when working with diagonal matrices, you can generally get much faster results by being smart. The following operations: $X+D$, $DX$, $XD$
 are mathematically the sum of two matrices and products of two matrices.
 But we can do the computation without using two full matrices.
-**Challenge**: How?
+
 
 ```{python, diag}
 n = 1000
@@ -3547,11 +3587,17 @@ prodMat1 = D @ X
 prodMat2 = X @ D
 ```
 
+:::{.callout-tip title="Challenge"}
+Consider either $X+D$, $DX$, or $XD$. How can I use vectorization to do this much more quickly than the direct, naive translation of the math into code?
+:::
+
+:::{.callout-important title="Exploit sparsity/structure!"}
 More generally, sparse matrices and structured matrices (such as block
 diagonal matrices) can generally be worked with MUCH more efficiently
 than treating them as arbitrary matrices. The `scipy.sparse` package (for both structured and arbitrary
 sparse matrices)  can help, as can specialized code available in other languages,
 such as C and Fortran packages.
+:::
 
 ### Speed of lookup operations
 
@@ -3694,7 +3740,9 @@ timeit.timeit('[np.sum(tA[row,:]) for row in range(tA.shape[0])]',
 
 Indeed, the row-wise calculations are much faster when done manually. However, when done with the `axis` argument in `np.sum` there is little difference. So that suggests numpy might be doing something clever in its implementation of `sum` with the `axis` argument.
 
-> **Challenge**: suppose you were writing code for this kind of use case. How could you set up your calculations to do either row-wise or column-wise operations in a way that processes each number sequentially based on the order in which the numbers are stored. For example suppose the values are stored row-major but you want the column sums.
+:::{.callout-tip title="Challenge"}
+Suppose you were writing code for this kind of use case. How could you set up your calculations to do either row-wise or column-wise operations in a way that processes each number sequentially based on the order in which the numbers are stored? For example suppose the values are stored row-major but you want the column sums.
+:::
 
 When we define a numpy array, we can choose to use column-major order (i.e., "Fortran" order) with the `order` argument.
 
@@ -3732,9 +3780,9 @@ We can also JIT compile JAX code. Behind the scenes, the instructions are compil
 
 Let's first consider running a vectorized calculation using JAX on the CPU, which will use multiple threads (discussed in Unit 6), each thread running on a separate CPU core on our computer. For now all we need to know is that the calculation will run in parallel, so we expect it to be faster than when using numpy, which won't run the calculation in parallel.
 
-> **Danger**
-> This demo uses 4 GB of memory just for `x`. Run on your own machine with caution.
-
+:::{.callout-warning}
+This demo uses 4 GB of memory just for `x`. Run on your own machine with caution.
+:::
 
 ```{python}
 #| eval: false
