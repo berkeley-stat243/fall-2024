@@ -27,12 +27,13 @@ References:
 
 -   [Tutorial on parallel processing using Python's Dask and R's future packages](https://berkeley-scf.github.io/tutorial-dask-future)
 
-
+:::{.callout-tip title="Parallelization and operating systems"}
 This unit will be fairly Linux-focused as most serious parallel
 computation is done on systems where some variant of Linux is running.
 The single-machine parallelization discussed here should work on Macs
 and Windows, but some of the details of what is happening under the hood
 are different for Windows.
+:::
 
 As context, let's consider some ways we might be able to achieve faster computation:
 
@@ -467,10 +468,12 @@ import sklearn.ensemble
 help(sklearn.ensemble.RandomForestClassifier)
 ```
 
+:::{.callout-tip}
 You'll usually need to look for an argument with one of the words *threads*, *processes*,
 *cores*, *cpus*, *jobs*, etc. in the argument name.
+:::
 
-### Scenario 1B:
+### Scenario 1B: Parallelized linear algebra
 
 If a method does linear algebra computations on large matrices/vectors,
 Python (and R) can call out to parallelized linear algebra packages (the BLAS and
@@ -520,15 +523,19 @@ to compare the time when run in parallel vs. on a single core.
 That's hard to demonstrate in this generated document, but when I ran it,
 it took 6.6 seconds, compared to 3 seconds using 8 cores.
 
+:::{.callout-warning}
 Note that for smaller linear algebra problems, we may not see any speed-up
 or even that the threaded calculation might be slower because of
 overhead in setting up the parallelization and because the parallelized
 linear algebra calculation involves more actual operations than when done
 serially.
+:::
 
-### GPUs and linear algebra
+### Scenario 1C: GPUs and linear algebra
 
 Linear algebra with large matrices is often a very good use case for GPUs.
+So if you or someone implementing a method can run the linear algebra you
+need on a GPU, that can give a big speedup.
 
 Here's an example of using the GPU to multiply large matrices using PyTorch.
 We could do this similarly with Tensorflow or JAX. I've just inserted the timing
@@ -584,7 +591,7 @@ using 4-byte floating point numbers for the GPU calculation.
 
 We'd also want to think about how many CPU cores should be used for the comparison.
 
-### Parallelized vectorized calculations
+### Scenario 1D: Parallelized vectorized calculations
 
 Similarly, packages such as PyTorch, Tensorflow, and JAX can parallelize vectorized calculations
 on either the CPU or GPU.
@@ -593,9 +600,48 @@ Recall that in Unit 5, we [used JAX to run a vectorized calculation on a very la
 JAX automatically ran that in parallel across multiple (CPU) cores.
 
 Here we'll see that if we have GPU available, JAX will automatically run the calculation in parallel on the GPU.
+I'll do this separately on a machine with a GPU and paste the results in here.
 
-[UNDER CONSTRUCTION]
+```{python}
+#| eval: false
+import time
+import jax
+import jax.numpy as jnp
 
+def myfun_jnp(x):
+    y = jnp.exp(x) + 3 * jnp.sin(x)
+    return y
+
+n = 500000000
+
+key = jax.random.key(1)
+x_jax = jax.random.normal(key, (n,))  # 32-bit by default
+print(x_jax.platform())
+
+t0 = time.time()
+z_jax1 = myfun_jnp(x_jax).block_until_ready()
+t_gpu = round(time.time() - t0, 3)
+
+cpu_device = jax.devices('cpu')[0]
+with jax.default_device(cpu_device):
+    key = jax.random.key(1)
+    x_jax = jax.random.normal(key, (n,))  # 32-bit by default
+    print(x_jax.platform())
+    t0 = time.time()
+    z_jax2 = myfun_jnp(x_jax).block_until_ready()
+    t_cpu = round(time.time() - t0, 3)
+
+print(f"GPU time: {t_gpu}\nCPU time: {t_cpu}")
+```
+
+```
+GPU time: 0.015
+CPU time: 4.709
+```
+
+So the GPU is much faster, even though the JAX CPU implementation uses multiple threads (as can be seen with `top`).
+
+Forcing JAX to use the CPU when a GPU is available is a bit of a hassle. When I tried to use `jax.config.update('jax_platform_name', 'cpu')`, it didn't seem to work for some reason.
 
 
 ## Scenario 2: three different prediction methods on your data
@@ -1109,11 +1155,11 @@ def myrandomfun(rng):
     z = rng.normal(size = 5)
 ```
 
-In R, the rlecuyer package deals with this. The L’Ecuyer algorithm has a period of $2^{191}$, which it divides into subsequences of length $2^{127}$.
+In R, the `rlecuyer` package deals with this. The L’Ecuyer algorithm has a period of $2^{191}$, which it divides into subsequences of length $2^{127}$.
 
 # 6. Additional details and topics (optional)
 
-## Avoiding repeated calculations by calling compute once
+## Avoiding repeated calculations by calling `.compute` once
 
 As far as I can tell, Dask avoids keeping all the pieces of a distributed object or computation in memory. However, in many cases this can mean repeating computations or re-reading data if you need to do multiple operations on a dataset.
 
@@ -1154,8 +1200,8 @@ machine and make use of them. However, you can also explicitly control
 the number of threads available to a process.
 
 For most threaded code (that based on the openMP protocol), the number
-of threads can be set by setting the OMP_NUM_THREADS environment
-variable (VECLIB_MAXIMUM_THREADS on a Mac). E.g., to set it for four
+of threads can be set by setting the `OMP_NUM_THREADS` environment
+variable (`VECLIB_MAXIMUM_THREADS` on a Mac). E.g., to set it for four
 threads in the bash shell:
 
 ```{bash}
@@ -1175,14 +1221,14 @@ OMP_NUM_THREADS=4 R CMD BATCH --no-save job.R job.out
 ```
 
 
-### Speed and threaded BLAS
+### Cautions about speed and threaded BLAS
 
 In many cases, using multiple threads for linear algebra operations will
 outperform using a single thread, but there is no guarantee that this
 will be the case, in particular for operations with small matrices and
-vectors. You can compare speeds by setting OMP_NUM_THREADS to different
+vectors. You can compare speeds by setting `OMP_NUM_THREADS` to different
 values. In cases where threaded linear algebra is slower than
-unthreaded, you would want to set OMP_NUM_THREADS to 1.
+unthreaded, you would want to set `OMP_NUM_THREADS` to 1.
 
 More generally, if you are using the parallel tools in Section 4 to
 simultaneously carry out many independent calculations (tasks), it is
