@@ -21,8 +21,8 @@ execute:
 
 # Overview
 
-Today we'll discuss the Statistical Computing Facility's (SCF) cluster, which is
-administrated by the Department of Statistics. Much of this material comes
+Today we'll discuss the Statistical Computing Facility's (SCF) cluster, which
+is administrated by the Department of Statistics. Much of this material comes
 directly from the SCF's documentation; see the links below for more details:
 
 - [SCF homepage](https://statistics.berkeley.edu/computing/getting-started)
@@ -44,10 +44,10 @@ GPUs.
 ![](./lab6-scfparallel/images/cluster.png)
 [Image source](https://hbctraining.github.io/Intro-to-shell-flipped/lessons/08_HPC_intro_and_terms.html)
 
- Nodes with similar capabilities or access policies are often grouped together
-as a **partition**. This allows cluster users to request the resources they need
--- such as number of CPU **cores** -- from a pool of nodes, rather than specify
-a specific one.
+Nodes with similar capabilities or access policies are often grouped together
+as a **partition**. This allows cluster users to request the resources they
+need -- such as number of CPU **cores** -- from a pool of nodes, rather than
+specify a specific one.
 
 :::
 
@@ -103,20 +103,20 @@ For info on using `ssh` (including on Windows), see
 
 :::
 
-For example, I'll use `ssh` to connect to the `dorothy` node:
+For example, I'll use `ssh` to connect to the `gandalf` node:
 
 ```bash
-james@pop-os:~$ ssh <scf-username>@dorothy.berkeley.edu
-The authenticity of host 'dorothy.berkeley.edu (128.32.135.58)' can't be established.
-ED25519 key fingerprint is SHA256:rOY7ED/iIiTgI++Y4XHmiEl+tC+OmSGBvWp03CSII5E.
+james@pop-os:~$ ssh <scf-username>@gandalf.berkeley.edu
+The authenticity of host 'gandalf.berkeley.edu (128.32.135.47)' can't be established.
+ED25519 key fingerprint is SHA256:io5uUQGbCZie78mF+UUZ5guDK29JXQGQ6LVB129UoUo.
 This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added 'dorothy.berkeley.edu' (ED25519) to the list of known hosts.
+Warning: Permanently added 'gandalf.berkeley.edu' (ED25519) to the list of known hosts.
 ```
 
 Notice that upon first connecting to a server you haven't visited there is a
 warning that the "authenticity of the host ... can't be established". So long as
-you have typed in the hostname correctly (`dorothy.berkeley.edu`, in this case),
+you have typed in the hostname correctly (`gandalf.berkeley.edu`, in this case),
 and trust the host (we trust the SCF!) then you can type `yes` to add the host
 to your known hosts file (found on your local machine at `~/.ssh/known_hosts`).
 
@@ -127,14 +127,14 @@ you're done. If you were successful, you should see a welcome message and your
 shell prompt, like:
 
 ```bash
-<scf-username>@dorothy:~$
+<scf-username>@gandalf:~$
 ```
 
 To get your bearings, you can type `pwd` to see where your home directory is
 located on the SCF cluster filesystem:
 
 ```bash
-<scf-username>@dorothy:~$ pwd
+<scf-username>@gandalf:~$ pwd
 /accounts/grad/<scf-username>
 ```
 
@@ -153,7 +153,7 @@ managing your disk space, and transferring data to/from the server.
 
 :::
 
- If for some reason `dorothy` is not working for you, the SCF has a number of
+ If for some reason `gandalf` is not working for you, the SCF has a number of
 nodes which can be accessed from your local machine with commands of the form
 `ssh <scf-username>@<hostname>.berkeley.edu`. Currently, these are:
 
@@ -174,7 +174,7 @@ you have used and available using the `quota` command, which will show your home
 directory usage and quota on the line for the `accounts` filesystem.
 
 ```bash
-<scf-username>@dorothy:~$ quota
+<scf-username>@gandalf:~$ quota
 FILESYSTEM	USE     	QUOTA   	%
   accounts	5.29 G  	20 G    	26.5
 ```
@@ -198,8 +198,8 @@ future.
 For temporary files (e.g., intermediate results of a computation that you don't
 need to store for later), every machine has a `/tmp` filesystem. However, `/tmp`
 is _always linked to the specific machine_ you are on, meaning that if you put
-something in `/tmp` on `dorothy` and then later go to `aragorn`, you won't find
-your files in the `/tmp` directory there. If you go back to `dorothy`, you will
+something in `/tmp` on `gandalf` and then later go to `aragorn`, you won't find
+your files in the `/tmp` directory there. If you go back to `gandalf`, you will
 likely find them again, but `/tmp` is automatically wiped when a machine
 reboots, so only use it for files you don't care about preserving!
 
@@ -222,20 +222,20 @@ The syntax for `scp` is `scp <from-place> <to-place>`, and you'll typically use
 
 ```bash
 # transfer to my home directory without renaming the file 
-scp data.csv <scf-username>@dorothy.berkeley.edu:~/
+scp data.csv <scf-username>@gandalf.berkeley.edu:~/
 
 # transfer to the data/ subdirectory and rename the file
-scp data.csv <scf-username>@dorothy.berkeley.edu:~/data/new_name.csv
+scp data.csv <scf-username>@gandalf.berkeley.edu:~/data/new_name.csv
 
-# transfer to the dorothy-specific /tmp/ directory
-scp data.csv <scf-username>@dorothy.berkeley.edu:/tmp/
+# transfer to the gandalf-specific /tmp/ directory
+scp data.csv <scf-username>@gandalf.berkeley.edu:/tmp/
 ```
 
 ### From SCF while on your local machine
 
 ```bash
 # now <from-place> is a path in my home directory on the SCF 
-scp <scf-username>@dorothy.berkeley.edu:~/data/new_name.csv ~/Desktop/data_scf.csv
+scp <scf-username>@gandalf.berkeley.edu:~/data/new_name.csv ~/Desktop/data_scf.csv
 ```
 
 For more information, see
@@ -354,7 +354,7 @@ don't need a GUI, e.g. when debugging components of larger non-interactive job.
 To run an interactive job via Slurm, you can use the `srun` command: 
 
 ```bash
-# ssh -Y <scf-username>@dorothy.berkeley.edu
+# ssh -Y <scf-username>@gandalf.berkeley.edu
 
 # 10 minute time limit
 srun  -t 00:10:00 -N 1 -n 1 -c 1 --pty /bin/bash
@@ -385,28 +385,44 @@ one of the cluster's computing nodes.
 ### Specifying resources
 
 If you are submitting a job that uses multiple cores or nodes, you may need to
-carefully specify the resources you need. The key flags for use in your job
-script are:
+carefully specify the resources you need. The main key flag for use in your job
+script is:
 
-- `--nodes` (or `-N`): indicates the number of nodes to use
 - `--ntasks-per-node`: indicates the number of tasks (i.e., processes) one wants to run on each node
-- `--cpus-per-task` (or `-c`): indicates the number of CPUs to be used for each task
 
-In addition, in some cases it can make sense to use the `--ntasks` (or `-n`)
-option to indicate the total number of tasks and let the scheduler determine how
-many nodes and tasks per node are needed. In general `--cpus-per-task` will be 1
-except when running threaded code. When setting up parallel python code, you can find
-out how many cores there are on the node assigned to you with:
+The value passed to `--ntasks-per-node` becomes available through the
+`SLURM_NTASKS` environment variable, which can be retrieved in python via:
 
 ```python
 import os
-ncores = os.getenv("SLURM_CPUS_ON_NODE")
+ntasks = os.getenv("SLURM_NTASKS")
 ```
 
-The `SLURM_CPUS_ON_NODE` environment variable is set by Slurm when the job
-starts running, and therefore can be accessed within your jobs. In addition to
-`SLURM_CPUS_ON_NODE` here are some other variables that may be useful:
-`SLURM_NTASKS`, `SLURM_CPUS_PER_TASK`, `SLURM_NODELIST`, `SLURM_NNODES`.
+### Specifying resources: alternatives
+
+The `--ntasks-per-node` flag is convenient as it does not require the user to
+know the actual number of CPUs on each node. It is generally a good choice if
+one is simply running parallel code via multiple processes on one node.
+However, there are alternatives flags that can be used in conjunction for
+finer-grained control:
+
+- `--nodes` (or `-N`): indicates the number of nodes to use
+- `--ntasks` (or `-n`): indicates the number of tasks to run, not necessarily on the same node
+- `--cpus-per-task` (or `-c`): indicates the number of CPUs to be used for each task
+
+Since specifying `--ntasks` does not guarantee that all the cores will be on a
+single node, this can cause problems in the common case of code that works on
+one node but not multiple nodes. If one wants to do parallelization at multiple
+levels (e.g., multiple processes, each process using multiple threads, such as
+for linear algebra), then one would use both `--ntasks-per-node` and
+`--cpus-per-task`. In general `--cpus-per-task` will be 1 except when running
+threaded code.
+
+The `SLURM_NTASKS` environment variable is set by Slurm when the job starts
+running, and therefore can be accessed within your jobs. In addition to
+`SLURM_NTASKS` here are some other variables that may be useful:
+`SLURM_CPUS_ON_NODE`, `SLURM_CPUS_PER_TASK`, `SLURM_NODELIST`, `SLURM_NNODES`.
+An explanation of each one of those can be found on slurm's manual (`man sbatch`).
 
 ### Monitoring your jobs
 
@@ -446,10 +462,16 @@ cluster, or you can do it remotely. 2 - 4 should be done on the SCF.
   execute in parallel on 3 CPUs.
   - Change the last line `python boot_serial.py`.
 
-1. Call `sbatch submitBoot.sh` to execute the python script `boot_proc.py`.
+2. Call `sbatch submitBoot.sh` to execute the python script `boot_proc.py`.
 
-2. Check that the execution worked by examining the `py.out` file.
+3. Check that the execution worked by examining the `py.out` file.
+
+4. Note that the number of Dask workers in `boot_proc.py` and `boot_dist.py` is
+  hard-coded. In many cases, it would be better for this value to be set
+  dynamically based on an appropriate Slurm environment variable. Make this
+  small adjustment to those files and verify it works as intended.
 
 ## Acknowledgements
 
-This lab was developed by Andrew Vaughn and James Duncan for R, adapted to python by Ahmed Eldeeb and slightly adjusted for the Fall 2024 semester.
+This lab was developed by Andrew Vaughn and James Duncan for R, adapted to
+python by Ahmed Eldeeb and slightly adjusted for the Fall 2024 semester.
