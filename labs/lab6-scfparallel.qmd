@@ -1,5 +1,5 @@
 ---
-title: "SCF and Parallel Computing"
+title: "Lab 6: SCF and Parallel Computing"
 date: "2024-10-11"
 format:
   pdf:
@@ -16,8 +16,6 @@ format:
 execute:
   freeze: auto
 ---
-
-[PDF](./scf.pdf){.btn .btn-primary}
 
 # Overview
 
