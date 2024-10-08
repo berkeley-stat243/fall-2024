@@ -3557,7 +3557,7 @@ print(time.time() - t0)
 
 ```
 
-:::{.callout-tip "Challenge"}
+:::{.callout-tip title="Challenge"}
 Why is the second order much faster?
 
 Count the number of multiplications involved in each of the two approaches.
@@ -3567,10 +3567,13 @@ Count the number of multiplications involved in each of the two approaches.
 
 We can use the matrix direct product (i.e., `A*B`) to do
 some manipulations much more quickly than using matrix multiplication.
-**Challenge**: How can I use the direct product to find the trace
-of a matrix, $XY$? 
 
-Finally, when working with diagonal matrices, you can generally get much faster results by being smart. The following operations: $X+D$, $DX$, $XD$
+:::{.callout-tip title="Challenge"}
+How can I use the direct product to find the trace
+of a matrix, $XY$? 
+:::
+
+When working with diagonal matrices, you can generally get much faster results by being smart. The following operations: $X+D$, $DX$, $XD$
 are mathematically the sum of two matrices and products of two matrices.
 But we can do the computation without using two full matrices.
 
