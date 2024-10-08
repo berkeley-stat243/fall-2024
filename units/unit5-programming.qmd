@@ -3420,8 +3420,8 @@ up your problem so you can loop over the 10 columns rather than the 10000 rows.
 because of numpy's row-major ordering (by default, matrices are stored in memory as a long array in which values in a row are adjacent to each other). However how numpy handles this is [more complicated](https://numpy.org/doc/stable/dev/internals.html#multidimensional-array-indexing-order-issues) (see more in the [Section on cache-aware programming](#cache-aware-programming)), such that it may not matter for numpy calculations.
  - You can use direct arithmetic operations to add/subtract/multiply/divide
 a 1-d array by each column of a matrix, e.g. `A*b` does element-wise multiplication of
-each column of *A* by a 1-d array *b*. If you need to operate
-by row, you can do it by transposing the matrix.
+each row of *A* by a 1-d array *b*. If you need to operate
+by column, you can do it by transposing the matrix.
 ::: 
 
 Caution: relying on Python's broadcasting rule in the context of vectorized
