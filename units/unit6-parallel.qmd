@@ -387,13 +387,13 @@ This table shows the different types of schedulers.
 |distributed**|Python sessions across multiple nodes   |     yes     |            yes |
 
 
-* Note that because of Python's Global Interpreter Lock (GIL) (which
+(*) Note that because of Python's Global Interpreter Lock (GIL) (which
     prevents threading of Python code), many computations done in pure
     Python code won't be parallelized using the 'threads' scheduler;
     however computations on numeric data in numpy arrays, Pandas
     dataframes and other C/C++/Cython-based code will parallelize.
 
-** It's fine to use the distributed scheduler on one machine, such as
+(**) It's fine to use the distributed scheduler on one machine, such as
     your laptop. According to the Dask documentation, it has advantages
     over multiprocessing, including the diagnostic dashboard (see the
     tutorial) and better handling of when copies need to be made. In

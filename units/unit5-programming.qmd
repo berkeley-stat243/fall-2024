@@ -1511,6 +1511,7 @@ Here are some important dunder methods:
  - `__repr__` is called when an object's name is invoked
  - `__call__` is called if the instance is invoked as a function call (e.g., `yog()` in the `Bear` case)
  - `__add__` is called by the `+` operator.
+ - `__getitem__` is called by the `[` slicing operator.
 
 Let's see an example of defining a dunder method for the `Bear` class.
 
