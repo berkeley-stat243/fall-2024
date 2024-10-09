@@ -792,7 +792,7 @@ advance, because some cores may finish a lot more quickly than others.
 Starting the tasks one by one (not in batches) is called *dynamic allocation*.
 
 In contrast, if the computation time is about the same for the different tasks
-(or if you have so many tasks that the effect of averaging helps with load-balancing)
+and you have a large number of tasks (in which case the effect of averaging may also help with load-balancing)
 then you want to group the tasks into batches.  This is called *static allocation* or *prescheduling*.
 This avoids the extra overhead (~1 millisecond per task) of scheduling many tasks.
 
@@ -867,8 +867,12 @@ p = len(n)
 for i in range(p):
     tasks.append(dask.delayed(fun)(i))  # add lazy task
 
+t0 = time.time()
 results = dask.compute(tasks)  # compute all in parallel
+print(time.time() - t0)   # 2.6 sec.
 ```
+
+We haven't illustrated it here, but if each task is quick and we have a lot of tasks, we likely want static allocation to avoid the extra overhead of starting each task individually.
 
 ### Choosing static vs. dynamic allocation in Dask
 
@@ -957,8 +961,8 @@ cluster = SSHCluster(
 c = Client(cluster)
 
 ## On the SCF, Savio and other clusters using the SLURM scheduler,
-## you can figure out the machine names like this, repeating the
-## first machine for the scheduler:
+## you can figure out the machine names like this, repeating the name of the
+## first machine to account for the main/scheduler/controller process:
 ## 
 ## machines = subprocess.check_output("srun hostname", shell = True,
 ##            universal_newlines = True).strip().split('\n')
@@ -990,7 +994,7 @@ and want to avoid unnecessary copies.
 
 **General scenario**: Avoiding copies when working with large data in parallel.
 
-In many parallelization tools, if you try to parallelize this case on a single node, you end up making copies of the original dataset, which both takes up time and eats up memory.
+In many parallelization tools, if you try to parallelize this case on a single node, you end up making copies of the original dataset, which both takes up time and eats up memory. That is because the separate processes do not have access to objects used in the main (or other) processes, even though they are sharing the same physical memory. So the data needs to be sent to each process (or task) individually and then stored as distinct objects in memory. 
 
 Here when we use the `processes` scheduler, we make copies for each task.
 

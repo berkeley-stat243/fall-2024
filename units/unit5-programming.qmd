@@ -1936,7 +1936,7 @@ x = ['a','b','c']
 os.path.join(*x)
 ```
 
-`*args` only handles positional arguments. You'd need to also have `**kwargs` as an argument to handle keyword arguments.
+`*args` only handles positional arguments. You'd need to also have `**kwargs` as an argument to handle keyword arguments. In the function, `args` will be a tuple while `kwargs` will be a dictionary.
 
 ### Function outputs
 
