@@ -33,6 +33,8 @@ website:
             text: "Unit 5 (Programming)"
           - href: units/unit6-parallel.qmd
             text: "Unit 6 (Parallelization)"
+          - href: units/unit7-bigData.qmd
+            text: "Unit 7 (Databases)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
