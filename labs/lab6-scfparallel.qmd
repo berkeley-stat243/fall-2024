@@ -165,6 +165,13 @@ nodes which can be accessed from your local machine with commands of the form
 - `radagast`
 - `shelob`
 
+Note that all those machines are stand-alone login nodes. After logging in and
+launching a job, the job will be run on a cluster node. Usually, users cannot
+ssh into cluster nodes and the process of launching a job is via slurm from one
+of the login machines. However, if one has a job running on a cluster node,
+that specific node becomes accessible via ssh. This can be helpful with
+troubleshooting.
+
 ## Disk space
 
 Your home directory has a limited amount of disk space; you can check how much
