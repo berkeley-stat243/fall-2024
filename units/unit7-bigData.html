@@ -567,9 +567,13 @@ Note
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      compression <span class="op">=</span> <span class="st">'bz2'</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      encoding <span class="op">=</span> <span class="st">'latin1'</span>, <span class="co"># (unexpected) latin1 value(s) in TailNum field in 2001</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      dtype <span class="op">=</span> {<span class="st">'Distance'</span>: <span class="st">'float64'</span>, <span class="st">'CRSElapsedTime'</span>: <span class="st">'float64'</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">'TailNum'</span>: <span class="st">'object'</span>, <span class="st">'CancellationCode'</span>: <span class="st">'object'</span>, <span class="st">'DepDelay'</span>: <span class="st">'float64'</span>})</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># specify some dtypes so Pandas doesn't complain about column type heterogeneity</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>air</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">'TailNum'</span>: <span class="st">'object'</span>, <span class="st">'CancellationCode'</span>: <span class="st">'object'</span>, <span class="st">'DepDelay'</span>: <span class="st">'float64'</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">'ActualElapsedTime'</span>: <span class="st">'float64'</span>, <span class="st">'ArrDelay'</span>: <span class="st">'float64'</span>, <span class="st">'ArrTime'</span>: <span class="st">'float64'</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">'DepTime'</span>: <span class="st">'float64'</span>})</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Specify some dtypes so Pandas doesn't complain about heterogeneity of ints and</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">## floats within certain columns.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>air</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>air.npartitions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Dask will reads the data in parallel from the various .csv.bz2 files (unzipping on the fly), but note the caveat in the previous section about the possibilities for truly parallel I/O.</p>
 <p>However, recall that Dask uses delayed (lazy) evaluation. In this case, the reading is delayed until <code>compute()</code> is called. For that matter, the various other calculations (<code>max</code>, <code>groupby</code>, <code>mean</code>) shown below are only done after <code>compute()</code> is called.</p>
@@ -577,11 +581,11 @@ Note
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>air.DepDelay.<span class="bu">max</span>().compute()   <span class="co"># this takes a while</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>air.DepDelay.<span class="bu">max</span>().compute()   <span class="co"># This takes a while.</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time() <span class="op">-</span> t0)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>air.DepDelay.mean().compute()   <span class="co"># this takes a while</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>air.DepDelay.mean().compute()   <span class="co"># This takes a while.</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time() <span class="op">-</span> t0)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>air.DepDelay.median().compute() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -591,7 +595,7 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sub <span class="op">=</span> air[(air.UniqueCarrier <span class="op">==</span> <span class="st">'UA'</span>) <span class="op">&amp;</span> (air.Origin <span class="op">==</span> <span class="st">'SFO'</span>)]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>byDest <span class="op">=</span> sub.groupby(<span class="st">'Dest'</span>).DepDelay.mean()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> byDest.compute()            <span class="co"># this takes a while too</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> byDest.compute()            <span class="co"># This takes a while too.</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You should see this:</p>
@@ -630,7 +634,7 @@ Memory use for results objects
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.bag <span class="im">as</span> db</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">## This is the full data</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">## path = '/scratch/users/paciorek/wikistats/dated_2017/'</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">## For demo we'll just use a small subset</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">## For demo we'll just use a small subset.</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> <span class="st">'/scratch/users/paciorek/wikistats/dated_2017_small/dated/'</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>wiki <span class="op">=</span> db.read_text(path <span class="op">+</span> <span class="st">'part-0*gz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -644,23 +648,25 @@ Memory use for results objects
 <p>And here is a more realistic example of filtering (subsetting).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find(line, regex <span class="op">=</span> <span class="st">'Armenia'</span>):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> line.split(<span class="st">' '</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(vals) <span class="op">&lt;</span> <span class="dv">6</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(<span class="va">False</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> re.search(regex, vals[<span class="dv">3</span>])</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tmp <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(<span class="va">False</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(<span class="va">True</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>wiki.<span class="bu">filter</span>(find).count().compute()</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>armenia <span class="op">=</span> wiki.<span class="bu">filter</span>(find)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>smp <span class="op">=</span> armenia.take(<span class="dv">100</span>) <span class="co">## grab a handful as proof of concept</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>smp[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find(line, regex <span class="op">=</span> <span class="st">'Armenia'</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> line.split(<span class="st">' '</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(vals) <span class="op">&lt;</span> <span class="dv">6</span>:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(<span class="va">False</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> re.search(regex, vals[<span class="dv">3</span>])</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tmp <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(<span class="va">False</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(<span class="va">True</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>wiki.<span class="bu">filter</span>(find).count().compute()</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>armenia <span class="op">=</span> wiki.<span class="bu">filter</span>(find)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>smp <span class="op">=</span> armenia.take(<span class="dv">100</span>)   <span class="co"># Grab a handful as proof of concept.</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>smp[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Note that it is quite inefficient to do the <code>find()</code> (and implicitly reading the data in) and then compute on top of that intermediate result in two separate calls to <code>compute()</code>. Rather, we should set up the code so that all the operations are set up before a single call to <code>compute()</code>. This is discussed in detail in the <a href="https://berkeley-scf.github.io/tutorial-dask-future/python-dask#63-avoid-repeated-calculations-by-embedding-tasks-within-one-call-to-compute">Dask/future tutorial</a>.</p>
+<p>Note that it is quite inefficient to do the <code>find()</code> (and implicitly read the data in) and then compute on top of that intermediate result in two separate calls to <code>compute()</code>. Rather, we should set up the code so that all the operations are set up before a single call to <code>compute()</code>. This is discussed in detail in the <a href="https://berkeley-scf.github.io/tutorial-dask-future/python-dask#63-avoid-repeated-calculations-by-embedding-tasks-within-one-call-to-compute">Dask/future tutorial</a>.</p>
 <p>Since the data are just treated as raw strings, we might want to introduce structure by converting each line to a tuple and then converting to a data frame.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_tuple(line):</span>
@@ -674,10 +680,11 @@ Memory use for results objects
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> armenia.<span class="bu">map</span>(make_tuple).to_dataframe(dtypes)</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df)</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Now let's actually do the computation, returning a Pandas df</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> df.compute()  </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(result)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>result[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Now let's actually do the computation,</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">## returning a **Pandas** (not Dask) df to the main process.</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> df.compute()  </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(result)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>result[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dask-arrays-numpy" class="level3">
@@ -705,7 +712,7 @@ Memory use for results objects
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>)  </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.array <span class="im">as</span> da</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x = da.from_array(x, chunks=(2500, 40000))  # adjust chunk size of existing array</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x = da.from_array(x, chunks=(2500, 40000))  # How to adjust chunk size of existing array.</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> da.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>(<span class="dv">40000</span>,<span class="dv">40000</span>), chunks<span class="op">=</span>(<span class="dv">2500</span>, <span class="dv">40000</span>))</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>mycalc <span class="op">=</span> da.mean(x, axis <span class="op">=</span> <span class="dv">1</span>)  <span class="co"># row means</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -724,18 +731,18 @@ Memory use for results objects
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>(<span class="dv">40000</span>,<span class="dv">40000</span>))</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0   <span class="co"># 110 sec.</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># for some reason the from_array and da.mean calculations are not done lazily here</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For some reason the `from_array` and `da.mean` calculations are not done lazily here.</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> da.from_array(x, chunks<span class="op">=</span>(<span class="dv">2500</span>, <span class="dv">40000</span>))</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0   <span class="co"># 27 sec.</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>mycalc <span class="op">=</span> da.mean(x, axis <span class="op">=</span> <span class="dv">1</span>)  <span class="co"># what is this doing given .compute() also takes time?</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>mycalc <span class="op">=</span> da.mean(x, axis <span class="op">=</span> <span class="dv">1</span>)  <span class="co"># What is this doing given .compute() also takes time?</span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0   <span class="co"># 28 sec.</span></span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>rs <span class="op">=</span> mycalc.compute()</span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0   <span class="co"># 21 sec.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Dask will avoid storing all the chunks in memory. (It appears to just generate them on the fly.) Here we have an 80 GB array but we never use more than a few GB of memory (based on <code>top</code> or <code>free -h</code>).</p>
+<p>Dask will avoid storing all the chunks in memory. (It appears to just generate them on the fly.) Here we have an 80 GB array, but we never use more than a few GB of memory (based on <code>top</code> or <code>free -h</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>)  </span>
@@ -761,7 +768,7 @@ Memory use for results objects
 <p>This material is drawn from the tutorial on <a href="https://computing.stat.berkeley.edu/tutorial-databases">Working with large datasets in SQL, R, and Python</a>, though I won’t hold you responsible for all of the database/SQL material in that tutorial, only what appears here in this Unit.</p>
 <section id="overview-1" class="level2">
 <h2 class="anchored" data-anchor-id="overview-1">Overview</h2>
-<p>Basically, standard SQL databases are <em>relational</em> databases that are a collection of rectangular format datasets (<em>tables</em>, also called <em>relations</em>), with each table similar to R or Pandas data frames, in that a table is made up of columns, which are called <em>fields</em> or <em>attributes</em>, each containing a single <em>type</em> (numeric, character, date, currency, enumerated (i.e., categorical), …) and rows or records containing the observations for one entity. Some of the tables in a given database will generally have fields in common so it makes sense to merge (i.e., join) information from multiple tables. E.g., you might have a database with a table of student information, a table of teacher information and a table of school information, and you might join student information with information about the teacher(s) who taught the students. Databases are set up to allow for fast querying and merging (called joins in database terminology).</p>
+<p>Standard SQL databases are <em>relational</em> databases that are a collection of rectangular format datasets (<em>tables</em>, also called <em>relations</em>), with each table similar to R or Pandas data frames, in that a table is made up of columns, which are called <em>fields</em> or <em>attributes</em>, each containing a single <em>type</em> (numeric, character, date, currency, enumerated (i.e., categorical), …) and rows or records containing the observations for one entity. Some of the tables in a given database will generally have fields in common so it makes sense to merge (i.e., join) information from multiple tables. E.g., you might have a database with a table of student information, a table of teacher information and a table of school information, and you might join student information with information about the teacher(s) who taught the students. Databases are set up to allow for fast querying and merging (called joins in database terminology).</p>
 <section id="memory-and-disk-use" class="level3">
 <h3 class="anchored" data-anchor-id="memory-and-disk-use">Memory and disk use</h3>
 <p>Formally, databases are stored on disk, while Python and R store datasets in memory. This would suggest that databases will be slow to access their data but will be able to store more data than can be loaded into an Python or R session. However, databases can be quite fast due in part to <a href="unit5-programming.html#monitoring-overall-memory-use-on-a-unix-style-computer">disk caching by the operating system</a> as well as careful implementation of good algorithms for database operations.</p>
@@ -774,7 +781,8 @@ Memory use for results objects
 <p>Many DBMS have a client-server model. Clients connect to the server, with some authentication, and make requests (i.e., queries).</p>
 <p>There are often multiple ways to interact with a DBMS, including directly using command line tools provided by the DBMS or via Python or R, among others.</p>
 <p>We’ll concentrate on SQLite (because it is simple to use on a single machine). SQLite is quite nice in terms of being self-contained - there is no server-client model, just a single file on your hard drive that stores the database and to which you can connect to using the SQLite shell, R, Python, etc. However, it does not have some useful functionality that other DBMS have. For example, you can’t use <code>ALTER TABLE</code> to modify column types or drop columns.</p>
-<p>A good alternative to SQLite that I encourage you to consider is DuckDB. DuckDB stores data column-wise, which can lead to big speedups when doing queries operating on large portions of tables (so-called “online analytical processing” (OLAP)). Another nice feature of DuckDB is that it can interact with data on disk without always having to read all the data into memory. In fact, ideally we’d use it for this class, but I haven’t had time to create a DuckDB version of the StackOverflow database.</p>
+<p>A good alternative to SQLite that I encourage you to consider is DuckDB. DuckDB stores data column-wise, which can lead to big speedups when doing queries operating on large portions of tables (so-called “online analytical processing” (OLAP)). Another nice feature of DuckDB is that it can interact with data on disk without always having to read all the data into memory.</p>
+<p>In the demo code, we’ll have the option to use either SQLite or DuckDB.</p>
 </section>
 <section id="database-schema-and-normalization" class="level2">
 <h2 class="anchored" data-anchor-id="database-schema-and-normalization">Database schema and normalization</h2>
@@ -940,7 +948,7 @@ Challenge
 </div>
 </div>
 <p>You can view <a href="normalized_example.png">one reasonable schema</a>. The lines between tables indicate the relationship of foreign keys in one table to primary keys in another table. The schema in the actual database of Stack Overflow data we’ll use in the examples here is similar to but not identical to that.</p>
-<p>You can download a <a href="http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.db">copy of the SQLite version of the Stack Overflow 2021 database</a>.</p>
+<p>You can download a <a href="http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.db">copy of the SQLite version of the Stack Overflow 2021 database</a> or a <a href="http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.duckdb">copy of the DuckDB version of the Stack Overflow 2021 database</a>.</p>
 </section>
 <section id="accessing-databases-in-python" class="level2">
 <h2 class="anchored" data-anchor-id="accessing-databases-in-python">Accessing databases in Python</h2>
@@ -951,29 +959,30 @@ Challenge
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3 <span class="im">as</span> sq</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dir_path <span class="op">=</span> <span class="st">'../data'</span>  <span class="co"># Replace with the actual path</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>db_filename <span class="op">=</span> <span class="st">'stackoverflow-2021.db'</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">## download from http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.db</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Download from http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.db.</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> sq.<span class="ex">connect</span>(os.path.join(dir_path, db_filename))</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> con.cursor()</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions limit 5"</span>)  <span class="co"># simple query </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;sqlite3.Cursor object at 0x7f8202e37640&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor object at 0x7f1bc801f640&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>db.fetchall() <span class="co"># retrieve results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[(65534165.0, '2021-01-01 22:15:54', 0.0, 112.0, 2.0, 0.0, None, "Can't update a value in sqlite3", 13189393.0), (65535296.0, '2021-01-02 01:33:13', 2.0, 1109.0, 0.0, 0.0, None, 'Install and run ROS on Google Colab', 14924336.0), (65535910.0, '2021-01-02 04:01:34', -1.0, 110.0, 1.0, 8.0, 0.0, 'Operators on date/time fields', 651174.0), (65535916.0, '2021-01-02 04:03:20', 1.0, 35.0, 1.0, 0.0, None, 'Plotting values normalised', 14695007.0), (65536749.0, '2021-01-02 07:03:04', 0.0, 108.0, 1.0, 5.0, None, 'Export C# to word with template', 14899717.0)]</code></pre>
 </div>
 </div>
-<p>Alternatively, we could use DuckDB. However, I don’t have a DuckDB version of the StackOverflow database, so one can’t actually run this code.</p>
+<p>Alternatively, we could use DuckDB.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb <span class="im">as</span> dd</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dir_path <span class="op">=</span> <span class="st">'../data'</span>  <span class="co"># Replace with the actual path</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>db_filename <span class="op">=</span> <span class="st">'stackoverflow-2021.duckdb'</span>  <span class="co"># This doesn't exist.</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> dd.<span class="ex">connect</span>(os.path.join(dir_path, db_filename))</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> con.cursor()</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions limit 5"</span>)  <span class="co"># simple query </span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>db.fetchall() <span class="co"># retrieve results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>db_filename <span class="op">=</span> <span class="st">'stackoverflow-2021.duckdb'</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Download from http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.duckdb.</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> dd.<span class="ex">connect</span>(os.path.join(dir_path, db_filename))</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> con.cursor()</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions limit 5"</span>)  <span class="co"># simple query </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>db.fetchall() <span class="co"># retrieve results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can (fairly) easily see the tables (this is easier from R):</p>
 <div class="cell">
@@ -1400,7 +1409,7 @@ Challenge
 <h2 class="anchored" data-anchor-id="creating-database-tables">Creating database tables</h2>
 <p>One can create tables from within the ‘sqlite’ command line interfaces (discussed in the tutorial), but often one would do this from Python or R. Here’s the syntax from Python, creating the table from a Pandas dataframe.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">## create data frame 'student_data' in some fashion</span></span>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Create data frame 'student_data' in some fashion.</span></span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> sq.<span class="ex">connect</span>(db_path)</span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>student_data.to_sql(<span class="st">'student'</span>, con, if_exists<span class="op">=</span><span class="st">'replace'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
