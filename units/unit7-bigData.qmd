@@ -16,7 +16,8 @@ format:
     code-block-background: true
 execute:
   freeze: auto
-engine: knitr
+ipynb-shell-interactivity: all
+code-overflow: wrap
 ---
 
 ```{python, setup, echo=FALSE}
@@ -272,6 +273,9 @@ Here's an example of reading from a dataset of flight delays (about 11
 GB data). You can get the data
 [here](https://www.stat.berkeley.edu/share/paciorek/1987-2008.csvs.tgz).
 
+We'll specify some dtypes as otherwise Pandas complains about the fact
+that some columns mix what appear to be ints and floats.
+
 ```{python}
 #| eval: false
 import dask
@@ -285,8 +289,6 @@ air = ddf.read_csv(path + '*.csv.bz2',
       'TailNum': 'object', 'CancellationCode': 'object', 'DepDelay': 'float64',
       'ActualElapsedTime': 'float64', 'ArrDelay': 'float64', 'ArrTime': 'float64',
        'DepTime': 'float64'})
-## Specify some dtypes so Pandas doesn't complain about heterogeneity of ints and
-## floats within certain columns.
 air
 air.npartitions
 ```
@@ -717,12 +719,12 @@ four tables.
     -   class_size
     -   teacher_ID
 
--   ClassAssignment
+-   Enrollment
     -   student_ID
     -   class_ID
     -   grade
 
-The `ClassAssignment` table has one row per student-class pair. Having a table like
+The `Enrollment` table has one row per student-class pair. Having a table like
 this handles "ragged" data where the number of observations per unit (in this case
 classes per student) varies. Using such tables is a common pattern when considering how to normalize a database.
 It's also a core part of the idea of "tidy data" and data in *long* format, seen in the `tidyr` package.
@@ -749,36 +751,36 @@ another table is generally done by equating the primary key in one table
 with a foreign key in a different table.
 
 In our educational example, the primary keys would presumably be:
-`Student.ID`, `Teacher.ID`, `Class.ID`, and for ClassAssignment a primary key
+`Student.ID`, `Teacher.ID`, `Class.ID`, and for Enrollment a primary key
 made of two
-fields: `{ClassAssignment.studentID, ClassAssignment.class_ID}`.
+fields: `{Enrollment.studentID, Enrollment.class_ID}`.
 
 Some examples of foreign keys would be:
 
--   `student_ID` as the foreign key in `ClassAssignment` for joining with
+-   `student_ID` as the foreign key in `Enrollment` for joining with
     `Student` on `Student.ID`
 
 -   `teacher_ID` as the foreign key in `Class` for joining with `Teacher`
     based on `Teacher.ID`
 
--   `class_ID` as the foreign key in `ClassAssignment` for joining with
+-   `class_ID` as the foreign key in `Enrollment` for joining with
     `Class` based on `Class.ID`
 
 ### Queries that join data across multiple tables
 
 Suppose we want a result that has the grades of all students in 9th
 grade. For this we need information from the `Student` table (to determine
-grade level) and information from the `ClassAssignment` table (to
+grade level) and information from the `Enrollment` table (to
 determine the class grade). More specifically we need a query that:
 
- - joins `Student` with `ClassAssignment` based on matching rows in `Student` with
- rows in `ClassAssignment` where `Student.ID` is the same as `ClassAssignment.student_ID` and
+ - joins `Student` with `Enrollment` based on matching rows in `Student` with
+ rows in `Enrollment` where `Student.ID` is the same as `Enrollment.student_ID` and
  - filters the rows based on `Student.grade_level`:
 
 ```{sql}
 #| eval: false
-SELECT Student.ID, grade FROM Student, ClassAssignment WHERE 
-  Student.ID = ClassAssignment.student_ID and Student.grade_level = 9;
+SELECT Student.ID, grade FROM Student, Enrollment WHERE 
+  Student.ID = Enrollment.student_ID and Student.grade_level = 9;
 ```
 
 Note that the query is a *join* (specifically an *inner join*), which is
@@ -789,7 +791,7 @@ could do these queries explicitly using JOIN, as we'll see later.
 
 I've obtained data from [Stack Overflow](https://stackoverflow.com), the
 popular website for asking coding questions, and placed it into a
-normalized database. The SQLite version has metadata (i.e., it lacks the
+normalized database. The SQLite/DuckDB version has metadata (i.e., it lacks the
 actual text of the questions and answers) on all of the questions and
 answers posted in 2021.
 
@@ -843,7 +845,12 @@ You can view [one reasonable schema](normalized_example.png).
 The lines between tables indicate the relationship of foreign keys in
 one table to primary keys in another table. The schema in the actual
 database of Stack Overflow data we'll use in the examples here is similar
-to but not identical to that.
+to but not identical to that. In particular, our version of the database has these tables and fields:
+
+ - questions: questionid, creationdate, score, viewcount, answercount, commentcount, favoritecount, title, ownerid
+ - answers: answerid, questionid, creationdate, score, ownerid
+ - users: userid, creationdate, lastaccessdate, location, reputation, displayname, upvotes, downvotes, age, accountid
+ - questions_tags: questionid, tag
 
 You can download a [copy of the SQLite version of the Stack Overflow 2021
 database](http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.db)
@@ -876,11 +883,12 @@ db_filename = 'stackoverflow-2021.db'
 
 con = sq.connect(os.path.join(dir_path, db_filename))
 db = con.cursor()
-db.execute("select * from questions limit 5")  # simple query 
+db.execute("select * from questions limit 3")  # simple query 
 db.fetchall() # retrieve results
 ```
 
-Alternatively, we could use DuckDB. 
+Alternatively, we could use DuckDB, but I haven't run this code
+while rendering this document.
 
 ```{python}
 #| eval: false
@@ -896,7 +904,7 @@ db.fetchall() # retrieve results
 ```
 
 
-We can (fairly) easily see the tables  (this is easier from R):
+We can (fairly) easily see the tables in SQLite (this is easier from R):
 
 ```{python}
 def db_list_tables(db):
@@ -907,9 +915,18 @@ def db_list_tables(db):
 db_list_tables(db)
 ```
 
+Or it's easy in DuckDB (code not executed while rendering).
+
+```{python}
+#| eval: false
+con.execute("show tables").fetchall()
+```
+
 To see the fields in the table, if you've just queried the table, you can look at `description`:
 
 ```{python}
+db.execute("select * from questions")
+
 [item[0] for item in db.description]
 
 def get_fields():
@@ -940,7 +957,7 @@ To disconnect from the database:
 db.close()
 ```
 
-It's convenient to get a Pandas dataframe back as the result. To that we can
+It's convenient to get a Pandas dataframe back as the result. To do that we can
 execute queries like this:
 
 ```{python}
@@ -948,9 +965,9 @@ import pandas as pd
 results = pd.read_sql("select * from questions limit 5", con)
 ```
 
+If I do that with DuckDB rather than SQLite, I get a warning, but it seems to work.
 
-
-## Basic SQL for choosing rows and columns from a table
+## Basic SQL for choosing rows and fields from a table
 
 SQL is a declarative language that tells the database system what
 results you want. The system then parses the SQL syntax and determines
@@ -965,8 +982,9 @@ have been viewed a lot (the `viewcount` field is large).
 
 ```{python}
 #| cache: true
-## Get the questions (* indicates all fields) for which the viewcount field is large.
-db.execute('select * from questions where viewcount > 100000').fetchall()
+## Get the questions for which the viewcount field is large.
+results = db.execute('select title, viewcount from questions where viewcount > 100000').fetchall()
+results[0:3]
 
 ## Find the 10 largest viewcounts (and associated titles) in the questions table,
 ## by sorting in descending order based on viewcount and returning the first 10.
@@ -1008,6 +1026,14 @@ What are a couple ways we could find the oldest users in the database? How do th
 as a function of the number of records in the table?
 :::
 
+## The result of a query
+
+The result of an SQL query (e.g., from `.execute` in Python) is an SQL table. It might only have one field or one row.
+
+For example, `select count(*) from questions` will produce a table with one row and one field.
+
+When we return the result to Python (e.g., via `fetch` or `fetchall`), we create a Python object, which in the most basic case is a list of tuples (but with `pandas.read_sql` is a DataFrame). 
+
 ## Grouping / stratifying
 
 A common pattern of operation is to stratify the dataset, i.e., collect
@@ -1039,11 +1065,13 @@ on the subsets. Options include: `COUNT`, `MIN`, `MAX`, `AVG`, `SUM`.
 The number of results will be the same as the number of groups; in the example
 above there should be one result per tag.
 
+:::{.callout-tip title="Use `having` to filter after `group by`"}
 If you filter after using `GROUP BY`, you need to use `having` instead of `where`.
+:::
 
 :::{.callout-tip title="Challenge"}
 Write a query that will count the number of answers for
-each question, returning the most answered questions.
+each question, returning the most answered questions. Why can we do this with only a single table?
 :::
 
 ## Getting unique results (DISTINCT)
@@ -1099,7 +1127,8 @@ result2 = db.execute("select * from questions, questions_tags \
         where questions.questionid = questions_tags.questionid and \
         tag = 'python'").fetchall()
 
-result1[0:5]
+result1[0]
+result1[1]
 result1 == result2
 ```
 
@@ -1158,7 +1187,7 @@ db.execute("create view questionsAugment as select \
                 on questions.ownerid = users.userid")
 ## you'll see the return value is '0'
                
-db.execute("select * from questionsAugment where viewcount > 1000 limit 5").fetchall()
+db.execute("select * from questionsAugment where viewcount > 1000 limit 3").fetchall()
 ```
 
 
@@ -1317,7 +1346,7 @@ What if you wanted to find users who had neither asked nor answered a question?
 ## Subqueries
 
 A subquery is a full query that is embedded in a larger query. 
-These can be quite handy in building up complicated queries. One could instead use temporary tables, but it often
+These can be quite handy in building up complicated queries. One could instead use temporary tables (views), but it often
 is easier to write all in one query (and that let's the database's query optimizer operate on the entire query).
 
 ### Subqueries in the FROM statement
