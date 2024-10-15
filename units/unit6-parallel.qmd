@@ -997,12 +997,17 @@ and want to avoid unnecessary copies.
 
 In many parallelization tools, if you try to parallelize this case on a single node, you end up making copies of the original dataset, which both takes up time and eats up memory. That is because the separate processes do not have access to objects used in the main (or other) processes, even though they are sharing the same physical memory. So the data needs to be sent to each process (or task) individually and then stored as distinct objects in memory. 
 
-Here when we use the `processes` scheduler, we make copies for each task.
+Here when we use the `processes` scheduler, we make copies. Whether there is a copy per task or a copy per process seems to depend on exactly what the parallelized code is doing (perhaps based on whether there is random number generation in the code).
 
 ```{python}
+import os
+
 def do_analysis(i,x):
-    # A fake "analysis", identical for each task.
-    print(id(x))   # Check the number of copies.
+    '''
+    A fake "analysis", identical for each task.
+    '''
+    # Check number of processes and copies.
+    print(f"Object id: {id(x)}, process id: {os.getpid()}")
     return np.mean(x)
 
 n_cores = 4
@@ -1018,37 +1023,25 @@ for i in range(p):
 
 t0 = time.time()
 results = dask.compute(tasks)
-print(time.time() - t0)
+t_elapsed = time.time() - t0)
 ```
 
-
-A better approach is to use the `distributed` scheduler (which is fine to use on a single machine or multiple machines), which makes one copy per worker instead of one per task, provided you apply `delayed()` to the global data object.
-
+```
+Object id: 140528840440112, process id: 1148556
+Object id: 140619687115056, process id: 1148559
+Object id: 140509694916912, process id: 1148561
+Object id: 140539164195120, process id: 1148560
+Object id: 140528840440112, process id: 1148556
+Object id: 140619687115056, process id: 1148559
+Object id: 140509694916912, process id: 1148561
+Object id: 140539164195120, process id: 1148560
+```
 
 ```{python}
-from dask.distributed import Client, LocalCluster
-cluster = LocalCluster(n_workers = n_cores)
-c = Client(cluster)
-
-x = dask.delayed(x)
-
-tasks = []
-p = 8
-for i in range(p):
-    tasks.append(dask.delayed(do_analysis)(i,x))
-
-t0 = time.time()
-results = dask.compute(tasks)
-print(time.time() - t0)
-
-cluster.close()
+print(t_elapsed)
 ```
 
-That seems to work, though Dask suggests sending the data to the workers in advance. I’m not sure of the distinction between what it is recommending and use of `dask.delayed(x)`.
-
-Furthermore, the id of `x` seems to be the same for all the tasks, even though we have four workers. The documentation indicates one copy per worker, but perhaps that's not actually the case.
-
-Even better would be to use the `threads` scheduler, in which case all workers can access the same data objects with no copying (but of course we cannot modify the data in that case without potentially causing problems for the other tasks). Without the copying, this is really fast.
+A much better approach here would be to use the `threads` scheduler, in which case all workers can access the same data objects with no copying (but of course we cannot modify the data in that case without potentially causing problems for the other tasks). Without the copying, this is really fast.
 
 ```{python}
 dask.config.set(scheduler='threads', num_workers = n_cores)
@@ -1063,6 +1056,33 @@ results = dask.compute(tasks)
 print(time.time() - t0)
 ```
 
+We can also consider using the the `distributed` scheduler (which is fine to use on a single machine or multiple machines). In order to have one copy per worker instead of one copy per task, we can apply `delayed()` to the global data object.
+
+However, with the Dask distributed scheduler, it is complicated to assess what is going on, because the scheduler seems to try to optimize assignment of tasks to workers in a way that may cause an imbalance in the number of tasks assigned to each worker. In this example, all the tasks are assigned to a single worker.
+
+(If instead the `do_analysis` function ran this: `np.mean(x + np.random.normal(size=5*10**7))`, we'd see the tasks be done on more than one worker.)
+
+
+```{python}
+from dask.distributed import Client, LocalCluster
+cluster = LocalCluster(n_workers = n_cores)
+c = Client(cluster)
+
+x = dask.delayed(x)  # To have one copy per worker.
+
+tasks = []
+p = 8
+for i in range(p):
+    tasks.append(dask.delayed(do_analysis)(i,x))
+
+t0 = time.time()
+results = dask.compute(tasks)
+print(time.time() - t0)
+
+cluster.close()
+```
+
+Also, Dask gives a warning about sending the data to the workers in advance. I’m not sure of the distinction between what it is recommending and use of `dask.delayed(x)`. When I tried to use `scatter()` in various ways, I wasn't able to silence the warning.
 
 
 ## Scenario 7: Simulation study with n=1000 replicates: parallel random number generation
