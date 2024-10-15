@@ -57,7 +57,8 @@ website:
           - href: ps/ps2.qmd
           - href: ps/ps3.qmd
           - href: ps/ps4.qmd
-      - section: "How tos"
+          - href: ps/ps5.qmd
+     - section: "How tos"
         contents:
           - howtos/accessPython.md
           - howtos/accessUnixCommandLine.md

@@ -98,4 +98,20 @@
           id: "4"
           name: "Problem Set 4"
           href: "ps/ps4.html"
+- week: 9
+  days:
+    - date: "Wed Oct 23"
+      items:
+        - type: "Quiz"
+          id: "1"
+          name: "Quiz 1"
+- week: 10
+  days:
+    - date: "Mon Oct 28"
+      items:
+        - type: "Problem_Set"
+          id: "5"
+          name: "Problem Set 5"
+          href: "ps/ps5.html"
+
       
