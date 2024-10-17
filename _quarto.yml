@@ -35,6 +35,8 @@ website:
             text: "Unit 6 (Parallelization)"
           - href: units/unit7-bigData.qmd
             text: "Unit 7 (Databases)"
+          - href: units/unit8-numbers.qmd
+            text: "Unit 8 (Precision)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html

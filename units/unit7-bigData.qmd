@@ -1347,7 +1347,7 @@ What if you wanted to find users who had neither asked nor answered a question?
 
 A subquery is a full query that is embedded in a larger query. 
 These can be quite handy in building up complicated queries. One could instead use temporary tables (views), but it often
-is easier to write all in one query (and that let's the database's query optimizer operate on the entire query).
+is easier to write all in one query (and that lets the database's query optimizer operate on the entire query).
 
 ### Subqueries in the FROM statement
 
