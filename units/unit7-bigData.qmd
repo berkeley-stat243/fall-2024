@@ -1287,11 +1287,18 @@ have indexes.
 
 DBMS use indexing to provide sub-linear time lookup. Without indexes, a
 database needs to scan through every row sequentially, which is called
-linear time lookup if there are n rows, the lookup is O(n) in
-computational cost. With indexes, lookup may be logarithmic O(log(n))
-(if using tree-based indexes) or constant time O(1) (if using hash-based
+linear time lookup. If there are 'n' rows, the lookup is $O(n)$ in
+computational cost. With indexes, lookup may be logarithmic $O(log(n))$
+(if using tree-based indexes) or constant time $O(1)$ (if using hash-based
 indexes). A binary tree-based search is logarithmic; at each step
 through the tree you can eliminate half of the possibilities.
+
+While that seems to suggest hash-based indexes are better, that is
+only the case when looking for exact matches (such as particular specific
+tags), as the hash index would be based on hashing the value of the field
+or fields used for the index. If one wanted to look for a range of values
+(such as a range of viewcount values), then a tree-based index would be
+more natural.
 
 Here's how we create an index, with some time comparison for a simple
 query.
