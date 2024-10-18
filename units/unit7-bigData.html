@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="stylesheet" href="../styles.css">
@@ -474,7 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="9fec085b" class="cell" data-execution_count="1">
+<div id="09d55834" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="./unit7-bigData.pdf" class="btn btn-primary">PDF</a></p>
@@ -575,7 +604,7 @@ Note
 <p>By default dataframes are handled by the <code>threads</code> scheduler. (Recall we discussed Dask’s various schedulers in Unit 6.)</p>
 <p>Here’s an example of reading from a dataset of flight delays (about 11 GB data). You can get the data <a href="https://www.stat.berkeley.edu/share/paciorek/1987-2008.csvs.tgz">here</a>.</p>
 <p>We’ll specify some dtypes as otherwise Pandas complains about the fact that some columns mix what appear to be ints and floats.</p>
-<div id="ae2d5c80" class="cell" data-execution_count="2">
+<div id="8c048681" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>)  </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.dataframe <span class="im">as</span> ddf</span>
@@ -592,7 +621,7 @@ Note
 </div>
 <p>Dask will reads the data in parallel from the various .csv.bz2 files (unzipping on the fly), but note the caveat in the previous section about the possibilities for truly parallel I/O.</p>
 <p>However, recall that Dask uses delayed (lazy) evaluation. In this case, the reading is delayed until <code>compute()</code> is called. For that matter, the various other calculations (<code>max</code>, <code>groupby</code>, <code>mean</code>) shown below are only done after <code>compute()</code> is called.</p>
-<div id="02e2db32" class="cell" data-execution_count="3">
+<div id="ffb0b70a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
@@ -607,7 +636,7 @@ Note
 </div>
 <p>We’ll discuss in class why Dask won’t do the median. Consider the discussion about moving data in the earlier section on MapReduce.</p>
 <p>Next let’s see a full split-apply-combine (aka MapReduce) type of analysis.</p>
-<div id="a5dd84d3" class="cell" data-execution_count="4">
+<div id="87e52a90" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sub <span class="op">=</span> air[(air.UniqueCarrier <span class="op">==</span> <span class="st">'UA'</span>) <span class="op">&amp;</span> (air.Origin <span class="op">==</span> <span class="st">'SFO'</span>)]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>byDest <span class="op">=</span> sub.groupby(<span class="st">'Dest'</span>).DepDelay.mean()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> byDest.compute()            <span class="co"># This takes a while too.</span></span>
@@ -643,7 +672,7 @@ Memory use for results objects
 <p>By default bags are handled via the <code>processes</code> scheduler.</p>
 <p>Let’s see some basic operations on a large dataset of Wikipedia log files. You can get a subset of the Wikipedia data <a href="https://www.stat.berkeley.edu/share/paciorek/wikistats_example.tar.gz">here</a>.</p>
 <p>Here we again read the data in (which Dask will do in parallel):</p>
-<div id="caa3f2c2" class="cell" data-execution_count="5">
+<div id="65ad809e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.multiprocessing</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'processes'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>)  </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.bag <span class="im">as</span> db</span>
@@ -654,14 +683,14 @@ Memory use for results objects
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>wiki <span class="op">=</span> db.read_text(path <span class="op">+</span> <span class="st">'part-0*gz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here we’ll just count the number of records.</p>
-<div id="4ac03790" class="cell" data-execution_count="6">
+<div id="1cab5a11" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>wiki.count().compute()</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0   <span class="co"># 136 sec. for full data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And here is a more realistic example of filtering (subsetting).</p>
-<div id="b7ff975e" class="cell" data-execution_count="7">
+<div id="93027461" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find(line, regex <span class="op">=</span> <span class="st">'Armenia'</span>):</span>
@@ -683,7 +712,7 @@ Memory use for results objects
 </div>
 <p>Note that it is quite inefficient to do the <code>find()</code> (and implicitly read the data in) and then compute on top of that intermediate result in two separate calls to <code>compute()</code>. Rather, we should set up the code so that all the operations are set up before a single call to <code>compute()</code>. This is discussed in detail in the <a href="https://berkeley-scf.github.io/tutorial-dask-future/python-dask#63-avoid-repeated-calculations-by-embedding-tasks-within-one-call-to-compute">Dask/future tutorial</a>.</p>
 <p>Since the data are just treated as raw strings, we might want to introduce structure by converting each line to a tuple and then converting to a data frame.</p>
-<div id="ad5b615a" class="cell" data-execution_count="8">
+<div id="97d23f41" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_tuple(line):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(<span class="bu">tuple</span>(line.split(<span class="st">' '</span>)))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -710,7 +739,7 @@ Memory use for results objects
 <section id="non-distributed-arrays" class="level4">
 <h4 class="anchored" data-anchor-id="non-distributed-arrays">Non-distributed arrays</h4>
 <p>Let’s first see operations on a single node, using a single 13 GB two-dimensional array. Again, Dask uses lazy evaluation, so creation of the array doesn’t happen until an operation requiring output is done.</p>
-<div id="9d280e13" class="cell" data-execution_count="9">
+<div id="55c48c12" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler <span class="op">=</span> <span class="st">'threads'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>) </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.array <span class="im">as</span> da</span>
@@ -723,7 +752,7 @@ Memory use for results objects
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0  <span class="co"># 41 sec.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For a row-based operation, we would presumably only want to chunk things up by row, but this doesn’t seem to actually make a difference, presumably because the mean calculation can be done in pieces and only a small number of summary statistics moved between workers.</p>
-<div id="9d2a65dd" class="cell" data-execution_count="10">
+<div id="f4ae7e7e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>)  </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.array <span class="im">as</span> da</span>
@@ -737,7 +766,7 @@ Memory use for results objects
 </div>
 <p>Of course, given the lazy evaluation, this timing comparison is not just timing the actual row mean calculations.</p>
 <p>But this doesn’t really clarify the story…</p>
-<div id="7c502d02" class="cell" data-execution_count="11">
+<div id="dbdac772" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>)  </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.array <span class="im">as</span> da</span>
@@ -758,7 +787,7 @@ Memory use for results objects
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0   <span class="co"># 21 sec.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Dask will avoid storing all the chunks in memory. (It appears to just generate them on the fly.) Here we have an 80 GB array, but we never use more than a few GB of memory (based on <code>top</code> or <code>free -h</code>).</p>
-<div id="d807b634" class="cell" data-execution_count="12">
+<div id="b47d4d05" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>, num_workers <span class="op">=</span> <span class="dv">4</span>)  </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dask.array <span class="im">as</span> da</span>
@@ -975,7 +1004,7 @@ Challenge
 <p>Python provides a variety of front-end packages for manipulating databases from a variety of DBMS (SQLite, DuckDB, MySQL, PostgreSQL, among others). Basically, you start with a bit of code that links to the actual database, and then you can easily query the database using SQL syntax regardless of the back-end. The Python function calls that wrap around the SQL syntax will also look the same regardless of the back-end (basically <code>execute("SOME SQL STATEMENT")</code>).</p>
 <p>With SQLite, Python processes make calls against the stand-alone SQLite database (.db) file, so there are no SQLite-specific processes. With a client-server DBMS like PostgreSQL, Python processes call out to separate Postgres processes; these are started from the overall Postgres background process</p>
 <p>You can access and navigate an SQLite database from Python as follows.</p>
-<div id="4f534cd8" class="cell" data-execution_count="13">
+<div id="334d22d8" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3 <span class="im">as</span> sq</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dir_path <span class="op">=</span> <span class="st">'../data'</span>  <span class="co"># Replace with the actual path</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>db_filename <span class="op">=</span> <span class="st">'stackoverflow-2021.db'</span></span>
@@ -986,7 +1015,7 @@ Challenge
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions limit 3"</span>)  <span class="co"># simple query </span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>db.fetchall() <span class="co"># retrieve results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>&lt;sqlite3.Cursor at 0x7fa00920ff40&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor at 0x7f9e0fbcbf40&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>[(65534165.0,
@@ -1019,7 +1048,7 @@ Challenge
 </div>
 </div>
 <p>Alternatively, we could use DuckDB, but I haven’t run this code while rendering this document.</p>
-<div id="b436ad54" class="cell" data-execution_count="14">
+<div id="77b9b39c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb <span class="im">as</span> dd</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dir_path <span class="op">=</span> <span class="st">'../data'</span>  <span class="co"># Replace with the actual path</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>db_filename <span class="op">=</span> <span class="st">'stackoverflow-2021.duckdb'</span> </span>
@@ -1031,7 +1060,7 @@ Challenge
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>db.fetchall() <span class="co"># retrieve results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can (fairly) easily see the tables in SQLite (this is easier from R):</p>
-<div id="074c76e9" class="cell" data-execution_count="15">
+<div id="3032ec77" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> db_list_tables(db):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    db.execute(<span class="st">"SELECT name FROM sqlite_master WHERE type='table';"</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    tables <span class="op">=</span> db.fetchall()</span>
@@ -1043,11 +1072,11 @@ Challenge
 </div>
 </div>
 <p>Or it’s easy in DuckDB (code not executed while rendering).</p>
-<div id="5f56da44" class="cell" data-execution_count="16">
+<div id="b8fb2895" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"show tables"</span>).fetchall()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To see the fields in the table, if you’ve just queried the table, you can look at <code>description</code>:</p>
-<div id="8e20a5ed" class="cell" data-execution_count="17">
+<div id="9e37f48e" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions"</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>[item[<span class="dv">0</span>] <span class="cf">for</span> item <span class="kw">in</span> db.description]</span>
@@ -1055,7 +1084,7 @@ Challenge
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_fields():</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [item[<span class="dv">0</span>] <span class="cf">for</span> item <span class="kw">in</span> db.description]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>&lt;sqlite3.Cursor at 0x7fa00920ff40&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor at 0x7f9e0fbcbf40&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>['questionid',
@@ -1070,7 +1099,7 @@ Challenge
 </div>
 </div>
 <p>Here’s how to make a basic SQL query. One can either make the query and get the results in one go or make the query and separately fetch the results. Here we’ve selected the first five rows (and all columns, based on the * wildcard) and brought them into Python as list of tuples.</p>
-<div id="af7e55ac" class="cell" data-cache="true" data-execution_count="18">
+<div id="101101d6" class="cell" data-cache="true" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> db.execute(<span class="st">"select * from questions limit 5"</span>).fetchall()  <span class="co"># simple query </span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(results)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(results[<span class="dv">0</span>])</span>
@@ -1089,11 +1118,11 @@ Challenge
 </div>
 </div>
 <p>To disconnect from the database:</p>
-<div id="910c6a8f" class="cell" data-execution_count="19">
+<div id="0ecf6786" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>db.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It’s convenient to get a Pandas dataframe back as the result. To do that we can execute queries like this:</p>
-<div id="5d94491b" class="cell" data-execution_count="20">
+<div id="64024207" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.read_sql(<span class="st">"select * from questions limit 5"</span>, con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1116,7 +1145,7 @@ Imperative vs.&nbsp;declarative
 </div>
 </div>
 <p>Here are some examples using the Stack Overflow database of getting questions that have been viewed a lot (the <code>viewcount</code> field is large).</p>
-<div id="ee0259a7" class="cell" data-cache="true" data-execution_count="21">
+<div id="d69cd08f" class="cell" data-cache="true" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Get the questions for which the viewcount field is large.</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> db.execute(<span class="st">'select title, viewcount from questions where viewcount &gt; 100000'</span>).fetchall()</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>results[<span class="dv">0</span>:<span class="dv">3</span>]</span>
@@ -1218,7 +1247,7 @@ Challenge
 <p>The basic syntax looks like this:</p>
 <pre><code>SELECT &lt;reduction_operation&gt;(&lt;column(s)&gt;) FROM &lt;table&gt; GROUP BY &lt;column(s)&gt;</code></pre>
 <p>Here’s a basic example where we count the occurrences of different tags. Note that we use <code>as</code> to define a name for the new column that is created based on the aggregation operation (<code>count</code> in this case).</p>
-<div id="32bc00fb" class="cell" data-cache="true" data-execution_count="22">
+<div id="1c6a3f7c" class="cell" data-cache="true" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select tag, count(*) as n from questions_tags </span><span class="ch">\</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="st">           group by tag </span><span class="ch">\</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="st">           order by n desc limit 25"</span>).fetchall()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1281,7 +1310,7 @@ Challenge
 <section id="getting-unique-results-distinct" class="level2">
 <h2 class="anchored" data-anchor-id="getting-unique-results-distinct">Getting unique results (DISTINCT)</h2>
 <p>A useful SQL keyword is <code>DISTINCT</code>, which allows you to eliminate duplicate rows from any table (or remove duplicate values when one only has a single column or set of values).</p>
-<div id="b83bf213" class="cell" data-cache="true" data-execution_count="23">
+<div id="049646a5" class="cell" data-cache="true" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Get the unique tags from the questions_tags table.</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>tag_names <span class="op">=</span> db.execute(<span class="st">"select distinct tag from questions_tags"</span>).fetchall()</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>tag_names[<span class="dv">0</span>:<span class="dv">5</span>]</span>
@@ -1302,7 +1331,7 @@ Challenge
 <pre><code>SELECT &lt;column(s)&gt; FROM &lt;table1&gt; JOIN &lt;table2&gt; ON &lt;columns to match on&gt;
 WHERE &lt;condition(s) on column(s)&gt; ORDER BY &lt;column(s)&gt;</code></pre>
 <p>Let’s see some joins using the different syntax on the Stack Overflow database. In particular let’s select only the questions with the tag ‘python’. By selecting <code>*</code> we are selecting all columns from both the questions and questions_tags tables.</p>
-<div id="a0377d5c" class="cell" data-cache="true" data-execution_count="24">
+<div id="76c2e8a6" class="cell" data-cache="true" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> db.execute(<span class="st">"select * from questions join questions_tags </span><span class="ch">\</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="st">        on questions.questionid = questions_tags.questionid </span><span class="ch">\</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="st">        where tag = 'python'"</span>).fetchall()</span>
@@ -1322,7 +1351,7 @@ WHERE &lt;condition(s) on column(s)&gt; ORDER BY &lt;column(s)&gt;</code></pre>
 </div>
 </div>
 <p>It turns out you can do it without using the JOIN keyword.</p>
-<div id="58a857d2" class="cell" data-cache="true" data-execution_count="25">
+<div id="512bbced" class="cell" data-cache="true" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>result2 <span class="op">=</span> db.execute(<span class="st">"select * from questions, questions_tags </span><span class="ch">\</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="st">        where questions.questionid = questions_tags.questionid and </span><span class="ch">\</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="st">        tag = 'python'"</span>).fetchall()</span>
@@ -1361,7 +1390,7 @@ WHERE &lt;condition(s) on column(s)&gt; ORDER BY &lt;column(s)&gt;</code></pre>
 </div>
 </div>
 <p>Here’s a three-way join (using both types of syntax) with some additional use of aliases to abbreviate table names. What does this query ask for?</p>
-<div id="2463bcf4" class="cell" data-cache="true" data-execution_count="26">
+<div id="d9b89787" class="cell" data-cache="true" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> db.execute(<span class="st">"select * from </span><span class="ch">\</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="st">        questions Q </span><span class="ch">\</span></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="st">        join questions_tags T on Q.questionid = T.questionid </span><span class="ch">\</span></span>
@@ -1412,7 +1441,7 @@ Challenge
 <h2 class="anchored" data-anchor-id="temporary-tables-and-views">Temporary tables and views</h2>
 <p>You can think of a view as a temporary table that is the result of a query and can be used in subsequent queries. In any given query you can use both views and tables. The advantage is that they provide modularity in our querying. For example, if a given operation (portion of a query) is needed repeatedly, one could abstract that as a view and then make use of that view.</p>
 <p>Suppose we always want the age and displayname of owners of questions to be readily available. Once we have the view we can query it like a regular table.</p>
-<div id="1e761354" class="cell" data-cache="true" data-execution_count="27">
+<div id="66976064" class="cell" data-cache="true" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"create view questionsAugment as select </span><span class="ch">\</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="st">                questionid, questions.creationdate, score, viewcount, </span><span class="ch">\</span></span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="st">                title, ownerid, age, displayname </span><span class="ch">\</span></span>
@@ -1422,7 +1451,7 @@ Challenge
 <span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>               </span>
 <span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questionsAugment where viewcount &gt; 1000 limit 3"</span>).fetchall()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>&lt;sqlite3.Cursor at 0x7fa00920ff40&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor at 0x7f9e0fbcbf40&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>[(65535296.0,
@@ -1500,9 +1529,10 @@ Challenge
 <section id="indexes" class="level2">
 <h2 class="anchored" data-anchor-id="indexes">Indexes</h2>
 <p>An index is an ordering of rows based on one or more fields. DBMS use indexes to look up values quickly, either when filtering (if the index is involved in the <code>WHERE</code> condition) or when doing joins (if the index is involved in the <code>JOIN</code> condition). So in general you want your tables to have indexes.</p>
-<p>DBMS use indexing to provide sub-linear time lookup. Without indexes, a database needs to scan through every row sequentially, which is called linear time lookup if there are n rows, the lookup is O(n) in computational cost. With indexes, lookup may be logarithmic O(log(n)) (if using tree-based indexes) or constant time O(1) (if using hash-based indexes). A binary tree-based search is logarithmic; at each step through the tree you can eliminate half of the possibilities.</p>
+<p>DBMS use indexing to provide sub-linear time lookup. Without indexes, a database needs to scan through every row sequentially, which is called linear time lookup. If there are ‘n’ rows, the lookup is <span class="math inline">\(O(n)\)</span> in computational cost. With indexes, lookup may be logarithmic <span class="math inline">\(O(log(n))\)</span> (if using tree-based indexes) or constant time <span class="math inline">\(O(1)\)</span> (if using hash-based indexes). A binary tree-based search is logarithmic; at each step through the tree you can eliminate half of the possibilities.</p>
+<p>While that seems to suggest hash-based indexes are better, that is only the case when looking for exact matches (such as particular specific tags), as the hash index would be based on hashing the value of the field or fields used for the index. If one wanted to look for a range of values (such as a range of viewcount values), then a tree-based index would be more natural.</p>
 <p>Here’s how we create an index, with some time comparison for a simple query.</p>
-<div id="5b299bc6" class="cell" data-execution_count="29">
+<div id="92710b8e" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> db.execute(</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"select * from questions where viewcount &gt; 10000"</span>).fetchall()</span>
@@ -1523,7 +1553,7 @@ Challenge
 <p>You can do set operations like union, intersection, and set difference using the UNION, INTERSECT, and EXCEPT keywords, respectively, on tables that have the same schema (same column names and types), though most often these would be used on single columns (i.e., single-column tables).</p>
 <p>While one can often set up an equivalent query without using INTERSECT or UNION, set operations can be very handy. In the example below one could do it with a join, but the syntax is often more complicated.</p>
 <p>Consider the following example of using <code>INTERSECT</code>. What does it return?</p>
-<div id="a6fe1d8b" class="cell" data-execution_count="30">
+<div id="e6781801" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> db.execute(<span class="st">"select displayname, userid from </span><span class="ch">\</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="st">                     questions Q join users U on U.userid = Q.ownerid </span><span class="ch">\</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="st">                     intersect </span><span class="ch">\</span></span>
@@ -1563,7 +1593,7 @@ Challenge
 <p>What does the following do?</p>
 </div>
 </div>
-<div id="e60b88c5" class="cell" data-execution_count="31">
+<div id="55925e0d" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions join answers A </span><span class="ch">\</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="st">           on questions.questionid = A.questionid </span><span class="ch">\</span></span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="st">           join </span><span class="ch">\</span></span>
@@ -1578,7 +1608,7 @@ Challenge
 <h3 class="anchored" data-anchor-id="subqueries-in-the-where-statement">Subqueries in the WHERE statement</h3>
 <p>Instead of a join, we can use subqueries as a way to combine information across tables, with the subquery involved in a WHERE statement. The subquery creates a set and we then can check for inclusion in (or exclusion from with <code>not in</code>) that set.</p>
 <p>For example, suppose we want to know the average number of UpVotes for users who have posted a question with the tag “python”.</p>
-<div id="1aff538c" class="cell" data-execution_count="32">
+<div id="1f510f79" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select avg(upvotes) from users where userid in </span><span class="ch">\</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="st">           (select distinct ownerid from </span><span class="ch">\</span></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="st">           questions join questions_tags </span><span class="ch">\</span></span>
@@ -1593,7 +1623,7 @@ Challenge
 <section id="creating-database-tables" class="level2">
 <h2 class="anchored" data-anchor-id="creating-database-tables">Creating database tables</h2>
 <p>One can create tables from within the ‘sqlite’ command line interfaces (discussed in the tutorial), but often one would do this from Python or R. Here’s the syntax from Python, creating the table from a Pandas dataframe.</p>
-<div id="435034c5" class="cell" data-execution_count="33">
+<div id="2cce8fee" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Create data frame 'student_data' in some fashion.</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> sq.<span class="ex">connect</span>(db_path)</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>student_data.to_sql(<span class="st">'student'</span>, con, if_exists<span class="op">=</span><span class="st">'replace'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
