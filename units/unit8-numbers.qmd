@@ -333,14 +333,6 @@ $$\pm d_{0}.d_{1}d_{2}\ldots d_{p}\times b^{e}\label{eq:floatRep}$$
 where $b$ is the base, $e$ is an integer and $d_{i}\in\{0,\ldots,b-1\}$.
 $e$ is called the *exponent* and $d=d_{1}d_{2}\ldots d_{p}$ is called the *mantissa*.
 
-Let's consider the choices that the computer pioneers needed to make
-in using this system to represent numbers on a computer using base 2 ($b=2$).
-First, we need to choose the number of bits to represent $e$ so that we
-can represent sufficiently large and small numbers. Second we need to
-choose the number of bits, $p$, to allocate to 
-$d=d_{1}d_{2}\ldots d_{p}$, which determines the accuracy of any
-computer representation of a real.
-
 The great thing about floating points
 is that we can represent numbers that range from incredibly small to
 very large while maintaining good precision. The floating point *floats*
@@ -351,6 +343,16 @@ $(1.20\times10^{-1})\times(1.20\times10^{-1})=1.44\times10^{-2}$, but if
 we had fixed the decimal point, we'd have $0.120\times0.120=0.014$ and
 we'd have lost a digit of accuracy. (Furthermore, we wouldn't be able
 to represent numbers bigger than $0.99$.)
+
+
+Let's consider the choices that the computer pioneers needed to make
+in using this system to represent numbers on a computer using base 2 ($b=2$).
+First, we need to choose the number of bits to represent $e$ so that we
+can represent sufficiently large and small numbers. Second we need to
+choose the number of bits, $p$, to allocate to 
+$d=d_{1}d_{2}\ldots d_{p}$, which determines the accuracy of any
+computer representation of a real.
+
 
 More specifically, the actual storage of a number on a computer these
 days is generally as a double in the form:
@@ -414,13 +416,12 @@ consider the difficulty with representing 1/3 in base 10.
 
 ## Overflow and underflow
 
-The largest and smallest numbers we can represent are $2^{e_{\max}}$ and
+The magnitudes of the largest and smallest numbers we can represent are $2^{e_{\max}}$ and
 $2^{e_{\min}}$ where $e_{\max}$ and $e_{\min}$ are the smallest and
 largest possible values of the exponent. Let's consider the exponent and
 what we can infer about the range of possible numbers. With 11 bits for
-$e$, we can represent $\pm2^{10}=\pm1024$ different exponent values (see
-`np.finfo(np.float64).maxexp`) (why is `np.finfo(np.float64).minexp` only
--1022?). So the largest number we could represent is $2^{1024}$. What
+$e$, we can represent $2^{11}=2048$ different exponent values, $e \in \{0,1,2,\ldots,2047\}$.
+So the largest number we could represent should have magnitude $2^{1024}$. What
 is this in base 10?
 
 
@@ -430,19 +431,24 @@ x = np.float64(10)
 x**308
 x**309
 
-np.log10(2.0**1024)
+np.log10(2.0**1024)  # Just barely overflows.
 np.log10(2.0**1023)
 
 np.finfo(np.float64)
 ```
 
-We could have been smarter about that calculation:
-$\log_{10}2^{1024}=\log_{2}2^{1024}/\log_{2}10=1024/3.32\approx308$. The
-result is analogous for the smallest number, so we have that floating
-points can range between $1\times10^{-308}$ and $1\times10^{308}$,
-consistent with what numpy reports above. Producing
+We could have been smarter about the calculation of $2^{1024}$ in base 10:
+$\log_{10}2^{1024}=\log_{2}2^{1024}/\log_{2}10=1024/3.32\approx308$.
+
+(Note that the reason that $2^{1024}$ overflows is that we need a way to represent infinity.)
+
+
+The result is analogous for the smallest number, so we have that floating
+points can range in magnitude between about $1\times10^{-308}$ and $1\times10^{308}$.
+Producing
 something larger or smaller in magnitude than these values is called
 overflow and underflow respectively.
+
 
 Let's see what happens when we underflow in numpy. Note that there is no warning.
 
@@ -451,7 +457,7 @@ x**(-308)
 x**(-330)
 ```
 
-Something subtle happens for numbers like $10^{-309}$ through $10^{-323}$. They can actually be represented despite what I said above. Investigating that may be an extra credit problem on a problem set.
+Something subtle happens for numbers like $10^{-309}$ through $10^{-323}$. They can actually be represented despite the fact that it doesn't seem like we should be able to represent numbers smaller than $2^{-1023} \approx 10^{-308}$. Investigating that may be an extra credit problem on a problem set.
 
 
 ## Integers or floats?
@@ -864,6 +870,8 @@ Given the limited *range* of computer numbers, be careful when you are:
     can cause over- or under-flow. Rather compute on the log scale and
     only at the end of your computations should you exponentiate. E.g.,
     $$\prod_{i}x_{i}/\prod_{j}y_{j}=\exp(\sum_{i}\log x_{i}-\sum_{j}\log y_{j})$$
+    In many cases we keep our final calculation on the log scale and never
+    need to exponentiate (e.g., maximizing a log-likelihood).
 
 Let's consider some challenges that illustrate that last concern.
 
