@@ -37,6 +37,8 @@ website:
             text: "Unit 7 (Databases)"
           - href: units/unit8-numbers.qmd
             text: "Unit 8 (Precision)"
+          - href: units/unit9-sim.qmd
+            text: "Unit 9 (Simulation)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
