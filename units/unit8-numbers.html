@@ -258,6 +258,12 @@ window.Quarto = {
  <span class="menu-text">Unit 8 (Precision)</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit9-sim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 9 (Simulation)</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -864,7 +870,7 @@ Question
 </section>
 <section id="overflow-and-underflow" class="level2">
 <h2 class="anchored" data-anchor-id="overflow-and-underflow">Overflow and underflow</h2>
-<p>The magnitudes of the largest and smallest numbers we can represent are <span class="math inline">\(2^{e_{\max}}\)</span> and <span class="math inline">\(2^{e_{\min}}\)</span> where <span class="math inline">\(e_{\max}\)</span> and <span class="math inline">\(e_{\min}\)</span> are the smallest and largest possible values of the exponent. Let’s consider the exponent and what we can infer about the range of possible numbers. With 11 bits for <span class="math inline">\(e\)</span>, we can represent <span class="math inline">\(2^{11}=2048\)</span> different exponent values, <span class="math inline">\(e \in {0,1,2,\ldots,2047}\)</span>. So the largest number we could represent should have magnitude <span class="math inline">\(2^{1024}\)</span>. What is this in base 10?</p>
+<p>The magnitudes of the largest and smallest numbers we can represent are <span class="math inline">\(2^{e_{\max}}\)</span> and <span class="math inline">\(2^{e_{\min}}\)</span> where <span class="math inline">\(e_{\max}\)</span> and <span class="math inline">\(e_{\min}\)</span> are the smallest and largest possible values of the exponent. Let’s consider the exponent and what we can infer about the range of possible numbers. With 11 bits for <span class="math inline">\(e\)</span>, we can represent <span class="math inline">\(2^{11}=2048\)</span> different exponent values, <span class="math inline">\(e \in \{0,1,2,\ldots,2047\}\)</span>. So the largest number we could represent should have magnitude <span class="math inline">\(2^{1024}\)</span>. What is this in base 10?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.float64(<span class="dv">10</span>)</span>
 <span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">**</span><span class="dv">308</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
