@@ -20,8 +20,8 @@ execute:
 # Comparing the Behavior of Python and R
 
 This week, we will be exploring the behavior of R for several common actions
-that we have previously covered in R. The final product of today's work will be
-a PDF which is uploaded as a group submission to Gradescope.
+that we have previously covered in python. The final product of today's work
+will be a PDF which is uploaded to Gradescope.
 
 ## Instructions
 
@@ -69,7 +69,7 @@ this PDF on Gradescope.
 ### No shows
 
 If you miss lab this week, you can form a group of 2-3 students and submit this
-assignment on Gradescope by Monday October 17th at 10pm.
+assignment on Gradescope by Monday October 28th at 10pm.
 
 ## Questions
 
