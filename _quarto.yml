@@ -7,7 +7,7 @@ website:
     style: docked
     title: "Stat 243"
     logo: assets/stat_bear.png
-    logo-alt: UC Berkeley Statistics logo
+    logo-alt: "UC Berkeley Statistics logo"
     tools:
       - icon: github
         href: https://github.com/berkeley-stat243/fall-2024
