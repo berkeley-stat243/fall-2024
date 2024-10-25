@@ -55,6 +55,8 @@ website:
             text: "Lab 5 (Code review)"
           - href: labs/lab6-scfparallel.html
             text: "Lab 6 (SCF and parallelization)"
+          - href: labs/lab7-pythonvsr.html
+            text: "Lab 7 (Python vs. R)"
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
