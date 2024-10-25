@@ -3,7 +3,7 @@
   color: purple
 - button: Gradescope
   link: https://www.gradescope.com/courses/825461
-  color: darkorange
+  color: orangered
 - button: Tutorials
   link: https://statistics.berkeley.edu/computing/training/tutorials
   color: blue
@@ -12,7 +12,7 @@
   color: green
 - button: bCourses 
   link: https://bcourses.berkeley.edu/courses/1537551
-  color: red
+  color: crimson
 - button: PollEV
   link: https://pollev.com/chrispaciorek428
   color: gray
