@@ -5,11 +5,11 @@
 }
 
 .label-Activity { background-color: #4767FF}
-.label-Event { background-color:  brown}
-.label-Lab { background-color: #C82DC6}
+.label-Event { background-color:  #facd05}
+.label-Lab { background-color: #7A2CAB}
 .label-Problem_Set { background-color: crimson}
 .label-Quiz { background-color: green}
-.label-Assignment { background-color: orangered}
+.label-Assignment { background-color: #ff6f36}
 
 
 th {
