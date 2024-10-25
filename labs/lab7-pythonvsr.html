@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-10-25">
 
-<title>Problem Set Submissions</title>
+<title>Lab 7: Python vs.&nbsp;R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,6 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked">
@@ -114,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/submitPS.html">Problem Set Submissions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab7-pythonvsr.html">Lab 7 (Python vs.&nbsp;R)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -287,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/lab7-pythonvsr.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/lab7-pythonvsr.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 7 (Python vs.&nbsp;R)</span></a>
   </div>
 </li>
@@ -369,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link active">
+  <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set Submissions</span></a>
   </div>
 </li>
@@ -397,23 +365,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#submission-format" id="toc-submission-format" class="nav-link active" data-scroll-target="#submission-format">Submission format</a></li>
-  <li><a href="#problem-set-solution-workflows" id="toc-problem-set-solution-workflows" class="nav-link" data-scroll-target="#problem-set-solution-workflows">Problem set solution workflows</a></li>
-  <li><a href="#github-repository" id="toc-github-repository" class="nav-link" data-scroll-target="#github-repository">GitHub repository</a>
+  <li><a href="#comparing-the-behavior-of-python-and-r" id="toc-comparing-the-behavior-of-python-and-r" class="nav-link active" data-scroll-target="#comparing-the-behavior-of-python-and-r">Comparing the Behavior of Python and R</a>
   <ul class="collapse">
-  <li><a href="#setting-up-your-repository" id="toc-setting-up-your-repository" class="nav-link" data-scroll-target="#setting-up-your-repository">Setting up your repository</a></li>
-  <li><a href="#repository-organization" id="toc-repository-organization" class="nav-link" data-scroll-target="#repository-organization">Repository Organization</a></li>
-  <li><a href="#save-or-cache-credentials-in-git" id="toc-save-or-cache-credentials-in-git" class="nav-link" data-scroll-target="#save-or-cache-credentials-in-git">Save or cache credentials in Git</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a>
+  <ul class="collapse">
+  <li><a href="#no-shows" id="toc-no-shows" class="nav-link" data-scroll-target="#no-shows">No shows</a></li>
+  </ul></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a>
+  <ul class="collapse">
+  <li><a href="#main-questions" id="toc-main-questions" class="nav-link" data-scroll-target="#main-questions">Main Questions</a></li>
+  <li><a href="#additional-questions" id="toc-additional-questions" class="nav-link" data-scroll-target="#additional-questions">Additional Questions</a></li>
+  </ul></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab7-pythonvsr.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/submitPS.html">Problem Set Submissions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab7-pythonvsr.html">Lab 7 (Python vs.&nbsp;R)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Problem Set Submissions</h1>
+<h1 class="title">Lab 7: Python vs.&nbsp;R</h1>
 </div>
 
 
@@ -421,6 +394,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 25, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -430,68 +409,123 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="submission-format" class="level2">
-<h2 class="anchored" data-anchor-id="submission-format">Submission format</h2>
-<p>Problem set solutions should be written in Quarto Markdown (.qmd) source files, interspersing explanatory text with Python (and in some cases bash) code chunks. Please do not use Jupyter notebook (.ipynb) files as your underlying source file for your solutions. In some cases we will ask that you put function definitions for more complicated functions into one or more Python code (.py) file(s) and show us the code in the appendix of your main solution file by using <code>inspect.getsource()</code>.</p>
-<p>Why?</p>
+<section id="comparing-the-behavior-of-python-and-r" class="level1">
+<h1>Comparing the Behavior of Python and R</h1>
+<p>This week, we will be exploring the behavior of R for several common actions that we have previously covered in python. The final product of today’s work will be a PDF which is uploaded to Gradescope.</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p>Please carefully read the full instructions before starting the assignment, as you will need to decide with your group how to organize and combine your efforts.</p>
+<p>Your group is expected to work on this for <strong>~60 minutes</strong></p>
+<p>It’s OK if you don’t get through all of the questions in one hour (i.e., you can just submit what you have at the end of section), but it should be clear that you put some thought and effort into the questions your group worked on.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do your best to document your efforts and insights as you go.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>We will separate into groups of (ideally) 2 or 3. I’ll try to make sure that each group has at least one person with some R experience.</p></li>
+<li><p>Groups should try to answer every question in the <a href="#main-questions">Main Questions</a> section. Here are some <strong>options</strong> for working through these questions:</p>
 <ul>
-<li>For one or two of the initial problem sets you’ll need to include both bash and Python code. This isn’t possible in a single notebook.</li>
-<li>The underlying format of .ipynb files is JSON. While this is a plain text format, the key-value pair structure (not generally being aligned with the file lines) is much less well-suited for use with Git version control (which relies on <code>diff</code>) than Markdown-based formats.</li>
-<li>One can run chunks in a Jupyter notebook in arbitrary order. What is printed to PDF depends on the order in which the chunks are run and the results can differ from what one would expect based on reading the notebook sequentially and running the chunks sequentially. For example, consider the following experiment and you’ll see what I mean: (1) Have one code chunk with <code>a = 3</code> and run it; (2) Add a second chunk with <code>print(a)</code> and run it; and (3) Change the first chunk to <code>a=4</code> and DO NOT rerun the second chunk. Save the notebook to PDF. You’ll see that your “report” makes no sense. Here’s <a href="./notebook-unreproducible.pdf">the result</a> of me doing that experiment.</li>
-</ul>
-<p>If you want to do your initial explorations of the problems in a Jupyter notebook, you can do so and convert the .ipynb file to a .qmd file using <code>quarto convert</code>.</p>
-</section>
-<section id="problem-set-solution-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="problem-set-solution-workflows">Problem set solution workflows</h2>
-<p>Here we outline a few suggested workflows for developing your problem set solutions:</p>
-<ol type="1">
-<li>Open the qmd file in any editor you like (e.g., Emacs, Sublime, ….). From the command line (we think this will work from a Windows command line such as cmd.exe or PowerShell as well), run <code>quarto preview FILE</code> to show your rendered document live as you edit and save changes. You can put the preview window side by side with your editor, and the preview document should <a href="https://quarto.org/docs/get-started/hello/text-editor.html">automatically render</a> as you save your qmd file.</li>
-<li><a href="https://quarto.org/docs/get-started/hello/vscode.html">Use VS Code</a> with the following extensions: Python, Quarto, and Jupyter Notebooks. This allows you to execute and preview chunks (and whole document) inside VS Code. This is currently our favorite path due to how well it integrated with the Python debugger.</li>
-<li><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Use RStudio</a> (yes, RStudio), which can manage Python code and will display chunk output in the same way it does with R chunks. This path seems to work quite well and is recommended if you are already familiar with RStudio.</li>
+<li><p>Option A – <strong>Many minds, one task</strong>: The group works together, discussing and answering each question sequentially.</p></li>
+<li><p>Option B – <strong>Divide, consult, conquer</strong>: Individual group members work on different questions, consulting with each other as they go or as needed.</p></li>
+</ul></li>
+<li><p>At the end of section (say, the last ~10-15 minutes), combine the solutions into <strong>one PDF</strong>. Each group member will then <strong>individually submit</strong> copies of this PDF on Gradescope.</p>
+<ul>
+<li>Make sure to include the name of each group member at the top of the PDF.</li>
+<li>How you create the PDF is up to you but some <strong>options</strong> are:
+<ol type="a">
+<li>(recommended) Using <strong>Google Docs</strong>.
+<ul>
+<li><em>Separate documents, then combine</em>: Each group member uses a separate Google Doc, then one person combines those documents into a final shared document.</li>
+<li><em>One document</em>: Everyone adds to a single document at the same time.</li>
+<li>You can take screenshots of code / outputs that you run in Jupyter or RStudio (alternatively, the IPython or R consoles), or just copy paste code and outputs directly to the document.</li>
+<li>When your final shared document is ready, each group member will export it to PDF and make individual submission to Gradescope.</li>
+</ul></li>
+<li>Create a <strong>Quarto</strong> file with the code and render to PDF. This may be more of a headache to combine if each person is working separately.</li>
+</ol></li>
+</ul></li>
 </ol>
-<p>Later in the semester, you may be allowed to work directly in Jupyter notebooks and use quarto to render from them directly. This has a few quirks and limitations, but may be allowed for some problem sets.</p>
-<p>Please commit your work regularly to your repository as you develop your solutions.</p>
+<section id="no-shows" class="level3">
+<h3 class="anchored" data-anchor-id="no-shows">No shows</h3>
+<p>If you miss lab this week, you can form a group of 2-3 students and submit this assignment on Gradescope by Monday October 28th at 10pm.</p>
 </section>
-<section id="github-repository" class="level2">
-<h2 class="anchored" data-anchor-id="github-repository">GitHub repository</h2>
-<section id="setting-up-your-repository" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up-your-repository">Setting up your repository</h3>
-<p>We are creating repositories for everyone at <a href="https://github.berkeley.edu/">github.berkeley.edu</a>. Additionally, homeworks still need to be submitted as PDFs on Gradescope.</p>
-<p>Steps:</p>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<section id="main-questions" class="level3">
+<h3 class="anchored" data-anchor-id="main-questions">Main Questions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ideally, you will make it through all of these, although if you run out of time that is okay.</p>
+</div>
+</div>
 <ol type="1">
-<li><p>Log into <a href="https://github.berkeley.edu/">github.berkeley.edu</a> using your Berkeley credentials. Because of how the system works, you will need to log in before your account is created. Nothing else needs to be done, just log in and log out.</p></li>
-<li><p>After accounts are created (may take a couple days after first login), when you log in again, you should see one private repository listed on the left side (e.g., <code>stat243-fall-2024/ahv36</code>). This is your class repository. Do not change the repository settings! They are set up for this class.</p></li>
-<li><p>Clone the repo to your home directory (I would clone it into a directory just for repositories (e.g., I use <code>~/repos</code>). In the top-level of your working directory, you should create a file named (exactly) <code>.gitignore</code>.</p></li>
+<li><p>Do R functions behave like pass-by-value or pass-by-reference? In other words, if you pass in an object and modify it, does that affect the value of the object in the environment from which the function was called? Check this for a scalar, a list, and an R vector.</p></li>
+<li><p>Can R lists and vectors be modified in place, without copying the object?</p>
+<p>For this the function <code>.Internal(inspect)</code> will be helpful. Here’s an example for a list.</p></li>
 </ol>
-<p>The <code>.gitignore</code> file causes Git to ignore transient or computer-specific files that Quarto generates. (more info at https://github.com/github/gitignore) In it, put (again, don’t put dashed lines):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cache directories</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/__pycache__</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pickle files</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">*.pkl</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">*.pickle</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">*.csv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>By adding the pickle and csv extensions you’ll avoid mistakenly committing potentially large data files to your repository.</p>
+<pre><code>#| eval: false
+x &lt;- list(7, c('abc', 'def'), rnorm(5))
+.Internal(inspect(x))
+
+@5652776540f8 19 VECSXP g0c3 [REF(1)] (len=3, tl=0)
+@5652776b9740 14 REALSXP g0c1 [REF(3)] (len=1, tl=0) 7
+@56527580b0d8 16 STRSXP g0c2 [REF(1)] (len=2, tl=0)
+@5652776b97b0 09 CHARSXP g0c1 [REF(4),gp=0x60] [ASCII] [cached] "abc"
+@565275b60168 09 CHARSXP g0c1 [MARK,REF(14),gp=0x61] [ASCII] [cached] "def"
+@565275a97478 14 REALSXP g0c4 [REF(1)] (len=5, tl=0) -0.38248,-0.100364,-0.485605,1.15111,-0.111647
+
+#`5652776540f8` is the address of the overall list.
+#`5652776b9740` of the 1-element vector containing '7'.
+#`56527580b0d8` is the address of the character vector.
+#`565275a97478` is the address of the vector of random numbers.</code></pre>
+<ol start="3" type="1">
+<li><p>Does R behave similarly to Python in terms of storing strings, as seen in PS4?</p></li>
+<li><p>If you make a copy of an R vector does it use the same memory as the original vector and does changing an element of the original vector affect the copy of the vector?</p></li>
+<li><p>How does variable scoping work in R - does it use lexical scoping and look for variables in the environment where a function was defined?</p></li>
+<li><p>Can you create a closure with embedded data, like we did in Python?</p></li>
+</ol>
 </section>
-<section id="repository-organization" class="level3">
-<h3 class="anchored" data-anchor-id="repository-organization">Repository Organization</h3>
-<p>The problem sets in your repository should be organized into folders with specific filenames.<br>
-When we pull from your repository, our code will be assuming the following structure:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">your_repo/</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> ps1/</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── ps1.pdf</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── ps1.qmd </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── <span class="op">&lt;</span>possibly auxiliary code or other files<span class="op">&gt;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> ps2/</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── ...</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> ...</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> ps8/</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> .gitignore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The file names are case-sensitive, so please keep everything lowercase.</p>
+<section id="additional-questions" class="level3">
+<h3 class="anchored" data-anchor-id="additional-questions">Additional Questions</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Work on these if you finish quickly/are curious. Note that quick operations can be tricky to time meaningfully. The <code>microbenchmark</code> function from the R <code>microbenchmark</code> package is useful in such cases.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>Consider the relative efficiency of <code>for</code> loops versus vectorized calculations vs.&nbsp;<code>apply</code> for numeric vectors in R and see how it compares to the equivalent operations in python.</p></li>
+<li><p>Can you determine if the speed of looking up values in a named vector varies with the size of the vector (this will indicate if something like hashing is going on or if the lookup has to scan through all the elements).</p></li>
+</ol>
 </section>
-<section id="save-or-cache-credentials-in-git" class="level3">
-<h3 class="anchored" data-anchor-id="save-or-cache-credentials-in-git">Save or cache credentials in Git</h3>
-<p>If authenticating to <a href="https://github.berkeley.edu/">github.berkeley.edu</a> every time sounds inconvenient, note that your credentials can be saved (cached) to avoid entering them constantly. More details can be found on this <a href="https://statistics.berkeley.edu/computing/faqs/git-auth#git-save-auth">SCF page</a>. Besides the methods mentioned on the page, one can also store credentials in a file via <code>git config --global credential.helper store</code>.</p>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This lab was developed by Zoe Vernon, Andrew Vaughn and James Duncan.</p>
 
 
 </section>
