@@ -166,7 +166,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Stat 243</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -423,7 +423,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#basic-representations" id="toc-basic-representations" class="nav-link active" data-scroll-target="#basic-representations">1. Basic representations</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#basic-representations" id="toc-basic-representations" class="nav-link" data-scroll-target="#basic-representations">1. Basic representations</a></li>
   <li><a href="#floating-point-basics" id="toc-floating-point-basics" class="nav-link" data-scroll-target="#floating-point-basics">2. Floating point basics</a>
   <ul class="collapse">
   <li><a href="#representing-real-numbers" id="toc-representing-real-numbers" class="nav-link" data-scroll-target="#representing-real-numbers">Representing real numbers</a>
@@ -483,6 +484,8 @@ window.Quarto = {
 
 
 <p><a href="./unit8-numbers.pdf" class="btn btn-primary">PDF</a></p>
+<section id="overview" class="level1">
+<h1>Overview</h1>
 <p>References:</p>
 <ul>
 <li>Gentle, Computational Statistics, Chapter 2.</li>
@@ -492,6 +495,7 @@ window.Quarto = {
 <p>A quick note that, as we’ve already seen, Python’s version of scientific notation is <code>XeY</code>, which means <span class="math inline">\(X\cdot10^{Y}\)</span>.</p>
 <p>A second note is that the concepts developed here apply outside of Python, but we’ll illustrate the principles of computer numbers using Python. Python usually makes use of the <em>double</em> type (8 bytes) in C for the underlying representation of real-valued numbers in C variables, so what we’ll really be seeing is how such types behave in C on most modern machines. It’s actually a bit more complicated in that one can use real-valued numbers that use something other than 8 bytes in numpy by specifying a <code>dtype</code>.</p>
 <p>The handling of integers is even more complicated. In numpy, the default is 8 byte integers, but other integer dtypes are available. And in Python itself, integers can be arbitrarily large.</p>
+</section>
 <section id="basic-representations" class="level1">
 <h1>1. Basic representations</h1>
 <p>Everything in computer memory or on disk is stored in terms of bits. A <em>bit</em> is essentially a switch than can be either on or off. Thus everything is encoded as numbers in base 2, i.e., 0s and 1s. 8 bits make up a <em>byte</em>. As discussed in Unit 2, for information stored as plain text (ASCII), each byte is used to encode a single character (as previously discussed, actually only 7 of the 8 bits are actually used, hence there are <span class="math inline">\(2^{7}=128\)</span> ASCII characters). One way to represent a byte is to write it in hexadecimal, rather than as 8 0/1 bits. Since there are <span class="math inline">\(2^{8}=256\)</span> possible values in a byte, we can represent it more compactly as 2 base-16 numbers, such as “3e” or “a0” or “ba”. A file format is nothing more than a way of interpreting the bytes in a file.</p>
