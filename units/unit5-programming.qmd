@@ -1227,6 +1227,7 @@ class tsSimClass:
 Now let's see how we would use the class.
 
 ```{python}
+#| fig-alt: Randomly-generated time series from our object
 myts = tsSimClass(np.arange(1, 101), 2, 1)
 print(myts)
 np.random.seed(1)
@@ -1249,6 +1250,7 @@ is larger than before.
 
 
 ```{python}
+#| fig-alt: Another randomly-generated time series
 myts2 = tsSimClass(np.arange(1, 101), 2, 4)
 np.random.seed(1)
 ## Here's a simulated time series with a different value of

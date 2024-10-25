@@ -30,6 +30,7 @@ import matplotlib.pyplot as plt
 
 [PDF](./unit9-sim.pdf){.btn .btn-primary}
 
+# Overview
 
 References:
 
@@ -359,6 +360,7 @@ pretty easy, as seen below. This helps to control for random differences
 between the datasets.
 
 ```{python}
+#| fig-alt: Scatterplot of aligned normal and t random variables
 from scipy.stats import t, norm
 
 devs = np.random.normal(size=100)
@@ -543,6 +545,7 @@ prime for all $p$). Here's an example of a
 linear congruential sampler (with $c=0$):
 
 ```{python, fig.height=5}
+#| Time series and histograms of pseudo-random numbers
 n = 100
 a = 171
 m = 30269

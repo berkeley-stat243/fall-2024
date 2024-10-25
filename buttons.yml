@@ -3,7 +3,7 @@
   color: purple
 - button: Gradescope
   link: https://www.gradescope.com/courses/825461
-  color: orange
+  color: darkorange
 - button: Tutorials
   link: https://statistics.berkeley.edu/computing/training/tutorials
   color: blue

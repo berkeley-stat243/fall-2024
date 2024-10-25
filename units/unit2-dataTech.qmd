@@ -31,7 +31,9 @@ InteractiveShell.ast_node_interactivity = "all"
 
 ```
 
-[PDF](./unit2-dataTech.pdf){.btn .btn-primary}
+[PDF](./unit2-dataTech.pdf){.btn .btn-info}
+
+# Overview
 
 References (see [syllabus](../syllabus.html) for links):
 
@@ -1354,7 +1356,7 @@ problems.
 
 ```{python, encoding-error}
 try:
-    with open('file.txt', 'r') as textfile:
+    with open('file_nonascii.txt', 'r') as textfile:
         lines = textfile.readlines()
 except Exception as error:
     print(error)
@@ -1363,7 +1365,7 @@ except Exception as error:
 If we specify the file is encoded with Latin1, it works.
 
 ```{python, encoding-error2}
-with open('file.txt', 'r', encoding = 'latin1') as textfile:
+with open('file_nonascii.txt', 'r', encoding = 'latin1') as textfile:
     lines = textfile.readlines()
 
 ## Note the non-ASCII (Latin-1) character (the upside-down question mark)
@@ -1398,15 +1400,15 @@ You may have heard of various other kinds of data structures, such as linked lis
 
 With a *linked list*, with each element (or node) has a value and a pointer (reference) to the location of the next element. (With a doubly-linked list, there is also a pointer back to the previous element.) One big advantage of this is that one can insert an element by simply modifying the pointers involved at the site of the insertion, without copying any of the other elements in the list. A big disadvantage is that to get to an element you have to navigate through the list. 
 
-![Linked list (courtesy of computersciencewiki.org)](linked-list.png)
+![Linked list (courtesy of computersciencewiki.org)](linked-list.png){fig-alt:"Drawing of linked list"}
 
 
 Both *trees* and *graphs* are collections of nodes (vertices) and links (edges). A tree involves a set of nodes and links to child nodes (also possibly containing information linking the child nodes to their parent nodes). With a graph, the links might not be directional, and there can be cycles.
 
-![Tree (courtesy of computersciencewiki.org)](tree.png)
+![Tree (courtesy of computersciencewiki.org)](tree.png){fig-alt:"Drawing of tree"}
 
 
-![Graph (courtesy of computersciencewiki.org)](graph.png)
+![Graph (courtesy of computersciencewiki.org)](graph.png){fig-alt:"Drawing of graph"}
 
 
 A *stack* is a collection of elements that behave like a stack of lunch trays. You can only access the top element directly("last in, first out"), so the operations are that you can push a new element onto the stack or pop the top element off the stack. In fact, nested function calls behave as stacks, and the memory used in the process of evaluating the function calls is called the 'stack'.
