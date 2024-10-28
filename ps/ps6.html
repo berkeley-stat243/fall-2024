@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Problem Set 2</title>
+<title>Problem Set 6</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="stylesheet" href="../styles.css">
@@ -81,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps2.html">Problem Set 2</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps6.html">Problem Set 6</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -277,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link active">
+  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 2</span></a>
   </div>
 </li>
@@ -301,7 +364,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ps/ps6.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps6.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 6</span></a>
   </div>
 </li>
@@ -366,14 +429,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ps2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ps6.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps2.html">Problem Set 2</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps6.html">Problem Set 6</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Problem Set 2</h1>
-<p class="subtitle lead">Due Friday Sep.&nbsp;20, 10 am</p>
+<h1 class="title">Problem Set 6</h1>
+<p class="subtitle lead">Due Wed. November 6, 10 am</p>
 </div>
 
 
@@ -393,37 +456,54 @@ ul.task-list li input[type="checkbox"] {
 <section id="comments" class="level2">
 <h2 class="anchored" data-anchor-id="comments">Comments</h2>
 <ul>
-<li>This covers material in Units 3 and 4.</li>
-<li>It’s due at 10 am (Pacific) on September 20, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>This covers material in Units 8 and 9.</li>
+<li>It’s due at 10 am (Pacific) on November 6, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
 <li>Please see PS1 for formatting and attribution requirements.</li>
-<li>Note that using chunks of bash code in Qmd may be troublesome.
-<ul>
-<li>You will need to add <code>engine: knitr</code> to the YAML preface of your qmd document. The default <code>jupyter</code> engine won’t run both bash and Python chunks in the same document because the Jupyter notebooks are associated with a single ‘kernel’ (i.e., a single language for the code chunks).</li>
-<li>For the <code>knitr</code> engine, you’ll need to have R installed on your computer, including the <code>knitr</code> package. Quarto will then process the code chunks through <code>knitr</code> (which will use R’s <code>reticulate</code> package to handle Python chunks).</li>
-<li>If you have trouble on your own computer, you can always render your solution for this problem set on an SCF machine (we won’t generally use bash chunks in future problem sets). (In particular I’m not quite sure what will happen if you render on Windows.)</li>
-<li>We can help troubleshoot and feel free to post on Ed.</li>
-<li><strong>Test things out well before the due date with a dummy qmd file with both a bash chunk and a Python chunk and make sure things work.</strong></li>
-</ul></li>
-<li>You will probably need to use <code>sed</code> in a basic way as shown in the bash tutorial. You should not need to use more advanced functionality nor should you need to use <code>awk</code>, but you may if you want to.</li>
+<li>Note that is is fine to hand-write solutions to the the non-coding questions, but make sure your writing is neat and insert any hand-written parts <strong>in order</strong> into your final submission.</li>
 </ul>
 </section>
 <section id="problems" class="level2">
 <h2 class="anchored" data-anchor-id="problems">Problems</h2>
 <ol type="1">
-<li><p>A friend of mine is planning to get married in Death Valley National Park in March (this problem is based on real events…). She wants to hold it as late in March as possible but without having a high chance of a very hot day. This problem will automate the task of generating information about what day of March to hold the wedding using data from the <a href="https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/by_year">Global Historical Climatology Network</a>. All of your operations should be done using the bash shell except part (c). Also, ALL of your work should be done using shell commands that you save in your solution file. So you can’t say “I downloaded the data from such-and-such website” or “I unzipped the file”; you need to give us the bash code that we could run to repeat what you did. This is partly for practice in writing shell code and partly to enforce the idea that your work should be reproducible and documented.</p>
+<li><p>In class we said that in the exponent of the 8 byte floating point representation, <span class="math inline">\(e \in \{0,...,2047\}\)</span>, since <span class="math inline">\(e\)</span> is represented with 11 bytes (<span class="math inline">\(2^{11} = 2048\)</span>). So that would suggest that the largest and smallest magnitude numbers (ignoring the influence of the 52 bit in the mantissa) are <span class="math inline">\(2^{1024}\)</span> and <span class="math inline">\(2^{-1023}\)</span>.</p>
 <ol type="a">
-<li><p>Download yearly climate data for a set of years of interest into a temporary directory. Do not download all the years and feel free to focus on a small number of years to reduce the amount of data you need to download. Note that data for Death Valley is only present in the last few decades. As you are processing the files, report the number of observations in each year by printing the information to the screen (i.e., <code>stdout</code>), including if there are no observations for that year.</p></li>
-<li><p>Subset to the station corresponding to Death Valley, to the TMAX (maximum daily temperature) variable, and to March, and put all the data into a single file. In subsetting to Death Valley, get the information programmatically from the <code>ghcnd-stations.txt</code> file one level up in the website. Do NOT type in the station ID code when you retrieve the Death Valley data from the yearly files.</p></li>
-<li><p>Create a Python chunk (or R would be fine too) that takes as input your single file from (b) and makes a single plot showing side-by-side boxplots containing the maximum daily temperatures on each calendar day in March. (If you somehow really have trouble mixing Python and bash chunks, it’s ok to insert this figure manually, after running the Python code separately. In this case you could use the <code>jupyter</code> engine provided that a bash kernel is available for Jupyter.)</p></li>
-<li><p>Now generalize your code from parts (a) and (b). Write a shell function that takes as arguments a string for identifying the location, the weather variable of interest, and the time period (i.e., the years of interest and the month of interest), and returns the results. Your function should detect if the user provides the wrong number of arguments or a string that doesn’t allow one to identify a single weather station and return a useful error message. It should also give useful help information if the user invokes the function as: <code>get_weather -h</code>. Finally the function should remove the raw downloaded data files (or you should download into your operating system’s temporary file location).</p>
-<p>Hint: to check for equality in an if statement, you generally need syntax like:</p>
-<pre><code>if [ "${var}" == "7" ]</code></pre></li>
+<li><p>However, <span class="math inline">\(2^{1024}\)</span> overflows. Create a numpy <code>float64</code> number larger than <span class="math inline">\(10^{308}\)</span> that overflows and is represented as <code>inf</code>. What is its bit-wise representation? Why does it now make sense that we can’t work with <span class="math inline">\(2^{1024}\)</span> as a regular number?</p>
+<p>Note that there is still a bit of a mystery here in that it doesn’t appear that the sequence 0 followed by 63 1s (or simply 64 1s) is used in any way, even though those would be a natural candidate to represent <code>inf</code> (and <code>-inf</code>). Extra credit for investigating and figuring out why that is (it might be difficult to determine and I don’t know the answer myself).</p></li>
+<li><p>What is the bitwise repr of <span class="math inline">\(2^{-1022}\)</span>? Given that, what would the bit-wise repr of <span class="math inline">\(2^{-1023}\)</span> be (work this out conceptually, not by trying to use <span class="math inline">\(2^{-1023}\)</span> in Python)? What number does that bitwise representation actually represent?</p>
+<p>I asked that you not try to use <span class="math inline">\(2^{-1023}\)</span> in Python. Doing that and exploring what is going on is part (c).</p></li>
+<li><p>Extra credit: By trial and error, find the base 10 representation of the smallest positive number that can be represented in Python. Hint: it’s rather smaller than <span class="math inline">\(1\times10^{-308}\)</span>. Explain how it can be that we can store a number smaller than <span class="math inline">\(1\times2^{-1022}\)</span>, which is the value of the smallest positive number that we saw above. Start by looking at the bit-wise representation of <span class="math inline">\(1\times2^{-1023}\)</span> and see it is not the same as what you worked out in part (b). Given the actual bit-wise representation of <span class="math inline">\(1\times2^{-1023}\)</span>, show the progression of numbers smaller than that that can be represented exactly and show the smallest number that can be represented in Python written in both base 2 and base 10.</p>
+<p>Hint: you’ll be working with numbers that are not normalized (i.e., denormalized); numbers that do not have 1 as the fixed number before the radix point in the floating point representation we discussed in Unit 8.</p></li>
 </ol></li>
-<li><p>Add documentation, error-trapping and testing for your code from Problem 4, parts (b) and (c) of PS1. You may use a modified version of your PS1 solution, perhaps because you found errors in what you did or wanted to make changes based on Chris’ solutions (to be distributed in class on Friday Sep.&nbsp;13) or your discussions with other students. These topics will be covered in Lab 2 (Sep.&nbsp;13) and are also discussed in Unit 4.</p>
+<li><p>Consider the following estimates of the variance of a set of numbers. The results depend on whether the magnitude of the numbers is large or small. You can assume that for a vector <code>w</code>, <span class="math inline">\(\mbox{var}(w)\)</span> is calculated as <span class="math inline">\(\sum_{i=1}^{n}(w_{i}-\bar{w})^{2}/(n-1)\)</span>.</p>
+<div id="12eb7860" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dg(x, form <span class="op">=</span> <span class="st">'.20f'</span>):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="bu">format</span>(x, form))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> rng.normal(size <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> z <span class="op">+</span> <span class="fl">1e12</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Calculate the empirical variances</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dg(np.var(z)) </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>dg(np.var(x)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.72514887009499828796
+0.72514631554484365594</code></pre>
+</div>
+</div>
+<p>Explain why these two estimates agree to only a small number of decimal places and which of the two is the more accurate answer, when mathematically the variance of <code>z</code> and the variance of <code>x</code> are exactly the same (since <code>x</code> is just the addition of a constant to <code>z</code>). How many digits of accuracy do you expect in the less accurate of the two?</p></li>
+<li><p>Consider the following, in which we run into problems when trying to calculate on a computer. Suppose I want to calculate a predictive density for new data (e.g., in a model comparison in a Bayesian context): <span class="math display">\[ f(y^{*}|y,x)  =  \int f(y^{*}|y,x,\theta)\pi(\theta|y,x)d\theta = E_{\theta|y,x}f(y^{*}|y,x,\theta). \]</span> Here <span class="math inline">\(\pi(\theta | y, x)\)</span> is the posterior distribution (the distribution of the parameter, <span class="math inline">\(\theta\)</span>, given the data, <span class="math inline">\(y\)</span>, and predictors, <span class="math inline">\(x\)</span>). All of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(x\)</span> will generally be vectors.</p>
+<p>If we have a set of samples for <span class="math inline">\(\theta\)</span> from the posterior distribution, <span class="math inline">\(\theta_j \sim \pi(\theta|y,x)\)</span>, <span class="math inline">\(j=1,\ldots,m\)</span>, we can estimate that quantity for a vector of conditionally IID observations using a Monte Carlo estimate of the expectation: <span class="math display">\[ f(y^{*}|y,x) \approx \frac{1}{m}\sum_{j=1}^{m}\prod_{i=1}^{n}f(y_i^{*}|y,x,\theta_{j}). \]</span></p>
 <ol type="a">
-<li>Add informative doc strings to your functions.</li>
-<li>Add exceptions for handling run-time errors. You should try to catch the various incorrect inputs a user could provide and anything else that could go wrong (e.g., what happens if the server refuses the request or if one is not online?). In some cases you will want to raise an error, but in others you may want to catch an error with <code>try-except</code> and return <code>None</code>.</li>
-<li>Use the <code>pytest</code> package to set up a thoughtful set of unit tests of your functions.</li>
+<li><p>Explain why I should calculate the product in the equation above on the log scale. What is likely to happen if I just try to calculate it directly?</p></li>
+<li><p>Here’s a re-expression, using the log scale for the inner quantity, <span class="math display">\[ \frac{1}{m}\sum_{j=1}^{m}\exp\sum_{i=1}^{n}\log f(y_{i}^{*}|y,x,\theta_{j}), \]</span> which can be re-expressed as <span class="math display">\[ \frac{1}{m}\sum_{j=1}^{m}\exp (v_j) \]</span> where <span class="math display">\[v_j = \sum_{i=1}^{n} \log f(y_i^{*}|y,x,\theta_j).\]</span> What is likely to happen when I try to exponentiate <span class="math inline">\(v_j\)</span>?</p></li>
+<li><p>Consider the log predictive density, <span class="math display">\[\log f(y^{*}|y,x) \approx \log \left(\frac{1}{m}\sum_{j=1}^{m} \exp(v_j)\right).\]</span> Figure out how you could calculate this log predictive density without running into the issues discussed in parts (a) and (b).</p>
+<p>Hint: recall that with the logistic regression example in class, we scaled the problematic expression to remove the numerical problem. Here you can do something similar with the <span class="math inline">\(\exp(v_j)\)</span> terms, though at the end of the day you’ll only be able to calculate the log of the predictive density and not the predictive density itself.</p></li>
+</ol></li>
+<li><p>Experimenting with importance sampling.</p>
+<ol type="a">
+<li><p>Use importance sampling to estimate the mean (i.e., <span class="math inline">\(\phi=E_{f}X)\)</span> of a truncated <em>t</em> distribution with 3 degrees of freedom, truncated such that <span class="math inline">\(X&lt; -4\)</span>. Have your sampling density be a normal distribution centered at -4 and then truncated so you only sample values less than -4 (this is called a half-normal distribution). You should be able to do this without discarding any samples (how?). Use <span class="math inline">\(m=10000\)</span> samples. Create histograms of the weights <span class="math inline">\(f(x)/g(x)\)</span> and the summand <span class="math inline">\(h(x)f(x)/g(x)\)</span> to get a sense for whether <span class="math inline">\(\mbox{Var}(\hat{\phi})\)</span> is large. Note if there are any extreme weights that would have a very strong influence on <span class="math inline">\(\hat{\phi}\)</span>. Estimate <span class="math inline">\(\mbox{Var}(\hat{\phi})\)</span>. Hint: remember that your <span class="math inline">\(f(x)\)</span> needs to be appropriately normalized or you need to adjust the weights per the class notes. For comparison, based on using numerical integration, which is feasible in this simple one-dimensional case but increasingly infeasible in higher dimensions, the mean is -6.216.</p></li>
+<li><p>Now use importance sampling to estimate the mean of the same truncated <em>t</em> distribution with 3 degrees of freedom, truncated such that <span class="math inline">\(X &lt; -4\)</span>, but have your sampling density be a <em>t</em> distribution, with 1 degree of freedom (not 3), centered at -4 and truncated so you only sample values less than -4. Again you shouldn’t have to discard any samples. Respond to the same questions as above in part (a). In addition, compute a 95% (simulation) uncertainty interval for your estimate, using the Monte Carlo simulation error, <span class="math inline">\(\sqrt{\widehat{\mbox{Var}}(\hat{\phi})}\)</span>.</p></li>
 </ol></li>
 </ol>
 

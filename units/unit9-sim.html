@@ -364,6 +364,12 @@ window.Quarto = {
  <span class="menu-text">Problem Set 5</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ps/ps6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem Set 6</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -556,9 +562,9 @@ E\hat{\beta} &amp; = &amp; \beta\\
 <p>Note that in most simulation studies, <span class="math inline">\(Y\)</span> is an entire dataset (predictors/covariates), and the “iid sample” means generating <span class="math inline">\(m\)</span> different datasets from <span class="math inline">\(f\)</span>, i.e., <span class="math inline">\(Y_{i}\in\{Y_{1},\ldots,Y_{m}\}\)</span> not <span class="math inline">\(m\)</span> different scalar values. If the dataset has <span class="math inline">\(n\)</span> observations, then <span class="math inline">\(Y_{i}=(Y_{i1},\ldots,Y_{in})\)</span>.</p>
 <section id="back-to-the-regression-example" class="level4">
 <h4 class="anchored" data-anchor-id="back-to-the-regression-example">Back to the regression example</h4>
-<p>Let’s relate that back to our regression example. In that particular case, if we’re interested in whether the regression estimator is biased, we want to know: <span class="math display">\[\phi=E\hat{\beta},\]</span> where <span class="math inline">\(h(Y) = \hat{\beta}(Y)\)</span>. We can use the Monte Carlo estimate of <span class="math inline">\(\phi\)</span>: <span class="math display">\[\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}h(Y_{i})=\frac{1}{m}\sum_{i=1}^{m}\hat{\beta}_{i}=\widehat{E(\hat{\beta})}.\]</span></p>
+<p>Let’s relate that back to our regression example. In that particular case, if we’re interested in whether the regression estimator is biased, we want to know: <span class="math display">\[\phi=E\hat{\beta},\]</span> where <span class="math inline">\(h(Y) = \hat{\beta}(Y)\)</span>. We can use the Monte Carlo estimate of <span class="math inline">\(\phi\)</span>: <span class="math display">\[\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}h(Y_{i})=\frac{1}{m}\sum_{i=1}^{m}\hat{\beta}_{i}=\hat{E}(\hat{\beta}).\]</span></p>
 <p>If we are interested in the variance of the regression estimator, we have</p>
-<p><span class="math display">\[\phi=\mbox{Var}(\hat{\beta})=E_{f}((\hat{\beta}-E\hat{\beta})^{2})\]</span> and we can use the Monte Carlo estimate of <span class="math inline">\(\phi\)</span>: <span class="math display">\[\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}h(Y_{i})=\frac{1}{m}\sum_{i=1}^{m}(\hat{\beta}_{i}-E\hat{\beta})^{2}=\widehat{\mbox{Var}(\hat{\beta)}}\]</span> where <span class="math display">\[h(Y)=(\hat{\beta}-E\hat{\beta})^{2}.\]</span></p>
+<p><span class="math display">\[\phi=\mbox{Var}(\hat{\beta})=E_{f}((\hat{\beta}-E\hat{\beta})^{2})\]</span> and we can use the Monte Carlo estimate of <span class="math inline">\(\phi\)</span>: <span class="math display">\[\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}h(Y_{i})=\frac{1}{m}\sum_{i=1}^{m}(\hat{\beta}_{i}-E\hat{\beta})^{2}=\widehat{\mbox{Var}}(\hat{\beta)}\]</span> where <span class="math display">\[h(Y)=(\hat{\beta}-E\hat{\beta})^{2}.\]</span></p>
 <p>Finally note that we also need to use the Monte Carlo estimate of <span class="math inline">\(E\hat{\beta}\)</span> in the Monte Carlo estimation of the variance.</p>
 <p>We might also be interested in the coverage of a confidence interval. In that case we have <span class="math display">\[h(Y)=1_{\beta\in CI(Y)}\]</span> and we can estimate the coverage as <span class="math display">\[\hat{\phi}=\frac{1}{m}\sum_{i=1}^{m}1_{\beta\in CI(y_{i})}.\]</span> Of course we want that <span class="math inline">\(\hat{\phi}\approx1-\alpha\)</span> for a <span class="math inline">\(100(1-\alpha)\)</span> confidence interval. In the standard case of a 95% interval we want <span class="math inline">\(\hat{\phi}\approx0.95\)</span>.</p>
 <p>Note that coverage can be too low for two reasons: (1) the estimated uncertainty is too low, or (2) the estimator is biased.</p>
