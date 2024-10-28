@@ -66,6 +66,7 @@ website:
           - href: ps/ps3.qmd
           - href: ps/ps4.qmd
           - href: ps/ps5.qmd
+          - href: ps/ps6.qmd
       - section: "How tos"
         contents:
           - howtos/accessPython.md
