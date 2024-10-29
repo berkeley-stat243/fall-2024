@@ -1879,13 +1879,11 @@ def add(x, y, z=1, absol=False):
         return x+y+z
 ```
 
+When defining a function, arguments without defaults must come first.
+
 When using a function, there are some rules that must be followed.
 
-Arguments without defaults are required.
-
-Arguments can be specified by position (based on the order of the inputs)
-or by name (keyword), using `name=value`, with positional arguments appearing first.
-
+First, users must provide values for arguments without defaults.
 
 ```{python}
 add(3, 5)
@@ -1901,7 +1899,9 @@ except Exception as error:
     print(error)
 ```
 
-Here's another error related to positional vs. keyword arguments.
+Second, arguments can be specified by position (based on the order of the inputs)
+or by name (keyword), using `name=value`. The user needs to provide
+positional arguments first.
 
 ```{python}
 #| eval: false
