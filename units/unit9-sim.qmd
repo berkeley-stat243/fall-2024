@@ -519,10 +519,10 @@ start to use the pseudo-random numbers.
 ### Sequential congruential generators
 
 Many RNG methods are sequential congruential methods. The basic idea is
-that the next value is $$u_{k}=f(u_{k-1},\ldots,u_{k-j})\mbox{mod}\,m$$
+that the next value is $$x_{k}=f(x_{k-1},\ldots,x_{k-j})\mbox{mod}\,m$$
 for some function, $f$, and some positive integer $m$ . Often $j=1$.
 *mod* just means to take the remainder after dividing by $m$. One then
-generates the random standard uniform value as $u_{k}/m$, which by
+generates the random standard uniform value as $u_k = x_{k}/m$, which by
 construction is in $[0,1]$. For our discussion below, it is important
 to distinguish the *state* ($u$) from the output of the RNG.
 
@@ -533,10 +533,10 @@ are remainders of divisions by a fixed number . One key to a good random
 number generator (RNG) is to have a very long period.
 
 An example of a sequential congruential method is a basic linear
-congruential generator: $$u_{k}=(au_{k-1}+c)\mbox{mod}\,m$$ with integer
-$a$, $m$, $c$, and $u_{k}$ values. (Note that in some cases $c=0$, in which case the periodicity can't exceed $m-1$ as the method is then set up so that we never get $u_{k}=0$ as this causes the
+congruential generator: $$x_{k}=(ax_{k-1}+c)\mbox{mod}\,m$$ with integer
+$a$, $m$, $c$, and $u_{k}$ values. (Note that in some cases $c=0$, in which case the periodicity can't exceed $m-1$ as the method is then set up so that we never get $x_{k}=0$ as this causes the
 algorithm to break.) The seed is
-the initial state, $u_{0}$ - i.e., the point in the sequence at which we
+the initial state, $x_{0}$ - i.e., the point in the sequence at which we
 start. By setting the seed you guarantee reproducibility since given a
 starting value, the sequence is deterministic. In general $a$, $c$ and $m$
 are chosen to be 'large'. The standard values of $m$
@@ -550,14 +550,16 @@ n = 100
 a = 171
 m = 30269
 
-u = np.empty(n)
-u[0] = 7306
+x = np.empty(n)
+x[0] = 7306
 
 for i in range(1, n):
-    u[i] = (a * u[i-1]) % m
+    x[i] = (a * x[i-1]) % m
 
-u = u / m
-uFromNP = np.random.uniform(size = n)
+u = x / m
+
+rng = np.random.default_rng(seed=1)
+uFromNP = rng.uniform(size=n)
 
 plt.figure(figsize=(10, 8))
 
@@ -610,12 +612,16 @@ saveSeed <- .Random.seed
 uFromR <- runif(10)
 a <- c(171, 172, 170)
 m <- c(30269, 30307, 30323)
+u <- rep(0, 10)
 xyz <- matrix(NA, nr = 10, nc = 3)
 xyz[1, ] <- (a * saveSeed[2:4]) %% m
-for( i in 2:10)
-	xyz[i, ] <- (a * xyz[i-1, ]) %% m
+u[1] <- sum(xyz[1, ]/m) %% 1
+for(i in 2:10) {
+   xyz[i, ] <- (a * xyz[i-1, ]) %% m
+   u[i] <- sum(xyz[i, ]/m) %% 1
+}
 for(i in 1:10)
-	print(c(uFromR[i],sum(xyz[i, ]/m)%%1))
+   print(c(uFromR[i], u[i]))
 ## we should be able to recover the current value of the seed
 xyz[10, ]
 .Random.seed[2:4]
@@ -631,7 +637,7 @@ The idea of the PCG approach goes like this:
   - Using a large value of $m$ can actually give good statistical performance.
   - Applying a technique called  *permutation functions* to the state of the LCG in order to produce the output at each step (the random value returned to the user) can improve the statistical performance even further.
 
-Instead of using relatively small values of $m$ seen above, in the PCG approach one uses $m=2^k$, for 'large enough' $k$, usually 64 or 128. It turns out that if $m=2^k$ then the period of the $b$th bit of the state is $2^b$ where $b=1$ is the right-most bit. Small periods are of course bad for RNG, so the bits with small period cause the LCG to not perform well. Thankfully, one simple fix is simply to discard some number of the right-most bits (this is one form of *bit shift*). Note that if one does this, the output of the RNG is based on a subset of the bits, which means that the number of unique values that can be generated is smaller than the period. This is not a problem given we start with a state with a large number of bits (64 or 128 as mentioned above).
+In the PCG approach, the state is usually a 64 or 128 bit integer. Instead of using relatively small values of $m$ seen above, in the PCG approach one uses $m=2^k$, where $k$ is either 64 or 128. It turns out that if $m=2^k$ then the period of the $b$th bit of the state is $2^b$ where $b=1$ is the right-most bit. Small periods are of course bad for RNG, so the bits with small period cause the LCG to not perform well. Thankfully, one simple fix is simply to discard some number of the right-most bits (this is one form of *bit shift*). Note that if one does this, the output of the RNG is based on a subset of the bits, which means that the number of unique values that can be generated is smaller than the period. This is not a problem given we start with a state with a large number of bits (64 or 128 as mentioned above).
 
 O'Neal then goes further; instead of simply discarding bits, she proposes to either shift bits by a random amount or rotate bits by a random amount, where the random amount is determined by a small number of the initial bits. This improves the statistical performance of the generator. The choice of how to do this gives the various members of the PCG family of generators. The details are fairly complicated (the PCG paper is 50-odd pages) and not important for our purposes here.
 
