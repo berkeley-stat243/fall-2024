@@ -117,15 +117,15 @@
   days:
     - date: "Mon Nov 4"
       items:
-        - type: "Problem_Set"
-          id: "6"
-          name: "Problem Set 6"
-          href: "ps/ps6.html"
-    - date: "Wed Nov 6"
-      items:
         - type: "Activity"
           id: "7"
           name: "Read Section 1 of Unit 10"
           href: "units/unit10-linalg.html#1-preliminaries"
+    - date: "Wed Nov 6"
+      items:
+        - type: "Problem_Set"
+          id: "6"
+          name: "Problem Set 6"
+          href: "ps/ps6.html"
 
       

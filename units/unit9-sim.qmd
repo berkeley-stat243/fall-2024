@@ -10,7 +10,7 @@ format:
     toc: true
   html:
     theme: cosmo
-    css: ../styles.css
+    css: ../assets/styles.css
     toc: true
     code-copy: true
     code-block-background: true
@@ -545,7 +545,7 @@ prime for all $p$). Here's an example of a
 linear congruential sampler (with $c=0$):
 
 ```{python, fig.height=5}
-#| Time series and histograms of pseudo-random numbers
+#| fig-alt: Time series and histograms of pseudo-random numbers
 n = 100
 a = 171
 m = 30269
