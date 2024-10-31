@@ -21,7 +21,7 @@ ipynb-shell-interactivity: all
 code-overflow: wrap
 ---
 
-[PDF](./unit6-parallel.pdf){.btn .btn-primary}
+[PDF](./unit6-parallel.pdf){.btn .btn-dark}
 
 # Overview
 

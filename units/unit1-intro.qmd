@@ -16,7 +16,7 @@ format:
     code-block-background: true
 ---
 
-[PDF](./unit1-intro.pdf){.btn .btn-primary}
+[PDF](./unit1-intro.pdf){.btn .btn-dark}
 
 # 1. UNIX command line basics
 

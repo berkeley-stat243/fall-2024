@@ -19,7 +19,7 @@ execute:
 engine: knitr
 ---
 
-[PDF](./unit8-numbers.pdf){.btn .btn-primary}
+[PDF](./unit8-numbers.pdf){.btn .btn-dark}
 
 ```{python, setup}
 #| echo: false

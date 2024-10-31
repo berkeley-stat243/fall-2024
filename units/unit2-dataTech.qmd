@@ -31,7 +31,7 @@ InteractiveShell.ast_node_interactivity = "all"
 
 ```
 
-[PDF](./unit2-dataTech.pdf){.btn .btn-info}
+[PDF](./unit2-dataTech.pdf){.btn .btn-dark}
 
 # Overview
 

@@ -20,7 +20,7 @@ execute:
 engine: knitr
 ---
 
-[PDF](./unit3-bash.pdf){.btn .btn-primary}
+[PDF](./unit3-bash.pdf){.btn .btn-dark}
 
 # Overview
 

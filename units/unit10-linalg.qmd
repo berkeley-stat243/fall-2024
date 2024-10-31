@@ -20,7 +20,7 @@ from: markdown+tex_math_single_backslash
 ipynb-shell-interactivity: all
 ---
 
-[PDF](./unit10-linalg.pdf){.btn .btn-primary}
+[PDF](./unit10-linalg.pdf){.btn .btn-dark}
 
 # Overview
 

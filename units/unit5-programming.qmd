@@ -33,7 +33,7 @@ import re, os, sys, time, math
 ## if using jupyter.
 ```
 
-[PDF](./unit5-programming.pdf){.btn .btn-primary}
+[PDF](./unit5-programming.pdf){.btn .btn-dark}
 
 :::{.callout-note}
 2024-10-05: There will be miminal further edits on this unit.

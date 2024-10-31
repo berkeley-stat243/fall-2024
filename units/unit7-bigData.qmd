@@ -20,11 +20,12 @@ ipynb-shell-interactivity: all
 code-overflow: wrap
 ---
 
-```{python, setup, echo=FALSE}
+```{python, setup}
+#| echo: false
 import os, time
 ```
 
-[PDF](./unit7-bigData.pdf){.btn .btn-primary}
+[PDF](./unit7-bigData.pdf){.btn .btn-dark}
 
 # Overview
 
