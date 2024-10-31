@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris Paciorek">
+<meta name="dcterms.date" content="2024-10-31">
 
-<title>foo</title>
+<title>Numerical linear algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,8 +103,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
@@ -112,22 +144,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries">1. Preliminaries</a>
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
+  <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#key-principle" id="toc-key-principle" class="nav-link" data-scroll-target="#key-principle">Key principle</a></li>
+  <li><a href="#computational-complexity" id="toc-computational-complexity" class="nav-link" data-scroll-target="#computational-complexity">Computational complexity</a></li>
+  <li><a href="#notation-and-dimensions" id="toc-notation-and-dimensions" class="nav-link" data-scroll-target="#notation-and-dimensions">Notation and dimensions</a></li>
+  <li><a href="#norms" id="toc-norms" class="nav-link" data-scroll-target="#norms">Norms</a></li>
+  <li><a href="#orthogonality" id="toc-orthogonality" class="nav-link" data-scroll-target="#orthogonality">Orthogonality</a></li>
+  <li><a href="#some-vector-and-matrix-properties" id="toc-some-vector-and-matrix-properties" class="nav-link" data-scroll-target="#some-vector-and-matrix-properties">Some vector and matrix properties</a></li>
+  <li><a href="#trace-and-determinant-of-square-matrices" id="toc-trace-and-determinant-of-square-matrices" class="nav-link" data-scroll-target="#trace-and-determinant-of-square-matrices">Trace and determinant of square matrices</a></li>
+  <li><a href="#transposes-and-inverses" id="toc-transposes-and-inverses" class="nav-link" data-scroll-target="#transposes-and-inverses">Transposes and inverses</a></li>
+  <li><a href="#matrix-decompositions" id="toc-matrix-decompositions" class="nav-link" data-scroll-target="#matrix-decompositions">Matrix decompositions</a></li>
+  </ul></li>
+  <li><a href="#statistical-interpretations-of-matrix-invertibility-rank-etc." id="toc-statistical-interpretations-of-matrix-invertibility-rank-etc." class="nav-link" data-scroll-target="#statistical-interpretations-of-matrix-invertibility-rank-etc.">2. Statistical interpretations of matrix invertibility, rank, etc.</a>
+  <ul class="collapse">
+  <li><a href="#linear-independence-rank-and-basis-vectors" id="toc-linear-independence-rank-and-basis-vectors" class="nav-link" data-scroll-target="#linear-independence-rank-and-basis-vectors">Linear independence, rank, and basis vectors</a></li>
+  <li><a href="#invertibility-singularity-rank-and-positive-definiteness" id="toc-invertibility-singularity-rank-and-positive-definiteness" class="nav-link" data-scroll-target="#invertibility-singularity-rank-and-positive-definiteness">Invertibility, singularity, rank, and positive definiteness</a></li>
+  <li><a href="#interpreting-an-eigendecomposition" id="toc-interpreting-an-eigendecomposition" class="nav-link" data-scroll-target="#interpreting-an-eigendecomposition">Interpreting an eigendecomposition</a></li>
+  <li><a href="#generalized-inverses-optional" id="toc-generalized-inverses-optional" class="nav-link" data-scroll-target="#generalized-inverses-optional">Generalized inverses (optional)</a></li>
+  <li><a href="#matrices-arising-in-regression" id="toc-matrices-arising-in-regression" class="nav-link" data-scroll-target="#matrices-arising-in-regression">Matrices arising in regression</a></li>
+  </ul></li>
+  <li><a href="#computational-issues" id="toc-computational-issues" class="nav-link" data-scroll-target="#computational-issues">3. Computational issues</a>
+  <ul class="collapse">
+  <li><a href="#storing-matrices" id="toc-storing-matrices" class="nav-link" data-scroll-target="#storing-matrices">Storing matrices</a></li>
+  <li><a href="#algorithms" id="toc-algorithms" class="nav-link" data-scroll-target="#algorithms">Algorithms</a></li>
+  <li><a href="#ill-conditioned-problems" id="toc-ill-conditioned-problems" class="nav-link" data-scroll-target="#ill-conditioned-problems">Ill-conditioned problems</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="test.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">foo</h1>
+<h1 class="title">Numerical linear algebra</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris Paciorek </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 31, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -137,11 +215,346 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess, io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p><a href="./unit10-linalg.pdf" class="btn btn-primary">PDF</a></p>
+<p>References:</p>
+<ul>
+<li>Gentle: Numerical Linear Algebra for Applications in Statistics (available via UC Library Search) (my notes here are based primarily on this source) [Gentle-NLA]
+<ul>
+<li>Gentle: Matrix Algebra also has much of this material.</li>
+</ul></li>
+<li>Gentle: Computational Statistics [Gentle-CS]</li>
+<li>Lange: Numerical Analysis for Statisticians</li>
+<li>Monahan: Numerical Methods of Statistics</li>
+</ul>
+<p>Videos (optional):</p>
+<p>There are various videos from 2020 in the bCourses Media Gallery that you can use for reference if you want to.</p>
+<ul>
+<li>Video 1. Ill-conditioned problems, part 1</li>
+<li>Video 2. Ill-conditioned problems, part 2</li>
+<li>Video 3. Triangular systems of equations</li>
+<li>Video 4. Solving systems of equations via LU, part 1</li>
+<li>Video 5. Solving systems of equations via LU, part 2</li>
+<li>Video 6. Solving systems of equations via LU, part 3</li>
+<li>Video 7. Cholesky decomposition</li>
+</ul>
+<p>In working through how to compute something or understanding an algorithm, it can be very helpful to depict the matrices and vectors graphically. We’ll see this on the board in class.</p>
+</section>
+<section id="preliminaries" class="level1">
+<h1>1. Preliminaries</h1>
+<section id="context" class="level2">
+<h2 class="anchored" data-anchor-id="context">Context</h2>
+<p>Many statistical and machine learning methods involve linear algebra of some sort - at the very least matrix multiplication and very often some sort of matrix decomposition to fit models and do analysis: linear regression, various more sophisticated forms of regression, deep neural networks, principle components analysis (PCA) and the wide varieties of generalizations and variations on PCA, etc., etc.</p>
+</section>
+<section id="goals" class="level2">
+<h2 class="anchored" data-anchor-id="goals">Goals</h2>
+<p>Here’s what I’d like you to get out of this unit:</p>
+<ol type="1">
+<li>How to think about the computational order (number of computations involved) of a problem</li>
+<li>How to choose a computational approach to a given linear algebra calculation you need to do.</li>
+<li>An understanding of how issues with computer numbers (Unit 8) affect linear algebra calculations.</li>
+</ol>
+</section>
+<section id="key-principle" class="level2">
+<h2 class="anchored" data-anchor-id="key-principle">Key principle</h2>
+<p><strong>The form of a mathematical expression and how it should be evaluated on a computer may be very different.</strong> Better computational approaches can increase speed and improve the numerical properties of the calculation.</p>
+<ul>
+<li>Example 1 (already seen in Unit 5): If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are matrices and <span class="math inline">\(z\)</span> is a vector, we should compute <span class="math inline">\(X(Yz)\)</span> rather than <span class="math inline">\((XY)z\)</span>; the former is much more computationally efficient.</li>
+<li>Example 2: We do not compute <span class="math inline">\((X^{\top}X)^{-1}X^{\top}Y\)</span> by computing <span class="math inline">\(X^{\top}X\)</span> and finding its inverse. In fact, perhaps more surprisingly, we may never actually form <span class="math inline">\(X^{\top}X\)</span> in some implementations.</li>
+<li>Example 3: Suppose I have a matrix <span class="math inline">\(A\)</span>, and I want to permute (switch) two rows. I can do this with a permutation matrix, <span class="math inline">\(P\)</span>, which is mostly zeroes. On a computer, in general I wouldn’t need to even change the values of <span class="math inline">\(A\)</span> in memory in some cases (e.g., if I were to calculate <span class="math inline">\(PAB\)</span>). Why not?</li>
+</ul>
+</section>
+<section id="computational-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="computational-complexity">Computational complexity</h2>
+<p>We can assess the computational complexity of a linear algebra calculation by counting the number multiplys/divides and the number of adds/subtracts. Sidenote: addition is a bit faster than multiplication, so some algorithms attempt to trade multiplication for addition.</p>
+<p>In general we do not try to count the actual number of calculations, but just their order, though in some cases in this unit we’ll actually get a more exact count. In general, we denote this as <span class="math inline">\(O(f(n))\)</span> which means that the number of calculations approaches <span class="math inline">\(cf(n)\)</span> as <span class="math inline">\(n\to\infty\)</span> (i.e., we know the calculation is approximately proportional to <span class="math inline">\(f(n)\)</span>). Consider matrix multiplication, <span class="math inline">\(AB\)</span>, with matrices of size <span class="math inline">\(a\times b\)</span> and <span class="math inline">\(b\times c\)</span>. Each column of the second matrix is multiplied by all the rows of the first. For any given inner product of a row by a column, we have <span class="math inline">\(b\)</span> multiplies. We repeat these operations for each column and then for each row, so we have <span class="math inline">\(abc\)</span> multiplies so <span class="math inline">\(O(abc)\)</span> operations. We could count the additions as well, but there’s usually an addition for each multiply, so we can usually just count the multiplys and then say there are such and such {multiply and add}s. This is Monahan’s approach, but you may see other counting approaches where one counts the multiplys and the adds separately.</p>
+<p>For two symmetric, <span class="math inline">\(n\times n\)</span> matrices, this is <span class="math inline">\(O(n^{3})\)</span>. Similarly, matrix factorization (e.g., the Cholesky decomposition) is <span class="math inline">\(O(n^{3})\)</span> unless the matrix has special structure, such as being sparse. As matrices get large, the speed of calculations decreases drastically because of the scaling as <span class="math inline">\(n^{3}\)</span> and memory use increases drastically. In terms of memory use, to hold the result of the multiply indicated above, we need to hold <span class="math inline">\(ab+bc+ac\)</span> total elements, which for symmetric matrices sums to <span class="math inline">\(3n^{2}\)</span>. So for a matrix with <span class="math inline">\(n=10000\)</span>, we have <span class="math inline">\(3\cdot10000^{2}\cdot8/1e9=2.4\)</span>Gb.</p>
+<p>When we have <span class="math inline">\(O(n^{q})\)</span> this is known as polynomial time. Much worse is <span class="math inline">\(O(b^{n})\)</span> (exponential time), while much better is <span class="math inline">\(O(\log n\)</span>) (log time). Computer scientists talk about NP-complete problems; these are essentially problems for which there is not a polynomial time algorithm - it turns out all such problems can be rewritten such that they are equivalent to one another.</p>
+<p>In real calculations, it’s possible to have the actual time ordering of two approaches differ from what the order approximations tell us. For example, something that involves <span class="math inline">\(n^{2}\)</span> operations may be faster than one that involves <span class="math inline">\(1000(n\log n+n)\)</span> even though the former is <span class="math inline">\(O(n^{2})\)</span> and the latter <span class="math inline">\(O(n\log n)\)</span>. The reasons are that the constant, <span class="math inline">\(c=1000\)</span>, can matter (depending on how big <span class="math inline">\(n\)</span> is), as can the extra calculations from the lower order term(s), in this case <span class="math inline">\(1000n\)</span>.</p>
+<p>A note on terminology: <em>flops</em> stands for both floating point operations (the number of operations required) and floating point operations per second, the speed of calculation.</p>
+</section>
+<section id="notation-and-dimensions" class="level2">
+<h2 class="anchored" data-anchor-id="notation-and-dimensions">Notation and dimensions</h2>
+<p>I’ll try to use capital letters for matrices, <span class="math inline">\(A\)</span>, and lower-case for vectors, <span class="math inline">\(x\)</span>. Then <span class="math inline">\(x_{i}\)</span> is the ith element of <span class="math inline">\(x\)</span>, <span class="math inline">\(A_{ij}\)</span> is the <span class="math inline">\(i\)</span>th row, <span class="math inline">\(j\)</span>th column element, and <span class="math inline">\(A_{\cdot j}\)</span> is the <span class="math inline">\(j\)</span>th column and <span class="math inline">\(A_{i\cdot}\)</span> the <span class="math inline">\(i\)</span>th row. By default, we’ll consider a vector, <span class="math inline">\(x\)</span>, to be a one-column matrix, and <span class="math inline">\(x^{\top}\)</span> to be a one-row matrix. Some of the references given at the start of this Unit also use <span class="math inline">\(a_{ij}\)</span> for <span class="math inline">\(A_{ij}\)</span> and <span class="math inline">\(a_{j}\)</span> for the <span class="math inline">\(j\)</span>th column.</p>
+<p>Throughout, we’ll need to be careful that the matrices involved in an operation are conformable: for <span class="math inline">\(A+B\)</span> both matrices need to be of the same dimension, while for <span class="math inline">\(AB\)</span> the number of columns of <span class="math inline">\(A\)</span> must match the number of rows of <span class="math inline">\(B\)</span>. Note that this allows for <span class="math inline">\(B\)</span> to be a column vector, with only one column, <span class="math inline">\(Ab\)</span>. Just checking dimensions is a good way to catch many errors. Example: is <span class="math inline">\(\mbox{Cov}(Ax)=A\mbox{Cov}(x)A^{\top}\)</span> or <span class="math inline">\(\mbox{Cov}(Ax)=A^{\top}\mbox{Cov}(x)A\)</span>? Well, if <span class="math inline">\(A\)</span> is <span class="math inline">\(m\times n\)</span>, it must be the former, as the latter is not conformable.</p>
+<p>The <strong>inner product</strong> of two vectors is <span class="math inline">\(\sum_{i}x_{i}y_{i}=x^{\top}y\equiv\langle x,y\rangle\equiv x\cdot y\)</span>.</p>
+<p>The <strong>outer product</strong> is <span class="math inline">\(xy^{\top}\)</span>, which comes from all pairwise products of the elements.</p>
+<p>When the indices of summation should be obvious, I’ll sometimes leave them implicit. Ask me if it’s not clear.</p>
+</section>
+<section id="norms" class="level2">
+<h2 class="anchored" data-anchor-id="norms">Norms</h2>
+<p>For a vector, <span class="math inline">\(\|x\|_{p}=(\sum_{i}|x_{i}|^{p})^{1/p}\)</span> and the standard (Euclidean) norm is <span class="math inline">\(\|x\|_{2}=\sqrt{\sum x_{i}^{2}}=\sqrt{x^{\top}x}\)</span>, just the length of the vector in Euclidean space, which we’ll refer to as <span class="math inline">\(\|x\|\)</span>, unless noted otherwise.</p>
+<p>One commonly used norm for a matrix is the Frobenius norm, <span class="math inline">\(\|A\|_{F}=(\sum_{i,j}a_{ij}^{2})^{1/2}\)</span>.</p>
+<p>In this Unit, we’ll often make use of the <strong>induced matrix norm</strong>, which is defined relative to a corresponding vector norm, <span class="math inline">\(\|\cdot\|\)</span>, as: <span class="math display">\[\|A\|=\sup_{x\ne0}\frac{\|Ax\|}{\|x\|}\]</span> So we have <span class="math display">\[\|A\|_{2}=\sup_{x\ne0}\frac{\|Ax\|_{2}}{\|x\|_{2}}=\sup_{\|x\|_{2}=1}\|Ax\|_{2}\]</span> If you’re not familiar with the supremum (“sup” above), you can just think of it as taking the maximum. In the case of the 2-norm, the norm turns out to be the largest singular value in the singular value decomposition (SVD) of the matrix.</p>
+<p>We can interpret the norm of a matrix as the most that the matrix can stretch a vector when multiplying by the vector (relative to the length of the vector).</p>
+<p>A property of any legitimate matrix norm (including the induced norm) is that <span class="math inline">\(\|AB\|\leq\|A\|\|B\|\)</span>. Also recall that norms must obey the triangle inequality, <span class="math inline">\(\|A+B\|\leq\|A\|+\|B\|\)</span>.</p>
+<p>A normalized vector is one with “length”, i.e., Euclidean norm, of one. We can easily normalize a vector: <span class="math inline">\(\tilde{x}=x/\|x\|\)</span></p>
+<p>The angle between two vectors is <span class="math display">\[\theta=\cos^{-1}\left(\frac{\langle x,y\rangle}{\sqrt{\langle x,x\rangle\langle y,y\rangle}}\right)\]</span></p>
+</section>
+<section id="orthogonality" class="level2">
+<h2 class="anchored" data-anchor-id="orthogonality">Orthogonality</h2>
+<p>Two vectors are orthogonal if <span class="math inline">\(x^{\top}y=0\)</span>, in which case we say <span class="math inline">\(x\perp y\)</span>. An <strong>orthogonal matrix</strong> is a square matrix in which all of the columns are orthogonal to each other and normalized. The same holds for the rows. Orthogonal matrices can be shown to have full rank. Furthermore if <span class="math inline">\(A\)</span> is orthogonal, <span class="math inline">\(A^{\top}A=I\)</span>, so <span class="math inline">\(A^{-1}=A^{\top}\)</span>. Given all this, the determinant of orthogonal <span class="math inline">\(A\)</span> is either 1 or -1. Finally the product of two orthogonal matrices, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, is also orthogonal since <span class="math inline">\((AB)^{\top}AB=B^{\top}A^{\top}AB=B^{\top}B=I\)</span>.</p>
+<section id="permutations" class="level4">
+<h4 class="anchored" data-anchor-id="permutations">Permutations</h4>
+<p>Sometimes we make use of matrices that permute two rows (or two columns) of another matrix when multiplied. Such a matrix is known as an elementary permutation matrix and is an orthogonal matrix with a determinant of -1. You can multiply such matrices to get more general permutation matrices that are also orthogonal. If you premultiply by <span class="math inline">\(P\)</span>, you permute rows, and if you postmultiply by <span class="math inline">\(P\)</span> you permute columns. Note that on a computer, you wouldn’t need to actually do the multiply (and if you did, you should use a sparse matrix routine), but rather one can often just rework index values that indicate where relevant pieces of the matrix are stored (more in the next section).</p>
+</section>
+</section>
+<section id="some-vector-and-matrix-properties" class="level2">
+<h2 class="anchored" data-anchor-id="some-vector-and-matrix-properties">Some vector and matrix properties</h2>
+<p><span class="math inline">\(AB\ne BA\)</span> but <span class="math inline">\(A+B=B+A\)</span> and <span class="math inline">\(A(BC)=(AB)C\)</span>.</p>
+<p>In Python, recall the syntax is</p>
+<div id="36913678" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">+</span> B</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix multiplication</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>np.matmul(A, B)  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> B        <span class="co"># alternative</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>A.dot(B)     <span class="co"># not recommended by the NumPy docs</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>A <span class="op">*</span> B <span class="co"># Hadamard (direct) product</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>You don’t need the spaces, but they’re nice for code readability.</p>
+</section>
+<section id="trace-and-determinant-of-square-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="trace-and-determinant-of-square-matrices">Trace and determinant of square matrices</h2>
+<p>The trace of a matrix is the sum of the diagonal elements. For square matrices, <span class="math inline">\(\mbox{tr}(A+B)=\mbox{tr}(A)+\mbox{tr}(B)\)</span>, <span class="math inline">\(\mbox{tr}(A)=\mbox{tr}(A^{\top})\)</span>.</p>
+<p>We also have <span class="math inline">\(\mbox{tr}(ABC)=\mbox{tr}(CAB)=\mbox{tr}(BCA)\)</span> - basically you can move a matrix from the beginning to the end or end to beginning, provided they are conformable for this operation. This is helpful for a couple reasons:</p>
+<ol type="1">
+<li>We can find the ordering that reduces computation the most if the individual matrices are not square.</li>
+<li><span class="math inline">\(x^{\top}Ax=\mbox{tr}(x^{\top}Ax)\)</span> since the quadratic form, <span class="math inline">\(x^{\top}Ax\)</span>, is a scalar, and this is equal to <span class="math inline">\(\mbox{tr}(xx^{\top}A)\)</span> where <span class="math inline">\(xx^{\top}A\)</span> is a matrix. It can be helpful to be able to go back and forth between a scalar and a trace in some statistical calculations.</li>
+</ol>
+<p>For square matrices, the determinant exists and we have <span class="math inline">\(|AB|=|A||B|\)</span> and therefore, <span class="math inline">\(|A^{-1}|=1/|A|\)</span> since <span class="math inline">\(|I|=|AA^{-1}|=1\)</span>. Also <span class="math inline">\(|A|=|A^{\top}|\)</span>, which can be seen using the QR decomposition for <span class="math inline">\(A\)</span> and understanding properties of determinants of triangular matrices (in this case <span class="math inline">\(R\)</span>) and orthogonal matrices (in this case <span class="math inline">\(Q\)</span>).</p>
+</section>
+<section id="transposes-and-inverses" class="level2">
+<h2 class="anchored" data-anchor-id="transposes-and-inverses">Transposes and inverses</h2>
+<p>For square, invertible matrices, we have that <span class="math inline">\((A^{-1})^{\top}=(A^{\top})^{-1}\)</span>. Why? Since we have <span class="math inline">\((AB)^{\top}=B^{\top}A^{\top}\)</span>, we have: <span class="math display">\[A^{\top}(A^{-1})^{\top}=(A^{-1}A)^{\top}=I\]</span> so <span class="math inline">\((A^{\top})^{-1}=(A^{-1})^{\top}\)</span>.</p>
+<p>For two invertible matrices, we have that <span class="math inline">\((AB)^{-1} = B^{-1}A^{-1}\)</span> since <span class="math inline">\(B^{-1}A^{-1} AB = I\)</span>.</p>
+<section id="other-matrix-multiplications" class="level4">
+<h4 class="anchored" data-anchor-id="other-matrix-multiplications">Other matrix multiplications</h4>
+<p>The Hadamard or direct product is simply multiplication of the correspoding elements of two matrices by each other. In R this is simply<code>A * B</code>.<br>
+<strong>Challenge</strong>: How can I find <span class="math inline">\(\mbox{tr}(AB)\)</span> without using <code>A %*% B</code> ?</p>
+<p>The Kronecker product is the product of each element of one matrix with the entire other matrix”</p>
+<p><span class="math display">\[A\otimes B=\left(\begin{array}{ccc}
+A_{11}B &amp; \cdots &amp; A_{1m}B\\
+\vdots &amp; \ddots &amp; \vdots\\
+A_{n1}B &amp; \cdots &amp; A_{nm}B
+\end{array}\right)\]</span></p>
+<p>The inverse of a Kronecker product is the Kronecker product of the inverses,</p>
+<p><span class="math display">\[ B^{-1} \otimes A^{-1} \]</span></p>
+<p>which is obviously quite a bit faster because the inverse (i.e., solving a system of equations) in this special case is <span class="math inline">\(O(n^{3}+m^{3})\)</span> rather than the naive approach being <span class="math inline">\(O((nm)^{3})\)</span>.</p>
+</section>
+</section>
+<section id="matrix-decompositions" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-decompositions">Matrix decompositions</h2>
+<p>A matrix decomposition is a re-expression of a matrix, <span class="math inline">\(A\)</span>, in terms of a product of two or three other, simpler matrices, where the decomposition reveals structure or relationships present in the original matrix, <span class="math inline">\(A\)</span>. The “simpler” matrices may be simpler in various ways, including</p>
+<ul>
+<li>having fewer rows or columns;</li>
+<li>being diagonal, triangular or sparse in some way,</li>
+<li>being orthogonal matrices.</li>
+</ul>
+<p>In addition, once you have a decomposition, computation is generally easier, because of the special structure of the simpler matrices.</p>
+<p>We’ll see this in great detail in Section 3.</p>
+</section>
+</section>
+<section id="statistical-interpretations-of-matrix-invertibility-rank-etc." class="level1">
+<h1>2. Statistical interpretations of matrix invertibility, rank, etc.</h1>
+<section id="linear-independence-rank-and-basis-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="linear-independence-rank-and-basis-vectors">Linear independence, rank, and basis vectors</h2>
+<p>A set of vectors, <span class="math inline">\(v_{1},\ldots v_{n}\)</span>, is linearly independent (LIN) when none of the vectors can be represented as a linear combination, <span class="math inline">\(\sum c_{i}v_{i}\)</span>, of the others for scalars, <span class="math inline">\(c_{1},\ldots,c_{n}\)</span>. If we have vectors of length <span class="math inline">\(n\)</span>, we can have at most <span class="math inline">\(n\)</span> linearly independent vectors. The rank of a matrix is the number of linearly independent rows (or columns - it’s the same), and is at most the minimum of the number of rows and number of columns. We’ll generally think about it in terms of the dimension of the column space - so we can just think about the number of linearly independent columns.</p>
+<p>Any set of linearly independent vectors (say <span class="math inline">\(v_{1},\ldots,v_{n}\)</span>) span a space made up of all linear combinations of those vectors (<span class="math inline">\(\sum_{i=1}^{n}c_{i}v_{i}\)</span>). The spanning vectors are known as basis vectors. We can express a vector <span class="math inline">\(y\)</span> that is in the space with respect to (as a linear combination of) basis vectors as <span class="math inline">\(y=\sum_{i}c_{i}v_{i}\)</span>, where if the basis vectors are normalized and orthogonal, we can find the weights as <span class="math inline">\(c_{i}=\langle y,v_{i}\rangle\)</span>.</p>
+<p>Consider a regression context. We have <span class="math inline">\(p\)</span> covariates (<span class="math inline">\(p\)</span> columns in the design matrix, <span class="math inline">\(X\)</span>), of which <span class="math inline">\(q\leq p\)</span> are linearly independent covariates. This means that <span class="math inline">\(p-q\)</span> of the vectors can be written as linear combos of the <span class="math inline">\(q\)</span> vectors. The space spanned by the covariate vectors is of dimension <span class="math inline">\(q\)</span>, rather than <span class="math inline">\(p\)</span>, and <span class="math inline">\(X^{\top}X\)</span> has <span class="math inline">\(p-q\)</span> eigenvalues that are zero. The <span class="math inline">\(q\)</span> LIN vectors are basis vectors for the space - we can represent any point in the space as a linear combination of the basis vectors. You can think of the basis vectors as being like the axes of the space, except that the basis vectors are not orthogonal. So it’s like denoting a point in <span class="math inline">\(\Re^{q}\)</span> as a set of <span class="math inline">\(q\)</span> numbers telling us where on each of the axes we are - this is the same as a linear combination of axis-oriented vectors.</p>
+<p>When fitting a regression, if <span class="math inline">\(n=p=q\)</span>, a vector of <span class="math inline">\(n\)</span> observations can be represented exactly as a linear combination of the <span class="math inline">\(p\)</span> basis vectors, so there is no residual and we have a single unique (and exact) solution (e.g., with <span class="math inline">\(n=p=2\)</span>, the observations fall exactly on the simple linear regression line). If <span class="math inline">\(n&lt;p\)</span>, then we have at most <span class="math inline">\(n\)</span> linearly independent covariates (the rank is at most <span class="math inline">\(n\)</span>). In this case we have multiple possible solutions and the system is ill-determined (under-determined). Similarly, if <span class="math inline">\(q&lt;p\)</span> and <span class="math inline">\(n\geq p\)</span>, the rank is again less than <span class="math inline">\(p\)</span> and we have multiple possible solutions. Of course we usually have <span class="math inline">\(n&gt;p\)</span>, so the system is overdetermined - there is no exact solution, but regression is all about finding solutions that minimize some criterion about the differences between the observations and linear combinations of the columns of the <span class="math inline">\(X\)</span> matrix (such as least squares or penalized least squares). In standard regression, we project the observation vector onto the space spanned by the columns of the <span class="math inline">\(X\)</span> matrix, so we find the point in the space closest to the observation vector.</p>
+</section>
+<section id="invertibility-singularity-rank-and-positive-definiteness" class="level2">
+<h2 class="anchored" data-anchor-id="invertibility-singularity-rank-and-positive-definiteness">Invertibility, singularity, rank, and positive definiteness</h2>
+<p>For square matrices, let’s consider how invertibility, singularity, rank and positive (or non-negative) definiteness relate.</p>
+<p>Square matrices that are “regular” have an eigendecomposition, <span class="math inline">\(A=\Gamma\Lambda\Gamma^{-1}\)</span> where <span class="math inline">\(\Gamma\)</span> is a matrix with the eigenvectors as the columns and <span class="math inline">\(\Lambda\)</span> is a diagonal matrix of eigenvalues, <span class="math inline">\(\Lambda_{ii}=\lambda_{i}\)</span>. Symmetric matrices and matrices with unique eigenvalues are regular, as are some other matrices. The number of non-zero eigenvalues is the same as the rank of the matrix. Square matrices that have an inverse are also called nonsingular, and this is equivalent to having full rank. If the matrix is symmetric, the eigenvectors and eigenvalues are real and <span class="math inline">\(\Gamma\)</span> is orthogonal, so we have <span class="math inline">\(A=\Gamma\Lambda\Gamma^{\top}\)</span>. The determinant of the matrix is the product of the eigenvalues (why?), which is zero if it is less than full rank. Note that if none of the eigenvalues are zero then <span class="math inline">\(A^{-1}=\Gamma\Lambda^{-1}\Gamma^{\top}\)</span>.</p>
+<p>Let’s focus on symmetric matrices. The symmetric matrices that tend to arise in statistics are either positive definite (p.d.) or non-negative definite (n.n.d.). If a matrix is positive definite, then by definition <span class="math inline">\(x^{\top}Ax&gt;0\)</span> for any <span class="math inline">\(x\)</span>. Note that if <span class="math inline">\(\mbox{Cov}(y)=A\)</span> then <span class="math inline">\(x^{\top}Ax=x^{\top}\mbox{Cov}(y)x=\mbox{Cov}(x^{\top}y)=\mbox{Var}(x^{\top}y)\)</span> if so positive definiteness amounts to having linear combinations of random variables (with the elements of <span class="math inline">\(x\)</span> here being the weights) having positive variance. So we must have that positive definite matrices are equivalent to variance-covariance matrices (I’ll just refer to this as a variance matrix or as a covariance matrix). If <span class="math inline">\(A\)</span> is p.d. then it has all positive eigenvalues and it must have an inverse, though as we’ll see, from a numerical perspective, we may not be able to compute it if some of the eigenvalues are very close to zero. In Python, <code>numpy.linalg.eig(A)[1]</code> is <span class="math inline">\(\Gamma\)</span>, with each column a vector, and <code>numpy.linalg.eig(A)[0]</code> contains the (unordered) eigenvalues.</p>
+<p>To summarize, here are some of the various connections between mathematical and statistical properties of <strong>positive definite</strong> matrices:</p>
+<p><span class="math inline">\(A\)</span> positive definite <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(A\)</span> is a covariance matrix <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(x^{\top}Ax&gt;0\)</span> <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(\lambda_{i}&gt;0\)</span> (positive eigenvalues) <span class="math inline">\(\Rightarrow\)</span><span class="math inline">\(|A|&gt;0\)</span> <span class="math inline">\(\Rightarrow\)</span><span class="math inline">\(A\)</span> is invertible <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(A\)</span> is non singular <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(A\)</span> is full rank.</p>
+<p>And here are connections for positive semi-definite matrices:</p>
+<p><span class="math inline">\(A\)</span> positive semi-definite <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(A\)</span> is a constrained covariance matrix <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(x^{\top}Ax\geq0\)</span> and equal to 0 for some <span class="math inline">\(x\)</span> <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(\lambda_{i}\geq 0\)</span> (non-negative eigenvalues), with at least one zero <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(|A|=0\)</span> <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(A\)</span> is not invertible <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(A\)</span> is singular <span class="math inline">\(\Leftrightarrow\)</span> <span class="math inline">\(A\)</span> is not full rank.</p>
+</section>
+<section id="interpreting-an-eigendecomposition" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-an-eigendecomposition">Interpreting an eigendecomposition</h2>
+<p>Let’s interpret the eigendecomposition in a generative context as a way of generating random vectors. We can generate <span class="math inline">\(y\)</span> s.t. <span class="math inline">\(\mbox{Cov}(y)=A\)</span> if we generate <span class="math inline">\(y=\Gamma\Lambda^{1/2}z\)</span> where <span class="math inline">\(\mbox{Cov}(z)=I\)</span> and <span class="math inline">\(\Lambda^{1/2}\)</span> is formed by taking the square roots of the eigenvalues. So <span class="math inline">\(\sqrt{\lambda_{i}}\)</span> is the standard deviation associated with the basis vector <span class="math inline">\(\Gamma_{\cdot i}\)</span>. That is, the <span class="math inline">\(z\)</span>’s provide the weights on the basis vectors, with scaling based on the eigenvalues. So <span class="math inline">\(y\)</span> is produced as a linear combination of eigenvectors as basis vectors, with the variance attributable to the basis vectors determined by the eigenvalues.</p>
+<p>To go the other direction, we can project a vector <span class="math inline">\(y\)</span> onto the space spanned by the eigenvectors: <span class="math inline">\(w = (\Gamma^{\top}\Gamma)^{-1}\Gamma^{\top}y = \Gamma^{\top}y = \Lambda^{1/2}z\)</span>, where the simplification of course comes from <span class="math inline">\(\Gamma\)</span> being orthogonal.</p>
+<p>If <span class="math inline">\(x^{\top}Ax\geq0\)</span> then <span class="math inline">\(A\)</span> is nonnegative definite (also called positive semi-definite). In this case one or more eigenvalues can be zero. Let’s interpret this a bit more in the context of generating random vectors based on non-negative definite matrices, <span class="math inline">\(y=\Gamma\Lambda^{1/2}z\)</span> where <span class="math inline">\(\mbox{Cov}(z)=I\)</span>. Questions:</p>
+<ol type="1">
+<li><p>What does it mean when one or more eigenvalue (i.e., <span class="math inline">\(\lambda_{i}=\Lambda_{ii}\)</span>) is zero?</p></li>
+<li><p>Suppose I have an eigenvalue that is very small and I set it to zero? What will be the impact upon <span class="math inline">\(y\)</span> and <span class="math inline">\(\mbox{Cov}(y)\)</span>?</p></li>
+<li><p>Now let’s consider the inverse of a covariance matrix, known as the precision matrix, <span class="math inline">\(A^{-1}=\Gamma\Lambda^{-1}\Gamma^{\top}\)</span>. What does it mean if a <span class="math inline">\((\Lambda^{-1})_{ii}\)</span> is very large? What if <span class="math inline">\((\Lambda^{-1})_{ii}\)</span> is very small?</p></li>
+</ol>
+<p>Consider an arbitrary <span class="math inline">\(n\times p\)</span> matrix, <span class="math inline">\(X\)</span>. Any crossproduct or sum of squares matrix, such as <span class="math inline">\(X^{\top}X\)</span> is positive definite (non-negative definite if <span class="math inline">\(p&gt;n\)</span>). This makes sense as it’s just a scaling of an empirical covariance matrix.</p>
+</section>
+<section id="generalized-inverses-optional" class="level2">
+<h2 class="anchored" data-anchor-id="generalized-inverses-optional">Generalized inverses (optional)</h2>
+<p>Suppose I want to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(Ax=b\)</span>. Mathematically the answer (provided <span class="math inline">\(A\)</span> is invertible, i.e.&nbsp;of full rank) is <span class="math inline">\(x=A^{-1}b\)</span>.</p>
+<p>Generalized inverses arise in solving equations when <span class="math inline">\(A\)</span> is not full rank. A generalized inverse is a matrix, <span class="math inline">\(A^{-}\)</span> s.t. <span class="math inline">\(AA^{-}A=A\)</span>. The Moore-Penrose inverse (the pseudo-inverse), <span class="math inline">\(A^{+}\)</span>, is a (unique) generalized inverse that also satisfies some additional properties. <span class="math inline">\(x=A^{+}b\)</span> is the solution to the linear system, <span class="math inline">\(Ax=b\)</span>, that has the shortest length for <span class="math inline">\(x\)</span>.</p>
+<p>We can find the pseudo-inverse based on an eigendecomposition (or an SVD) as <span class="math inline">\(\Gamma\Lambda^{+}\Gamma^{\top}\)</span>. We obtain <span class="math inline">\(\Lambda^{+}\)</span> from <span class="math inline">\(\Lambda\)</span> as follows. For values <span class="math inline">\(\lambda_{i}&gt;0\)</span>, compute <span class="math inline">\(1/\lambda_{i}\)</span>. All other values are set to 0. Let’s interpret this statistically. Suppose we have a precision matrix with one or more zero eigenvalues and we want to find the covariance matrix. A zero eigenvalue means we have no precision, or infinite variance, for some linear combination (i.e., for some basis vector). We take the pseudo-inverse and assign that linear combination zero variance.</p>
+<p>Let’s consider a specific example. Autoregressive models are often used for smoothing (in time, in space, and in covariates). A first order autoregressive model for <span class="math inline">\(y_{1},y_{2},\ldots,y_{T}\)</span> has <span class="math inline">\(E(y_{i}|y_{-i})=\frac{1}{2}(y_{i-1}+y_{i+1})\)</span>. Another way of writing the model is in time-order: <span class="math inline">\(y_{i}=y_{i-1}+\epsilon_{i}\)</span>. A second order autoregressive model has <span class="math inline">\(E(y_{i}|y_{-i})=\frac{1}{6}(4y_{i-1}+4y_{i+1}-y_{i-2}-y_{i+2})\)</span>. These constructions basically state that each value should be a smoothed version of its neighbors. One can figure out that the <strong>precision</strong> matrix for <span class="math inline">\(y\)</span> in the first order model is <span class="math display">\[\left(\begin{array}{ccccc}
+\ddots &amp;  &amp; \vdots\\
+-1 &amp; 2 &amp; -1 &amp; 0\\
+\cdots &amp; -1 &amp; 2 &amp; -1 &amp; \dots\\
+&amp; 0 &amp; -1 &amp; 2 &amp; -1\\
+&amp;  &amp; \vdots &amp;  &amp; \ddots
+\end{array}\right)\]</span> and in the second order model is</p>
+<p><span class="math display">\[\left( \begin{array}{ccccccc} \ddots &amp;  &amp;  &amp; \vdots \\ 1 &amp; -4 &amp; 6 &amp; -4 &amp; 1 \\ \cdots &amp; 1 &amp; -4 &amp; 6 &amp; -4 &amp; 1 &amp; \cdots \\  &amp;  &amp; 1 &amp; -4 &amp; 6 &amp; -4 &amp; 1 \\  &amp;  &amp;  &amp; \vdots \end{array} \right).\]</span></p>
+<p>If we look at the eigendecomposition of such matrices, we see that in the first order case, the eigenvalue corresponding to the constant eigenvector is zero.</p>
+<div id="5848af6a" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>precMat <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>]])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.linalg.eig(precMat)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>e[<span class="dv">0</span>]        <span class="co"># 4th eigenvalue is numerically zero</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>e[<span class="dv">1</span>][:,<span class="dv">3</span>]   <span class="co"># constant eigenvector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>array([ 3.61803399e+00,  2.61803399e+00,  1.38196601e+00, -4.84577457e-17,
+        3.81966011e-01])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>array([0.4472136, 0.4472136, 0.4472136, 0.4472136, 0.4472136])</code></pre>
+</div>
+</div>
+<p>This means we have no information about the overall level of <span class="math inline">\(y\)</span>. So how would we generate sample <span class="math inline">\(y\)</span> vectors? We can’t put infinite variance on the constant basis vector and still generate samples. Instead we use the pseudo-inverse and assign ZERO variance to the constant basis vector. This corresponds to generating realizations under the constraint that <span class="math inline">\(\sum y_{i}\)</span> has no variation, i.e., <span class="math inline">\(\sum y_{i}=\bar{y}=0\)</span> - you can see this by seeing that <span class="math inline">\(\mbox{Var}(\Gamma_{\cdot i}^{\top}y)=0\)</span> when <span class="math inline">\(\lambda_{i}=0\)</span>.</p>
+<div id="f6fc64de" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a realization</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>evals <span class="op">=</span> e[<span class="dv">0</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>evals <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>evals   <span class="co"># variances</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>evals[<span class="dv">3</span>] <span class="op">=</span> <span class="dv">0</span>      <span class="co"># generalized inverse</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> e[<span class="dv">1</span>] <span class="op">@</span> ((evals <span class="op">**</span> <span class="fl">0.5</span>) <span class="op">*</span> np.random.normal(size <span class="op">=</span> <span class="dv">5</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>y.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>-4.440892098500626e-16</code></pre>
+</div>
+</div>
+<p>In the second order case, we have two non-identifiabilities: for the sum and for the linear component of the variation in <span class="math inline">\(y\)</span> (linear in the indices of <span class="math inline">\(y\)</span>).</p>
+<p>I could parameterize a statistical model as <span class="math inline">\(\mu+y\)</span> where <span class="math inline">\(y\)</span> has covariance that is the generalized inverse discussed above. Then I allow for both a non-zero mean and for smooth variation governed by the autoregressive structure. In the second-order case, I would need to add a linear component as well, given the second non-identifiability.</p>
+</section>
+<section id="matrices-arising-in-regression" class="level2">
+<h2 class="anchored" data-anchor-id="matrices-arising-in-regression">Matrices arising in regression</h2>
+<p>In regression, we work with <span class="math inline">\(X^{\top}X\)</span>. Some properties of this matrix are that it is symmetric and non-negative definite (hence our use of <span class="math inline">\((X^{\top}X)^{-1}\)</span> in the OLS estimator). When is it not positive definite?</p>
+<p>Fitted values are <span class="math inline">\(X\hat{\beta}=X(X^{\top}X)^{-1}X^{\top}Y=HY\)</span>. The “hat” matrix, <span class="math inline">\(H\)</span>, projects <span class="math inline">\(Y\)</span> into the column space of <span class="math inline">\(X\)</span>. <span class="math inline">\(H\)</span> is idempotent: <span class="math inline">\(HH=H\)</span>, which makes sense - once you’ve projected into the space, any subsequent projection just gives you the same thing back. <span class="math inline">\(H\)</span> is singular. Why? Also, under what special circumstance would it not be singular?</p>
+</section>
+</section>
+<section id="computational-issues" class="level1">
+<h1>3. Computational issues</h1>
+<section id="storing-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="storing-matrices">Storing matrices</h2>
+<p>We’ve discussed column-major and row-major storage of matrices. First, retrieval of matrix elements from memory is quickest when multiple elements are contiguous in memory. So in a column-major language (e.g., R, Fortran), it is best to work with values in a common column (or entire columns) while in a row-major language (e.g., Python, C) for values in a common row.</p>
+<p>In some cases, one can save space (and potentially speed) by overwriting the output from a matrix calculation into the space occupied by an input. This occurs in some clever implementations of matrix factorizations.</p>
+</section>
+<section id="algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="algorithms">Algorithms</h2>
+<p>Good algorithms can change the efficiency of an algorithm by one or more orders of magnitude, and many of the improvements in computational speed over recent decades have been in algorithms rather than in computer speed.</p>
+<p>Most matrix algebra calculations can be done in multiple ways. For example, we could compute <span class="math inline">\(b=Ax\)</span> in either of the following ways, denoted here in pseudocode.</p>
+<ol type="1">
+<li>Stack the inner products of the rows of <span class="math inline">\(A\)</span> with <span class="math inline">\(x\)</span>.<br>
+</li>
+</ol>
+<pre><code>        for(i=1:n){ 
+            b_i = 0
+            for(j=1:m){
+                b_i = b_i + a_{ij} x_j
+            }
+        }</code></pre>
+<ol start="2" type="1">
+<li>Take the linear combination (based on <span class="math inline">\(x\)</span>) of the columns of <span class="math inline">\(A\)</span><br>
+</li>
+</ol>
+<pre><code>        for(i=1:n){ 
+            b_i = 0
+        }
+        for(j=1:m){
+            for(i = 1:n){
+                b_i = b_i + a_{ij} x_j  
+            }
+        }</code></pre>
+<p>In this case the two approaches involve the same number of operations but the first might be better for row-major matrices (so might be how we would implement in C) and the second for column-major (so might be how we would implement in Fortran).</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Challenge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Challenge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Check whether the first approach is faster in Python with numpy’s default row-major ordering. (Write the code just doing the outer loop as a for loop and doing the inner loop using vectorized calculation.) Your answer will probably depend on how big the matrices are.</p>
+</div>
+</div>
+<section id="general-computational-issues" class="level4">
+<h4 class="anchored" data-anchor-id="general-computational-issues">General computational issues</h4>
+<p>The same caveats we discussed in terms of computer arithmetic hold naturally for linear algebra, since this involves arithmetic with many elements. Good implementations of algorithms are aware of the danger of catastrophic cancellation and of the possibility of dividing by zero or by values that are near zero.</p>
+</section>
+</section>
+<section id="ill-conditioned-problems" class="level2">
+<h2 class="anchored" data-anchor-id="ill-conditioned-problems">Ill-conditioned problems</h2>
+<section id="basics" class="level4">
+<h4 class="anchored" data-anchor-id="basics">Basics</h4>
+<p>A problem is ill-conditioned if small changes to values in the computation result in large changes in the result. This is quantified by something called the <em>condition number</em> of a calculation. For different operations there are different condition numbers.</p>
+<p>Ill-conditionedness arises most often in terms of matrix inversion, so the standard condition number is the “condition number with respect to inversion”, which when using the <span class="math inline">\(L_{2}\)</span> norm is the ratio of the absolute values of the largest to smallest eigenvalue. Here’s an example: <span class="math display">\[A=\left(\begin{array}{cccc}
+10 &amp; 7 &amp; 8 &amp; 7\\
+7 &amp; 5 &amp; 6 &amp; 5\\
+8 &amp; 6 &amp; 10 &amp; 9\\
+7 &amp; 5 &amp; 9 &amp; 10
+\end{array}\right).\]</span> The solution of <span class="math inline">\(Ax=b\)</span> for <span class="math inline">\(b=(32,23,33,31)\)</span> is <span class="math inline">\(x=(1,1,1,1)\)</span>, while the solution for <span class="math inline">\(b+\delta b=(32.1,22.9,33.1,30.9)\)</span> is <span class="math inline">\(x+\delta x=(9.2,-12.6,4.5,-1.1)\)</span>, where <span class="math inline">\(\delta\)</span> is notation for a perturbation to the vector or matrix.</p>
+<div id="be2a17c9" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> norm2(x):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(np.<span class="bu">sum</span>(x<span class="op">**</span><span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">10</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">7</span>],[<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">5</span>],[<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">10</span>,<span class="dv">9</span>],[<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">9</span>,<span class="dv">10</span>]])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">32</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">31</span>])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linalg.solve(A, b)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>bPerturbed <span class="op">=</span> np.array([<span class="fl">32.1</span>, <span class="fl">22.9</span>, <span class="fl">33.1</span>, <span class="fl">30.9</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>xPerturbed <span class="op">=</span> np.linalg.solve(A, bPerturbed)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>delta_b <span class="op">=</span> bPerturbed <span class="op">-</span> b</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>delta_x <span class="op">=</span> xPerturbed <span class="op">-</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What’s going on? Some manipulations with inequalities involving the induced matrix norm (for any chosen vector norm, but we might as well just think about the Euclidean norm) (see Gentle-CS Sec. 5.1 or the derivation in class) give <span class="math display">\[\frac{\|\delta x\|}{\|x\|}\leq\|A\|\|A^{-1}\|\frac{\|\delta b\|}{\|b\|}\]</span> where we define the condition number w.r.t. inversion as <span class="math inline">\(\mbox{cond}(A)\equiv\|A\|\|A^{-1}\|\)</span>. We’ll generally work with the <span class="math inline">\(L_{2}\)</span> norm, and for a nonsingular square matrix the result is that the condition number is the ratio of the absolute values of the largest and smallest magnitude eigenvalues. This makes sense since <span class="math inline">\(\|A\|_{2}\)</span> is the absolute value of the largest magnitude eigenvalue of <span class="math inline">\(A\)</span> and <span class="math inline">\(\|A^{-1}\|_{2}\)</span> that of the inverse of the absolute value of the smallest magnitude eigenvalue of <span class="math inline">\(A\)</span>.</p>
+<p>We see in the code below that the large disparity in eigenvalues of <span class="math inline">\(A\)</span> leads to an effect predictable from our inequality above, with the condition number helping us find an upper bound.</p>
+<div id="e9544468" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.linalg.eig(A)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>evals <span class="op">=</span> e[<span class="dv">0</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">## relative perturbation in x much bigger than in b</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>norm2(delta_x) <span class="op">/</span> norm2(x)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>norm2(delta_b) <span class="op">/</span> norm2(b)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">## ratio of relative perturbations</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>(norm2(delta_x) <span class="op">/</span> norm2(x)) <span class="op">/</span> (norm2(delta_b) <span class="op">/</span> norm2(b))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">## ratio of largest and smallest magnitude eigenvalues</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">## confusingly evals[2] is the smallest, not evals[3]</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>(evals[<span class="dv">0</span>]<span class="op">/</span>evals[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[3.02886853e+01 3.85805746e+00 1.01500484e-02 8.43107150e-01]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>8.198475468037087</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>0.0033319453118976702</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>2460.5672364315433</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>2984.092701676514</code></pre>
+</div>
+</div>
+<p>The main use of these ideas for our purposes is in thinking about the numerical accuracy of a linear system solution (Gentle-NLA Sec 3.4). On a computer we have the system <span class="math display">\[(A+\delta A)(x+\delta x)=b+\delta b\]</span> where the ‘perturbation’ is from the inaccuracy of computer numbers. Our exploration of computer numbers tells us that <span class="math display">\[\frac{\|\delta b\|}{\|b\|}\approx10^{-p};\,\,\,\frac{\|\delta A\|}{\|A\|}\approx10^{-p}\]</span> where <span class="math inline">\(p=16\)</span> for standard double precision floating points. Following Gentle, one gets the approximation</p>
+<p><span class="math display">\[\frac{\|\delta x\|}{\|x\|}\approx\mbox{cond}(A)10^{-p},\]</span> so if <span class="math inline">\(\mbox{cond}(A)\approx10^{t}\)</span>, we have accuracy of order <span class="math inline">\(10^{t-p}\)</span> instead of <span class="math inline">\(10^{-p}\)</span>. (Gentle cautions that this holds only if <span class="math inline">\(10^{t-p}\ll1\)</span>). So we can think of the condition number as giving us the number of digits of accuracy lost during a computation relative to the precision of numbers on the computer. E.g., a condition number of <span class="math inline">\(10^{8}\)</span> means we lose 8 digits of accuracy relative to our original 16 on standard systems. One issue is that estimating the condition number is itself subject to numerical error and requires computation of <span class="math inline">\(A^{-1}\)</span> (albeit not in the case of <span class="math inline">\(L_{2}\)</span> norm with square, nonsingular <span class="math inline">\(A\)</span>) but see Golub and van Loan (1996; p.&nbsp;76-78) for an algorithm.</p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
