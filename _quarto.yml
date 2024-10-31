@@ -41,6 +41,8 @@ website:
             text: "Unit 8 (Precision)"
           - href: units/unit9-sim.qmd
             text: "Unit 9 (Simulation)"
+          - href: units/unit10-linalg.qmd
+            text: "Unit 10 (Linear Algebra)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
