@@ -61,6 +61,8 @@ website:
             text: "Lab 6 (SCF and parallelization)"
           - href: labs/lab7-pythonvsr.html
             text: "Lab 7 (Python vs. R)"
+          - href: labs/lab8-simulation.html
+            text: "Lab 8 (Simulation)"
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
