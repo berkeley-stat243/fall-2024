@@ -600,11 +600,11 @@ Most matrix algebra calculations can be done in multiple ways. For
 example, we could compute $b=Ax$ in either of the following ways,
 denoted here in pseudocode.
 
-1.  Stack the inner products of the rows of $A$ with $x$.\
+1.  Collect the inner products of the rows of $A$ with $x$.\
 
 ```
-        for(i=1:n){ 
-            b_i = 0
+        # initialize b[1:n]=0
+        for(i=1:n) {
             for(j=1:m){
                 b_i = b_i + a_{ij} x_j
             }
@@ -614,9 +614,7 @@ denoted here in pseudocode.
 2.  Take the linear combination (based on $x$) of the columns of $A$\
 
 ```
-        for(i=1:n){ 
-            b_i = 0
-        }
+        # initialize b[1:n]=0
         for(j=1:m){
             for(i = 1:n){
                 b_i = b_i + a_{ij} x_j  
@@ -624,9 +622,9 @@ denoted here in pseudocode.
         }
 ```
 
-In this case the two approaches involve the same number of operations
-but the first might be better for row-major matrices (so might be how we
-would implement in C) and the second for column-major (so might be how
+In this case the two approaches involve the same number of operations.
+But the first accesses $A$ by row, so it might be better for row-major matrices (so might be how we
+would implement in C). The second accesses $A$ by column, so it might be better for column-major matrices (so might be how
 we would implement in Fortran). 
 
 :::{.callout-tip title="Challenge"}
@@ -694,8 +692,9 @@ $L_{2}$ norm, and for a nonsingular square matrix the result is that the
 condition number is the ratio of the absolute values of the largest and
 smallest magnitude eigenvalues. This makes sense since $\|A\|_{2}$ is
 the absolute value of the largest magnitude eigenvalue of $A$ and
-$\|A^{-1}\|_{2}$ that of the inverse of the absolute value of the
-smallest magnitude eigenvalue of $A$.
+$\|A^{-1}\|_{2}$ is the absolute value of the largest magnitude eigenvalue of $A^{-1}$.
+But since the eigenvalues of the inverse are the inverses of the eigenvalues of $A$,
+the latter is the inverse of the absolute value of the smallest magnitude eigenvalue of $A$.
 
 We see in the code below that the large disparity in eigenvalues of $A$
 leads to an effect predictable from our inequality above, with the
@@ -758,36 +757,55 @@ the condition number
 
 ```{python}
 import statsmodels.api as sm
+rng = np.random.default_rng(seed=1)
 
 t1 = np.arange(1990, 2011)  # naive covariate
-X1 = np.column_stack((np.ones(21), t1, t1 ** 2))
+n = len(t1)
+X1 = np.column_stack((np.ones(n), t1, t1 ** 2))
 
-beta = np.array([5, .1, .0001])
-y = X1 @ beta + np.random.normal(size = len(t1))
+beta = np.array([5, 0.1, 0.0001])
+y = X1 @ beta + rng.normal(size = n)
 
-e1 = np.linalg.eig(np.dot(X1.T, X1))
+e1 = np.linalg.eig(X1.T @ X1)
 np.sort(e1[0])[::-1]
-np.linalg.cond(np.dot(X1.T, X1))  # built-in!
+np.linalg.cond(X1.T @ X1)  # built-in!
 sm.OLS(y, X1).fit().params
-
-t2 = t1 - 2000              # centered
-X2 = np.column_stack((np.ones(21), t2, t2 ** 2))
-e2 = np.linalg.eig(np.dot(X2.T, X2))
-with np.printoptions(suppress=True):
-    np.sort(e2[0])[::-1]
-
-t3 = t2/10                  # centered and scaled
-X3 = np.column_stack((np.ones(21), t3, t3 ** 2))
-e3 = np.linalg.eig(np.dot(X3.T, X3))
-with np.printoptions(suppress=True):
-    np.sort(e3[0])[::-1]
 ```
 
-I haven't shown the OLS results for the transformed version
-of the problem because the transformations modify the true
-parameter values, so there is a bit of arithmetic to be done,
-but you should be able to verify that the second and third
-approaches give reasonable answers.
+The fitted values are quite different than the true beta values of (5, 0.1, 0.0001), particularly the intercept and linear terms. This is primarily because of the ill-conditioning, rather than that the OLS estimate
+is different than the true values because we are estimating beta.
+
+Now we'll do a simple transformation, subtracting off the mean of the covariate,
+so that the covariate values (in particular the quadratic values) don't have such large magnitudes.
+
+```{python}
+t2 = t1 - 2000              # centered
+X2 = np.column_stack((np.ones(n), t2, t2 ** 2))
+e2 = np.linalg.eig(X2.T @ X2)
+with np.printoptions(suppress=True):
+    print(np.sort(e2[0])[::-1])
+sm.OLS(y, X2).fit().params
+```
+
+We can work out that the effect of centering is that the true beta values
+after centering are (605, 0.5, 0.0001). (Consider $\beta_0 + \beta_1(t-c+c) + \beta_2(t-c+c)^2$ for $c=2000$.) So for the intercept and linear term, the OLS estimates are now pretty similar to the true values.
+
+Interestingly, the estimate for the quadratic terms has not changed at all. This is quite surprising. There must be something subtle going on that causes that not to be affected by the bad conditioning, but I'm not sure what is happening there.
+
+We could go even further to improve the conditioning. 
+
+```{python}
+t3 = t2/10                  # centered and scaled
+X3 = np.column_stack((np.ones(n), t3, t3 ** 2))
+e3 = np.linalg.eig(X3.T @ X3)
+with np.printoptions(suppress=True):
+    print(np.sort(e3[0])[::-1])
+```
+
+I haven't shown the OLS results for the third version,
+but with a bit of arithmetic to be done,
+but you should be able to verify that the third
+approach also gives reasonable answers.
 
 
 The basic story is that simple strategies often solve the problem, and
