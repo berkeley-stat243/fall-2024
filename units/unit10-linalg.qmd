@@ -877,14 +877,14 @@ The `trans` argument indicates whether to solve $Ax=b$ or $A^{\top}x=b$
 
 ```{python}
 import scipy as sp
-np.random.seed(1)
+rng = np.random.default_rng(seed=1)
 n = 20
-X = np.random.normal(size = (n,n))
+X = rng.normal(size = (n,n))
 ## R has the `crossprod` function, which would be more efficient
 ## than having to transpose, but numpy doesn't seem to have an equivalent.
 A = X.T @ X  # produce a positive def. matrix 
 
-b = np.random.normal(size = n)
+b = rng.normal(size = n)
 L = np.linalg.cholesky(A) # L is lower-triangular
 U = L.T
 
@@ -908,14 +908,14 @@ Here's a good reason why.
 ```{python, cache=TRUE}
 import time
 
-np.random.seed(1)
+rng = np.random.default_rng(seed=1)
 n = 5000
-X = np.random.normal(size = (n,n))
+X = rng.normal(size = (n,n))
 
 ## R has the `crossprod` function, which would be more efficient
 ## than having to transpose, but numpy doesn't seem to have an equivalent.
 A = X.T @ X
-b = np.random.normal(size = n)
+b = rng.normal(size = n)
 L = np.linalg.cholesky(A) # L is lower-triangular
 
 t0 = time.time()
@@ -1066,7 +1066,7 @@ The standard algorithm for generating $y\sim\mathcal{N}(0,A)$ is:
 ```{python}
 #| eval: false
 L = sp.linalg.cholesky(A, lower=True)
-y = L @ np.random.normal(size = n)
+y = L @ rng.normal(size = n)
 ```
 
 :::{.callout-tip title="Question"}
@@ -1106,7 +1106,8 @@ produce such a matrix, particularly when working with high-dimensional
 covariance matrices with large correlations.
 
 ```{python}
-locs = np.random.uniform(size = 100)
+rng = np.random.default_rng(seed=1)
+locs = rng.uniform(size = 100)
 rho = .1
 dists = np.abs(locs[:, np.newaxis] - locs)
 C = np.exp(-dists**2/rho**2)
