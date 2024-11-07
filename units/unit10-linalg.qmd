@@ -541,11 +541,12 @@ see this by seeing that $\mbox{Var}(\Gamma_{\cdot i}^{\top}y)=0$ when
 $\lambda_{i}=0$.
 
 ```{python}
-# generate a realization
+# Generate a realization.
 evals = e[0]
 evals = 1/evals   # variances
 evals[3] = 0      # generalized inverse
-y = e[1] @ ((evals ** 0.5) * np.random.normal(size = 5))
+rng = np.random.default_rng(seed=1)
+y = e[1] @ ((evals ** 0.5) * rng.normal(size = 5))
 y.sum()
 ```
 
