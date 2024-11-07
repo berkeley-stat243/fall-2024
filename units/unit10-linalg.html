@@ -752,14 +752,15 @@ A_{n1}B &amp; \cdots &amp; A_{nm}B
 </div>
 <p>This means we have no information about the overall level of <span class="math inline">\(y\)</span>. So how would we generate sample <span class="math inline">\(y\)</span> vectors? We can’t put infinite variance on the constant basis vector and still generate samples. Instead we use the pseudo-inverse and assign ZERO variance to the constant basis vector. This corresponds to generating realizations under the constraint that <span class="math inline">\(\sum y_{i}\)</span> has no variation, i.e., <span class="math inline">\(\sum y_{i}=\bar{y}=0\)</span> - you can see this by seeing that <span class="math inline">\(\mbox{Var}(\Gamma_{\cdot i}^{\top}y)=0\)</span> when <span class="math inline">\(\lambda_{i}=0\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate a realization</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a realization.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>evals <span class="op">=</span> e[<span class="dv">0</span>]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>evals <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>evals   <span class="co"># variances</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>evals[<span class="dv">3</span>] <span class="op">=</span> <span class="dv">0</span>      <span class="co"># generalized inverse</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> e[<span class="dv">1</span>] <span class="op">@</span> ((evals <span class="op">**</span> <span class="fl">0.5</span>) <span class="op">*</span> np.random.normal(size <span class="op">=</span> <span class="dv">5</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>y.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> e[<span class="dv">1</span>] <span class="op">@</span> ((evals <span class="op">**</span> <span class="fl">0.5</span>) <span class="op">*</span> rng.normal(size <span class="op">=</span> <span class="dv">5</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>y.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-3.3306690738754696e-16</code></pre>
+<pre><code>-6.661338147750939e-16</code></pre>
 </div>
 </div>
 <p>In the second order case, we have two non-identifiabilities: for the sum and for the linear component of the variation in <span class="math inline">\(y\)</span> (linear in the indices of <span class="math inline">\(y\)</span>).</p>
@@ -1019,14 +1020,14 @@ Challenge
 <p>In Scipy, we can use <code>linalg.solve_triangular</code> to solve triangular systems. The <code>trans</code> argument indicates whether to solve <span class="math inline">\(Ax=b\)</span> or <span class="math inline">\(A^{\top}x=b\)</span> (so one wouldn’t need to transpose before solving).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sp</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">1</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.normal(size <span class="op">=</span> (n,n))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> rng.normal(size <span class="op">=</span> (n,n))</span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">## R has the `crossprod` function, which would be more efficient</span></span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">## than having to transpose, but numpy doesn't seem to have an equivalent.</span></span>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> X.T <span class="op">@</span> X  <span class="co"># produce a positive def. matrix </span></span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.normal(size <span class="op">=</span> n)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> rng.normal(size <span class="op">=</span> n)</span>
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> np.linalg.cholesky(A) <span class="co"># L is lower-triangular</span></span>
 <span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> L.T</span>
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
@@ -1048,27 +1049,27 @@ Challenge
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">1</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5000</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.normal(size <span class="op">=</span> (n,n))</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> rng.normal(size <span class="op">=</span> (n,n))</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">## R has the `crossprod` function, which would be more efficient</span></span>
 <span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">## than having to transpose, but numpy doesn't seem to have an equivalent.</span></span>
 <span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> X.T <span class="op">@</span> X</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.normal(size <span class="op">=</span> n)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> rng.normal(size <span class="op">=</span> n)</span>
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> np.linalg.cholesky(A) <span class="co"># L is lower-triangular</span></span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
 <span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>out1 <span class="op">=</span> sp.linalg.solve_triangular(L, b, lower<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.09086394309997559</code></pre>
+<pre><code>0.03161954879760742</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> time.time()</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>out2 <span class="op">=</span> np.linalg.inv(L) <span class="op">@</span> b</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>time.time() <span class="op">-</span> t0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>4.297646760940552</code></pre>
+<pre><code>4.863181114196777</code></pre>
 </div>
 </div>
 <p>That assumes you have <span class="math inline">\(L\)</span>, but we’ll see in a bit that even when one accounts for the creation of <span class="math inline">\(L\)</span>, you don’t want to invert matrices in order to solve systems of equations.</p>
@@ -1120,7 +1121,7 @@ Challenge
 <p>The standard algorithm for generating <span class="math inline">\(y\sim\mathcal{N}(0,A)\)</span> is:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> sp.linalg.cholesky(A, lower<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> L <span class="op">@</span> np.random.normal(size <span class="op">=</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> L <span class="op">@</span> rng.normal(size <span class="op">=</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Question">
 <div class="callout-header d-flex align-content-center">
@@ -1156,15 +1157,16 @@ Challenge
 <h4 class="anchored" data-anchor-id="numerical-issues-with-eigendecompositions-and-cholesky-decompositions-for-positive-definite-matrices">Numerical issues with eigendecompositions and Cholesky decompositions for positive definite matrices</h4>
 <p>Monahan comments that in general Gaussian elimination and the Cholesky decomposition are very stable. However, in the Cholesky case, if the matrix is very ill-conditioned we can get <span class="math inline">\(A_{ii}-\sum_{k}U_{ki}^{2}\)</span> being negative and then the algorithm stops when we try to take the square root. In this case, the Cholesky decomposition does not exist numerically although it exists mathematically. It’s not all that hard to produce such a matrix, particularly when working with high-dimensional covariance matrices with large correlations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>locs <span class="op">=</span> np.random.uniform(size <span class="op">=</span> <span class="dv">100</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="fl">.1</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>dists <span class="op">=</span> np.<span class="bu">abs</span>(locs[:, np.newaxis] <span class="op">-</span> locs)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.exp(<span class="op">-</span>dists<span class="op">**</span><span class="dv">2</span><span class="op">/</span>rho<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.linalg.eig(C)</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>np.sort(e[<span class="dv">0</span>])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">96</span>:<span class="dv">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>locs <span class="op">=</span> rng.uniform(size <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="fl">.1</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>dists <span class="op">=</span> np.<span class="bu">abs</span>(locs[:, np.newaxis] <span class="op">-</span> locs)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.exp(<span class="op">-</span>dists<span class="op">**</span><span class="dv">2</span><span class="op">/</span>rho<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.linalg.eig(C)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>np.sort(e[<span class="dv">0</span>])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">96</span>:<span class="dv">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([-3.97281456e-16+0.00000000e+00j, -5.04026222e-16+2.43770877e-16j,
-       -5.04026222e-16-2.43770877e-16j, -6.63548161e-16+0.00000000e+00j])</code></pre>
+<pre><code>array([-3.73181266e-16-5.84190120e-17j, -4.67035510e-16+1.89571791e-16j,
+       -4.67035510e-16-1.89571791e-16j, -9.16675579e-16+0.00000000e+00j])</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> np.linalg.cholesky(C)</span>
@@ -1177,7 +1179,7 @@ Challenge
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>vals <span class="op">=</span> np.<span class="bu">abs</span>(e[<span class="dv">0</span>])</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">max</span>(vals)<span class="op">/</span>np.<span class="bu">min</span>(vals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>5.971220243671803e+17</code></pre>
+<pre><code>4.4428831436221965e+17</code></pre>
 </div>
 </div>
 <p>I don’t see a way to use pivoting with the Cholesky in Python, but in R, one can do <code>chol(C, pivot = TRUE)</code>.</p>
