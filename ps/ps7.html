@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Problem Set 1</title>
+<title>Problem Set 7</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -101,6 +67,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="stylesheet" href="../styles.css">
@@ -115,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Set 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps7.html">Problem Set 7</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -317,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ps/ps1.html" class="sidebar-item-text sidebar-link active">
+  <a href="../ps/ps1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 1</span></a>
   </div>
 </li>
@@ -353,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ps/ps7.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps7.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 7</span></a>
   </div>
 </li>
@@ -418,14 +413,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ps1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ps7.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Set 1</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps7.html">Problem Set 7</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Problem Set 1</h1>
-<p class="subtitle lead">Due Wednesday Sep.&nbsp;11, 10 am</p>
+<h1 class="title">Problem Set 7</h1>
+<p class="subtitle lead">Due Mon. November 18, 10 am</p>
 </div>
 
 
@@ -445,69 +440,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comments" class="level2">
 <h2 class="anchored" data-anchor-id="comments">Comments</h2>
 <ul>
-<li>This covers material in Units 2 and 4 as well as practice with Quarto.</li>
-<li>It’s due at 10 am (Pacific) on September 11, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
-<li>Please note my comments in the syllabus about when to ask for help and about working together. <strong>In particular, include a short initial section giving the names of any other students that you worked with on the problem set (or indicating you didn’t work with anyone if that was the case) and then indicate in the text or in code comments any specific ideas or code you borrowed from another student or any online reference (including ChatGPT or the like).</strong></li>
+<li>This covers material in Unit 10.</li>
+<li>It’s due at 10 am (Pacific) on November 18, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>Please see PS1 for formatting and attribution requirements.</li>
+<li>Note that is is fine to hand-write solutions to the the non-coding questions, but make sure your writing is neat and insert any hand-written parts <strong>in order</strong> into your final submission.</li>
 </ul>
-</section>
-<section id="formatting-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="formatting-requirements">Formatting requirements</h2>
-<ol type="1">
-<li><p>Your electronic solution should be in the form of an Quarto file named <code>ps1.qmd</code>, with Python code chunks. Please see Lab 1 and the <a href="https://berkeley-scf.github.io/tutorial-dynamic-docs">dynamic documents tutorial</a> for more information on how to do this. You can put longer functions in a .py file and show the source code in your qmd file using <code>inspect.getsource()</code>.</p></li>
-<li><p>Your PDF submission to Gradescope should be the PDF produced from your qmd. Your GitHub submission should include the qmd file, any Python code files (modules) that you use in your qmd file, your environment file (see problem 4d) and the final PDF, all named according to the <a href="https://stat243.berkeley.edu/fall-2024/howtos/submitPS.html">submission guidelines</a>.</p></li>
-<li><p>Your solution should not just be code - you should have text describing how you approached the problem and what the various steps were. Your code should have comments indicating what each function or block of code does, and for any lines of code or code constructs that may be hard to understand, a comment indicating what that code does.</p></li>
-<li><p>You do not need to (and should not) show exhaustive output, but in general you should show short examples of what your code does to demonstrate its functionality. Please see the <a href="https://stat243.berkeley.edu/fall-2024/rubric.html">grading rubric</a>, and note that the output should be produced as a result of the code chunks being run during the rendering process, not by copy-pasting of output from running the code separately (and definitely not as screenshots).</p></li>
-</ol>
 </section>
 <section id="problems" class="level2">
 <h2 class="anchored" data-anchor-id="problems">Problems</h2>
 <ol type="1">
-<li><p>Please read <a href="https://36-750.github.io/tools/computer-architecture">these lecture notes</a> about how computers work, used in a class on statistical computing at CMU. Briefly (a few sentences) describe the difference between disk and memory based on that reference and/or other resources you find.</p></li>
-<li><p>This problem uses the ideas and tools in Unit 2, Sections 1-3 to explore approaches to reading and writing data from files and to consider file sizes in ASCII plain text vs.&nbsp;binary formats in light of the fact that numbers are (generally) stored as 8 bytes per number in binary formats.</p>
+<li><p>We’ve seen how to use Gaussian elimination (i.e., the LU decomposition) to solve <span class="math inline">\(Ax=b\)</span> and that we can do the solution in <span class="math inline">\(n^{3}/3\)</span> operations (plus lower-order terms). Suppose I want to know how inefficient it is to explicitly invert the matrix <span class="math inline">\(A\)</span> and then multiply, thereby finding <span class="math inline">\(x=A^{-1}b\)</span> via matrix-vector multiplication. If we look into the C++ code behind <code>numpy.linalg</code> at the <code>inv</code> function, we see it solves the system <span class="math inline">\(AZ=I\)</span> to find <span class="math inline">\(Z=A^{-1}\)</span>, using a Lapack routine <a href="http://www.netlib.org/lapack/explore-html/d7/d3b/group__double_g_esolve_ga5ee879032a8365897c3ba91e3dc8d512.html">DGESV</a>, which uses the LU decomposition. Count the number of computations for</p>
 <ol type="a">
-<li><p>Generate a numpy array (named <code>x</code>) of random numbers from a standard normal distribution with 20 columns and as many rows as needed so that the data take up about 16 MB (megabytes) in size. As part of your answer, show the arithmetic (formatted using LaTeX math syntax) you did to determine the number of rows.</p></li>
-<li><p>Explain the sizes of the two files created below. In discussing the CSV text file, how many characters do you expect to be in the file (i.e., you should be able to estimate this reasonably accurately from first principles without using <code>wc</code> or any explicit program that counts characters). Hint: what do we know about numbers drawn from a standard normal distribution?</p>
-<div id="29ca7484" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x.<span class="bu">round</span>(decimals <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(x).to_csv(<span class="st">'x.csv'</span>, header <span class="op">=</span> <span class="va">False</span>, index <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">str</span>(os.path.getsize(<span class="st">'x.csv'</span>)<span class="op">/</span><span class="fl">1e6</span>)<span class="sc">}</span><span class="ss"> MB"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(x).to_pickle(<span class="st">'x.pkl'</span>, compression <span class="op">=</span> <span class="va">None</span>) </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">str</span>(os.path.getsize(<span class="st">'x.pkl'</span>)<span class="op">/</span><span class="fl">1e6</span>)<span class="sc">}</span><span class="ss"> MB"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>30.777135 MB
-16.000572 MB</code></pre>
-</div>
-</div>
-<p>Suppose we had rounded each number to four decimal places. Would using CSV have saved disk space relative to the pickle file?</p></li>
-<li><p>Now consider saving out the numbers one number per row in a CSV file. Given we no longer have to save all the commas, why is the file size unchanged?</p></li>
-<li><p>Read the CSV file into Python using <code>pandas.read_csv</code>. Compare the speed of reading the CSV to reading the pickle file with <code>pandas.read_pickle</code>. Note that in some cases you might find that the first time you read a file is slower; if so this has to do with the operating system caching the file in memory (we’ll discuss this further in Unit 7 when we talk about databases).</p></li>
-<li><p>Finally, in the next parts of the question, we’ll consider reading the CSV file in chunks as discussed in Unit 2. First, time how long it takes to read the first 10,000 rows in a single chunk using <code>nrows</code>.</p></li>
-<li><p>Now experiment with the <code>skiprows</code> to see if you can read in a large chunk of data from the middle of the file as quickly as the same size chunk from the start of the file. What does this indicate regarding whether Pandas/Python has to read in all the data up to the point where the chunk in the middle starts or can skip over it in some fashion? Is there any savings relative to reading all the initial rows and the chunk in the middle all at once?</p></li>
-</ol></li>
-<li><p>Please read the <a href="https://stat243.berkeley.edu/fall-2024/units/unit4-goodPractices.html#code-syntax-and-style">Code syntax and style section</a> of Unit 4 on good programming/project practices and incorporate what you’ve learned from that reading into your solution for Problem 4. (You can skip the section on Assertions and Testing, as we’ll cover that in Lab.) In particular, lint your code (e.g., using <code>ruff</code> or another tool of your choice as discussed in the <a href="../units/unit4-goodPractices.html#linting">Unit 4</a>. (This is most straightforward for code in a .py file. If your code is directly in the qmd file, you probably need to copy-paste it into another file to lint it, unfortunately. If anyone figures out a good way to directly lint the code chunks, please post on Ed!)</p>
-<p>As your response to this question, very briefly (a few sentences) note what you did in your code for Problem 4 that reflects what you read. Please also note anything in what you read in Unit 4 that you disagree with, if you have a different stylistic perspective.</p></li>
-<li><p>We’ll experiment with webscraping and manipulating HTML by getting publication information off of Google Scholar. Note that Google Scholar does not have an API, so we are forced to deconstruct the queries that are produced when we point and click on the website.</p>
-<p>Your functions may be short enough that it’s ok to put a function directly within a code chunk in your qmd file. Or you might choose to put one or more functions into a .py file and use <code>inspect.getsource()</code> to show us the code. For this problem in which the focus of the work is the function and how it works, it will generally be best to show the function code as part of the problem solution rather than in an appendix.</p>
-<ol type="a">
-<li><p>Go to <a href="https://scholar.google.com">Google Scholar</a> and enter the name (including first name to help with disambiguation) for a researcher whose work interests you. (If you want to do the one that will match the problem set solutions, you can use “Michael Jordan”, who is a well-known statistician and machine learning researcher here at Berkeley.) If you’ve entered the name of a researcher that Google Scholar recognizes as having a Google Scholar profile, you should see that the first item shown in the results page is a “User profile”. Now, based on the information returned, show the HTML element containing the Google Scholar ID and determine the Google Scholar ID for the researcher. Ideally (see the extra credit part (e)) we would automate that process and write a Python function that returns the ID, but see Question 5 for why that seemingly would violate Google Scholar’s terms of use.</p></li>
-<li><p>Create a function that constructs the http GET request (and submits that request) to get the citations for the scholar, taking the ID as the input argument and returning the HTML as a Python object.</p>
-<p><strong>IMPORTANT</strong>: While running the query in an automated fashion is seemingly allowed (see Problem 5), Google may return “429” errors because it detects automated usage. Here are some things to do in that case:</p>
-<ol type="1">
-<li>You can try to download the HTML file via the UNIX <code>curl</code> command, which you can run within Python as <code>subprocess.run(["curl", "-L", request_string], capture_output=True)</code>. If necessary for part (c), you can use <code>curl</code> or <code>wget</code> from the command line to separately download the file and then read that file into Python.</li>
-<li>When developing your code, once you have the code in this part of the problem working to download the HTML, use the downloaded HTML to develop the remainder of your code for part (c) and don’t keep re-downloading the HTML as you work on the remainder of the code.</li>
+<li>transforming <span class="math inline">\(AZ=I\)</span> to <span class="math inline">\(UZ=I^{*}\)</span> (where <span class="math inline">\(I^{*}\)</span> is no longer a diagonal matrix),</li>
+<li>for solving for <span class="math inline">\(Z\)</span> given <span class="math inline">\(UZ=I^{*}\)</span>, and</li>
+<li>for calculating <span class="math inline">\(x=Zb\)</span>.</li>
 </ol>
-<p>For now, you can assume the user will provide a valid ID and that Google Scholar returns a result for the specified person. We’ll deal with making the code more robust in PS2.</p></li>
-<li><p>Now write a function that processes the HTML to return a Pandas (or Polars) data frame with the citation information (article title, authors, journal information, year of publication, and number of citations as five columns of information) for the researcher. Try your function on a second researcher to provide more confidence that your function is working properly. (We’ll add unit tests in PS2). Given the comments in (b), ideally your function will work either if given (i) the name of a file that you’ve already downloaded or (ii) the HTML content produced by your function in (b).</p>
-<p>Hint: a possibly useful argument for <code>find_all</code> is to request element(s) with certain attributes, e.g., <code>html.find("p", attrs = {'class': 'songtext'})</code> for finding a <code>p</code> element whose class is <code>songtext</code>.</p></li>
-<li><p>Create a <a href="../units/unit4-goodPractices.html#some-basic-strategies">requirements file (based on either pip or Conda)</a> that has the necessary information (in particular Python package versions) to reproduce the environment in which you ran your code. Include this file in your GitHub repository directory for this problem set.</p></li>
-<li><p>(Extra credit) If you’d like extra practice, write a Python function that will return the Google Scholar ID when the function is provided an html file as its argument. The file would be the file that is returned by searching for a researcher name as the input at scholar.google.com. As discussed in (a), your function should not query Google Scholar using the <code>requests</code> package, but rather should manipulate an HTML file that you download after manually querying Google Scholar yourself.</p></li>
-<li><p>(Extra credit) If you’d like extra practice, fix your function so that you get all of the results for a researcher and not just the first 20. E.g., for Michael Jordan there are several hundred.</p></li>
+<p>Then compare the total cost to the <span class="math inline">\(n^{3}/3\)</span> cost of what we saw in class.</p>
+<p>Notes:</p>
+<ul>
+<li>In counting the computations you should be able to make use of various results we derived in class concerning the Gaussian elimination computations and computations involved in a backsolve, so your answer should be able to simply combine together results we’ve already discussed without any detailed new derivation.</li>
+<li>Given that numpy’s call to <code>dgesv</code> doesn’t take account of the special (diagonal) structure of <span class="math inline">\(I\)</span> on the right-hand side, you do not need to take account of the fact that because <span class="math inline">\(I\)</span> has zeroes and ones, one can actually save some computation. You can simply count the calculations as if <span class="math inline">\(I\)</span> were filled with arbitrary values. (Note: if we did actually try to be careful about making use of the structure of <span class="math inline">\(I\)</span>, it turns out we could save <span class="math inline">\(n^{3}/3\)</span> calculations.)</li>
+</ul></li>
+<li><p>Suppose I need to compute the generalized least squares estimator, <span class="math inline">\(\hat{\beta}=(X^{\top}\Sigma^{-1}X)^{-1}X^{\top}\Sigma^{-1}Y\)</span>, where <span class="math inline">\(X\)</span> is <span class="math inline">\(n\times p\)</span> and <span class="math inline">\(\Sigma\)</span> is a positive definite <span class="math inline">\(n\times n\)</span> matrix. Assume that <span class="math inline">\(n&gt;p\)</span> and <span class="math inline">\(n\)</span> could be of order several thousand and <span class="math inline">\(p\)</span> of order in the hundreds.</p>
+<ol type="a">
+<li><p>First write out in pseudo-code how you would do this in an efficient way - i.e., the particular linear algebra steps and the order of operations. Then write efficient Python code in the form of a function, <code>gls()</code>, to do this - you can rely on the various high-level functions for matrix decompositions and solving systems of equations, but you should not use any code that already exists for doing generalized least squares. Warning: the Cholesky functions in numpy and scipy don’t return the result in the same form.</p></li>
+<li><p>Now compare your approach to directly using the inverse in Python (but make sure to only calculate the inverse once and to use an efficicient order of operations). Is the timing consistent with the results of Question 1 and the computational efficiency results from Unit 10? For simplicity, you can construct a positive definite matrix <span class="math inline">\(\Sigma\)</span> as <span class="math inline">\(\Sigma=W^{\top}W\)</span>, with the elements of the <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(W\)</span> generated randomly. (In a real problem, <span class="math inline">\(\Sigma\)</span> would be set up based on the context of course.) You can also generate <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> randomly</p></li>
+<li><p>Are the results for the solution, <span class="math inline">\(\hat{\beta}\)</span>, the same numerically for the two approaches (up to machine precision)? Comment on how many digits in the elements of <span class="math inline">\(\hat{\beta}\)</span> agree, and relate this to the condition number of the calculation.</p></li>
 </ol></li>
-<li><p>Look at the <code>robots.txt</code> for Google Scholar (scholar.google.com) and the references in Unit 2 on the ethics of webscraping. Does it seem like it’s ok to scrape data from Google Scholar? Hopefully this will make clear why our scraping in Problem 4 did not include programmatically obtaining the Google Scholar ID.</p></li>
+<li><p>Two-stage least squares (2SLS) is a way of implementing a causal inference method called instrumental variables that is commonly used in economics. Consider the following set of regression equations: <span class="math display">\[\begin{aligned}
+\hat{X} &amp; = &amp; Z(Z^{\top}Z)^{-1}Z^{\top}X\\
+\hat{\beta} &amp; = &amp; (\hat{X}^{\top}\hat{X})^{-1}\hat{X}^{\top}Y\end{aligned}\]</span> which can be interpreted as regressing <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> after filtering such that we only retain variation in <span class="math inline">\(X\)</span> that is correlated with the instrumental variable <span class="math inline">\(Z\)</span>. An economics graduate student asked me how he could compute <span class="math inline">\(\hat{\beta}\)</span> if <span class="math inline">\(Z\)</span> is 60 million by 630, <span class="math inline">\(X\)</span> is 60 million by 600, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(60\)</span> million by 1, but both <span class="math inline">\(Z\)</span> and <span class="math inline">\(X\)</span> are sparse matrices.</p>
+<ol type="a">
+<li><p>Describe briefly why I can’t do this calculation in two steps as given in the equations, even if I use the techniques for OLS discussed in class for each stage.</p></li>
+<li><p>Figure out how to rewrite the equations such that you can actually calculate <span class="math inline">\(\hat{\beta}\)</span> on a computer without using a huge amount of memory. You can assume that any matrix multiplications involving sparse matrices can be done on the computer (e.g., using <code>scipy.sparse</code>). Describe the specific steps of how you would do this and/or write out in pseudo-code.</p></li>
+</ol>
+<p>Notes:</p>
+<ul>
+<li>The product of two sparse matrices is not (in general) sparse and would not be sparse in this case.</li>
+<li>As discussed in Section 6 of Unit 10, there are approaches in Python (and software packages more generally) for efficiently storing (to save memory) and efficiently doing matrix manipulations (to save computation time) with sparse matrices.</li>
+</ul></li>
+<li><p>(Extra credit) In class we saw that the condition number when solving a system of equations, <span class="math inline">\(Ax=b\)</span>, is the ratio of the absolute values of the largest and smallest magnitude eigenvalues of <span class="math inline">\(A\)</span>. Show that <span class="math inline">\(\|A\|_{2}\)</span> (i.e., the matrix norm induced by the usual L2 vector norm; see Section 1 of Unit 10) is the largest of the absolute values of the eigenvalues of <span class="math inline">\(A\)</span> for symmetric <span class="math inline">\(A\)</span>. To do so, find the following quantity, <span class="math display">\[\|A\|_{2}=\sup_{z:\|z\|_{2}=1}\sqrt{(Az)^{\top}Az}.\]</span> If you’re not familiar with the notion of the supremum (the <em>sup</em> here), just think of it as the maximum. It accounts for situations such as trying to find the maximum of the numbers in the open interval (0,1). The max is undefined in this case since there is always a number closer to 1 than any number you choose, but the <em>sup</em> in this case is 1.</p>
+<p>Hints: when you get to having the quantity <span class="math inline">\(\Gamma^{\top}z\)</span> for orthogonal <span class="math inline">\(\Gamma\)</span>, set <span class="math inline">\(y=\Gamma^{\top}z\)</span> and show that if <span class="math inline">\(\|z\|_{2}=1\)</span> then <span class="math inline">\(\|y\|_{2}=1\)</span>. Finally, if you have the quantity <span class="math inline">\(y^{\top}Dy\)</span>, think about how this can be rewritten given the form of <span class="math inline">\(D\)</span> and think intuitively about how to maximize it if <span class="math inline">\(\|y\|_{2}=1\)</span>.</p></li>
 </ol>
 
 
