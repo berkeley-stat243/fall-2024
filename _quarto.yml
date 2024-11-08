@@ -63,6 +63,8 @@ website:
             text: "Lab 7 (Python vs. R)"
           - href: labs/lab8-simulation.html
             text: "Lab 8 (Simulation)"
+          - href: labs/lab9-git.html
+            text: "Lab 9 (Collaboration with Git)"
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
