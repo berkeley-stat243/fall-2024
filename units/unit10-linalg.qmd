@@ -1505,7 +1505,10 @@ orthogonal matrix is either one or minus one.
 
 $|A|=|QR|=|Q||R|=\pm|R|$
 
-$|A^{\top}A|=|(QR)^{\top}QR|=|R^{\top}R|=|R_{1}^{\top}R_{1}|=|R_{1}|^{2}$\
+$|A^{\top}A|=|(QR)^{\top}QR|=|R^{\top}R|=|R_{1}^{\top}R_{1}|=|R_{1}|^{2}$
+
+(Note of course that that is for square $A$, so we have $R$ is $n \times $n$.
+
 In Python, the following will do it (on the log scale).
 
 ```{python}

@@ -74,6 +74,8 @@ website:
           - href: ps/ps5.qmd
           - href: ps/ps6.qmd
           - href: ps/ps7.qmd
+      - href: project/project.qmd
+        text: Final Project
       - section: "How tos"
         contents:
           - howtos/accessPython.md

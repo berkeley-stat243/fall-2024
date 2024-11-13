@@ -135,5 +135,14 @@
           id: "7"
           name: "Problem Set 7"
           href: "ps/ps7.html"
+- week: 17
+  days:
+    - date: "Thu Dec 19"
+      items:
+        - type: "Problem_Set"
+          id: "9"
+          name: "Project"
+          href: "project/project.html"
+
 
       
