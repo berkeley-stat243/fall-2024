@@ -334,6 +334,12 @@ window.Quarto = {
  <span class="menu-text">Lab 8 (Simulation)</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/lab9-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 9 (Collaboration with Git)</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -389,6 +395,12 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project/project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -1332,8 +1344,9 @@ R_{23}
 <h2 class="anchored" data-anchor-id="determinants">Determinants</h2>
 <p>The absolute value of the determinant of a square matrix can be found from the product of the diagonals of the triangular matrix in any factorization that gives a triangular (including diagonal) matrix times an orthogonal matrix (or matrices) since the determinant of an orthogonal matrix is either one or minus one.</p>
 <p><span class="math inline">\(|A|=|QR|=|Q||R|=\pm|R|\)</span></p>
-<p><span class="math inline">\(|A^{\top}A|=|(QR)^{\top}QR|=|R^{\top}R|=|R_{1}^{\top}R_{1}|=|R_{1}|^{2}\)</span><br>
-In Python, the following will do it (on the log scale).</p>
+<p><span class="math inline">\(|A^{\top}A|=|(QR)^{\top}QR|=|R^{\top}R|=|R_{1}^{\top}R_{1}|=|R_{1}|^{2}\)</span></p>
+<p>(Note of course that that is for square <span class="math inline">\(A\)</span>, so we have <span class="math inline">\(R\)</span> is $n <span class="math inline">\(n\)</span>.</p>
+<p>In Python, the following will do it (on the log scale).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>Q,R <span class="op">=</span> qr(A)</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>magn <span class="op">=</span> np.<span class="bu">sum</span>(np.log(np.<span class="bu">abs</span>(np.diag(R)))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

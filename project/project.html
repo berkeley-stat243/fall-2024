@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Problem Set 2</title>
+<title>Final Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps2.html">Problem Set 2</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project/project.html">Final Project</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -295,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link active">
+  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 2</span></a>
   </div>
 </li>
@@ -333,7 +333,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project/project.html" class="sidebar-item-text sidebar-link">
+  <a href="../project/project.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Final Project</span></a>
   </div>
 </li>
@@ -396,14 +396,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ps2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="project.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps2.html">Problem Set 2</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Problem Set 2</h1>
-<p class="subtitle lead">Due Friday Sep.&nbsp;20, 10 am</p>
+<h1 class="title">Final Project</h1>
+<p class="subtitle lead">Due Thursday Dec.&nbsp;19, 5 pm</p>
 </div>
 
 
@@ -420,41 +420,41 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="comments" class="level2">
-<h2 class="anchored" data-anchor-id="comments">Comments</h2>
-<ul>
-<li>This covers material in Units 3 and 4.</li>
-<li>It’s due at 10 am (Pacific) on September 20, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
-<li>Please see PS1 for formatting and attribution requirements.</li>
-<li>Note that using chunks of bash code in Qmd may be troublesome.
-<ul>
-<li>You will need to add <code>engine: knitr</code> to the YAML preface of your qmd document. The default <code>jupyter</code> engine won’t run both bash and Python chunks in the same document because the Jupyter notebooks are associated with a single ‘kernel’ (i.e., a single language for the code chunks).</li>
-<li>For the <code>knitr</code> engine, you’ll need to have R installed on your computer, including the <code>knitr</code> package. Quarto will then process the code chunks through <code>knitr</code> (which will use R’s <code>reticulate</code> package to handle Python chunks).</li>
-<li>If you have trouble on your own computer, you can always render your solution for this problem set on an SCF machine (we won’t generally use bash chunks in future problem sets). (In particular I’m not quite sure what will happen if you render on Windows.)</li>
-<li>We can help troubleshoot and feel free to post on Ed.</li>
-<li><strong>Test things out well before the due date with a dummy qmd file with both a bash chunk and a Python chunk and make sure things work.</strong></li>
-</ul></li>
-<li>You will probably need to use <code>sed</code> in a basic way as shown in the bash tutorial. You should not need to use more advanced functionality nor should you need to use <code>awk</code>, but you may if you want to.</li>
-</ul>
-</section>
-<section id="problems" class="level2">
-<h2 class="anchored" data-anchor-id="problems">Problems</h2>
+<p>The project will be done in groups of three, with students assigned randomly.</p>
+<p>The project, when split amongst the group members, is not intended to be a huge undertaking. The goals of the project are to give you experience in working collaboratively and developing a well-designed, well-tested piece of software.</p>
+<p>The project will be graded as a letter grade and will count for about as much as two problem sets in your final grade.</p>
+<p>Please use standard citation practices to cite any papers/code/online resources/chatbots whose ideas you make use of. Please do not consult with any people (in particular class members) who are not in your group. You are of course welcome to ask Chris or João questions.</p>
+<section id="problem" class="level1">
+<h1>Problem</h1>
+<p>Your task is to implement an adaptive-rejection sampler, described in the Unit 9 notes (Section 5) and with details in Section 2.2 of Gilks et al.&nbsp;(1992) - the PDF is in the <code>project</code> directory of the class Git repository. The result should be an Python package that I can <strong>easily</strong> install and use.</p>
+<p>My grading will be largely based on the following items.</p>
 <ol type="1">
-<li><p>A friend of mine is planning to get married in Death Valley National Park in March (this problem is based on real events…). She wants to hold it as late in March as possible but without having a high chance of a very hot day. This problem will automate the task of generating information about what day of March to hold the wedding using data from the <a href="https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/by_year">Global Historical Climatology Network</a>. All of your operations should be done using the bash shell except part (c). Also, ALL of your work should be done using shell commands that you save in your solution file. So you can’t say “I downloaded the data from such-and-such website” or “I unzipped the file”; you need to give us the bash code that we could run to repeat what you did. This is partly for practice in writing shell code and partly to enforce the idea that your work should be reproducible and documented.</p>
+<li><p>Your solution should allow the user to provide reasonable inputs, including the number of values to sample, and should check the inputs for validity. The primary input should be a Python function that calculates the (possibly unnormalized) density of the distribution of interest in a vectorized fashion (e.g., the pdf functions in scipy). Your code should include numerical checks that catch cases of non-log-concave densities as the calculations proceed. (I.e., you do not need to come up with an overall test of the input density, but you should be able to do some checks that will catch cases where the upper and lower bounds are not actually bounding the density.)</p></li>
+<li><p>Formal testing is required with a set of tests where samples are compared to the true distribution. Given the overall output is stochastic, how to do this will require some thought. Note that an important part of the grade will depend on how your code performs on tests that I have prepared, so think broadly about the various kinds of densities a user might provide. You should also have unit tests for non-trivial individual functions that carry out the individual computations that make up the algorithm.</p></li>
+<li><p>Your solution should involve modular code, with functions or OOP methods that implement discrete tasks. You should have an overall design and style that is consistent across the components, in terms of functions vs.&nbsp;OOP methods, naming of functions/objects, etc.</p></li>
+<li><p>In terms of efficiency, the algorithm is inherently sequential. However, you should try to vectorize as much as possible and consider approaches that allow you to generate multiple points at once.</p></li>
+<li><p>Your solution should include clear, complete documentation, discussed further in the next section.</p></li>
+<li><p>You should start by using numerical differentiation to estimate the gradients you need. But for an “A” solution, I’d like to see the capability to use automatic differentiation (AD) via JAX or PyTorch. Often we’d use JAX/PyTorch on a GPU, but here we’ll just use them for their AD capabilities. There is no benefit here from using the GPU as we can’t set up this problem to do a large number of identical calculations at once.</p></li>
+<li><p>Your code can use any scipy/numpy/jax/pytorch calls you want as building blocks, but otherwise should not use or mimic any external code that implements adaptive rejection sampling.</p></li>
+</ol>
+</section>
+<section id="formatting-requirements-and-additional-information" class="level1">
+<h1>Formatting requirements and additional information</h1>
+<ol type="1">
+<li><p>Your solution to the problem should have two parts:</p>
 <ol type="a">
-<li><p>Download yearly climate data for a set of years of interest into a temporary directory. Do not download all the years and feel free to focus on a small number of years to reduce the amount of data you need to download. Note that data for Death Valley is only present in the last few decades. As you are processing the files, report the number of observations in each year by printing the information to the screen (i.e., <code>stdout</code>), including if there are no observations for that year.</p></li>
-<li><p>Subset to the station corresponding to Death Valley, to the TMAX (maximum daily temperature) variable, and to March, and put all the data into a single file. In subsetting to Death Valley, get the information programmatically from the <code>ghcnd-stations.txt</code> file one level up in the website. Do NOT type in the station ID code when you retrieve the Death Valley data from the yearly files.</p></li>
-<li><p>Create a Python chunk (or R would be fine too) that takes as input your single file from (b) and makes a single plot showing side-by-side boxplots containing the maximum daily temperatures on each calendar day in March. (If you somehow really have trouble mixing Python and bash chunks, it’s ok to insert this figure manually, after running the Python code separately. In this case you could use the <code>jupyter</code> engine provided that a bash kernel is available for Jupyter.)</p></li>
-<li><p>Now generalize your code from parts (a) and (b). Write a shell function that takes as arguments a string for identifying the location, the weather variable of interest, and the time period (i.e., the years of interest and the month of interest), and returns the results. Your function should detect if the user provides the wrong number of arguments or a string that doesn’t allow one to identify a single weather station and return a useful error message. It should also give useful help information if the user invokes the function as: <code>get_weather -h</code>. Finally the function should remove the raw downloaded data files (or you should download into your operating system’s temporary file location).</p>
-<p>Hint: to check for equality in an if statement, you generally need syntax like:</p>
-<pre><code>if [ "${var}" == "7" ]</code></pre></li>
+<li><p>A Python package named <code>ars</code>, which can be as simple as a directory named <code>ars</code> with .py modules and an <code>__init__.py</code>. (If you’d like to get experience with creating a package that could be installed via <code>pip</code> or <code>conda install</code> you’re welcome to explore that but it’s not required.) The package should be made available to me via a private repository named <code>ars-dev</code> within the Berkeley GitHub account or github.com account of one of the project members. <strong>Make sure to share the repository with me</strong> (my username is <code>paciorek</code> in either <code>github.berkeley.edu</code> or <code>github.com</code>.)</p>
+<p>The package should include:</p>
+<ol type="i">
+<li><p>A primary function called <code>ars</code> that carries out the sampling, including appropriate code comments.</p></li>
+<li><p>Other supporting code in the same or additional files (please think about clear organization), including appropriate code comments.</p></li>
+<li><p>Formal tests set up using <code>pytest</code> and included in the package. I should be able to easily run these tests.</p></li>
+<li><p>Help information for the main function, in the form of a standard Python docstring for <code>ars</code>. As part of this, you should have working examples in the example section of the docstring. You do not need extensive docstrings for your auxiliary functions but there should be a brief docstring just stating what each function does.</p></li>
 </ol></li>
-<li><p>Add documentation, error-trapping and testing for your code from Problem 4, parts (b) and (c) of PS1. You may use a modified version of your PS1 solution, perhaps because you found errors in what you did or wanted to make changes based on Chris’ solutions (to be distributed in class on Friday Sep.&nbsp;13) or your discussions with other students. These topics will be covered in Lab 2 (Sep.&nbsp;13) and are also discussed in Unit 4.</p>
-<ol type="a">
-<li>Add informative doc strings to your functions.</li>
-<li>Add exceptions for handling run-time errors. You should try to catch the various incorrect inputs a user could provide and anything else that could go wrong (e.g., what happens if the server refuses the request or if one is not online?). In some cases you will want to raise an error, but in others you may want to catch an error with <code>try-except</code> and return <code>None</code>.</li>
-<li>Use the <code>pytest</code> package to set up a thoughtful set of unit tests of your functions.</li>
+<li><p>A PDF document describing your solution, provided as a Quarto document (you’re welcome to develop this using a Jupyter notebook and then convert to qmd). The description does not need to be more than 2-4 pages, but it should summarize the approach you took in terms of functions/modularity/object-oriented programming, the testing that you carried out, and the results of applying the implementation to various examples. It must include a paragraph describing the specific contributions of each team member and which person/people were responsible for each component of the work. Please submit a paper copy of the document to me - either directly to me, under my door, or in my mailbox. <strong>On your paper solution, please indicate the URL of the GitHub repository for the project.</strong></p></li>
 </ol></li>
+<li><p>You should start the process by mapping out the modular components you need to write and how they will fit together, as well as what the primary function will do. After one person writes a component, another person on the team should test it and, with the original coder, improve it. You could also consider using pair programming for some of your development.</p></li>
+<li><p>You should use Git and GitHub to manage your collaboration.</p></li>
 </ol>
 
 
