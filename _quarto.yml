@@ -43,6 +43,8 @@ website:
             text: "Unit 9 (Simulation)"
           - href: units/unit10-linalg.qmd
             text: "Unit 10 (Linear Algebra)"
+          - href: units/unit11-optim.qmd
+            text: "Unit 11 (Optimization)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
