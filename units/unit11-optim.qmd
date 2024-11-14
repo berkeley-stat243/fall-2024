@@ -328,9 +328,9 @@ the optimum.
 
 #### Divergence
 
-First let's see an example of divergence. The left and middle panels
-show two cases of convergence, while the right panel shows divergence.
-In the right panel, the initial second derivative value is small enough
+First let's see an example of divergence. The first and second plots
+show two cases of convergence, while the third plot panel shows divergence.
+In the third plot, the initial second derivative value is small enough
 that $x_{2}$ is further from $x^{*}$ than $x_{1}$ and then $x_{3}$ is
 yet further away. In all cases the sequence of $x$ values is indicated
 by the red letters.
@@ -341,19 +341,19 @@ by the red letters.
 import numpy as np
 import matplotlib.pyplot as plt
 
-def fp(x, theta=1):
+def f_deriv1(x, theta=1):
     ## First derivative - we want the root of this.
     return np.exp(x * theta) / (1 + np.exp(x * theta)) - 0.5
 
-def fpp(x, theta=1):
+def f_deriv2(x, theta=1):
     ## Second derivative - used to scale the optimization steps.
     return np.exp(x * theta) / ((1 + np.exp(x * theta)) ** 2)
 
-def make_plot(xs, xvals, fp, fpp, subplot, title):
-    plt.plot(xs, fp(xs), '-', label="f'(x)", color = 'grey')
-    plt.plot(xs, fpp(xs), '--', label="f''(x)", color = 'grey')
+def make_plot(xs, xvals, f_deriv1, f_deriv2, subplot, title):
+    plt.plot(xs, f_deriv1(xs), '-', label="f'(x)", color = 'grey')
+    plt.plot(xs, f_deriv2(xs), '--', label="f''(x)", color = 'grey')
     for i in range(len(xvals)):
-        plt.text(xvals[i], fp(xvals[i]), i, fontsize=14, color = 'red')
+        plt.text(xvals[i], 0, i, fontsize=14, color = 'red')
     plt.xlabel("x")
     plt.ylabel("f'(x)")
     plt.title(title)
@@ -370,24 +370,24 @@ x0 = 1
 
 xvals[0] = x0
 for t in range(1,10):
-    xvals[t] = xvals[t-1] - fp(xvals[t-1]) / fpp(xvals[t-1])
+    xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 
-## print(xvals)
-
-make_plot(xs, xvals, fp, fpp, 1, "converges quickly")
+make_plot(xs, xvals, f_deriv1, f_deriv2, 1, "converges quickly")
 plt.show()
+
+print(np.round(xvals,3))
 
 ## Ok starting point
 x0 = 2
 
 xvals[0] = x0
 for t in range(1,10):
-    xvals[t] = xvals[t-1] - fp(xvals[t-1]) / fpp(xvals[t-1])
+    xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 
-## print(xvals)
-
-make_plot(xs, xvals, fp, fpp, 2, "converges")
+make_plot(xs, xvals, f_deriv1, f_deriv2, 2, "converges")
 plt.show()
+
+print(np.round(xvals,3))
 
 ## Bad starting point
 
@@ -395,15 +395,16 @@ x0 = 2.5
 
 xvals[0] = x0
 for t in range(1,10):
-    xvals[t] = xvals[t-1] - fp(xvals[t-1]) / fpp(xvals[t-1])
+    xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 
-## print(xvals)
-
-make_plot(xs, xvals[np.abs(xvals) < 15], fp, fpp, 3, "diverges")
+make_plot(xs, xvals[np.abs(xvals) < 15], f_deriv1, f_deriv2, 3, "diverges")
+plt.show()
 ## whoops!
 
-plt.show()
+print(np.round(xvals,3))
 ```
+
+In the last case the divergence quickly leads to numerical overflow and then NaNs (resulting from trying to use infinity in calculations).
 
 #### Multiple optima: converging to the wrong optimum
 
@@ -419,84 +420,87 @@ def f(x):
     return np.cos(x)
 
 # Define the gradient
-def fp(x):
+def f_deriv1(x):
     return -np.sin(x)
 
 # Define the second derivative
-def fpp(x):
+def f_deriv2(x):
     return -np.cos(x)# original fxn
 
-def make_plot2(xs, xvals, f, fp, num, title):
+def make_plot2(xs, xvals, f, f_deriv1, num, title):
     # gradient subplot
     plt.subplot(3, 2, num)
-    plt.plot(xs, fp(xs), '-', label="f'(x)")
-    plt.scatter(np.pi, fp(np.pi))
+    plt.plot(xs, f_deriv1(xs), '-', label="f'(x)")
+    plt.scatter(np.pi, f_deriv1(np.pi))
     for i in range(len(xvals)):
-        plt.text(xvals[i], fp(xvals[i]), i, fontsize=14, color = 'red')
+        plt.text(xvals[i], 0, i, fontsize=12, color = 'red')
     plt.xlabel('x')
     plt.ylabel("f'(x)")
     plt.title(title[0])
     plt.legend(loc='lower right')
+    plt.tight_layout()
     # function subplot
     plt.subplot(3, 2, num+1)
     plt.plot(xs, f(xs), '-', label="f(x)")
     plt.scatter(np.pi, f(np.pi))
     for i in range(len(xvals)):
-        plt.text(xvals[i], f(xvals[i]), i, fontsize=14, color = 'red')
+        plt.text(xvals[i], 0, i, fontsize=12, color = 'red')
     plt.xlabel('x')
     plt.ylabel("f(x)")
     plt.title(title[1])
     plt.legend(loc='lower right')
+    plt.tight_layout()
  
 
 xs = np.linspace(0, 2 * np.pi, num=300)
 
 x0 = 5.5 # starting point
-fp(x0) # positive
-fpp(x0) # negative
-x1 = x0 - fp(x0)/fpp(x0) # whoops, we've gone uphill 
+
+## f_deriv1(x0) # positive
+## f_deriv2(x0) # negative
+## x1 = x0 - f_deriv1(x0)/f_deriv2(x0) # whoops, we've gone uphill 
 ## because of the negative second derivative
 xvals = np.zeros(n)
 
 xvals[0] = x0
 for t in range(1,10):
-    xvals[t] = xvals[t-1] - fp(xvals[t-1]) / fpp(xvals[t-1])
+    xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 ## print(xvals)
 
 plt.figure(figsize=(10, 7))
 
-make_plot2(xs, xvals, f, fp, 1, title =
+make_plot2(xs, xvals, f, f_deriv1, 1, title =
     ['uphill to local maximum, gradient view', 'uphill to local maximum, function view'])
 
 ## In contrast, with better starting points we can find the minimum
 ## (but this nearly diverges).
 
 x0 = 4.3 # ok starting point
-fp(x0) 
-fpp(x0) 
-x1 = x0 - fp(x0)/fpp(x0)  # going downhill
+## f_deriv1(x0) 
+## f_deriv2(x0) 
+## x1 = x0 - f_deriv1(x0)/f_deriv2(x0)  # going downhill
 
 xvals[0] = x0
 for t in range(1,10):
-    xvals[t] = xvals[t-1] - fp(xvals[t-1]) / fpp(xvals[t-1])
+    xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 ## print(xvals)
 
-make_plot2(xs, xvals, f, fp, 3, title =
+make_plot2(xs, xvals, f, f_deriv1, 3, title =
     ['nearly diverges, gradient view', 'nearly diverges, function view'])
 
 ## With a better starting point, we converge quickly.
 
 x0 = 3.8 # good starting point
-fp(x0) 
-fpp(x0) 
-x1 = x0 - fp(x0)/fpp(x0)   # going downhill
+f_deriv1(x0) 
+f_deriv2(x0) 
+x1 = x0 - f_deriv1(x0)/f_deriv2(x0)   # going downhill
 
 xvals[0] = x0
 for t in range(1,10):
-    xvals[t] = xvals[t-1] - fp(xvals[t-1]) / fpp(xvals[t-1])
+    xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 ## print(xvals)
 
-make_plot2(xs, xvals, f, fp, 5, title =
+make_plot2(xs, xvals, f, f_deriv1, 5, title =
     ['better starting point, gradient view', 'better starting point, function view'])
 
 plt.show()
@@ -656,11 +660,11 @@ def f(x):
     return np.cos(x)
 
 # Define the gradient
-def fp(x):
+def f_deriv1(x):
     return -np.sin(x)
 
 # Define the second derivative
-def fpp(x):
+def f_deriv2(x):
     return -np.cos(x)
 
 xstar = np.pi  # known minimum
@@ -671,7 +675,7 @@ n_it = 10
 xvals = np.zeros(n_it)
 xvals[0] = x0
 for t in range(1, n_it):
-    xvals[t] = xvals[t - 1] - fp(xvals[t - 1]) / fpp(xvals[t - 1])
+    xvals[t] = xvals[t - 1] - f_deriv1(xvals[t - 1]) / f_deriv2(xvals[t - 1])
 
 print(xvals)
 ```
@@ -680,10 +684,10 @@ Next, here is bisection:
 
 ```{python}
 ## Bisection method
-def bisec_step(interval, fp):
+def bisec_step(interval, f_deriv1):
     interval = interval.copy()
     xt = np.mean(interval)
-    if fp(interval[0]) * fp(xt) <= 0:
+    if f_deriv1(interval[0]) * f_deriv1(xt) <= 0:
         interval[1] = xt
     else:
         interval[0] = xt
@@ -696,7 +700,7 @@ interval = np.zeros((n_it, 2))
 interval[0,:] = [a0, b0]
 
 for t in range(1, n_it):
-    interval[t,:] = bisec_step(interval[t-1,:], fp)
+    interval[t,:] = bisec_step(interval[t-1,:], f_deriv1)
 
 print(np.mean(interval, axis=1))
 ```
@@ -1077,7 +1081,7 @@ par(mai = c(.5,.4,.1,.4))
 f <- function(x){
 	x[1]^2/1000 + 4*x[1]*x[2]/1000 + 5*x[2]^2/1000
 }
-fp <- function(x){
+f_deriv1 <- function(x){
 	c(2 * x[1]/1000 + 4 * x[2]/1000,
 	4 * x[1]/1000 + 10 * x[2]/1000)
 }
@@ -1090,9 +1094,9 @@ xvals <- matrix(NA, nr = nIt, nc = 2)
 xvals[1, ] <- c(7, -4)
 for(t in 2:50){
 	newalpha <- optimize(lineSearch, interval = c(-5000, 5000),
-		xCurrent = xvals[t-1, ], direction = fp(xvals[t-1, ]),
+		xCurrent = xvals[t-1, ], direction = f_deriv1(xvals[t-1, ]),
 		FUN = f)$minimum 
-	xvals[t, ] <- xvals[t-1, ] + newalpha * fp(xvals[t-1, ])
+	xvals[t, ] <- xvals[t-1, ] + newalpha * f_deriv1(xvals[t-1, ])
 }
 x1s <- seq(-5, 8, len = 100); x2s = seq(-5, 2, len = 100)
 fx <- apply(expand.grid(x1s, x2s), 1, f)
