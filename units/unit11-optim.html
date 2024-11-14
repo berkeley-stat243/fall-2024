@@ -694,24 +694,24 @@ Convergence of Newton’s method
 <p>In all these cases Newton’s method could diverge, failing to converge on the optimum.</p>
 <section id="divergence" class="level4">
 <h4 class="anchored" data-anchor-id="divergence">Divergence</h4>
-<p>First let’s see an example of divergence. The left and middle panels show two cases of convergence, while the right panel shows divergence. In the right panel, the initial second derivative value is small enough that <span class="math inline">\(x_{2}\)</span> is further from <span class="math inline">\(x^{*}\)</span> than <span class="math inline">\(x_{1}\)</span> and then <span class="math inline">\(x_{3}\)</span> is yet further away. In all cases the sequence of <span class="math inline">\(x\)</span> values is indicated by the red letters.</p>
-<div id="258fbb43" class="cell" data-fig-height="3" data-execution_count="1">
+<p>First let’s see an example of divergence. The first and second plots show two cases of convergence, while the third plot panel shows divergence. In the third plot, the initial second derivative value is small enough that <span class="math inline">\(x_{2}\)</span> is further from <span class="math inline">\(x^{*}\)</span> than <span class="math inline">\(x_{1}\)</span> and then <span class="math inline">\(x_{3}\)</span> is yet further away. In all cases the sequence of <span class="math inline">\(x\)</span> values is indicated by the red letters.</p>
+<div id="81d43c9b" class="cell" data-fig-height="3" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fp(x, theta<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_deriv1(x, theta<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">## First derivative - we want the root of this.</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.exp(x <span class="op">*</span> theta) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(x <span class="op">*</span> theta)) <span class="op">-</span> <span class="fl">0.5</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fpp(x, theta<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_deriv2(x, theta<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Second derivative - used to scale the optimization steps.</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.exp(x <span class="op">*</span> theta) <span class="op">/</span> ((<span class="dv">1</span> <span class="op">+</span> np.exp(x <span class="op">*</span> theta)) <span class="op">**</span> <span class="dv">2</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_plot(xs, xvals, fp, fpp, subplot, title):</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, fp(xs), <span class="st">'-'</span>, label<span class="op">=</span><span class="st">"f'(x)"</span>, color <span class="op">=</span> <span class="st">'grey'</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, fpp(xs), <span class="st">'--'</span>, label<span class="op">=</span><span class="st">"f''(x)"</span>, color <span class="op">=</span> <span class="st">'grey'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_plot(xs, xvals, f_deriv1, f_deriv2, subplot, title):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, f_deriv1(xs), <span class="st">'-'</span>, label<span class="op">=</span><span class="st">"f'(x)"</span>, color <span class="op">=</span> <span class="st">'grey'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, f_deriv2(xs), <span class="st">'--'</span>, label<span class="op">=</span><span class="st">"f''(x)"</span>, color <span class="op">=</span> <span class="st">'grey'</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(xvals)):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        plt.text(xvals[i], fp(xvals[i]), i, fontsize<span class="op">=</span><span class="dv">14</span>, color <span class="op">=</span> <span class="st">'red'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        plt.text(xvals[i], <span class="dv">0</span>, i, fontsize<span class="op">=</span><span class="dv">14</span>, color <span class="op">=</span> <span class="st">'red'</span>)</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"x"</span>)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"f'(x)"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
@@ -728,24 +728,24 @@ Convergence of Newton’s method
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fp(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> fpp(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f_deriv1(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> f_deriv2(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>make_plot(xs, xvals, fp, fpp, <span class="dv">1</span>, <span class="st">"converges quickly"</span>)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>make_plot(xs, xvals, f_deriv1, f_deriv2, <span class="dv">1</span>, <span class="st">"converges quickly"</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(xvals,<span class="dv">3</span>))</span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">## Ok starting point</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fp(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> fpp(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f_deriv1(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> f_deriv2(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>make_plot(xs, xvals, fp, fpp, <span class="dv">2</span>, <span class="st">"converges"</span>)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>make_plot(xs, xvals, f_deriv1, f_deriv2, <span class="dv">2</span>, <span class="st">"converges"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(xvals,<span class="dv">3</span>))</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co">## Bad starting point</span></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
@@ -753,14 +753,13 @@ Convergence of Newton’s method
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fp(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> fpp(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f_deriv1(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> f_deriv2(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>make_plot(xs, xvals[np.<span class="bu">abs</span>(xvals) <span class="op">&lt;</span> <span class="dv">15</span>], fp, fpp, <span class="dv">3</span>, <span class="st">"diverges"</span>)</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">## whoops!</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>make_plot(xs, xvals[np.<span class="bu">abs</span>(xvals) <span class="op">&lt;</span> <span class="dv">15</span>], f_deriv1, f_deriv2, <span class="dv">3</span>, <span class="st">"diverges"</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">## whoops!</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(xvals,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -768,23 +767,29 @@ Convergence of Newton’s method
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 1.    -0.175  0.001 -0.     0.     0.     0.     0.     0.     0.   ]</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="unit11-optim_files/figure-html/cell-2-output-2.png" width="600" height="449" class="figure-img"></p>
+<p><img src="unit11-optim_files/figure-html/cell-2-output-3.png" width="600" height="449" class="figure-img"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 2.    -1.627  0.819 -0.095  0.    -0.     0.     0.     0.     0.   ]</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_817213/3161030548.py:58: RuntimeWarning:
+<pre><code>/tmp/ipykernel_1088788/215489303.py:58: RuntimeWarning:
 
 divide by zero encountered in scalar divide
 
-/tmp/ipykernel_817213/3161030548.py:6: RuntimeWarning:
+/tmp/ipykernel_1088788/215489303.py:6: RuntimeWarning:
 
 invalid value encountered in scalar divide
 
-/tmp/ipykernel_817213/3161030548.py:10: RuntimeWarning:
+/tmp/ipykernel_1088788/215489303.py:10: RuntimeWarning:
 
 invalid value encountered in scalar divide
 </code></pre>
@@ -792,124 +797,121 @@ invalid value encountered in scalar divide
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="unit11-optim_files/figure-html/cell-2-output-4.png" width="600" height="449" class="figure-img"></p>
+<p><img src="unit11-optim_files/figure-html/cell-2-output-6.png" width="600" height="449" class="figure-img"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 2.50000000e+00 -3.55000000e+00  1.38460000e+01 -5.15287628e+05
+             inf             nan             nan             nan
+             nan             nan]</code></pre>
 </div>
+</div>
+<p>In the last case the divergence quickly leads to numerical overflow and then NaNs (resulting from trying to use infinity in calculations).</p>
 </section>
 <section id="multiple-optima-converging-to-the-wrong-optimum" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-optima-converging-to-the-wrong-optimum">Multiple optima: converging to the wrong optimum</h4>
 <p>In the first row of the next figure, let’s see an example of climbing uphill and finding a local maximum rather than minimum. The other rows show convergence. In all cases the minimum is at <span class="math inline">\(x^{*}\approx3.14\)</span></p>
-<div id="f3388227" class="cell" data-fig-height="7" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the gradient</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fp(x):</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.sin(x)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the second derivative</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fpp(x):</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.cos(x)<span class="co"># original fxn</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_plot2(xs, xvals, f, fp, num, title):</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># gradient subplot</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">3</span>, <span class="dv">2</span>, num)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, fp(xs), <span class="st">'-'</span>, label<span class="op">=</span><span class="st">"f'(x)"</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    plt.scatter(np.pi, fp(np.pi))</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(xvals)):</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        plt.text(xvals[i], fp(xvals[i]), i, fontsize<span class="op">=</span><span class="dv">14</span>, color <span class="op">=</span> <span class="st">'red'</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"f'(x)"</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    plt.title(title[<span class="dv">0</span>])</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># function subplot</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">3</span>, <span class="dv">2</span>, num<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, f(xs), <span class="st">'-'</span>, label<span class="op">=</span><span class="st">"f(x)"</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    plt.scatter(np.pi, f(np.pi))</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(xvals)):</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        plt.text(xvals[i], f(xvals[i]), i, fontsize<span class="op">=</span><span class="dv">14</span>, color <span class="op">=</span> <span class="st">'red'</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"f(x)"</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    plt.title(title[<span class="dv">1</span>])</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, num<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="fl">5.5</span> <span class="co"># starting point</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>fp(x0) <span class="co"># positive</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>fpp(x0) <span class="co"># negative</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> x0 <span class="op">-</span> fp(x0)<span class="op">/</span>fpp(x0) <span class="co"># whoops, we've gone uphill </span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">## because of the negative second derivative</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(n)</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fp(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> fpp(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>make_plot2(xs, xvals, f, fp, <span class="dv">1</span>, title <span class="op">=</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'uphill to local maximum, gradient view'</span>, <span class="st">'uphill to local maximum, function view'</span>])</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co">## In contrast, with better starting points we can find the minimum</span></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">## (but this nearly diverges).</span></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="fl">4.3</span> <span class="co"># ok starting point</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>fp(x0) </span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>fpp(x0) </span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> x0 <span class="op">-</span> fp(x0)<span class="op">/</span>fpp(x0)  <span class="co"># going downhill</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fp(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> fpp(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>make_plot2(xs, xvals, f, fp, <span class="dv">3</span>, title <span class="op">=</span></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'nearly diverges, gradient view'</span>, <span class="st">'nearly diverges, function view'</span>])</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co">## With a better starting point, we converge quickly.</span></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="fl">3.8</span> <span class="co"># good starting point</span></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>fp(x0) </span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>fpp(x0) </span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> x0 <span class="op">-</span> fp(x0)<span class="op">/</span>fpp(x0)   <span class="co"># going downhill</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> fp(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> fpp(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>make_plot2(xs, xvals, f, fp, <span class="dv">5</span>, title <span class="op">=</span></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'better starting point, gradient view'</span>, <span class="st">'better starting point, function view'</span>])</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>0.7055403255703919</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>-0.70866977429126</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>0.9161659367494549</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>0.40079917207997545</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div id="a0c6e189" class="cell" data-fig-height="7" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the gradient</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_deriv1(x):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.sin(x)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the second derivative</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_deriv2(x):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.cos(x)<span class="co"># original fxn</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_plot2(xs, xvals, f, f_deriv1, num, title):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># gradient subplot</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">3</span>, <span class="dv">2</span>, num)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, f_deriv1(xs), <span class="st">'-'</span>, label<span class="op">=</span><span class="st">"f'(x)"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    plt.scatter(np.pi, f_deriv1(np.pi))</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(xvals)):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        plt.text(xvals[i], <span class="dv">0</span>, i, fontsize<span class="op">=</span><span class="dv">12</span>, color <span class="op">=</span> <span class="st">'red'</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"f'(x)"</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    plt.title(title[<span class="dv">0</span>])</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># function subplot</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">3</span>, <span class="dv">2</span>, num<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, f(xs), <span class="st">'-'</span>, label<span class="op">=</span><span class="st">"f(x)"</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    plt.scatter(np.pi, f(np.pi))</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(xvals)):</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        plt.text(xvals[i], <span class="dv">0</span>, i, fontsize<span class="op">=</span><span class="dv">12</span>, color <span class="op">=</span> <span class="st">'red'</span>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    plt.title(title[<span class="dv">1</span>])</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, num<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="fl">5.5</span> <span class="co"># starting point</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">## f_deriv1(x0) # positive</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">## f_deriv2(x0) # negative</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">## x1 = x0 - f_deriv1(x0)/f_deriv2(x0) # whoops, we've gone uphill </span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">## because of the negative second derivative</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(n)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f_deriv1(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> f_deriv2(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>make_plot2(xs, xvals, f, f_deriv1, <span class="dv">1</span>, title <span class="op">=</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'uphill to local maximum, gradient view'</span>, <span class="st">'uphill to local maximum, function view'</span>])</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co">## In contrast, with better starting points we can find the minimum</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co">## (but this nearly diverges).</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="fl">4.3</span> <span class="co"># ok starting point</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co">## f_deriv1(x0) </span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co">## f_deriv2(x0) </span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="co">## x1 = x0 - f_deriv1(x0)/f_deriv2(x0)  # going downhill</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f_deriv1(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> f_deriv2(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>make_plot2(xs, xvals, f, f_deriv1, <span class="dv">3</span>, title <span class="op">=</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'nearly diverges, gradient view'</span>, <span class="st">'nearly diverges, function view'</span>])</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="co">## With a better starting point, we converge quickly.</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="fl">3.8</span> <span class="co"># good starting point</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>f_deriv1(x0) </span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>f_deriv2(x0) </span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> x0 <span class="op">-</span> f_deriv1(x0)<span class="op">/</span>f_deriv2(x0)   <span class="co"># going downhill</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f_deriv1(xvals[t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> f_deriv2(xvals[t<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="co">## print(xvals)</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>make_plot2(xs, xvals, f, f_deriv1, <span class="dv">5</span>, title <span class="op">=</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'better starting point, gradient view'</span>, <span class="st">'better starting point, function view'</span>])</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="57">
 <pre><code>0.6118578909427189</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="57">
 <pre><code>0.7909677119144168</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="unit11-optim_files/figure-html/cell-3-output-7.png" width="830" height="597" class="figure-img"></p>
+<p><img src="unit11-optim_files/figure-html/cell-3-output-3.png" width="950" height="660" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -936,38 +938,38 @@ invalid value encountered in scalar divide
 <p>Good starting values are important because they can improve the speed of optimization, prevent divergence or cycling, and prevent finding local optima.</p>
 <p>Using random or selected multiple starting values can help with multiple optima (aka multimodality).</p>
 <p>Here’s a function (the Rastrigin function) with multiple optima that is commonly used for testing methods that claim to work well for multimodal problems. This is a hard function to optimize with respect to, particularly in higher dimensions (one can do it in higher dimensions than 2 by simply making the <span class="math inline">\(x\)</span> vector longer but having the same structure). In particular Rastrigin with 30 dimensions is considered to be very hard.</p>
-<div id="493d2eed" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rastrigin(x):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A <span class="op">*</span> n <span class="op">+</span> np.<span class="bu">sum</span>(x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> x))</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>const <span class="op">=</span> <span class="fl">5.12</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>nGrid <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>gr <span class="op">=</span> np.linspace(<span class="op">-</span>const, const, num<span class="op">=</span>nGrid)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid of x values</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>x1, x2 <span class="op">=</span> np.meshgrid(gr, gr)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.column_stack((x1.ravel(), x2.ravel()))</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the Rastrigin function for each point in the grid</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.apply_along_axis(rastrigin, <span class="dv">1</span>, xs)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>plt.imshow(y.reshape((nGrid, nGrid)), extent<span class="op">=</span>[<span class="op">-</span>const, const, <span class="op">-</span>const, const], origin<span class="op">=</span><span class="st">'lower'</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Rastrigin Function'</span>)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x1'</span>)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'x2'</span>)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div id="415323d0" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rastrigin(x):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A <span class="op">*</span> n <span class="op">+</span> np.<span class="bu">sum</span>(x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> x))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>const <span class="op">=</span> <span class="fl">5.12</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>nGrid <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>gr <span class="op">=</span> np.linspace(<span class="op">-</span>const, const, num<span class="op">=</span>nGrid)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid of x values</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>x1, x2 <span class="op">=</span> np.meshgrid(gr, gr)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.column_stack((x1.ravel(), x2.ravel()))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the Rastrigin function for each point in the grid</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.apply_along_axis(rastrigin, <span class="dv">1</span>, xs)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.imshow(y.reshape((nGrid, nGrid)), extent<span class="op">=</span>[<span class="op">-</span>const, const, <span class="op">-</span>const, const], origin<span class="op">=</span><span class="st">'lower'</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Rastrigin Function'</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x1'</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'x2'</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
 <pre><code>Text(0.5, 1.0, 'Rastrigin Function')</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="58">
 <pre><code>Text(0.5, 0, 'x1')</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="58">
 <pre><code>Text(0, 0.5, 'x2')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -988,59 +990,59 @@ invalid value encountered in scalar divide
 <p>If <span class="math inline">\(c\)</span> were one, then we see that if we have <span class="math inline">\(k\)</span> digits of accuracy at <span class="math inline">\(t\)</span>, we’d have <span class="math inline">\(2k\)</span> digits at <span class="math inline">\(t+1\)</span> (e.g., <span class="math inline">\(|\epsilon_{t}|=0.01\)</span> results in <span class="math inline">\(|\epsilon_{t+1}|=0.0001\)</span>), which justifies the characterization of quadratic convergence being fast. In practice <span class="math inline">\(c\)</span> will moderate the rate of convergence. The smaller <span class="math inline">\(c\)</span> the better, so we’d like to have the second derivative be large and the third derivative be small. The expression also indicates we’ll have a problem if <span class="math inline">\(f^{\prime\prime}(x_{t})=0\)</span> at any point (think about what this corresponds to graphically - what is our next step when <span class="math inline">\(f^{\prime\prime}(x_{t})=0\)</span>?). The characteristics of the derivatives determine the domain of attraction (the region in which we’ll converge rather than diverge) of the minimum.</p>
 <p>Givens and Hoeting show that using the secant-based approximation to the second derivative in N-R has order of convergence, <span class="math inline">\(\beta\approx1.62\)</span>.</p>
 <p>Here’s an example of convergence comparing bisection and N-R. First, Newton-Raphson:</p>
-<div id="b383024a" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the gradient</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fp(x):</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.sin(x)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the second derivative</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fpp(x):</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.cos(x)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>xstar <span class="op">=</span> np.pi  <span class="co"># known minimum</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">## Newton-Raphson (N-R) method</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(n_it)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_it):</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> fp(xvals[t <span class="op">-</span> <span class="dv">1</span>]) <span class="op">/</span> fpp(xvals[t <span class="op">-</span> <span class="dv">1</span>])</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(xvals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="98612186" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the gradient</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_deriv1(x):</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.sin(x)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the second derivative</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_deriv2(x):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.cos(x)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>xstar <span class="op">=</span> np.pi  <span class="co"># known minimum</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">## Newton-Raphson (N-R) method</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(n_it)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>] <span class="op">=</span> x0</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_it):</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    xvals[t] <span class="op">=</span> xvals[t <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> f_deriv1(xvals[t <span class="op">-</span> <span class="dv">1</span>]) <span class="op">/</span> f_deriv2(xvals[t <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(xvals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[2.           4.1850398633 2.4678936745 3.2661862776 3.1409439123
  3.1415926537 3.1415926536 3.1415926536 3.1415926536 3.1415926536]</code></pre>
 </div>
 </div>
 <p>Next, here is bisection:</p>
-<div id="74615874" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Bisection method</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bisec_step(interval, fp):</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    interval <span class="op">=</span> interval.copy()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    xt <span class="op">=</span> np.mean(interval)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> fp(interval[<span class="dv">0</span>]) <span class="op">*</span> fp(xt) <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        interval[<span class="dv">1</span>] <span class="op">=</span> xt</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        interval[<span class="dv">0</span>] <span class="op">=</span> xt</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> interval</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>a0 <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>b0 <span class="op">=</span> (<span class="dv">3</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">2</span>) <span class="op">-</span> (xstar <span class="op">-</span> a0)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>interval <span class="op">=</span> np.zeros((n_it, <span class="dv">2</span>))</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>interval[<span class="dv">0</span>,:] <span class="op">=</span> [a0, b0]</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_it):</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    interval[t,:] <span class="op">=</span> bisec_step(interval[t<span class="op">-</span><span class="dv">1</span>,:], fp)</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.mean(interval, axis<span class="op">=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e696098e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Bisection method</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bisec_step(interval, f_deriv1):</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    interval <span class="op">=</span> interval.copy()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    xt <span class="op">=</span> np.mean(interval)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f_deriv1(interval[<span class="dv">0</span>]) <span class="op">*</span> f_deriv1(xt) <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        interval[<span class="dv">1</span>] <span class="op">=</span> xt</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        interval[<span class="dv">0</span>] <span class="op">=</span> xt</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> interval</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>a0 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>b0 <span class="op">=</span> (<span class="dv">3</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">2</span>) <span class="op">-</span> (xstar <span class="op">-</span> a0)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>interval <span class="op">=</span> np.zeros((n_it, <span class="dv">2</span>))</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>interval[<span class="dv">0</span>,:] <span class="op">=</span> [a0, b0]</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_it):</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    interval[t,:] <span class="op">=</span> bisec_step(interval[t<span class="op">-</span><span class="dv">1</span>,:], f_deriv1)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.mean(interval, axis<span class="op">=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[2.7853981634 3.1780972451 2.9817477042 3.0799224747 3.1290098599
  3.1535535525 3.1412817062 3.1474176293 3.1443496678 3.142815687
@@ -1072,32 +1074,32 @@ invalid value encountered in scalar divide
 <p>Let’s suppose (I have no real reason to think this) that we think that the data can be well-represented by this nonlinear model: <span class="math display">\[Y_{i}=\beta_{0}+\beta_{1}\exp(t_i/\beta_{2})+\epsilon_{i}.\]</span></p>
 <p>Some of the things we need to worry about with Newton’s method in general about are (1) good starting values, (2) positive definiteness of the Hessian, and (3) avoiding errors in deriving the derivatives.</p>
 <p>A note on the positive definiteness: since the Hessian may not be positive definite (although it may well be, provided the function is approximately locally quadratic), one can consider modifying the Cholesky decomposition of the Hessian to enforce positive definiteness by adding diagonal elements to <span class="math inline">\(H_{f}\)</span> as necessary.</p>
-<div id="64e1ce8b" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">'..'</span>,<span class="st">'data'</span>, <span class="st">'co2_annmean_mlo.csv'</span>),</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    header <span class="op">=</span> <span class="dv">0</span>, names <span class="op">=</span> [<span class="st">'year'</span>,<span class="st">'co2'</span>,<span class="st">'unc'</span>])</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'year'</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CO2"</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Center years for better numerical behavior</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>data.year <span class="op">=</span> data.year <span class="op">-</span> np.mean(data.year)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Linear fit - not a good model</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(data.year)  </span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, model.fittedvalues, <span class="st">'-'</span>)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="809a57af" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">'..'</span>,<span class="st">'data'</span>, <span class="st">'co2_annmean_mlo.csv'</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    header <span class="op">=</span> <span class="dv">0</span>, names <span class="op">=</span> [<span class="st">'year'</span>,<span class="st">'co2'</span>,<span class="st">'unc'</span>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'year'</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CO2"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Center years for better numerical behavior</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>data.year <span class="op">=</span> data.year <span class="op">-</span> np.mean(data.year)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Linear fit - not a good model</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(data.year)  </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, model.fittedvalues, <span class="st">'-'</span>)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
 <pre><code>Text(0.5, 0, 'year')</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="61">
 <pre><code>Text(0, 0.5, 'CO2')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -1116,22 +1118,22 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>We need some starting values. Having centered the year variable, <span class="math inline">\(\beta_2\)</span> seems plausibly like it would be order of magnitude of 10, which is about the magnitude of the year values.</p>
-<div id="6d6bd967" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit(params):</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> params[<span class="dv">0</span>] <span class="op">+</span> params[<span class="dv">1</span>] <span class="op">*</span> np.exp(data.year <span class="op">/</span> params[<span class="dv">2</span>])</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, fit(beta), <span class="st">'-'</span>)</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="dd52ac18" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit(params):</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> params[<span class="dv">0</span>] <span class="op">+</span> params[<span class="dv">1</span>] <span class="op">*</span> np.exp(data.year <span class="op">/</span> params[<span class="dv">2</span>])</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, fit(beta), <span class="st">'-'</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1141,19 +1143,19 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>That’s not great. How about changing the scale of beta2 more?</p>
-<div id="af88696b" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, fit(beta), <span class="st">'-'</span>)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="782c9b2c" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, fit(beta), <span class="st">'-'</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1163,72 +1165,72 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>Let’s get derivative information using automatic differentation (the algorithmic implementation of the chain rule for derivatives also used in gradient descent in deep learning, as well as various other contexts). We’ll use JAX, but PyTorch or Tensorflow are other options. We need to use the JAX versions of various numpy operations in order to be able to get the derivatives.</p>
-<div id="51fb1f33" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> loss(params):</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    fitted <span class="op">=</span> params[<span class="dv">0</span>] <span class="op">+</span> params[<span class="dv">1</span>]<span class="op">*</span>jnp.exp(jnp.array(data.year)<span class="op">/</span>params[<span class="dv">2</span>])</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.<span class="bu">sum</span>((fitted <span class="op">-</span> jnp.array(data.co2))<span class="op">**</span><span class="fl">2.0</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>deriv1 <span class="op">=</span> jax.grad(loss)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>deriv2 <span class="op">=</span> jax.hessian(loss)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>deriv1(jnp.array([beta0_init, beta1_init, beta2_init]))</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>hess <span class="op">=</span> deriv2(jnp.array([beta0_init, beta1_init, beta2_init]))</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>hess</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>np.linalg.eig(hess)[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div id="fa729c20" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> loss(params):</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    fitted <span class="op">=</span> params[<span class="dv">0</span>] <span class="op">+</span> params[<span class="dv">1</span>]<span class="op">*</span>jnp.exp(jnp.array(data.year)<span class="op">/</span>params[<span class="dv">2</span>])</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jnp.<span class="bu">sum</span>((fitted <span class="op">-</span> jnp.array(data.co2))<span class="op">**</span><span class="fl">2.0</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>deriv1 <span class="op">=</span> jax.grad(loss)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>deriv2 <span class="op">=</span> jax.hessian(loss)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>deriv1(jnp.array([beta0_init, beta1_init, beta2_init]))</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>hess <span class="op">=</span> deriv2(jnp.array([beta0_init, beta1_init, beta2_init]))</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>hess</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>np.linalg.eig(hess)[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>Array([-9.1552734e-04, -8.9645386e-04,  4.7961874e+00], dtype=float32)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>Array([[128.      , 130.1952  ,  -7.13916 ],
        [130.1952  , 136.91656 , -14.690592],
        [ -7.13916 , -14.690592,  12.677565]], dtype=float32)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>array([ 2.6369040e+02, -2.5794024e-03,  1.3906310e+01], dtype=float32)</code></pre>
 </div>
 </div>
 <p>The Hessian is not positive definite. We could try tricks such as adding to the diagonal of the Hessian or using the pseudo-inverse (i.e., setting all negative eigenvalues in the inverse to zero).</p>
 <p>Instead, let’s try a bit more to find starting values where the Hessian is positive definite. The order of magnitude of our initial value for <span class="math inline">\(\beta_2\)</span> seems about right, so let’s try halving or doubling it.</p>
-<div id="244a1da3" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>hess <span class="op">=</span> deriv2(jnp.array([beta0_init, beta1_init, beta2_init]))</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>np.linalg.eig(hess)[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div id="9188fb30" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>hess <span class="op">=</span> deriv2(jnp.array([beta0_init, beta1_init, beta2_init]))</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>np.linalg.eig(hess)[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
 <pre><code>array([3.0403909e+02, 2.4109183e-01, 5.5710766e+01], dtype=float32)</code></pre>
 </div>
 </div>
 <p>That seems better. Let’s try with that.</p>
-<div id="01e81a3a" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(shape <span class="op">=</span> (n_it, <span class="dv">3</span>))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>, :] <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_it):</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  jxvals <span class="op">=</span> jnp.array(xvals[t<span class="op">-</span><span class="dv">1</span>, :])</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  hess <span class="op">=</span> deriv2(jxvals)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  e <span class="op">=</span> np.linalg.eig(hess)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(np.<span class="bu">any</span>(e[<span class="dv">0</span>] <span class="op">&lt;</span> <span class="dv">0</span>)):</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"not positive definite"</span>)</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  xvals[t, :] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>, :] <span class="op">-</span> np.linalg.solve(hess, deriv1(jxvals))</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(loss(xvals[t,:]))</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="op">=</span> xvals[t,:]</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, fit(beta_hat), <span class="st">'r-'</span>)</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9883a7b5" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(shape <span class="op">=</span> (n_it, <span class="dv">3</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>, :] <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_it):</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  jxvals <span class="op">=</span> jnp.array(xvals[t<span class="op">-</span><span class="dv">1</span>, :])</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  hess <span class="op">=</span> deriv2(jxvals)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  e <span class="op">=</span> np.linalg.eig(hess)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(np.<span class="bu">any</span>(e[<span class="dv">0</span>] <span class="op">&lt;</span> <span class="dv">0</span>)):</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"not positive definite"</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  xvals[t, :] <span class="op">=</span> xvals[t<span class="op">-</span><span class="dv">1</span>, :] <span class="op">-</span> np.linalg.solve(hess, deriv1(jxvals))</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(loss(xvals[t,:]))</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="op">=</span> xvals[t,:]</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>plt.scatter(data.year, data.co2)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>plt.plot(data.year, fit(beta_hat), <span class="st">'r-'</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>38.304596
 30.817617
@@ -1298,7 +1300,7 @@ invalid value encountered in scalar divide
 f &lt;- function(x){
     x[1]^2/1000 + 4*x[1]*x[2]/1000 + 5*x[2]^2/1000
 }
-fp &lt;- function(x){
+f_deriv1 &lt;- function(x){
     c(2 * x[1]/1000 + 4 * x[2]/1000,
     4 * x[1]/1000 + 10 * x[2]/1000)
 }
@@ -1311,9 +1313,9 @@ xvals &lt;- matrix(NA, nr = nIt, nc = 2)
 xvals[1, ] &lt;- c(7, -4)
 for(t in 2:50){
     newalpha &lt;- optimize(lineSearch, interval = c(-5000, 5000),
-        xCurrent = xvals[t-1, ], direction = fp(xvals[t-1, ]),
+        xCurrent = xvals[t-1, ], direction = f_deriv1(xvals[t-1, ]),
         FUN = f)$minimum 
-    xvals[t, ] &lt;- xvals[t-1, ] + newalpha * fp(xvals[t-1, ])
+    xvals[t, ] &lt;- xvals[t-1, ] + newalpha * f_deriv1(xvals[t-1, ])
 }
 x1s &lt;- seq(-5, 8, len = 100); x2s = seq(-5, 2, len = 100)
 fx &lt;- apply(expand.grid(x1s, x2s), 1, f)
@@ -1434,78 +1436,78 @@ lines(xvals)</code></pre>
 </ol></li>
 </ol>
 <p>Convergence is assessed based on the sample variance of the function values at the points, the total of the norms of the differences between the points in the new and old simplexes, or the size of the simplex. In class we’ll work through some demo code (click below to show the code in the html version of this document) that illustrates the individual steps in an iteration of Nelder-Mead.</p>
-<div id="39fb6d26" class="cell" data-execution_count="12">
+<div id="bf91a1cb" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Auxiliary function to plot line segments</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plotseg(ind1, ind2, col<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(ind1, np.ndarray):</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        plt.plot([xs[ind1, <span class="dv">0</span>], xs[ind2, <span class="dv">0</span>]], [xs[ind1, <span class="dv">1</span>], xs[ind2, <span class="dv">1</span>],], color<span class="op">=</span>col)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        plt.plot([ind1[<span class="dv">0</span>], xs[ind2, <span class="dv">0</span>]], [ind1[<span class="dv">1</span>], xs[ind2, <span class="dv">1</span>]], color<span class="op">=</span>col)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial polytope</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">6</span>, <span class="dv">4</span>], [<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>]], dtype<span class="op">=</span>np.float64)</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>plt.plot(xs[:, <span class="dv">0</span>], xs[:, <span class="dv">1</span>], <span class="st">'o-'</span>, color <span class="op">=</span> <span class="st">'black'</span>)</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">7</span>, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">1</span>, <span class="dv">8</span>)</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'black'</span>)</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">2</span>, <span class="st">'black'</span>)</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'black'</span>)</span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>xbar <span class="op">=</span> np.mean(xs[:<span class="dv">2</span>], axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>plt.text(xs[<span class="dv">2</span>, <span class="dv">0</span>], xs[<span class="dv">2</span>, <span class="dv">1</span>], <span class="st">'x[p+1]'</span>)</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>plt.plot(xbar[<span class="dv">0</span>], xbar[<span class="dv">1</span>], <span class="st">'ro'</span>)</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Reflection</span></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>xr <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> alpha) <span class="op">*</span> xbar <span class="op">-</span> alpha <span class="op">*</span> xs[<span class="dv">2</span>]</span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>plt.plot(xr[<span class="dv">0</span>], xr[<span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>plt.text(xr[<span class="dv">0</span>], xr[<span class="dv">1</span>], <span class="st">'x[r]'</span>)</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>plotseg(xr, <span class="dv">0</span>, <span class="st">'red'</span>)</span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>plotseg(xr, <span class="dv">1</span>, <span class="st">'red'</span>)</span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'red'</span>)</span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider expansion</span></span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>xe <span class="op">=</span> gamma <span class="op">*</span> xr <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> gamma) <span class="op">*</span> xbar</span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>plt.plot(xe[<span class="dv">0</span>], xe[<span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>plt.text(xe[<span class="dv">0</span>], xe[<span class="dv">1</span>], <span class="st">'x[e]'</span>)</span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>plotseg(xe, <span class="dv">0</span>, <span class="st">'green'</span>)</span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>plotseg(xe, <span class="dv">1</span>, <span class="st">'green'</span>)</span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'green'</span>)</span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider contraction</span></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>xh <span class="op">=</span> xs[<span class="dv">2</span>,:]  <span class="co"># Suppose the original point is better than the reflection</span></span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>xc <span class="op">=</span> beta <span class="op">*</span> xh <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> beta) <span class="op">*</span> xbar</span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>plt.plot(xc[<span class="dv">0</span>], xc[<span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>plt.text(xc[<span class="dv">0</span>], xc[<span class="dv">1</span>], <span class="st">'x[c]'</span>)</span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>plotseg(xc, <span class="dv">0</span>, <span class="st">'blue'</span>)</span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>plotseg(xc, <span class="dv">1</span>, <span class="st">'blue'</span>)</span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'blue'</span>)</span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Shrinkage</span></span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>xs[<span class="dv">1</span>,:] <span class="op">=</span> delta <span class="op">*</span> xs[<span class="dv">1</span>,:] <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> delta) <span class="op">*</span> xs[<span class="dv">0</span>,:]</span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>xs[<span class="dv">2</span>,:] <span class="op">=</span> delta <span class="op">*</span> xs[<span class="dv">2</span>,:] <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> delta) <span class="op">*</span> xs[<span class="dv">0</span>,:]</span>
-<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>plt.plot(xs[<span class="dv">1</span>, <span class="dv">0</span>], xs[<span class="dv">1</span>, <span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'purple'</span>)</span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>plt.plot(xs[<span class="dv">2</span>, <span class="dv">0</span>], xs[<span class="dv">2</span>, <span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'purple'</span>)</span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'purple'</span>)</span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">2</span>, <span class="st">'purple'</span>)</span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'purple'</span>)</span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Auxiliary function to plot line segments</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plotseg(ind1, ind2, col<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(ind1, np.ndarray):</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        plt.plot([xs[ind1, <span class="dv">0</span>], xs[ind2, <span class="dv">0</span>]], [xs[ind1, <span class="dv">1</span>], xs[ind2, <span class="dv">1</span>],], color<span class="op">=</span>col)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>        plt.plot([ind1[<span class="dv">0</span>], xs[ind2, <span class="dv">0</span>]], [ind1[<span class="dv">1</span>], xs[ind2, <span class="dv">1</span>]], color<span class="op">=</span>col)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial polytope</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">6</span>, <span class="dv">4</span>], [<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>]], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>plt.plot(xs[:, <span class="dv">0</span>], xs[:, <span class="dv">1</span>], <span class="st">'o-'</span>, color <span class="op">=</span> <span class="st">'black'</span>)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">7</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">1</span>, <span class="dv">8</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'black'</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">2</span>, <span class="st">'black'</span>)</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'black'</span>)</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>xbar <span class="op">=</span> np.mean(xs[:<span class="dv">2</span>], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>plt.text(xs[<span class="dv">2</span>, <span class="dv">0</span>], xs[<span class="dv">2</span>, <span class="dv">1</span>], <span class="st">'x[p+1]'</span>)</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>plt.plot(xbar[<span class="dv">0</span>], xbar[<span class="dv">1</span>], <span class="st">'ro'</span>)</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Reflection</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>xr <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> alpha) <span class="op">*</span> xbar <span class="op">-</span> alpha <span class="op">*</span> xs[<span class="dv">2</span>]</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>plt.plot(xr[<span class="dv">0</span>], xr[<span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>plt.text(xr[<span class="dv">0</span>], xr[<span class="dv">1</span>], <span class="st">'x[r]'</span>)</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>plotseg(xr, <span class="dv">0</span>, <span class="st">'red'</span>)</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>plotseg(xr, <span class="dv">1</span>, <span class="st">'red'</span>)</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'red'</span>)</span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider expansion</span></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>xe <span class="op">=</span> gamma <span class="op">*</span> xr <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> gamma) <span class="op">*</span> xbar</span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>plt.plot(xe[<span class="dv">0</span>], xe[<span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>plt.text(xe[<span class="dv">0</span>], xe[<span class="dv">1</span>], <span class="st">'x[e]'</span>)</span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>plotseg(xe, <span class="dv">0</span>, <span class="st">'green'</span>)</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>plotseg(xe, <span class="dv">1</span>, <span class="st">'green'</span>)</span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'green'</span>)</span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider contraction</span></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>xh <span class="op">=</span> xs[<span class="dv">2</span>,:]  <span class="co"># Suppose the original point is better than the reflection</span></span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>xc <span class="op">=</span> beta <span class="op">*</span> xh <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> beta) <span class="op">*</span> xbar</span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>plt.plot(xc[<span class="dv">0</span>], xc[<span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>plt.text(xc[<span class="dv">0</span>], xc[<span class="dv">1</span>], <span class="st">'x[c]'</span>)</span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>plotseg(xc, <span class="dv">0</span>, <span class="st">'blue'</span>)</span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>plotseg(xc, <span class="dv">1</span>, <span class="st">'blue'</span>)</span>
+<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'blue'</span>)</span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Shrinkage</span></span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>xs[<span class="dv">1</span>,:] <span class="op">=</span> delta <span class="op">*</span> xs[<span class="dv">1</span>,:] <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> delta) <span class="op">*</span> xs[<span class="dv">0</span>,:]</span>
+<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a>xs[<span class="dv">2</span>,:] <span class="op">=</span> delta <span class="op">*</span> xs[<span class="dv">2</span>,:] <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> delta) <span class="op">*</span> xs[<span class="dv">0</span>,:]</span>
+<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a>plt.plot(xs[<span class="dv">1</span>, <span class="dv">0</span>], xs[<span class="dv">1</span>, <span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'purple'</span>)</span>
+<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a>plt.plot(xs[<span class="dv">2</span>, <span class="dv">0</span>], xs[<span class="dv">2</span>, <span class="dv">1</span>], <span class="st">'ro'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, color<span class="op">=</span><span class="st">'purple'</span>)</span>
+<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'purple'</span>)</span>
+<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">0</span>, <span class="dv">2</span>, <span class="st">'purple'</span>)</span>
+<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a>plotseg(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'purple'</span>)</span>
+<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We can see the points at which the function was evaluated in the same quadratic example we saw in previous sections. The left hand panel shows the steps from a starting point somewhat far from the optimum, with the first 9 points numbered. In this case, we start with points 1, 2, and 3. Point 4 is a reflection. At this point, it looks like point 5 is a contraction but that doesn’t exactly follow the algorithm above (since Point 4 is between Points 2 and 3 so the iteration should end without a contraction), so perhaps the algorithm as implemented is a bit different than as described above. In any event, the new set is (2, 3, 4). Then point 6 and point 7 are reflection and expansion steps and the new set is (3, 4, 6). Points 8 and 9 are again reflection and expansion steps. The right hand panel shows the steps from a starting point near (actually at) the optimum. Points 4 and 5 are reflection and expansion steps, with the next set being (1, 2, 5). Now step 6 is a reflection but it is the worst of all the points, so point 7 is a contraction of point 2 giving the next set (1, 5, 7). Point 8 is then a reflection and point 9 is a contraction of point 5.</p>
@@ -1576,80 +1578,80 @@ optim(init, f, method = "Nelder-Mead", verbose = FALSE)</code></pre>
 <li>One can provide a variety of nonlinear, linear, and simple bounds constraints as well, though certain types of constraints can only be used with certain algorithms.</li>
 </ul>
 <p>Here’s a very basic example of using <code>minimize</code> with the Mauna Loa CO2 example we saw earlier when hand-coding Newton-Raphson. Here we’ll include the unknown variance as an additional parameter so we have a full likelihood. And as mentioned previously, we could profile out <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>, but we won’t do that here so as to illustrate multivariate Newton-Raphson.</p>
-<div id="ac8821e7" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">'..'</span>,<span class="st">'data'</span>, <span class="st">'co2_annmean_mlo.csv'</span>),</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    header <span class="op">=</span> <span class="dv">0</span>, names <span class="op">=</span> [<span class="st">'year'</span>,<span class="st">'co2'</span>,<span class="st">'unc'</span>])</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Center years for better numerical behavior</span></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>data.year <span class="op">=</span> data.year <span class="op">-</span> np.mean(data.year)</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nll(params, data):</span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># params[3] is log of sigma^2 to address constraint</span></span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(data.year)</span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>    fitted <span class="op">=</span> params[<span class="dv">0</span>] <span class="op">+</span> params[<span class="dv">1</span>] <span class="op">*</span> np.exp(data.year <span class="op">/</span> params[<span class="dv">2</span>])</span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (n<span class="op">/</span><span class="dv">2</span>)<span class="op">*</span>params[<span class="dv">3</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.<span class="bu">sum</span>((data.co2 <span class="op">-</span> fitted)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.exp(params[<span class="dv">3</span>])</span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimization using Nelder-Mead</span></span>
-<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>fit1 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'Nelder-Mead'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nelder-Mead Optimization:"</span>)</span>
-<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fit1)</span>
-<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution Time:"</span>, end_time <span class="op">-</span> start_time, <span class="st">"seconds"</span>)</span>
-<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimization using BFGS</span></span>
-<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>fit2 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">BFGS Optimization:"</span>)</span>
-<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fit2)</span>
-<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution Time:"</span>, end_time <span class="op">-</span> start_time, <span class="st">"seconds"</span>)</span>
-<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a><span class="co">## IMPORTANT: `hess_inv` is just the final estimate from BFGS not</span></span>
-<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a><span class="co">## a direct numerical estimate of the Hessian at the optimum.</span></span>
-<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a><span class="co">## If you need the Hessian, calculate it directly, e.g, using `numdifftools`.</span></span>
-<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Different starting value (recall non-positive definite Hessian)</span></span>
-<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
-<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a>fit3 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb35-63"><a href="#cb35-63" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb35-64"><a href="#cb35-64" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb35-65"><a href="#cb35-65" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
-<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>fit4 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Arbitrarily bad starting values</span></span>
-<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10000</span>, <span class="fl">0.1</span>)</span>
-<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a>fit5 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'Nelder-Mead'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>fit6 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="35ac4485" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">'..'</span>,<span class="st">'data'</span>, <span class="st">'co2_annmean_mlo.csv'</span>),</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    header <span class="op">=</span> <span class="dv">0</span>, names <span class="op">=</span> [<span class="st">'year'</span>,<span class="st">'co2'</span>,<span class="st">'unc'</span>])</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Center years for better numerical behavior</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>data.year <span class="op">=</span> data.year <span class="op">-</span> np.mean(data.year)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nll(params, data):</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># params[3] is log of sigma^2 to address constraint</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(data.year)</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    fitted <span class="op">=</span> params[<span class="dv">0</span>] <span class="op">+</span> params[<span class="dv">1</span>] <span class="op">*</span> np.exp(data.year <span class="op">/</span> params[<span class="dv">2</span>])</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (n<span class="op">/</span><span class="dv">2</span>)<span class="op">*</span>params[<span class="dv">3</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.<span class="bu">sum</span>((data.co2 <span class="op">-</span> fitted)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> np.exp(params[<span class="dv">3</span>])</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimization using Nelder-Mead</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>fit1 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'Nelder-Mead'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nelder-Mead Optimization:"</span>)</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fit1)</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution Time:"</span>, end_time <span class="op">-</span> start_time, <span class="st">"seconds"</span>)</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimization using BFGS</span></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>fit2 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">BFGS Optimization:"</span>)</span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fit2)</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution Time:"</span>, end_time <span class="op">-</span> start_time, <span class="st">"seconds"</span>)</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a><span class="co">## IMPORTANT: `hess_inv` is just the final estimate from BFGS not</span></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a><span class="co">## a direct numerical estimate of the Hessian at the optimum.</span></span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a><span class="co">## If you need the Hessian, calculate it directly, e.g, using `numdifftools`.</span></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Different starting value (recall non-positive definite Hessian)</span></span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>fit3 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>fit4 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Arbitrarily bad starting values</span></span>
+<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10000</span>, <span class="fl">0.1</span>)</span>
+<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a>fit5 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'Nelder-Mead'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a>fit6 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="automatic-differentiation-ad" class="level2">
