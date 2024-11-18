@@ -373,7 +373,7 @@ for t in range(1,10):
     xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 
 make_plot(xs, xvals, f_deriv1, f_deriv2, 1, "converges quickly")
-plt.show()
+plt.show(block=False)
 
 print(np.round(xvals,3))
 
@@ -385,7 +385,7 @@ for t in range(1,10):
     xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 
 make_plot(xs, xvals, f_deriv1, f_deriv2, 2, "converges")
-plt.show()
+plt.show(block=False)
 
 print(np.round(xvals,3))
 
@@ -398,7 +398,7 @@ for t in range(1,10):
     xvals[t] = xvals[t-1] - f_deriv1(xvals[t-1]) / f_deriv2(xvals[t-1])
 
 make_plot(xs, xvals[np.abs(xvals) < 15], f_deriv1, f_deriv2, 3, "diverges")
-plt.show()
+plt.show(block=False)
 ## whoops!
 
 print(np.round(xvals,3))
@@ -503,7 +503,7 @@ for t in range(1,10):
 make_plot2(xs, xvals, f, f_deriv1, 5, title =
     ['better starting point, gradient view', 'better starting point, function view'])
 
-plt.show()
+plt.show(block=False)
 ```
 
 #### Improving Newton's method
@@ -786,7 +786,7 @@ data = pd.read_csv(os.path.join('..','data', 'co2_annmean_mlo.csv'),
 plt.scatter(data.year, data.co2)
 plt.xlabel('year')
 plt.ylabel("CO2")
-plt.show()
+plt.show(block=False)
 
 ## Center years for better numerical behavior
 data.year = data.year - np.mean(data.year)
@@ -797,7 +797,7 @@ model = sm.OLS(data.co2, X).fit()
 plt.scatter(data.year, data.co2)
 plt.plot(data.year, model.fittedvalues, '-')
 
-plt.show()
+plt.show(block=False)
 ```
 
 We need some starting values. Having centered the year variable,
@@ -819,7 +819,7 @@ def fit(params):
 
 beta = (beta0_init, beta1_init, beta2_init)
 plt.plot(data.year, fit(beta), '-')
-plt.show()
+plt.show(block=False)
 ```
 
 That's not great. How about changing the scale of beta2 more?
@@ -836,7 +836,7 @@ plt.scatter(data.year, data.co2)
 beta = (beta0_init, beta1_init, beta2_init)
 plt.plot(data.year, fit(beta), '-')
 
-plt.show()
+plt.show(block=False)
 ```
 
 
@@ -909,7 +909,7 @@ beta_hat = xvals[t,:]
 plt.scatter(data.year, data.co2)
 plt.plot(data.year, fit(beta_hat), 'r-')
 
-plt.show()
+plt.show(block=False)
 ```
 
 That looks pretty good, but the lack of positive definiteness/sensitivity to starting values should make us
@@ -1492,7 +1492,7 @@ plotseg(0, 1, 'purple')
 plotseg(0, 2, 'purple')
 plotseg(1, 2, 'purple')
 
-plt.show()
+plt.show(block=False)
 ```
 
 
@@ -1763,7 +1763,7 @@ plt.xlabel('Precipitation (inches)')
 plt.ylabel('Frequency')
 plt.title(f'Histogram of Wet Days (Precip > {np.round(thresh,2)} inches)')
 plt.tight_layout()
-plt.show()
+plt.show(block=False)
 
 # Define objective (negative log-likelihood) function
 
@@ -1856,7 +1856,7 @@ for i, shape_value in enumerate(shape_vals):
 fig.colorbar(im, ax=axes, label="Objective Function Value")
 plt.tight_layout()
 
-plt.show()
+plt.show(block=False)
 ```
 
 ## Automatic differentiation (AD)
