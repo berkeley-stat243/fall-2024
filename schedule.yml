@@ -135,6 +135,21 @@
           id: "7"
           name: "Problem Set 7"
           href: "ps/ps7.html"
+- week: 14
+  days:
+    - date: "Mon Nov 25"
+      items:
+        - type: "Quiz"
+          id: "2"
+          name: "Quiz 2"
+- week: 15
+  days:
+    - date: "Fri Dec 6"
+      items:
+        - type: "Problem Set"
+          id: "8"
+          name: "Problem Set 8"
+          href: "ps/ps8.html"
 - week: 17
   days:
     - date: "Thu Dec 19"

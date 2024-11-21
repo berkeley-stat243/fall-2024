@@ -1187,7 +1187,7 @@ better estimate the Hessian directly at $x^{*}$.
 
 ### Stochastic gradient descent
 
-Stochastic gradient descent (SGD) is the hot method in machine learning,
+Stochastic gradient descent (SGD) is a well-known method in machine learning,
 commonly used for fitting deep neural networks. It allows you to
 optimize an objective function with respect to what is often a very
 large number of parameters even when the data size is huge.
