@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-09-19">
 
-<title>Lab 3: Debugging</title>
+<title>Problem Set 8</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -102,6 +67,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="stylesheet" href="../styles.css">
@@ -116,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab3-debugging.html">Lab 3 (Debugging)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps8.html">Problem Set 8</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -277,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/lab3-debugging.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labs/lab3-debugging.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 3 (Debugging)</span></a>
   </div>
 </li>
@@ -372,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ps/ps8.html" class="sidebar-item-text sidebar-link">
+  <a href="../ps/ps8.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 8</span></a>
   </div>
 </li>
@@ -443,24 +437,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#debugging" id="toc-debugging" class="nav-link active" data-scroll-target="#debugging">Debugging</a></li>
-  <li><a href="#advanced-debugging" id="toc-advanced-debugging" class="nav-link" data-scroll-target="#advanced-debugging">Advanced debugging</a></li>
-  <li><a href="#integrated-gui-debugger-with-vs-code" id="toc-integrated-gui-debugger-with-vs-code" class="nav-link" data-scroll-target="#integrated-gui-debugger-with-vs-code">Integrated GUI debugger (with VS Code)</a></li>
-  <li><a href="#post-mortem-debugging" id="toc-post-mortem-debugging" class="nav-link" data-scroll-target="#post-mortem-debugging">Post-mortem debugging</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab3-debugging.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
-    </div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ps8.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab3-debugging.html">Lab 3 (Debugging)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps8.html">Problem Set 8</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 3: Debugging</h1>
+<h1 class="title">Problem Set 8</h1>
+<p class="subtitle lead">Due Friday Dec.&nbsp;6, 5 pm</p>
 </div>
 
 
@@ -468,12 +452,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 19, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -483,108 +461,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="debugging" class="level2">
-<h2 class="anchored" data-anchor-id="debugging">Debugging</h2>
-<p>Today we’re going to explore the concept of debugging and some of the tooling that allows for debugging python code.</p>
-<p>It’s widely recognized and accepted that any sizeable code base will have a non-trivial number of bugs (flaws in the design of a system; term used as early as 1878 by Thomas Edison). The main goal of testing is to make sure the main expected cases are behaving correctly.</p>
-<p>Sometimes your code doesn’t do what you expect or want it to do, and it’s not clear just by reading through it, what the problem is.</p>
-<p>In interpreted languages (especially those with interactive shells like python) one can sometimes run the code piece by piece and inspect the state of the variables.</p>
-<p>If the code involves a loop or a function, a common practice is to judiciously place a few print statements that dump the state of some variables to the terminal so that you can spot the problem by tracing through it.</p>
-<p>When the code involves multiple functions and complex state, this strategy starts to break down. This is where you start rolling up your sleeves and invoking a debugger!</p>
-<p>Debugging can be a slow process, so you typically start a debugging session by deciding which line in your code you would like to start tracing the behavior from, and you place a breakpoint. Then you can have the debugger run the program up to that point and stop at it, allowing you to:</p>
-<p>1- inspect the current state of variables 2- step through the code line by line 3- step over or into functions as they are called 4- resume program execution</p>
-</section>
-<section id="advanced-debugging" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-debugging">Advanced debugging</h2>
-<p>Some bugs are really tricky to catch. Those are typically the bugs that happen very rarely, and in unclear circumstances. In statistical computing and data analysis settings these might be conditions that happen in iterative algorithms sometimes, but not very often, and can be hard to reproduce.</p>
-<p>One way to deal with these bugs is to start the debugging session with placing one or more <strong>conditional</strong> breakpoints. These are similar to regular breakpoints but are not going to cause the debugger to stop the execution of the program and hand you the controls unless a specific condition (that you specify) evaluates to true as the program is executing that particular line of code. You may use some conditions that are similar to what you would place in an assert statement (conditions that shouldn’t happen) or any other conditions that you think may be associated with the occurrence of the anomalous behavior your are debugging.</p>
-</section>
-<section id="integrated-gui-debugger-with-vs-code" class="level2">
-<h2 class="anchored" data-anchor-id="integrated-gui-debugger-with-vs-code">Integrated GUI debugger (with VS Code)</h2>
-<p>Today we will experiment with the visual debugging tools integrated with IDEs. We will do that in VS Code (unless you have another IDE with debugger integration). We will load a piece of code, go through it to understand what it does, then try to discover the problem with it and fix it.</p>
-<p>Here’s a piece of code that implements the binary search algorithm to locate the first occurrence of a number in a list of numbers:</p>
-<div id="cf4bee77" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> binary_search(lst, T):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> <span class="bu">len</span>(lst) <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L <span class="op">&lt;</span> R:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> math.floor((L <span class="op">+</span> R) <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> lst[m] <span class="op">&lt;=</span> T:</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            L <span class="op">=</span> m <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            R <span class="op">=</span> m <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lst[L] <span class="op">==</span> T:</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> L</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>There are a couple of things not quite right with this implementation, even though it will run and produce correct results for some cases.</p>
-<p>Here’s another piece of code implementing merge sort (also with some bugs in it):</p>
-<div id="a5b82fae" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merge_sort(lst):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(lst)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> lst</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merge(merge_sort(lst[:n<span class="op">//</span><span class="dv">2</span>]), merge_sort(lst[n<span class="op">//</span><span class="dv">2</span>:]))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merge(lst1, lst2):</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    merged <span class="op">=</span> []</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> <span class="dv">0</span>,<span class="dv">0</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(lst1) <span class="kw">and</span> j <span class="op">&lt;</span> <span class="bu">len</span>(lst2):</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(lst1) <span class="kw">and</span> j <span class="op">&lt;</span> <span class="bu">len</span>(lst2) <span class="kw">and</span> lst1[i] <span class="op">&lt;</span> lst2[j]:</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            merged.append(lst1[i])</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            i <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            merged.append(lst1[j])</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            j <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(lst1):</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        merged.append(lst1[i])</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> j <span class="op">&lt;</span> <span class="bu">len</span>(lst2):</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            merged.append(lst2[j])</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            j <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merged</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>merge_sort([<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">8</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You can use this to practice stepping inside functions, and thinking about recursion.</p>
-<p>Incidentally, if you first sort, then find, you can get the quantile of a particular value within a collection (you’ll need to adjust the binary search a little to achieve this).</p>
-<p>Alternatively you could start by implementing (without using any existing functions) a function that inverts the order of the words in a string, and debug it until it works.</p>
-<p>Here’s a version of this function with a couple of bugs injected, if you prefer to start from there:</p>
-<div id="bd01280a" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reverse_words(<span class="bu">input</span>):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    working <span class="op">=</span> <span class="bu">list</span>(<span class="bu">input</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    invert(working)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, c <span class="kw">in</span> <span class="bu">enumerate</span>(working):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> c <span class="op">==</span> <span class="st">' '</span> <span class="kw">and</span> i <span class="op">!=</span> start:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            invert(working, start, i)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            start <span class="op">=</span> i<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">''</span>.join(working)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> invert(lst, start<span class="op">=</span><span class="va">None</span>, end<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">None</span> <span class="op">==</span> start:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">None</span> <span class="op">==</span> end:</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        end <span class="op">=</span> <span class="bu">len</span>(lst)<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> start <span class="op">&lt;</span> end:</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        tmp <span class="op">=</span> lst[start]</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        lst[start] <span class="op">=</span> lst[start]</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        lst[end] <span class="op">=</span> tmp</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        start <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        end <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>reverse_words(<span class="st">"These are my words.   I have spoken!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="post-mortem-debugging" class="level2">
-<h2 class="anchored" data-anchor-id="post-mortem-debugging">Post-mortem debugging</h2>
-<p>A usual workflow to debug a piece of code that is crashing is to run it, investigate the exact location where the crash happens, add a breakpoint statement and rerun the code. Oftentimes, the bug is not deterministic or only happens at certain iterations inside a loop, so a conditional breakpoint will have to be engineered. Post-mortem debugging simplifies such a workflow, sometimes drastically, by running the program until it crashes and automatically placing the user into a debugging session immediately before the crash. To enter post-mortem debugging automatically, a script that exits abnormally can be called via <code>python -m pdb myscript.py</code>. Alternatively, one may import <code>pdb</code> and call <code>pdb.pm()</code> after a function call crashes.</p>
-</section>
-<section id="acknowledgements" class="level2">
-<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.</p>
+<section id="comments" class="level2">
+<h2 class="anchored" data-anchor-id="comments">Comments</h2>
+<ul>
+<li>This covers material in Unit 11.</li>
+<li>It’s due at 5 pm (Pacific) (yes, 5 pm) on December 6, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>Please see PS1 for formatting and attribution requirements.</li>
+<li>Note that is is fine to hand-write solutions to the the non-coding questions, but make sure your writing is neat and insert any hand-written parts in order into your final submission.</li>
+</ul>
+<ol type="1">
+<li><p>Consider probit regression, which is an alternative to logistic regression for binary outcomes. The probit model is <span class="math inline">\(Y_{i}\sim\mbox{Ber}(p_{i})\)</span> for <span class="math inline">\(p_{i}=P(Y_{i}=1)=\Phi(X_{i}^{\top}\beta)\)</span> where <span class="math inline">\(\Phi\)</span> is the standard normal CDF, and <span class="math inline">\(\mbox{Ber}\)</span> is the Bernoulli distribution. We can rewrite this model with latent variables, one latent variable, <span class="math inline">\(z_{i}\)</span>, for each observation: <span class="math display">\[\begin{aligned}
+y_{i} &amp; = &amp; I(z_{i}&gt;0)\\
+z_{i} &amp; \sim &amp; \mathcal{N}(X_{i}^{\top}\beta,1)\end{aligned}\]</span></p>
+<ol type="a">
+<li><p>Design an EM algorithm to estimate <span class="math inline">\(\beta\)</span>, taking the complete data to be <span class="math inline">\({Y,Z}\)</span>. You’ll need to make use of the mean and variance of truncated normal distributions (see hint below). Be careful that you carefully distinguish <span class="math inline">\(\beta\)</span> from the current value at iteration <span class="math inline">\(t\)</span>, <span class="math inline">\(\beta^{t}\)</span>, in writing out the expected log-likelihood and computing the expectation and that your maximization be with respect to <span class="math inline">\(\beta\)</span> (not <span class="math inline">\(\beta^{t}\)</span>). Also be careful that your calculations respect the fact that for each <span class="math inline">\(z_{i}\)</span> you know that it is either bigger or smaller than <span class="math inline">\(0\)</span> based on its <span class="math inline">\(y_{i}\)</span>. You should be able to analytically maximize the expected log likelihood. A couple hints:</p>
+<ol type="i">
+<li><p>From the Johnson and Kotz ‘bibles’ on distributions, the mean and variance of the truncated normal distribution, <span class="math inline">\(f(w)\propto\mathcal{N}(w;\mu,\sigma^{2})I(w&gt;\tau)\)</span>, are: <span class="math display">\[\begin{aligned}
+E(W|W&gt;\tau) &amp; = &amp; \mu+\sigma\rho(\tau^{*})\\
+V(W|W&gt;\tau) &amp; = &amp; \sigma^{2}\left(1+\tau^{*}\rho(\tau^{*})-\rho(\tau^{*})^{2}\right)\\
+\rho(\tau^{*}) &amp; = &amp; \frac{\phi(\tau^{*})}{1-\Phi(\tau^{*})}\\
+\tau^{*} &amp; = &amp; (\tau-\mu)/\sigma,\end{aligned}\]</span> where <span class="math inline">\(\phi(\cdot)\)</span> is the standard normal density and <span class="math inline">\(\Phi(\cdot)\)</span> is the standard normal CDF. Or see the Wikipedia page on the truncated normal distribution for more general formulae.</p></li>
+<li><p>You should recognize that your expected log-likelihood can be expressed as a regression of some new quantities (which you might denote as <span class="math inline">\(m_{i}\)</span>, <span class="math inline">\(i=1,\ldots,n\)</span>, where the <span class="math inline">\(m_{i}\)</span> are functions of <span class="math inline">\(\beta^{t}\)</span> and <span class="math inline">\(y_{i}\)</span>) on <span class="math inline">\(X\)</span>.</p></li>
+</ol></li>
+<li><p>Propose how to get reasonable starting values for <span class="math inline">\(\beta\)</span>.</p></li>
+<li><p>Write a Python function to estimate the parameters. Make use of the initialization from part (b). You may use existing regression functions for the update steps. You’ll need to include criteria for deciding when to stop the optimization.</p></li>
+<li><p>Try out your function using data simulated from the model. Take <span class="math inline">\(n=100\)</span> and the parameters such that <span class="math inline">\(\hat{\beta}_{1}/se(\hat{\beta}_{1})\approx2\)</span> and <span class="math inline">\(\beta_{2}=\beta_{3}=0\)</span>. In other words, I want you to choose <span class="math inline">\(\beta_{1}\)</span> such that the signal to noise ratio in the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span> is moderately large. You can do this via trial and error simply by simulating data for a given <span class="math inline">\(\beta_{1}\)</span> and fitting a logistic regression to get the estimate and standard error. Then adjust <span class="math inline">\(\beta_{1}\)</span> as needed.</p></li>
+</ol></li>
+<li><p>A different approach to this problem just directly maximizes the log-likelihood of the observed data under the original probit model (i.e., without the <code>z</code>s).</p>
+<ol type="a">
+<li><p>Write an objective function that calculates the negative log-likelihood of the observed data using JAX or PyTorch syntax (for use in part (d)).</p></li>
+<li><p>Estimate the parameters for your test cases using <code>scipy.optimize.minimize()</code> with the BFGS option. Compare how many iterations EM and BFGS take. Note that this provide a nice test of your EM derivation and code, since you should get the same results from the two optimization approaches. Calculate the estimated standard errors based on the inverse of the Hessian. Note that the <code>hess_inv</code> returned by <code>minimize</code> is probably NOT a good estimate of the Hessian as it seems to just be the approximation built up during the course of the BFGS iterations and not a good numerical derivative estimate at the optimum. Try using <code>numdifftools</code> and compare to what is seen in <code>hess_inv</code>. If you get warnings about loss of precision, you may need to tell JAX or PyTorch to use 64-bit rather than 32-bit floating point numbers.</p></li>
+<li><p>As part of this, try a variety of starting values and see if you can find ones that cause the optimization <strong>not</strong> to converge using BFGS. Also try them with Nelder-Mead.</p></li>
+<li><p>Now use JAX or PyTorch automatic differentiation (AD) functionality to create a gradient function. Set up your objective and gradient functions to use just-in-time compilation (you can use <code>jit()</code> or <code>@jit</code> for JAX and <code>torch.compile</code> or <code>@torch.compile</code> for PyTorch). Use these functions to find the parameters using BFGS. Check that you get the same results as in (b) and compare the number of iterations and timing to using BFGS without providing the gradient function (and thereby relying on scipy using numerical differentiation). Finally, use JAX or PyTorch functionality to create a Hessian function and use it to calculate the Hessian at the optimum. Compare the inverse of the Hessian and the estimated standard errors to what you got in part (b).</p></li>
+</ol></li>
+</ol>
 
 
 </section>
