@@ -701,7 +701,7 @@ Convergence of Newton’s method
 <section id="divergence" class="level4">
 <h4 class="anchored" data-anchor-id="divergence">Divergence</h4>
 <p>First let’s see an example of divergence. The first and second plots show two cases of convergence, while the third plot panel shows divergence. In the third plot, the initial second derivative value is small enough that <span class="math inline">\(x_{2}\)</span> is further from <span class="math inline">\(x^{*}\)</span> than <span class="math inline">\(x_{1}\)</span> and then <span class="math inline">\(x_{3}\)</span> is yet further away. In all cases the sequence of <span class="math inline">\(x\)</span> values is indicated by the red letters.</p>
-<div id="0eb608f5" class="cell" data-fig-height="3" data-execution_count="1">
+<div id="5f3e1135" class="cell" data-fig-height="3" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -787,15 +787,15 @@ Convergence of Newton’s method
 <pre><code>[ 2.    -1.627  0.819 -0.095  0.    -0.     0.     0.     0.     0.   ]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_930988/3626598925.py:58: RuntimeWarning:
+<pre><code>/tmp/ipykernel_1695352/3626598925.py:58: RuntimeWarning:
 
 divide by zero encountered in scalar divide
 
-/tmp/ipykernel_930988/3626598925.py:6: RuntimeWarning:
+/tmp/ipykernel_1695352/3626598925.py:6: RuntimeWarning:
 
 invalid value encountered in scalar divide
 
-/tmp/ipykernel_930988/3626598925.py:10: RuntimeWarning:
+/tmp/ipykernel_1695352/3626598925.py:10: RuntimeWarning:
 
 invalid value encountered in scalar divide
 </code></pre>
@@ -818,7 +818,7 @@ invalid value encountered in scalar divide
 <section id="multiple-optima-converging-to-the-wrong-optimum" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-optima-converging-to-the-wrong-optimum">Multiple optima: converging to the wrong optimum</h4>
 <p>In the first row of the next figure, let’s see an example of climbing uphill and finding a local maximum rather than minimum. The other rows show convergence. In all cases the minimum is at <span class="math inline">\(x^{*}\approx3.14\)</span></p>
-<div id="1f2b8e2d" class="cell" data-fig-height="7" data-execution_count="2">
+<div id="dd6a510c" class="cell" data-fig-height="7" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x)</span>
@@ -944,7 +944,7 @@ invalid value encountered in scalar divide
 <p>Good starting values are important because they can improve the speed of optimization, prevent divergence or cycling, and prevent finding local optima.</p>
 <p>Using random or selected multiple starting values can help with multiple optima (aka multimodality).</p>
 <p>Here’s a function (the Rastrigin function) with multiple optima that is commonly used for testing methods that claim to work well for multimodal problems. This is a hard function to optimize with respect to, particularly in higher dimensions (one can do it in higher dimensions than 2 by simply making the <span class="math inline">\(x\)</span> vector longer but having the same structure). In particular Rastrigin with 30 dimensions is considered to be very hard.</p>
-<div id="69497ae3" class="cell" data-execution_count="3">
+<div id="7a60a4a6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rastrigin(x):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
@@ -996,7 +996,7 @@ invalid value encountered in scalar divide
 <p>If <span class="math inline">\(c\)</span> were one, then we see that if we have <span class="math inline">\(k\)</span> digits of accuracy at <span class="math inline">\(t\)</span>, we’d have <span class="math inline">\(2k\)</span> digits at <span class="math inline">\(t+1\)</span> (e.g., <span class="math inline">\(|\epsilon_{t}|=0.01\)</span> results in <span class="math inline">\(|\epsilon_{t+1}|=0.0001\)</span>), which justifies the characterization of quadratic convergence being fast. In practice <span class="math inline">\(c\)</span> will moderate the rate of convergence. The smaller <span class="math inline">\(c\)</span> the better, so we’d like to have the second derivative be large and the third derivative be small. The expression also indicates we’ll have a problem if <span class="math inline">\(f^{\prime\prime}(x_{t})=0\)</span> at any point (think about what this corresponds to graphically - what is our next step when <span class="math inline">\(f^{\prime\prime}(x_{t})=0\)</span>?). The characteristics of the derivatives determine the domain of attraction (the region in which we’ll converge rather than diverge) of the minimum.</p>
 <p>Givens and Hoeting show that using the secant-based approximation to the second derivative in N-R has order of convergence, <span class="math inline">\(\beta\approx1.62\)</span>.</p>
 <p>Here’s an example of convergence comparing bisection and N-R. First, Newton-Raphson:</p>
-<div id="6c20b3a1" class="cell" data-execution_count="4">
+<div id="89aa5850" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
@@ -1028,7 +1028,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>Next, here is bisection:</p>
-<div id="60a3b5d0" class="cell" data-execution_count="5">
+<div id="b817d85f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Bisection method</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bisec_step(interval, f_deriv1):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    interval <span class="op">=</span> interval.copy()</span>
@@ -1080,7 +1080,7 @@ invalid value encountered in scalar divide
 <p>Let’s suppose (I have no real reason to think this) that we think that the data can be well-represented by this nonlinear model: <span class="math display">\[Y_{i}=\beta_{0}+\beta_{1}\exp(t_i/\beta_{2})+\epsilon_{i}.\]</span></p>
 <p>Some of the things we need to worry about with Newton’s method in general about are (1) good starting values, (2) positive definiteness of the Hessian, and (3) avoiding errors in deriving the derivatives.</p>
 <p>A note on the positive definiteness: since the Hessian may not be positive definite (although it may well be, provided the function is approximately locally quadratic), one can consider modifying the Cholesky decomposition of the Hessian to enforce positive definiteness by adding diagonal elements to <span class="math inline">\(H_{f}\)</span> as necessary.</p>
-<div id="81743992" class="cell" data-execution_count="6">
+<div id="a7ece769" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
@@ -1124,7 +1124,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>We need some starting values. Having centered the year variable, <span class="math inline">\(\beta_2\)</span> seems plausibly like it would be order of magnitude of 10, which is about the magnitude of the year values.</p>
-<div id="bfa00f9b" class="cell" data-execution_count="7">
+<div id="f576c5cb" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1149,7 +1149,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>That’s not great. How about changing the scale of beta2 more?</p>
-<div id="f840448d" class="cell" data-execution_count="8">
+<div id="81dcc1de" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1171,7 +1171,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>Let’s get derivative information using automatic differentation (the algorithmic implementation of the chain rule for derivatives also used in gradient descent in deep learning, as well as various other contexts). We’ll use JAX, but PyTorch or Tensorflow are other options. We need to use the JAX versions of various numpy operations in order to be able to get the derivatives.</p>
-<div id="1dfbfd1e" class="cell" data-execution_count="9">
+<div id="185e261e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1201,7 +1201,7 @@ invalid value encountered in scalar divide
 </div>
 <p>The Hessian is not positive definite. We could try tricks such as adding to the diagonal of the Hessian or using the pseudo-inverse (i.e., setting all negative eigenvalues in the inverse to zero).</p>
 <p>Instead, let’s try a bit more to find starting values where the Hessian is positive definite. The order of magnitude of our initial value for <span class="math inline">\(\beta_2\)</span> seems about right, so let’s try halving or doubling it.</p>
-<div id="8e395861" class="cell" data-execution_count="10">
+<div id="1cb76685" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1217,7 +1217,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>That seems better. Let’s try with that.</p>
-<div id="f88b168c" class="cell" data-execution_count="11">
+<div id="0d6eb83d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(shape <span class="op">=</span> (n_it, <span class="dv">3</span>))</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>, :] <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
@@ -1442,7 +1442,7 @@ lines(xvals)</code></pre>
 </ol></li>
 </ol>
 <p>Convergence is assessed based on the sample variance of the function values at the points, the total of the norms of the differences between the points in the new and old simplexes, or the size of the simplex. In class we’ll work through some demo code (click below to show the code in the html version of this document) that illustrates the individual steps in an iteration of Nelder-Mead.</p>
-<div id="a2dea63e" class="cell" data-execution_count="12">
+<div id="8e97333e" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">1</span></span>
@@ -1584,7 +1584,7 @@ optim(init, f, method = "Nelder-Mead", verbose = FALSE)</code></pre>
 <li>One can provide a variety of nonlinear, linear, and simple bounds constraints as well, though certain types of constraints can only be used with certain algorithms.</li>
 </ul>
 <p>Here’s a very basic example of using <code>minimize</code> with the Mauna Loa CO2 example we saw earlier when hand-coding Newton-Raphson. Here we’ll include the unknown variance as an additional parameter so we have a full likelihood. And as mentioned previously, we could profile out <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>, but we won’t do that here so as to illustrate multivariate Newton-Raphson.</p>
-<div id="979d1d7d" class="cell" data-execution_count="13">
+<div id="35b532b3" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1727,16 +1727,16 @@ g_{t}(\theta) &amp; = \sum_{i=1}^{n}\sqrt{r_{i}(\theta_{t})^{2}}+\frac{1}{2}\sum
 <h2 class="anchored" data-anchor-id="expectation-maximization-em">Expectation-Maximization (EM)</h2>
 <p>It turns out the EM algorithm that many of you have heard about is a special case of MM. For our purpose here, we’ll consider maximization.</p>
 <p>The EM algorithm is most readily motivated from a missing data perspective. Suppose you want to maximize <span class="math inline">\(L(\theta|x)=f(x;\theta)\)</span> based on available data in a missing data context. Denote the complete data as <span class="math inline">\(Y=(X,Z)\)</span> with <span class="math inline">\(Z\)</span> is missing. As we’ll see, in many cases, <span class="math inline">\(Z\)</span> is actually a set of latent variables that we introduce into the problem to formulate it so we can use EM. The canonical example is when <span class="math inline">\(Z\)</span> are membership indicators in a mixture modeling context. (Note that in the case where you introduce <span class="math inline">\(Z\)</span>, that also means that one could also just directly maximize <span class="math inline">\(L(\theta|x)\)</span>, which in many cases may work better than using the EM algorithm.)</p>
-<p>In general, <span class="math inline">\(\log L(\theta;x)\)</span> may be hard to optimize because it involves an integral over the missing data, <span class="math inline">\(Z\)</span>: <span class="math display">\[f(x;\theta)=\int f(x,z;\theta)dz,\]</span> but the EM algorithm provides a recipe that makes the optimization straightforward for many problems.</p>
+<p>In general, <span class="math inline">\(\log L(\theta|x)\)</span> may be hard to optimize because it involves an integral over the missing data, <span class="math inline">\(Z\)</span>: <span class="math display">\[f(x;\theta)=\int f(x,z;\theta)dz,\]</span> but the EM algorithm provides a recipe that makes the optimization straightforward for many problems.</p>
 <p>The algorithm is as follows. Let <span class="math inline">\(\theta^{t}\)</span> be the current value of <span class="math inline">\(\theta\)</span>. Then define <span class="math display">\[Q(\theta|\theta^{t})=E(\log L(\theta|Y)|x;\theta^{t})\]</span>.</p>
-<p>That expectation is an expectation with respect to the conditional distribution, $ f(z|x; = ^t)$.</p>
+<p>That expectation is an expectation with respect to the conditional distribution, <span class="math inline">\(f(z|x; \theta = \theta^t)\)</span>.</p>
 <p>The algorithm is</p>
 <ol type="1">
 <li><p>E step: Compute <span class="math inline">\(Q(\theta|\theta^{t})\)</span>, ideally calculating the expectation over the missing data in closed form. Note that <span class="math inline">\(\log L(\theta|Y)\)</span> is a function of <span class="math inline">\(\theta\)</span> so <span class="math inline">\(Q(\theta|\theta^{t})\)</span> will involve both <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\theta^{t}\)</span>.</p></li>
 <li><p>M step: Maximize <span class="math inline">\(Q(\theta|\theta^{t})\)</span> with respect to <span class="math inline">\(\theta\)</span>, finding <span class="math inline">\(\theta^{t+1}\)</span>.</p></li>
 <li><p>Continue until convergence.</p></li>
 </ol>
-<p>Ideally both the E and M steps can be done analytically. When the M step cannot be done analytically, one can employ some of the numerical optimization tools we’ve already seen. When the E step cannot be done analytically, one standard approach is to estimate the expectation by Monte Carlo, which produces Monte Carlo EM (MCEM). The strategy is to draw from <span class="math inline">\(z_{j}\)</span> from <span class="math inline">\(f(z|x,\theta^{t})\)</span> and approximate <span class="math inline">\(Q\)</span> as a Monte Carlo average of <span class="math inline">\(\log f(x,z_{j};\theta)\)</span>, and then optimize over this approximation to the expectation. If one can’t draw in closed form from the conditional density, one strategy is to do a short MCMC to draw a (correlated) sample.</p>
+<p>Ideally both the E and M steps can be done analytically. When the M step cannot be done analytically, one can employ some of the numerical optimization tools we’ve already seen. When the E step cannot be done analytically, one standard approach is to estimate the expectation by Monte Carlo, which produces Monte Carlo EM (MCEM). The strategy is to draw from <span class="math inline">\(z_{j}\)</span> from <span class="math inline">\(f(z|x,\theta^{t})\)</span> and approximate <span class="math inline">\(Q\)</span> as a Monte Carlo average of <span class="math inline">\(\log f(x,z_{j};\theta)\)</span>, and then optimize over this approximation to the expectation. If one can’t draw in closed form from the conditional density, one strategy is to do a short MCMC to draw a (correlated) sample. However, if the E step cannot be done analytically EM often will be very slow. (Even when the E step can be done analytically, EM is often slow.)</p>
 <p>EM can be show to increase the value of the function at each step using Jensen’s inequality (equivalent to the information inequality that holds with regard to the Kullback-Leibler divergence between two distributions) (Givens and Hoeting, p.&nbsp;95, go through the details). Furthermore, one can show that it amounts, at each step, to maximizing a minorizing function for <span class="math inline">\(\log L(\theta)\)</span> - the minorizing function (effectively <span class="math inline">\(Q\)</span>) is tangent to <span class="math inline">\(\log L(\theta)\)</span> at <span class="math inline">\(\theta^{t}\)</span> and lies below <span class="math inline">\(\log L(\theta)\)</span>.</p>
 <p>A standard example is a mixture model. (Here we’ll assume a mixture of normal distributions, but other distributions could be used.) Therefore we have <span class="math display">\[f(x;\theta)=\sum_{k=1}^{K}\pi_{k}f_{k}(x;\mu_{k},\sigma_{k})\]</span> where we have <span class="math inline">\(K\)</span> mixture components and <span class="math inline">\(\pi_{k}\)</span> are the (marginal) probabilities of being in each component. The complete parameter vector is <span class="math inline">\(\theta=\{\{\pi_{k}\},\{\mu_{k}\},\{\sigma_{k}\}\}\)</span>. Note that the likelihood is a complicated product (over observations) over the sum (over components), so maximization may be difficult. Furthermore, such likelihoods are well-known to be multimodal because of label switching.</p>
 <p>To use EM, we take the group membership indicators for each observation as the missing data. For the <span class="math inline">\(i\)</span>th observation, we have <span class="math inline">\(z_{i}\in\{1,2,\ldots,K\}\)</span>. Introducing these indicators “breaks the mixture”. If we know the memberships for all the observations, it’s often easy to estimate the parameters for each group based on the observations from that group. For example if the <span class="math inline">\(\{f_{k}\}\)</span>’s were normal densities, then we can estimate the mean and variance of each normal density using the sample mean and sample variance of the <span class="math inline">\(x_{i}\)</span>’s that belong to each mixture component. EM will give us a variation on this that uses “soft” (i.e., probabilistic) weighting.</p>
