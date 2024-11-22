@@ -2083,7 +2083,7 @@ case where you introduce $Z$, that also means that one could also just
 directly maximize $L(\theta|x)$, which in many cases may work better
 than using the EM algorithm.)
 
-In general, $\log L(\theta;x)$ may be hard to optimize because it
+In general, $\log L(\theta|x)$ may be hard to optimize because it
 involves an integral over the missing data, $Z$:
 $$f(x;\theta)=\int f(x,z;\theta)dz,$$ but the EM algorithm provides a
 recipe that makes the optimization straightforward for many problems.
@@ -2093,7 +2093,7 @@ $\theta$. Then define
 $$Q(\theta|\theta^{t})=E(\log L(\theta|Y)|x;\theta^{t})$$.
 
 That expectation is an expectation with respect to the conditional distribution,
-$ f(z|x; \theta = \theta^t)$.
+$f(z|x; \theta = \theta^t)$.
 
  The algorithm is
 
@@ -2116,7 +2116,9 @@ draw from $z_{j}$ from $f(z|x,\theta^{t})$ and approximate $Q$ as a
 Monte Carlo average of $\log f(x,z_{j};\theta)$, and then optimize over
 this approximation to the expectation. If one can't draw in closed form
 from the conditional density, one strategy is to do a short MCMC to draw
-a (correlated) sample.
+a (correlated) sample. However, if the E step cannot be done analytically
+EM often will be very slow. (Even when the E step can be done analytically,
+EM is often slow.)
 
 EM can be show to increase the value of the function at each step using
 Jensen's inequality (equivalent to the information inequality that holds
