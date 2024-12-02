@@ -529,7 +529,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#convex-optimization-convex-programming" id="toc-convex-optimization-convex-programming" class="nav-link" data-scroll-target="#convex-optimization-convex-programming">Convex optimization (convex programming)</a></li>
   <li><a href="#linear-programming-linear-system-linear-constraints" id="toc-linear-programming-linear-system-linear-constraints" class="nav-link" data-scroll-target="#linear-programming-linear-system-linear-constraints">Linear programming: Linear system, linear constraints</a></li>
-  <li><a href="#general-system-equality-constraints" id="toc-general-system-equality-constraints" class="nav-link" data-scroll-target="#general-system-equality-constraints">General system, equality constraints</a></li>
+  <li><a href="#general-system-equality-constraints" id="toc-general-system-equality-constraints" class="nav-link" data-scroll-target="#general-system-equality-constraints">General system, equality constraints</a>
+  <ul class="collapse">
+  <li><a href="#linear-equality-constraints" id="toc-linear-equality-constraints" class="nav-link" data-scroll-target="#linear-equality-constraints">Linear equality constraints</a></li>
+  <li><a href="#nonlinear-equality-constraints" id="toc-nonlinear-equality-constraints" class="nav-link" data-scroll-target="#nonlinear-equality-constraints">Nonlinear equality constraints</a></li>
+  </ul></li>
   <li><a href="#the-dual-problem-optional" id="toc-the-dual-problem-optional" class="nav-link" data-scroll-target="#the-dual-problem-optional">The dual problem (optional)</a></li>
   <li><a href="#kkt-conditions-optional" id="toc-kkt-conditions-optional" class="nav-link" data-scroll-target="#kkt-conditions-optional">KKT conditions (optional)</a></li>
   <li><a href="#interior-point-methods" id="toc-interior-point-methods" class="nav-link" data-scroll-target="#interior-point-methods">Interior-point methods</a></li>
@@ -701,7 +705,7 @@ Convergence of Newton’s method
 <section id="divergence" class="level4">
 <h4 class="anchored" data-anchor-id="divergence">Divergence</h4>
 <p>First let’s see an example of divergence. The first and second plots show two cases of convergence, while the third plot panel shows divergence. In the third plot, the initial second derivative value is small enough that <span class="math inline">\(x_{2}\)</span> is further from <span class="math inline">\(x^{*}\)</span> than <span class="math inline">\(x_{1}\)</span> and then <span class="math inline">\(x_{3}\)</span> is yet further away. In all cases the sequence of <span class="math inline">\(x\)</span> values is indicated by the red letters.</p>
-<div id="5f3e1135" class="cell" data-fig-height="3" data-execution_count="1">
+<div id="049c27bc" class="cell" data-fig-height="3" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -787,15 +791,15 @@ Convergence of Newton’s method
 <pre><code>[ 2.    -1.627  0.819 -0.095  0.    -0.     0.     0.     0.     0.   ]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_1695352/3626598925.py:58: RuntimeWarning:
+<pre><code>/tmp/ipykernel_4008398/3626598925.py:58: RuntimeWarning:
 
 divide by zero encountered in scalar divide
 
-/tmp/ipykernel_1695352/3626598925.py:6: RuntimeWarning:
+/tmp/ipykernel_4008398/3626598925.py:6: RuntimeWarning:
 
 invalid value encountered in scalar divide
 
-/tmp/ipykernel_1695352/3626598925.py:10: RuntimeWarning:
+/tmp/ipykernel_4008398/3626598925.py:10: RuntimeWarning:
 
 invalid value encountered in scalar divide
 </code></pre>
@@ -818,7 +822,7 @@ invalid value encountered in scalar divide
 <section id="multiple-optima-converging-to-the-wrong-optimum" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-optima-converging-to-the-wrong-optimum">Multiple optima: converging to the wrong optimum</h4>
 <p>In the first row of the next figure, let’s see an example of climbing uphill and finding a local maximum rather than minimum. The other rows show convergence. In all cases the minimum is at <span class="math inline">\(x^{*}\approx3.14\)</span></p>
-<div id="dd6a510c" class="cell" data-fig-height="7" data-execution_count="2">
+<div id="690e8bf7" class="cell" data-fig-height="7" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x)</span>
@@ -944,7 +948,7 @@ invalid value encountered in scalar divide
 <p>Good starting values are important because they can improve the speed of optimization, prevent divergence or cycling, and prevent finding local optima.</p>
 <p>Using random or selected multiple starting values can help with multiple optima (aka multimodality).</p>
 <p>Here’s a function (the Rastrigin function) with multiple optima that is commonly used for testing methods that claim to work well for multimodal problems. This is a hard function to optimize with respect to, particularly in higher dimensions (one can do it in higher dimensions than 2 by simply making the <span class="math inline">\(x\)</span> vector longer but having the same structure). In particular Rastrigin with 30 dimensions is considered to be very hard.</p>
-<div id="7a60a4a6" class="cell" data-execution_count="3">
+<div id="614d8db7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rastrigin(x):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
@@ -996,7 +1000,7 @@ invalid value encountered in scalar divide
 <p>If <span class="math inline">\(c\)</span> were one, then we see that if we have <span class="math inline">\(k\)</span> digits of accuracy at <span class="math inline">\(t\)</span>, we’d have <span class="math inline">\(2k\)</span> digits at <span class="math inline">\(t+1\)</span> (e.g., <span class="math inline">\(|\epsilon_{t}|=0.01\)</span> results in <span class="math inline">\(|\epsilon_{t+1}|=0.0001\)</span>), which justifies the characterization of quadratic convergence being fast. In practice <span class="math inline">\(c\)</span> will moderate the rate of convergence. The smaller <span class="math inline">\(c\)</span> the better, so we’d like to have the second derivative be large and the third derivative be small. The expression also indicates we’ll have a problem if <span class="math inline">\(f^{\prime\prime}(x_{t})=0\)</span> at any point (think about what this corresponds to graphically - what is our next step when <span class="math inline">\(f^{\prime\prime}(x_{t})=0\)</span>?). The characteristics of the derivatives determine the domain of attraction (the region in which we’ll converge rather than diverge) of the minimum.</p>
 <p>Givens and Hoeting show that using the secant-based approximation to the second derivative in N-R has order of convergence, <span class="math inline">\(\beta\approx1.62\)</span>.</p>
 <p>Here’s an example of convergence comparing bisection and N-R. First, Newton-Raphson:</p>
-<div id="89aa5850" class="cell" data-execution_count="4">
+<div id="0a758458" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original function</span></span>
@@ -1028,7 +1032,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>Next, here is bisection:</p>
-<div id="b817d85f" class="cell" data-execution_count="5">
+<div id="6ca76582" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Bisection method</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bisec_step(interval, f_deriv1):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    interval <span class="op">=</span> interval.copy()</span>
@@ -1080,7 +1084,7 @@ invalid value encountered in scalar divide
 <p>Let’s suppose (I have no real reason to think this) that we think that the data can be well-represented by this nonlinear model: <span class="math display">\[Y_{i}=\beta_{0}+\beta_{1}\exp(t_i/\beta_{2})+\epsilon_{i}.\]</span></p>
 <p>Some of the things we need to worry about with Newton’s method in general about are (1) good starting values, (2) positive definiteness of the Hessian, and (3) avoiding errors in deriving the derivatives.</p>
 <p>A note on the positive definiteness: since the Hessian may not be positive definite (although it may well be, provided the function is approximately locally quadratic), one can consider modifying the Cholesky decomposition of the Hessian to enforce positive definiteness by adding diagonal elements to <span class="math inline">\(H_{f}\)</span> as necessary.</p>
-<div id="a7ece769" class="cell" data-execution_count="6">
+<div id="9042ed92" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
@@ -1124,7 +1128,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>We need some starting values. Having centered the year variable, <span class="math inline">\(\beta_2\)</span> seems plausibly like it would be order of magnitude of 10, which is about the magnitude of the year values.</p>
-<div id="f576c5cb" class="cell" data-execution_count="7">
+<div id="bbe46392" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1149,7 +1153,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>That’s not great. How about changing the scale of beta2 more?</p>
-<div id="81dcc1de" class="cell" data-execution_count="8">
+<div id="c709f4c4" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1171,7 +1175,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>Let’s get derivative information using automatic differentation (the algorithmic implementation of the chain rule for derivatives also used in gradient descent in deep learning, as well as various other contexts). We’ll use JAX, but PyTorch or Tensorflow are other options. We need to use the JAX versions of various numpy operations in order to be able to get the derivatives.</p>
-<div id="185e261e" class="cell" data-execution_count="9">
+<div id="99f0cfe1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1201,7 +1205,7 @@ invalid value encountered in scalar divide
 </div>
 <p>The Hessian is not positive definite. We could try tricks such as adding to the diagonal of the Hessian or using the pseudo-inverse (i.e., setting all negative eigenvalues in the inverse to zero).</p>
 <p>Instead, let’s try a bit more to find starting values where the Hessian is positive definite. The order of magnitude of our initial value for <span class="math inline">\(\beta_2\)</span> seems about right, so let’s try halving or doubling it.</p>
-<div id="1cb76685" class="cell" data-execution_count="10">
+<div id="0bfc2bf9" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1217,7 +1221,7 @@ invalid value encountered in scalar divide
 </div>
 </div>
 <p>That seems better. Let’s try with that.</p>
-<div id="0d6eb83d" class="cell" data-execution_count="11">
+<div id="6345446e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>n_it <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.zeros(shape <span class="op">=</span> (n_it, <span class="dv">3</span>))</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>xvals[<span class="dv">0</span>, :] <span class="op">=</span> (beta0_init, beta1_init, beta2_init)</span>
@@ -1442,7 +1446,7 @@ lines(xvals)</code></pre>
 </ol></li>
 </ol>
 <p>Convergence is assessed based on the sample variance of the function values at the points, the total of the norms of the differences between the points in the new and old simplexes, or the size of the simplex. In class we’ll work through some demo code (click below to show the code in the html version of this document) that illustrates the individual steps in an iteration of Nelder-Mead.</p>
-<div id="8e97333e" class="cell" data-execution_count="12">
+<div id="07d893ad" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">1</span></span>
@@ -1584,7 +1588,7 @@ optim(init, f, method = "Nelder-Mead", verbose = FALSE)</code></pre>
 <li>One can provide a variety of nonlinear, linear, and simple bounds constraints as well, though certain types of constraints can only be used with certain algorithms.</li>
 </ul>
 <p>Here’s a very basic example of using <code>minimize</code> with the Mauna Loa CO2 example we saw earlier when hand-coding Newton-Raphson. Here we’ll include the unknown variance as an additional parameter so we have a full likelihood. And as mentioned previously, we could profile out <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma^2\)</span>, but we won’t do that here so as to illustrate multivariate Newton-Raphson.</p>
-<div id="35b532b3" class="cell" data-execution_count="13">
+<div id="7d4c27b3" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1634,30 +1638,38 @@ optim(init, f, method = "Nelder-Mead", verbose = FALSE)</code></pre>
 <span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a><span class="co">## a direct numerical estimate of the Hessian at the optimum.</span></span>
 <span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a><span class="co">## If you need the Hessian, calculate it directly, e.g, using `numdifftools`.</span></span>
 <span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Different starting value (recall non-positive definite Hessian)</span></span>
-<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
-<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>fit3 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
-<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
-<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
-<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
-<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
-<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>fit4 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Arbitrarily bad starting values</span></span>
-<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10000</span>, <span class="fl">0.1</span>)</span>
-<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a>fit5 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'Nelder-Mead'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
-<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a>fit6 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a><span class="co"># BFGS with specific relative tolerance on 'x', given precision loss message.</span></span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a><span class="co">## See `https://docs.scipy.org/doc/scipy/reference/optimize.minimize-bfgs.html`.</span></span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>fit2_alt <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>,</span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>    options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>, <span class="st">'xrtol'</span>: <span class="fl">1e-6</span>})</span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Different starting value (recall non-positive definite Hessian)</span></span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>fit3 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a>beta2_init <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>implicit_covar <span class="op">=</span> np.exp(data.year<span class="op">/</span>beta2_init)</span>
+<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(implicit_covar)</span>
+<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(data.co2, X).fit()</span>
+<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a>beta0_init, beta1_init <span class="op">=</span> model.params</span>
+<span id="cb34-74"><a href="#cb34-74" aria-hidden="true" tabindex="-1"></a>sigma2_init <span class="op">=</span> np.mean((data.co2<span class="op">-</span>model.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb34-75"><a href="#cb34-75" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (beta0_init, beta1_init, beta2_init, np.log(sigma2_init))</span>
+<span id="cb34-76"><a href="#cb34-76" aria-hidden="true" tabindex="-1"></a>fit4 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-77"><a href="#cb34-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-78"><a href="#cb34-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Arbitrarily bad starting values</span></span>
+<span id="cb34-79"><a href="#cb34-79" aria-hidden="true" tabindex="-1"></a>inits <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10000</span>, <span class="fl">0.1</span>)</span>
+<span id="cb34-80"><a href="#cb34-80" aria-hidden="true" tabindex="-1"></a>fit5 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'Nelder-Mead'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span>
+<span id="cb34-81"><a href="#cb34-81" aria-hidden="true" tabindex="-1"></a>fit6 <span class="op">=</span> minimize(nll, inits, args<span class="op">=</span>(data), method<span class="op">=</span><span class="st">'BFGS'</span>, options<span class="op">=</span>{<span class="st">'disp'</span>: <span class="va">True</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="automatic-differentiation-ad" class="level2">
@@ -1766,8 +1778,13 @@ g_{t}(\theta) &amp; = \sum_{i=1}^{n}\sqrt{r_{i}(\theta_{t})^{2}}+\frac{1}{2}\sum
 </section>
 <section id="general-system-equality-constraints" class="level2">
 <h2 class="anchored" data-anchor-id="general-system-equality-constraints">General system, equality constraints</h2>
+<section id="linear-equality-constraints" class="level3">
+<h3 class="anchored" data-anchor-id="linear-equality-constraints">Linear equality constraints</h3>
 <p>Suppose we have an objective function <span class="math inline">\(f(x)\)</span> and we have <span class="math inline">\(q\)</span> equality constraints, <span class="math inline">\(Ax=b\)</span>. We can manipulate this into an unconstrained problem. The null space of <span class="math inline">\(A\)</span> is the set of <span class="math inline">\(\delta\)</span> s.t. <span class="math inline">\(A\delta=0\)</span>. So if we start with a candidate <span class="math inline">\(x_{c}\)</span> s.t. <span class="math inline">\(Ax_{c}=b\)</span> (e.g., by using the pseudo inverse, <span class="math inline">\(A^{+}b\)</span>), we can form all other candidates (a candidate is an <span class="math inline">\(x\)</span> s.t. <span class="math inline">\(Ax=b\)</span>) as <span class="math inline">\(x=x_{c}+\delta=x_{c}+Bz\)</span> where <span class="math inline">\(B\)</span> is a set of column basis functions for the null space of <span class="math inline">\(A\)</span> and <span class="math inline">\(z\in\Re^{p-q}\)</span>. Consider <span class="math inline">\(h(z)=f(x_{c}+Bz)\)</span> and note that <span class="math inline">\(h\)</span> is a function of <span class="math inline">\(p-q\)</span> rather than <span class="math inline">\(p\)</span> inputs. Namely, we are working in a reduced dimension space with no constraints. If we assume differentiability of <span class="math inline">\(f\)</span>, we can express <span class="math inline">\(\nabla h(z)=B^{\top}\nabla f(x_{c}+Bz)\)</span> and <span class="math inline">\(H_{h}(z)=B^{\top}H_{f}(x_{c}+Bz)B\)</span>. Then we can use unconstrained methods to find the point at which <span class="math inline">\(\nabla h(z)=0\)</span>.</p>
 <p>How do we find <span class="math inline">\(B\)</span>? One option is to use the <span class="math inline">\(p-m\)</span> columns of <span class="math inline">\(V\)</span> in the SVD of <span class="math inline">\(A\)</span> that correspond to singular values that are zero. A second option is to take the QR decomposition of <span class="math inline">\(A^{\top}\)</span>. Then <span class="math inline">\(B\)</span> is the columns of <span class="math inline">\(Q_{2}\)</span>, where these are the columns of the (non-skinny) Q matrix corresponding to the rows of <span class="math inline">\(R\)</span> that are zero.</p>
+</section>
+<section id="nonlinear-equality-constraints" class="level3">
+<h3 class="anchored" data-anchor-id="nonlinear-equality-constraints">Nonlinear equality constraints</h3>
 <p>For more general (nonlinear) equality constraints, <span class="math inline">\(g_{i}(x)=b_{i}\)</span>, <span class="math inline">\(i=1,\ldots,q\)</span>, we can use the Lagrange multiplier approach to define a new objective function, <span class="math display">\[L(x,\lambda)=f(x)+\lambda^{\top}(g(x)-b)\]</span> for which, if we set the derivative (with respect to both <span class="math inline">\(x\)</span> and the Lagrange multiplier vector, <span class="math inline">\(\lambda\)</span>) equal to zero, we have a critical point of the original function and we respect the constraints.</p>
 <p>An example occurs with quadratic programming, under the simplification of affine equality constraints (quadratic programming in general optimizes a quadratic function under affine inequality constraints - i.e., constraints of the form <span class="math inline">\(Ax-b\preceq0\)</span>). For example we might solve a least squares problem subject to linear equality constraints, <span class="math inline">\(f(x)=\frac{1}{2}x^{\top}Qx+m^{\top}x+c\)</span> s.t. <span class="math inline">\(Ax=b\)</span>, where <span class="math inline">\(Q\)</span> is positive semi-definite. The Lagrange multiplier approach gives the objective function <span class="math display">\[L(x,\lambda)=\frac{1}{2}x^{\top}Qx+m^{\top}x+c+\lambda^{\top}(Ax-b)\]</span> and differentiating gives the equations <span class="math display">\[\begin{aligned}
 \frac{\partial L(x,\lambda)}{\partial x} &amp; =m+Qx+A^{\top}\lambda  =  0\\
@@ -1775,6 +1792,7 @@ g_{t}(\theta) &amp; = \sum_{i=1}^{n}\sqrt{r_{i}(\theta_{t})^{2}}+\frac{1}{2}\sum
 \left( \begin{array}{cc} Q &amp; A^{\top} \\ A &amp; 0 \end{array}\right)^{-1}
 \left(\begin{array}{c} -m \\ b \end{array}\right).\label{eq:quadProg}\]</span></p>
 <p>Using known results for inverses of matrices split into blocks, one gets that <span class="math inline">\(x^{*}=-Q^{-1}m+Q^{-1}A^{\top}(AQ^{-1}A^{\top})^{-1}(AQ^{-1}m+b)\)</span>. This can be readily coded up using strategies from Unit 10.</p>
+</section>
 </section>
 <section id="the-dual-problem-optional" class="level2">
 <h2 class="anchored" data-anchor-id="the-dual-problem-optional">The dual problem (optional)</h2>
