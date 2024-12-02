@@ -1702,7 +1702,15 @@ print("Execution Time:", end_time - start_time, "seconds")
 ## a direct numerical estimate of the Hessian at the optimum.
 ## If you need the Hessian, calculate it directly, e.g, using `numdifftools`.
 
+# BFGS with specific relative tolerance on 'x', given precision loss message.
+## See `https://docs.scipy.org/doc/scipy/reference/optimize.minimize-bfgs.html`.
+
+fit2_alt = minimize(nll, inits, args=(data), method='BFGS',
+    options={'disp': True, 'xrtol': 1e-6})
+
+
 # Different starting value (recall non-positive definite Hessian)
+
 
 beta2_init = 100
 implicit_covar = np.exp(data.year/beta2_init)
@@ -1727,6 +1735,8 @@ inits = (10, 0, 10000, 0.1)
 fit5 = minimize(nll, inits, args=(data), method='Nelder-Mead', options={'disp': True})
 fit6 = minimize(nll, inits, args=(data), method='BFGS', options={'disp': True})
 ```
+
+
 
 
 ```{python}
@@ -2236,6 +2246,8 @@ improve the objective function.
 
 ## General system, equality constraints
 
+### Linear equality constraints
+
 Suppose we have an objective function $f(x)$ and we have $q$ equality
 constraints, $Ax=b$. We can manipulate this into an unconstrained
 problem. The null space of $A$ is the set of $\delta$ s.t. $A\delta=0$.
@@ -2256,6 +2268,8 @@ SVD of $A$ that correspond to singular values that are zero. A second
 option is to take the QR decomposition of $A^{\top}$. Then $B$ is the
 columns of $Q_{2}$, where these are the columns of the (non-skinny) Q
 matrix corresponding to the rows of $R$ that are zero.
+
+### Nonlinear equality constraints
 
 For more general (nonlinear) equality constraints, $g_{i}(x)=b_{i}$,
 $i=1,\ldots,q$, we can use the Lagrange multiplier approach to define a
