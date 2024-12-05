@@ -157,9 +157,9 @@ this:
 2.  an understanding of multivariate derivative-based optimization and
     how line searches are useful within this,
 3.  an understanding of derivative-free methods,
-4.  an understanding of the methods used in R's optimization routines,
+4.  an understanding of the methods used in Python's optimization routines,
     their strengths and weaknesses, and various tricks for doing better
-    optimization in R, and
+    optimization in Python, and
 5.  a basic idea of what convex optimization is and when you might want
     to go learn more about it.
 
