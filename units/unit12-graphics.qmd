@@ -102,32 +102,35 @@ the ones above. There is also a list of guidelines in [this article](https://www
 
 ## Some example graphics
 
-1. This [pie chart](trafficking.jpeg) circulating online is intended to raise awareness of human trafficking. What do you
+1. This [pie chart](graphics_files/trafficking.jpeg) circulating online is intended to raise awareness of human trafficking. What do you
    like or not like about the graphical presentation? 
 
-2.  This [NY Times
-    article](http://www.nytimes.com/interactive/2016/08/08/sports/olympics/history-olympic-dominance-charts.html)
-    presents time-series graphics about how many Olympic medals have
-    been won by different countries. What do you like or not like about
-    the graphical approach?
+2.  Here are various plots showing time series of categorical data. What do you like or not like about
+    the graphical approaches shown?
+    - This [NY Times article](https://www.nytimes.com/interactive/2024/09/27/opinion/fentanyl-overdose-deaths.html) shows deaths from drug overdoses over time.
+    - This [graphic from the FlowingData website](https://flowingdata.com/2016/01/05/causes-of-death) shows causes of mortality by age and sex in the United States.
+    - This [NY Times article](https://www.nytimes.com/interactive/2024/08/02/climate/electricity-generation-us-states.html) shows the sources of electricity for the US and specific states.
+    - This [NY Times article](http://www.nytimes.com/interactive/2016/08/08/sports/olympics/history-olympic-dominance-charts.html)
+    presents time-series graphics about how many Olympic medals have been won by different countries. 
 
 3.  Consider [this scatterplot of life expectancy statistics](https://academic.oup.com/view-large/figure/81018073/dyr146f2.gif)
     from [this article](https://academic.oup.com/ije/article/40/6/1703/801755) on variation in lifespan in European countries in the International Journal of Epidemiology. What
     are you able to learn from this presentation of the data. What other
-    ways could you plot the data to better illustrate patterns in the data?
+    ways could you plot the data to better illustrate patterns in the data? The data are in [this CSV](graphics_files/life_exp.csv) with
+    [some initial exploration of plotting approaches using `ggplot` in R](graphics_files/liffe_exp.R).
 
-4.  Here's [another online graphic](exampleGraphic.png). What
+4.  Here's [another online graphic](graphics_files/exampleGraphic.png). What
     aspects of the graph could be improved? What aspects do you like?
 
-5.  The file *shell.pdf* in the repository has an example of a crazy pie
+5.  [This file](graphics_files/shell.pdf) in the repository has an example of a crazy pie
     chart from an advertisement in the NY Times from December 2014.
 
-6.  The article *wainer1984.pdf* in the repository is rather old but the
+6.  [This article](graphics_files/wainer1984.pdf) in the repository is rather old but the
     ideas are still relevant and while the example figures are dated in
     terms of appearance, the same issues arise with more modern-looking
     graphics.
 
-7.  The article *gelmanUnwin2013.pdf* in the repository presents a
+7.  [This article](graphics_files/gelmanUnwin2013.pdf) in the repository presents a
     modern-day reinterpretation of a famous graphic from Florence
     Nightingale regarding causes of death in the British Army during the
     Crimean War in the 1850s.

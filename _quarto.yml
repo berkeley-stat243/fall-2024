@@ -45,6 +45,8 @@ website:
             text: "Unit 10 (Linear Algebra)"
           - href: units/unit11-optim.qmd
             text: "Unit 11 (Optimization)"
+          - href: units/unit12-graphics.qmd
+            text: "Unit 12 (Graphics)"
       - section: "Labs"
         contents:
           - href: labs/lab0-setup.html
