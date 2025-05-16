@@ -97,6 +97,8 @@ format:
     theme: cosmo
     css: assets/styles.css
     toc: true
+    include-in-header:
+      file: siteimprove.html
 
 execute:
   freeze: auto
